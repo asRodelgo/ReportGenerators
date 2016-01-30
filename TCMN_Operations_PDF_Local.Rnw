@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template TCMN data sheet version 3
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Dec 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{This is my name}
+\rhead{this is page \thepage}
+\cfoot{center of the footer!}
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage{longtable} % add pages for long tables
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+<<setup,echo=FALSE,message=FALSE,cache=FALSE>>= 
+#library(knitr)
+# Global chunk options: Cache chunks which source R code
+read_chunk("TCMN_portfolio_PDF.R")
+#opts_chunk$set(cache=TRUE,autodep=TRUE)
+@
+%
+<<params,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
+
+#source("/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/generic_functions.R")
+
+#c <- "Spain"
+couName <- countryNames[countryNames$Country==c,]$Country
+couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
+@
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}\Sexpr{couName}}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+    \begin{flushleft}  
+      \center{\color{blue!20!black} \textbf{\Large T\&C Product Line Operations Board Approved On or After FY14}}
+    \end{flushleft} 
+  \end{minipage}  
+\end{minipage} % end top section
+
+\begin{minipage}[b]{0.99\textwidth} % macro indicators main table
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\large Status of Operations}}
+     \vspace*{0.5cm}
+     
+  \begin{minipage}[t]{0.99\textwidth}
+    \begin{minipage}[c]{0.49\textwidth}
+      \vspace*{0.2cm}
+      \center{\color{blue!50!black} \textbf{\small By number of projects}}
+      \vspace*{0.3cm}
+    <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=7,results="asis">>=  
+      @      
+      \end{minipage}
+      \begin{minipage}[c]{0.49\textwidth}
+      \center{\color{blue!50!black} \textbf{\small By amount in thousands of US\$ \\ (ASA IBRD products not included)}}
+      <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=7,results="asis">>=  
+      @
+      \end{minipage}
+ 
+%\hspace*{0.5cm} 
+\raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: IBRD Operations, IFC group Operations}}}
+   \end{minipage}
+  
+   \begin{minipage}[b]{0.99\textwidth} % overview tables
+     \vspace*{1cm}
+     \begin{minipage}[c]{0.99\textwidth}  
+     \raggedright{\color{white!30!blue} \textbf{\large Financing}}
+     \vspace*{0.5cm}
+     
+       <<financeTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.5cm}
+     \end{minipage}
+     
+     \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+     \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IBRD}}
+     \vspace*{0.5cm}
+     
+       <<ASATable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.5cm}
+     \end{minipage}
+     
+     \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+     \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IFC}}
+     \vspace*{0.5cm}
+     
+       <<ASA_IFCTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.5cm}
+     \end{minipage}
+     
+    \end{minipage}
+\end{minipage}
+ 
+ \newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+\raggedright{\color{white!30!blue} \textbf{\large Major sectors and themes}}
+     \vspace*{0.5cm}
+     
+  \begin{minipage}[c]{0.49\textwidth} % sectors
+    \center{\color{blue!50!black} \textbf{Operations by sector, in percent}}
+    \vspace*{0.4cm}
+      <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+    @      
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: IBRD Operations database}}
+  \end{minipage}
+  \begin{minipage}[c]{0.49\textwidth} % themes
+  \center{\color{blue!50!black} \textbf{Operations by theme, in percent}}
+    \vspace*{0.4cm}
+    <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+    @            
+  %\hspace*{0.5cm} 
+  \raggedright{\footnotesize{\href{http://lpi.worldbank.org}{Source: IBRD Operations database}}}
+  \end{minipage}
+\end{minipage}  
+ 
+\begin{minipage}[b]{0.99\textwidth}
+  \vspace*{1cm}
+  \raggedright{\color{white!30!blue} \textbf{\large T\&C Staff in charge of operations}}
+  \vspace*{0.5cm}
+     
+       <<projectsPeople,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.5cm}
+\end{minipage}
+
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}

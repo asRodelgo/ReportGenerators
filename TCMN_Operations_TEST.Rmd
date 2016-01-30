@@ -1,0 +1,36 @@
+---
+title: "TCMN_Operations_TEST"
+author: "Alberto Sanchez Rodelgo"
+date: "January 30, 2016"
+output: html_document
+---
+
+```{r echo=FALSE}
+library(knitr)
+read_chunk("TCMN_portfolio_PDF.R")
+```
+
+T&C Product Line Operations Board Approved On or After FY14
+
+```{r echo=FALSE}
+couName <- countryNames[countryNames$Country==c,]$Country
+couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
+```
+
+Status of Operations
+```{r projectStatus_count, echo=FALSE}  
+```      
+
+By amount in thousands of US$ (ASA IBRD products not included)
+```{r projectStatus_amount, echo=FALSE}  
+```
+
+Major sectors and themes
+
+Operations by sector, in percent
+```{r projectsTreemap_sectors, echo=FALSE}  
+```      
+
+Operations by theme, in percent
+```{r projectsTreemap_themes, echo=FALSE}  
+```            
