@@ -55,9 +55,9 @@
 
 ## ---- testRMD ----
 
-x <- rnorm(100)
-y <- rnorm(100)
-plot(x,y)
+#x <- rnorm(100)
+#y <- rnorm(100)
+#plot(x,y)
 
 ## ---- financeTable ----
 projectsTableFinancing <- function(couName){
@@ -107,14 +107,14 @@ projectsTableFinancing <- function(couName){
   if (count_ibrd>6){ # squeeze tables in case they are too long
    
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\footnotesize",
+          size="\\scriptsize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x} # include sanitize to control formats
     )
   } else{
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\small",
+          size="\\footnotesize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x} # include sanitize to control formats
     )
@@ -140,7 +140,7 @@ projectsTableASA <- function(couName){
   dataTC <- filter(dataTC, (Approval_Date >= fromDate) & (Approval_Date <= toDate))
   count_ibrd <- nrow(dataTC) # will determine the size of the table
   # Advisory (ASA) products
-  dataTC <- filter(dataTC, substr(Prod_Line,1,3) == "Adv")
+  dataTC <- filter(dataTC, Prod_Line != "Financing")
   
   # arrange
   dataTC <- arrange(as.data.frame(dataTC), desc(Prod_Line), ProjectOrder)
@@ -171,14 +171,14 @@ projectsTableASA <- function(couName){
   if (count_ibrd>6){ # squeeze tables in case they are too long
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\footnotesize",
+          size="\\scriptsize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x} # include sanitize to control formats
     )
   } else{
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\small",
+          size="\\footnotesize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x} # include sanitize to control formats
     )
@@ -232,14 +232,14 @@ projectsTableASA_IFC <- function(couName){
   if (nrow(data)>3){
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\footnotesize",
+          size="\\scriptsize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x} # include sanitize to control formats
     )
   } else{
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\small",
+          size="\\footnotesize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x} # include sanitize to control formats
     )
@@ -564,19 +564,20 @@ projectsPeople <- function(couName){
   data[is.na(data)] <- "---"
   
   # make sure staff info appear only once
-  i <- 1
-  while (i <= nrow(data)){
-    j <- i + 1
-    while(data$Staff_Name[j]==data$Staff_Name[i]){
-      data$Staff_Name[j]<-""
-      data$job_title[j]<-""
-      data$Location[j]<-""
-      j <- j + 1
-      if (j > nrow(data)) j <- j - 1
+  if (nrow(data)>1){
+    i <- 1
+    while (i <= nrow(data)){
+      j <- i + 1
+      while(data$Staff_Name[j]==data$Staff_Name[i]){
+        data$Staff_Name[j]<-""
+        data$job_title[j]<-""
+        data$Location[j]<-""
+        j <- j + 1
+        if (j > nrow(data)) j <- j - 1
+      }
+      i <- ifelse(j == nrow(data),j+1,j)
     }
-    i <- ifelse(j == nrow(data),j+1,j)
   }
-  
   # escape reserved characters
   data$Project_Name <- gsub("%", "\\%", data$Project_Name, fixed=TRUE)
   data$Project_Name <- gsub("&", "\\&", data$Project_Name, fixed=TRUE)
@@ -593,13 +594,13 @@ projectsPeople <- function(couName){
   if (nrow(data)>13){
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\footnotesize",
+          size="\\scriptsize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x}) # include sanitize to control formats
   } else {
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\small",
+          size="\\footnotesize",
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
           sanitize.text.function = function(x){x}) # include sanitize to control formats
   }

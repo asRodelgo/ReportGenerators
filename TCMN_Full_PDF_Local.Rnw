@@ -406,12 +406,12 @@ read_chunk("TCMN_portfolio_PDF.R")
       \vspace*{0.2cm}
       \center{\color{blue!50!black} \textbf{\small By number of projects}}
       \vspace*{0.3cm}
-    <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=7,results="asis">>=  
+    <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
       @      
       \end{minipage}
       \begin{minipage}[c]{0.49\textwidth}
       \center{\color{blue!50!black} \textbf{\small By amount in thousands of US\$ \\ (ASA IBRD products not included)}}
-      <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=7,results="asis">>=  
+      <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
       @
       \end{minipage}
  
@@ -460,14 +460,14 @@ read_chunk("TCMN_portfolio_PDF.R")
   \begin{minipage}[c]{0.49\textwidth} % sectors
     \center{\color{blue!50!black} \textbf{Operations by sector, in percent}}
     \vspace*{0.4cm}
-      <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+      <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
     @      
     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: IBRD Operations database}}
   \end{minipage}
   \begin{minipage}[c]{0.49\textwidth} % themes
   \center{\color{blue!50!black} \textbf{Operations by theme, in percent}}
     \vspace*{0.4cm}
-    <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+    <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
     @            
   %\hspace*{0.5cm} 
   \raggedright{\footnotesize{\href{http://lpi.worldbank.org}{Source: IBRD Operations database}}}

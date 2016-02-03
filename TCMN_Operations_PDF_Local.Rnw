@@ -79,59 +79,59 @@ couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
   \end{minipage}  
 \end{minipage} % end top section
 
-\begin{minipage}[b]{0.99\textwidth} % macro indicators main table
-\vspace*{0.5cm}
-\raggedright{\color{white!30!blue} \textbf{\large Status of Operations}}
-     \vspace*{0.5cm}
+\begin{minipage}[b]{0.99\textwidth} % main body
+  \vspace*{0.5cm}
+  \raggedright{\color{white!30!blue} \textbf{\large Status of Operations}}
+  \vspace*{0.5cm}
      
   \begin{minipage}[t]{0.99\textwidth}
     \begin{minipage}[c]{0.49\textwidth}
       \vspace*{0.2cm}
       \center{\color{blue!50!black} \textbf{\small By number of projects}}
       \vspace*{0.3cm}
-    <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=7,results="asis">>=  
+     <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
       @      
-      \end{minipage}
-      \begin{minipage}[c]{0.49\textwidth}
+    \end{minipage}
+    \begin{minipage}[c]{0.49\textwidth}
       \center{\color{blue!50!black} \textbf{\small By amount in thousands of US\$ \\ (ASA IBRD products not included)}}
-      <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=7,results="asis">>=  
+      <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
       @
-      \end{minipage}
+    \end{minipage}
  
 %\hspace*{0.5cm} 
-\raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: IBRD Operations, IFC group Operations}}}
-   \end{minipage}
-  
-   \begin{minipage}[b]{0.99\textwidth} % overview tables
-     \vspace*{1cm}
-     \begin{minipage}[c]{0.99\textwidth}  
-     \raggedright{\color{white!30!blue} \textbf{\large Financing}}
-     \vspace*{0.5cm}
+    \raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: IBRD Operations, IFC group Operations}}}
+  \end{minipage}
+  %\end{minipage}  
+  \begin{minipage}[b]{0.99\textwidth} % overview tables
+    \vspace*{1cm}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \raggedright{\color{white!30!blue} \textbf{\large Financing}}
+      \vspace*{0.5cm}
      
        <<financeTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-     \vspace*{0.5cm}
-     \end{minipage}
+      \vspace*{0.5cm}
+    \end{minipage}
      
-     \begin{minipage}[c]{0.99\textwidth} % imports/exports 
-     \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IBRD}}
-     \vspace*{0.5cm}
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+      \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IBRD}}
+      \vspace*{0.5cm}
      
        <<ASATable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-     \vspace*{0.5cm}
-     \end{minipage}
-     
-     \begin{minipage}[c]{0.99\textwidth} % imports/exports 
-     \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IFC}}
-     \vspace*{0.5cm}
-     
-       <<ASA_IFCTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-       @
-     \vspace*{0.5cm}
-     \end{minipage}
-     
+      \vspace*{0.5cm}
     \end{minipage}
+     
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+      \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IFC}}
+      \vspace*{0.5cm}
+     
+      <<ASA_IFCTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+      \vspace*{0.5cm}
+    \end{minipage}
+     
+  \end{minipage}
 \end{minipage}
  
  \newpage
@@ -143,14 +143,14 @@ couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
   \begin{minipage}[c]{0.49\textwidth} % sectors
     \center{\color{blue!50!black} \textbf{Operations by sector, in percent}}
     \vspace*{0.4cm}
-      <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+      <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
     @      
     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: IBRD Operations database}}
   \end{minipage}
   \begin{minipage}[c]{0.49\textwidth} % themes
   \center{\color{blue!50!black} \textbf{Operations by theme, in percent}}
     \vspace*{0.4cm}
-    <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+    <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
     @            
   %\hspace*{0.5cm} 
   \raggedright{\footnotesize{\href{http://lpi.worldbank.org}{Source: IBRD Operations database}}}

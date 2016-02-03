@@ -17,7 +17,7 @@ for (c in countryNames$Country) {
   
 # Create the operations reports --------------------------------------
 for (c in countryNames$Country) {
-#for (c in c("Brazil")) {
+#for (c in c("Peru","Tunisia","Panama")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Operations_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",
@@ -28,7 +28,7 @@ for (c in countryNames$Country) {
 
 # Create the combined reports --------------------------------------
 for (c in countryNames$Country) {
-#for (c in c("Brazil")) {
+#for (c in c("Peru","Tunisia","Panama")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Full_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",

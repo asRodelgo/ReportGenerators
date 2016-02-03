@@ -122,6 +122,7 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
   
 }
 # filter IBRD T&C relevant projects ---------------
+# filter IBRD T&C relevant projects ---------------
 .filterTCProjects <- function(couName){
   
   cou <- .getCountryCode(couName)
@@ -135,10 +136,11 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
            Prod_Line = ifelse(tolower(substr(PROD_LINE_TYPE_NME,1,4))=="lend","Financing",
                               ifelse(tolower(substr(PROD_LINE_TYPE_NME,1,3))=="aaa",
                                      "Advisory Services and Analytics (ASA) IBRD",PROD_LINE_TYPE_NME)),
-           ProjectOrder = ifelse(PROJECT_STATUS_NME=="Active",1,ifelse(PROJECT_STATUS_NME=="Pipeline",2,3))) %>%
+           ProjectOrder = ifelse(PROJECT_STATUS_NME=="Active",1,ifelse(PROJECT_STATUS_NME=="Pipeline",2,3)),
+           url = paste0("http://operationsportal2.worldbank.org/wb/opsportal/ttw/about?projId=",PROJ_ID)) %>%
     select(-IBRD_CMT_USD_AMT, -GRANT_USD_AMT, -IDA_CMT_USD_AMT) %>%
-    filter(PROJECT_STATUS_NME %in% c("Closed","Active","Pipeline")) %>%
-    filter(!(tolower(substr(Prod_Line,1,8))=="standard"))
+    filter(PROJECT_STATUS_NME %in% c("Closed","Active","Pipeline")) #%>%
+  #filter(!(tolower(substr(Prod_Line,1,8))=="standard"))
   
   return(dataTC)
 }
@@ -151,11 +153,12 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
   
   dataIFC <- filter(IFCprojects, COUNTRY_CODE==cou) #select country
   # projects in active, pipeline or closed status
-  dataIFC <- filter(dataIFC, (PROJECT_STAGE=="PIPELINE") | (PROJECT_STATUS %in% c("ACTIVE", "PIPELINE", "CLOSED")),
+  dataIFC <- filter(dataIFC, (PROJECT_STAGE %in% c("PIPELINE","PORTFOLIO")) | (PROJECT_STATUS %in% c("ACTIVE", "HOLD", "CLOSED")),
                     PROJECT_TYPE == "AS PROJECTS WITH CLIENT(S)")
   dataIFC <- mutate(dataIFC, Prod_Line = "Advisory Services and Analytics (ASA) IFC",
                     Project_Status = ifelse(PROJECT_STAGE=="PIPELINE","Pipeline",ifelse(PROJECT_STATUS=="CLOSED","Closed","Active")))
-  dataIFC <- mutate(dataIFC, ProjectOrder = ifelse(Project_Status=="Active",1,ifelse(Project_Status=="Pipeline",2,3)))
+  dataIFC <- mutate(dataIFC, ProjectOrder = ifelse(Project_Status=="Active",1,ifelse(Project_Status=="Pipeline",2,3)),
+                    url = paste0("http://ifcext.ifc.org/ifcext/spiwebsite1.nsf/%20AllDocsAdvisory?SearchView&Query=(FIELD ProjectId=",PROJ_ID))
   # make PROJ_ID character
   dataIFC$PROJ_ID <- as.character(dataIFC$PROJ_ID)
   
