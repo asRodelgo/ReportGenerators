@@ -132,14 +132,16 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
   # calculate total amount per project
   dataTC <- dataTC %>%
     group_by(PROJ_ID) %>%
-    mutate(Project_Amount = IBRD_CMT_USD_AMT + GRANT_USD_AMT + IDA_CMT_USD_AMT,
+    mutate(Project_Amount = (IBRD_CMT_USD_AMT + GRANT_USD_AMT + IDA_CMT_USD_AMT)/1000000,
            Prod_Line = ifelse(tolower(substr(PROD_LINE_TYPE_NME,1,4))=="lend","Financing",
                               ifelse(tolower(substr(PROD_LINE_TYPE_NME,1,3))=="aaa",
                                      "Advisory Services and Analytics (ASA) IBRD",PROD_LINE_TYPE_NME)),
            ProjectOrder = ifelse(PROJECT_STATUS_NME=="Active",1,ifelse(PROJECT_STATUS_NME=="Pipeline",2,3)),
-           url = paste0("http://operationsportal2.worldbank.org/wb/opsportal/ttw/about?projId=",PROJ_ID)) %>%
+           url = paste0("http://operationsportal2.worldbank.org/wb/opsportal/ttw/about?projId=",PROJ_ID),
+           RAS = ifelse(is.na(FEE_BASED_FLAG),"N","Y")) %>%
     select(-IBRD_CMT_USD_AMT, -GRANT_USD_AMT, -IDA_CMT_USD_AMT) %>%
     filter(PROJECT_STATUS_NME %in% c("Closed","Active","Pipeline")) #%>%
+  #filter(sequence == max(sequence) & rate_code == "ORR") # latest SORT
   #filter(!(tolower(substr(Prod_Line,1,8))=="standard"))
   
   return(dataTC)

@@ -377,7 +377,7 @@ read_chunk("TCMN_portfolio_PDF.R")
       \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
   \end{minipage}
 \end{figure}
-
+%
 %%%% Macro Indicators
 \begin{minipage}[t]{0.99\textwidth} % top section
   \vspace{-1.5cm}
@@ -390,99 +390,124 @@ read_chunk("TCMN_portfolio_PDF.R")
     \end{minipage}
   \end{minipage}
   \begin{minipage}[c]{0.63\textwidth}
-    \begin{flushleft}  
-      \center{\color{blue!20!black} \textbf{\Large T\&C Product Line Operations Board Approved On or After FY14}}
-    \end{flushleft} 
+  %  \begin{flushleft}  
+  %    \center{\color{blue!20!black} \textbf{\Large T\&C Product Line Operations Board Approved On or After FY14}}
+  %  \end{flushleft} 
   \end{minipage}  
 \end{minipage} % end top section
 
-\begin{minipage}[b]{0.99\textwidth} % macro indicators main table
-\vspace*{0.5cm}
-\raggedright{\color{white!30!blue} \textbf{\large Status of Operations}}
-     \vspace*{0.5cm}
-     
-  \begin{minipage}[t]{0.99\textwidth}
-    \begin{minipage}[c]{0.49\textwidth}
-      \vspace*{0.2cm}
-      \center{\color{blue!50!black} \textbf{\small By number of projects}}
-      \vspace*{0.3cm}
-    <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
-      @      
-      \end{minipage}
-      \begin{minipage}[c]{0.49\textwidth}
-      \center{\color{blue!50!black} \textbf{\small By amount in thousands of US\$ \\ (ASA IBRD products not included)}}
-      <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
-      @
-      \end{minipage}
- 
-%\hspace*{0.5cm} 
-\raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: IBRD Operations, IFC group Operations}}}
-   \end{minipage}
-  
-   \begin{minipage}[b]{0.99\textwidth} % overview tables
-     \vspace*{1cm}
-     \begin{minipage}[c]{0.99\textwidth}  
-     \raggedright{\color{white!30!blue} \textbf{\large Financing}}
-     \vspace*{0.5cm}
-     
-       <<financeTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+\begin{minipage}[b]{0.99\textwidth} % main body
+  \vspace*{0.5cm}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+%'   \begin{minipage}[t]{0.99\textwidth}
+%'     \begin{minipage}[c]{0.49\textwidth}
+%'       \vspace*{0.2cm}
+%'       \center{\color{blue!50!black} \textbf{\small By number of projects}}
+%'       \vspace*{0.3cm}
+%'      <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
+%'       @      
+%'     \end{minipage}
+%'     \begin{minipage}[c]{0.49\textwidth}
+%'       \center{\color{blue!50!black} \textbf{\small By amount in thousands of US\$ \\ (ASA IBRD products not included)}}
+%'       <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
+%'       @
+%'     \end{minipage}
+%'  
+%' %\hspace*{0.5cm} 
+%'     \raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: IBRD Operations, IFC group Operations}}}
+%'   \end{minipage}
+%'   %\end{minipage}  
+  \begin{minipage}[b]{0.99\textwidth} % overview tables
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.5cm}
+       <<lendingPipeline,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-     \vspace*{0.5cm}
-     \end{minipage}
-     
-     \begin{minipage}[c]{0.99\textwidth} % imports/exports 
-     \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IBRD}}
-     \vspace*{0.5cm}
-     
-       <<ASATable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-       @
-     \vspace*{0.5cm}
-     \end{minipage}
-     
-     \begin{minipage}[c]{0.99\textwidth} % imports/exports 
-     \raggedright{\color{white!30!blue} \textbf{\large Advisory Services and Analytics (ASA) IFC}}
-     \vspace*{0.5cm}
-     
-       <<ASA_IFCTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-       @
-     \vspace*{0.5cm}
-     \end{minipage}
-     
+      \vspace*{0.5cm}
     \end{minipage}
+    
+     \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Active}}
+      \vspace*{0.3cm}
+      
+       <<portfolioActive,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+      \vspace*{0.5cm}
+    \end{minipage}
+     
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+      \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+      \vspace*{0.5cm}
+      
+      <<portfolioClosed,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+      \vspace*{0.5cm}
+    \end{minipage}
+     
+  \end{minipage}
 \end{minipage}
  
  \newpage
-%%%%%%%%%%%%%%%% PAGE 4 %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
 \begin{minipage}[t]{0.99\textwidth}
-\raggedright{\color{white!30!blue} \textbf{\large Major sectors and themes}}
-     \vspace*{0.5cm}
-     
-  \begin{minipage}[c]{0.49\textwidth} % sectors
-    \center{\color{blue!50!black} \textbf{Operations by sector, in percent}}
-    \vspace*{0.4cm}
-      <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
-    @      
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: IBRD Operations database}}
-  \end{minipage}
-  \begin{minipage}[c]{0.49\textwidth} % themes
-  \center{\color{blue!50!black} \textbf{Operations by theme, in percent}}
-    \vspace*{0.4cm}
-    <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
-    @            
-  %\hspace*{0.5cm} 
-  \raggedright{\footnotesize{\href{http://lpi.worldbank.org}{Source: IBRD Operations database}}}
-  \end{minipage}
-\end{minipage}  
+\raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+%'   \begin{minipage}[c]{0.49\textwidth} % sectors
+%'     \center{\color{blue!50!black} \textbf{Active}}
+%'     \vspace*{0.4cm}
+%'       <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
+%'     @      
+%'     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: IBRD Operations database}}
+%'   \end{minipage}
+%'   \begin{minipage}[c]{0.49\textwidth} % themes
+%'   \center{\color{blue!50!black} \textbf{Operations by theme, in percent}}
+%'     \vspace*{0.4cm}
+%'     <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
+%'     @            
+%'   %\hspace*{0.5cm} 
+%'   \raggedright{\footnotesize{\href{http://lpi.worldbank.org}{Source: IBRD Operations database}}}
+%'   \end{minipage}
+%' \end{minipage}  
  
 \begin{minipage}[b]{0.99\textwidth}
-  \vspace*{1cm}
-  \raggedright{\color{white!30!blue} \textbf{\large T\&C Staff in charge of operations}}
-  \vspace*{0.5cm}
+  \vspace*{0.2cm}
+  \raggedright{\color{white!30!blue} \textbf{\large Active}}
+  \vspace*{0.3cm}
+  
+       <<ASAActive,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \vspace*{0.2cm}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
      
-       <<projectsPeople,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       <<ASAClosed,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
      \vspace*{0.5cm}
 \end{minipage}
 
+\raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+\begin{minipage}[b]{0.99\textwidth}
+  \vspace*{0.2cm}
+  \raggedright{\color{white!30!blue} \textbf{\large Active}}
+  \vspace*{0.3cm}
+  
+       <<ASA_IFCActive,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+       <<ASA_IFCClosed,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+     \vspace*{0.2cm}
+\end{minipage}
+\end{minipage}
 %%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
 \end{document}
