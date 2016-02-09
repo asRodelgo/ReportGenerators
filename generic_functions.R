@@ -140,9 +140,12 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
            url = paste0("http://operationsportal2.worldbank.org/wb/opsportal/ttw/about?projId=",PROJ_ID),
            RAS = ifelse(is.na(FEE_BASED_FLAG),"N","Y")) %>%
     select(-IBRD_CMT_USD_AMT, -GRANT_USD_AMT, -IDA_CMT_USD_AMT) %>%
-    filter(PROJECT_STATUS_NME %in% c("Closed","Active","Pipeline")) #%>%
+    filter(PROJECT_STATUS_NME %in% c("Closed","Active","Pipeline")) %>%
+    mutate(ProjectOrder = ifelse(is.na(REVISED_CLS_DATE),ProjectOrder,ifelse(REVISED_CLS_DATE<Sys.Date(),3,ProjectOrder)))
   #filter(sequence == max(sequence) & rate_code == "ORR") # latest SORT
   #filter(!(tolower(substr(Prod_Line,1,8))=="standard"))
+  #dataTC <- as.data.frame(dataTC)
+  #dataTC <- mutate(dataTC, ProjectOrder = ifelse(REVISED_CLS_DATE<Sys.Date(),3,ProjectOrder))
   
   return(dataTC)
 }
@@ -163,6 +166,7 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
                     url = paste0("http://ifcext.ifc.org/ifcext/spiwebsite1.nsf/%20AllDocsAdvisory?SearchView&Query=(FIELD ProjectId=",PROJ_ID))
   # make PROJ_ID character
   dataIFC$PROJ_ID <- as.character(dataIFC$PROJ_ID)
+  dataIFC <- mutate(dataIFC, ProjectOrder = ifelse(is.na(IMPLEMENTATION_END_DATE),ProjectOrder,ifelse(IMPLEMENTATION_END_DATE<Sys.Date(),3,ProjectOrder)))
   
   return(dataIFC)
 }

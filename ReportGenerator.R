@@ -17,7 +17,7 @@ for (c in countryNames$Country) {
   
 # Create the operations reports --------------------------------------
 for (c in countryNames$Country) {
-#for (c in c("Brazil","Peru","Spain")) {
+#for (c in c("Brazil","Indonesia")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Operations_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",

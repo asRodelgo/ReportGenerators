@@ -259,10 +259,20 @@ projectsTablePortfolioClosed <- function(couName){
                    Team_Leader = FULL_NME, Approval_Date = BD_APPRVL_DATE, 
                    Lending_Inst_Type = LENDING_INSTR_TYPE_NME,
                    Closing_Date = REVISED_CLS_DATE,Project_Amount,
-                   DO_RATING, IP_RATING,
+                   DO_RATING, IP_RATING, ieg_Outcome,
                    ProjectOrder,url)
   # Financing products in Closed (ProjectOrder==3)
   dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==3)
+  # compute IEG_Ouctome codes:
+  dataTC <- mutate(dataTC, ieg_Outcome = ifelse(is.na(ieg_Outcome),"---",
+                                                ifelse(substr(ieg_Outcome,1,1)=="H",
+                                                       ifelse(substr(ieg_Outcome,8,8)=="S","HS","HU"),
+                                                       ifelse(substr(ieg_Outcome,1,1)=="M",
+                                                              ifelse(substr(ieg_Outcome,12,12)=="S","MS","MU"),
+                                                              ifelse(substr(ieg_Outcome,1,1)=="N",
+                                                                     ifelse(substr(ieg_Outcome,5,6)=="AP","NAP",ifelse(substr(ieg_Outcome,5,6)=="AV","NA","NR")),
+                                                                     substr(ieg_Outcome,1,2))))))
+  
   # filter by date range. Last 2 years
   dataTC <- filter(dataTC, (Closing_Date >= (Sys.Date() - 730)) | (is.na(Closing_Date)))
   count_ibrd <- nrow(dataTC) # will determine the size of the table
@@ -298,8 +308,6 @@ projectsTablePortfolioClosed <- function(couName){
   if (nrow(data)==0){
     data <- rbind(data,c("None",rep("",ncol(dataTC)-2)))
   }
-  # substitution for IEG Outcome Rating
-  data$dummy2 <- rep("",nrow(data)) 
   #
   names(data) <- c("Project ID", "Project Name", "Team Leader", "Approval Date", "Lending Inst. Type",
                    "Closing Date", "Commitment (US\\$M)",
@@ -539,7 +547,7 @@ projectsTableASA_IFC <- function(couName, status){
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
                     Project_Status, Project_Amount = TOTAL_FUNDING,
                     Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
-  dataIFC <- filter(dataIFC, Project_Status == status)
+  dataIFC <- filter(dataIFC, ProjectOrder == 1)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
   # arrange
@@ -617,7 +625,7 @@ projectsTableASA_IFC <- function(couName, status){
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
                     Project_Status, Project_Amount = TOTAL_FUNDING,
                     Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
-  dataIFC <- filter(dataIFC, Project_Status == status)
+  dataIFC <- filter(dataIFC, ProjectOrder == 3)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
   # arrange
