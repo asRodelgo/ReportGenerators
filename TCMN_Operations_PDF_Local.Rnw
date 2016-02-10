@@ -79,108 +79,103 @@ couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
   \end{minipage}  
 \end{minipage} % end top section
 
-\begin{minipage}[b]{0.99\textwidth} % main body
-  \vspace*{0.5cm}
-  \raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
-%'   \begin{minipage}[t]{0.99\textwidth}
-%'     \begin{minipage}[c]{0.49\textwidth}
-%'       \vspace*{0.2cm}
-%'       \center{\color{blue!50!black} \textbf{\small By number of projects}}
-%'       \vspace*{0.3cm}
-%'      <<projectStatus_count,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
-%'       @      
-%'     \end{minipage}
-%'     \begin{minipage}[c]{0.49\textwidth}
-%'       \center{\color{blue!50!black} \textbf{\small By amount in thousands of US\$ \\ (ASA IBRD products not included)}}
-%'       <<projectStatus_amount,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.60\\textwidth',results="asis">>=  
-%'       @
-%'     \end{minipage}
-%'  
-%' %\hspace*{0.5cm} 
-%'     \raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: IBRD Operations, IFC group Operations}}}
-%'   \end{minipage}
-%'   %\end{minipage}  
-  \begin{minipage}[b]{0.99\textwidth} % overview tables
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
     \begin{minipage}[c]{0.99\textwidth}  
-      \vspace*{0.5cm}
-       <<lendingPipeline,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+       <<mostRecentDocs,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
       \vspace*{0.5cm}
     \end{minipage}
     
-     \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
     \begin{minipage}[c]{0.99\textwidth} % imports/exports
       \vspace*{0.2cm}
-      \raggedright{\color{white!30!blue} \textbf{\large Active}}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
       \vspace*{0.3cm}
+      
+       <<plannedDocs,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+       <<lendingPipeline,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
       
        <<portfolioActive,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-      \vspace*{0.5cm}
-    \end{minipage}
+    \vspace*{0.5cm}
+  \end{minipage}
      
-    \begin{minipage}[c]{0.99\textwidth} % imports/exports 
-      \raggedright{\color{white!30!blue} \textbf{\large Closed}}
-      \vspace*{0.5cm}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
       
       <<portfolioClosed,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-      \vspace*{0.5cm}
-    \end{minipage}
-     
+    \vspace*{0.5cm}
   \end{minipage}
+     
 \end{minipage}
  
  \newpage
 %%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
 \begin{minipage}[t]{0.99\textwidth}
-\raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
-%'   \begin{minipage}[c]{0.49\textwidth} % sectors
-%'     \center{\color{blue!50!black} \textbf{Active}}
-%'     \vspace*{0.4cm}
-%'       <<projectsTreemap_sectors,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
-%'     @      
-%'     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: IBRD Operations database}}
-%'   \end{minipage}
-%'   \begin{minipage}[c]{0.49\textwidth} % themes
-%'   \center{\color{blue!50!black} \textbf{Operations by theme, in percent}}
-%'     \vspace*{0.4cm}
-%'     <<projectsTreemap_themes,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',out.width='.80\\textwidth',results="asis">>=  
-%'     @            
-%'   %\hspace*{0.5cm} 
-%'   \raggedright{\footnotesize{\href{http://lpi.worldbank.org}{Source: IBRD Operations database}}}
-%'   \end{minipage}
-%' \end{minipage}  
- 
-\begin{minipage}[b]{0.99\textwidth}
-  \vspace*{0.2cm}
-  \raggedright{\color{white!30!blue} \textbf{\large Active}}
-  \vspace*{0.3cm}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
   
        <<ASAActive,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
      \vspace*{0.2cm}
-\end{minipage}
+  \end{minipage}
 
-\begin{minipage}[b]{0.99\textwidth}
-  \vspace*{0.2cm}
-  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
-  \vspace*{0.3cm}
-     
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
        <<ASAClosed,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-     \vspace*{0.5cm}
-\end{minipage}
+    \vspace*{0.5cm}
+  \end{minipage}
 
-\raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
-\begin{minipage}[b]{0.99\textwidth}
-  \vspace*{0.2cm}
-  \raggedright{\color{white!30!blue} \textbf{\large Active}}
-  \vspace*{0.3cm}
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
   
        <<ASA_IFCActive,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-     \vspace*{0.2cm}
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+       <<ASA_IFCPipeline,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+       @
+  \vspace*{0.2cm}
 \end{minipage}
 
 \begin{minipage}[b]{0.99\textwidth}
@@ -189,8 +184,8 @@ couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
   
        <<ASA_IFCClosed,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
        @
-     \vspace*{0.2cm}
+  \vspace*{0.2cm}
 \end{minipage}
-\end{minipage}
+
 %%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
 \end{document}

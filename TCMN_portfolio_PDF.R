@@ -78,7 +78,7 @@ projectsTableLendingPipeline <- function(couName){
                    Cum_Expenses = CUMULATIVE_FY_COST,FY_Prob = FY_PROB_TYPE_CODE,
                    ProjectOrder,url)
   # Financing products in Pipeline (ProjectOrder==2)
-  dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==2 & !(is.na(Approval_Date)))
+  dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==2)
   count_ibrd <- nrow(dataTC) # will determine the size of the table
   # filter by date range
   #dataTC <- filter(dataTC, (Approval_Date >= fromDate) & (Approval_Date <= toDate))
@@ -337,7 +337,7 @@ projectsTablePortfolioClosed <- function(couName){
 projectsTablePortfolioClosed(couName)
 
 
-# ---- ASAActive ----
+## ---- ASAActive ----
 projectsTableASAActive <- function(couName){
   
   cou <- .getCountryCode(couName)
@@ -433,7 +433,7 @@ projectsTableASAActive <- function(couName){
 }
 projectsTableASAActive(couName)
 
-# ---- ASAClosed ----
+## ---- ASAClosed ----
 projectsTableASAClosed <- function(couName){
   
   cou <- .getCountryCode(couName)
@@ -532,14 +532,14 @@ projectsTableASAClosed <- function(couName){
 projectsTableASAClosed(couName)
 
 
-# ---- ASA_IFCActive ----
+## ---- ASA_IFCActive ----
 projectsTableASA_IFC <- function(couName, status){
   
   cou <- .getCountryCode(couName)
   couISO2 <- .getISO2(couName)
   #fromDate <- as.character(dateRange[[1]])
   #toDate <- as.character(dateRange[[2]])
-  
+  pOrder <- ifelse(status=="Active",1,ifelse(status=="Closed",3,2))
   ### IFC projects ----------
   dataIFC <- .filterIFCProjects(couName)
   # keep relevant columns
@@ -547,7 +547,7 @@ projectsTableASA_IFC <- function(couName, status){
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
                     Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
                     Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
-  dataIFC <- filter(dataIFC, ProjectOrder == 1)
+  dataIFC <- filter(dataIFC, ProjectOrder == pOrder)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
   # arrange
@@ -595,8 +595,90 @@ projectsTableASA_IFC <- function(couName, status){
   names(data)[ncol(data)] <- ""
   
   data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c('l','l','>{\\raggedright}p{1.6in}','>{\\raggedright}p{1.5in}',rep('>{\\raggedright}p{0.7in}',2),rep('>{\\raggedleft}p{0.7in}',2),'l')
-  if (count_ibrd>6){ # squeeze tables in case they are too long
+  align(data.table) <- c('l','l','>{\\raggedright}p{1.6in}','>{\\raggedright}p{1.5in}',rep('>{\\raggedright}p{0.7in}',2),rep('>{\\raggedleft}p{0.7in}',3),'l')
+  if (count_ifc>6){ # squeeze tables in case they are too long
+    
+    print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          size="\\scriptsize", scalebox = 0.85,
+          booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
+          sanitize.text.function = function(x){x} # include sanitize to control formats
+    )
+  } else{
+    
+    print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          size="\\footnotesize", scalebox = 0.85,
+          booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
+          sanitize.text.function = function(x){x} # include sanitize to control formats
+    )
+  }
+}
+projectsTableASA_IFC(couName,"Active")
+
+## ---- ASA_IFCClosed ----
+projectsTableASA_IFC <- function(couName, status){
+  
+  cou <- .getCountryCode(couName)
+  couISO2 <- .getISO2(couName)
+  #fromDate <- as.character(dateRange[[1]])
+  #toDate <- as.character(dateRange[[2]])
+  pOrder <- ifelse(status=="Active",1,ifelse(status=="Closed",3,2))
+  ### IFC projects ----------
+  dataIFC <- .filterIFCProjects(couName)
+  # keep relevant columns
+  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, Team_Leader = PROJECT_LEADER,
+                    Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
+                    Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
+                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
+  dataIFC <- filter(dataIFC, ProjectOrder == pOrder)
+  #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
+  count_ifc <- nrow(dataIFC) # will determine the size of the table
+  # arrange
+  dataIFC <- arrange(as.data.frame(dataIFC), desc(Approval_Date))
+  dataIFC <- select(dataIFC,-ProjectOrder, -Project_Status) # drop ProjectOrder
+  # remove duplicates
+  data <- dataIFC[!duplicated(dataIFC$PROJ_ID),]
+  # Scale amounts
+  data$Project_Amount <- data$Project_Amount/1000
+  data$Current_Exp <- data$Current_Exp/1000
+  data$ITD_EXPENDITURES <- data$ITD_EXPENDITURES/1000
+  
+  # format Amount
+  data$Project_Amount <- format(data$Project_Amount, digits=0, decimal.mark=".",
+                                big.mark=",",small.mark=".", small.interval=3)
+  data$Current_Exp <- format(data$Current_Exp, digits=0, decimal.mark=".",
+                             big.mark=",",small.mark=".", small.interval=3)
+  data$ITD_EXPENDITURES <- format(data$ITD_EXPENDITURES, digits=0, decimal.mark=".",
+                                  big.mark=",",small.mark=".", small.interval=3)
+  # substitute NAs for "---" em-dash
+  data[is.na(data)] <- "---"
+  nrow <- nrow(data)
+  data <- sapply(data, function(x) gsub("NA", "---", x, fixed=TRUE))
+  if (nrow==1){
+    data <- as.data.frame(t(data))
+  } else{
+    data <- as.data.frame(data)
+  }
+  
+  # escape reserved characters
+  data$Project_Name <- gsub("%", "\\%", data$Project_Name, fixed=TRUE)
+  data$Project_Name <- gsub("&", "\\&", data$Project_Name, fixed=TRUE)
+  data$Project_Name <- gsub("_", "\\_", data$Project_Name, fixed=TRUE)
+  data$Project_Name <- gsub("#", "\\#", data$Project_Name, fixed=TRUE)
+  
+  # If table is empty show "None"
+  if (nrow(data)==0){
+    data <- rbind(data,c("None",rep("",ncol(dataIFC)-1)))
+  }
+  names(data) <- c("Project ID", "Project Name", "Team Leader","IP Approval Date", 
+                   "Expected End Date","Approval Value (in US\\$K)", "Total Expenditures (in US\\$K)", "Current FY Expenditure (in US\\$K)")
+  
+  # I have to add a dummy column so the alignment works (align)
+  data$dummy <- rep("",nrow(data))
+  names(data)[ncol(data)] <- ""
+  
+  data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
+  align(data.table) <- c('l','l','>{\\raggedright}p{1.6in}','>{\\raggedright}p{1.5in}',rep('>{\\raggedright}p{0.7in}',2),rep('>{\\raggedleft}p{0.7in}',3),'l')
+  if (count_ifc>6){ # squeeze tables in case they are too long
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
           size="\\scriptsize", scalebox = 0.85,
@@ -614,37 +696,41 @@ projectsTableASA_IFC <- function(couName, status){
 }
 projectsTableASA_IFC(couName,"Closed")
 
-# ---- ASA_IFCClosed ----
+## ---- ASA_IFCPipeline ----
 projectsTableASA_IFC <- function(couName, status){
   
   cou <- .getCountryCode(couName)
   couISO2 <- .getISO2(couName)
   #fromDate <- as.character(dateRange[[1]])
   #toDate <- as.character(dateRange[[2]])
-  
+  pOrder <- ifelse(status=="Active",1,ifelse(status=="Closed",3,2))
   ### IFC projects ----------
   dataIFC <- .filterIFCProjects(couName)
   # keep relevant columns
   dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, Team_Leader = PROJECT_LEADER,
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
-                    Project_Status, Project_Amount = TOTAL_FUNDING,
+                    Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
                     Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
-  dataIFC <- filter(dataIFC, ProjectOrder == 3)
+  dataIFC <- filter(dataIFC, ProjectOrder == pOrder)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
   # arrange
-  dataIFC <- arrange(as.data.frame(dataIFC), desc(Closing_Date))
+  dataIFC <- arrange(as.data.frame(dataIFC), desc(Approval_Date))
   dataIFC <- select(dataIFC,-ProjectOrder, -Project_Status) # drop ProjectOrder
   # remove duplicates
   data <- dataIFC[!duplicated(dataIFC$PROJ_ID),]
   # Scale amounts
   data$Project_Amount <- data$Project_Amount/1000
   data$Current_Exp <- data$Current_Exp/1000
+  data$ITD_EXPENDITURES <- data$ITD_EXPENDITURES/1000
+  
   # format Amount
   data$Project_Amount <- format(data$Project_Amount, digits=0, decimal.mark=".",
                                 big.mark=",",small.mark=".", small.interval=3)
   data$Current_Exp <- format(data$Current_Exp, digits=0, decimal.mark=".",
                              big.mark=",",small.mark=".", small.interval=3)
+  data$ITD_EXPENDITURES <- format(data$ITD_EXPENDITURES, digits=0, decimal.mark=".",
+                                  big.mark=",",small.mark=".", small.interval=3)
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
   nrow <- nrow(data)
@@ -654,6 +740,7 @@ projectsTableASA_IFC <- function(couName, status){
   } else{
     data <- as.data.frame(data)
   }
+  
   # escape reserved characters
   data$Project_Name <- gsub("%", "\\%", data$Project_Name, fixed=TRUE)
   data$Project_Name <- gsub("&", "\\&", data$Project_Name, fixed=TRUE)
@@ -665,15 +752,15 @@ projectsTableASA_IFC <- function(couName, status){
     data <- rbind(data,c("None",rep("",ncol(dataIFC)-1)))
   }
   names(data) <- c("Project ID", "Project Name", "Team Leader","IP Approval Date", 
-                   "Expected End Date","Approval Value (in US\\$K)", "Current Expenditure (in US\\$K)")
+                   "Expected End Date","Approval Value (in US\\$K)", "Total Expenditures (in US\\$K)", "Current FY Expenditure (in US\\$K)")
   
   # I have to add a dummy column so the alignment works (align)
   data$dummy <- rep("",nrow(data))
   names(data)[ncol(data)] <- ""
   
   data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c('l','l','>{\\raggedright}p{1.6in}','>{\\raggedright}p{1.5in}',rep('>{\\raggedright}p{0.7in}',2),rep('>{\\raggedleft}p{0.7in}',2),'l')
-  if (count_ibrd>6){ # squeeze tables in case they are too long
+  align(data.table) <- c('l','l','>{\\raggedright}p{1.6in}','>{\\raggedright}p{1.5in}',rep('>{\\raggedright}p{0.7in}',2),rep('>{\\raggedleft}p{0.7in}',3),'l')
+  if (count_ifc>6){ # squeeze tables in case they are too long
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
           size="\\scriptsize", scalebox = 0.85,
@@ -689,13 +776,78 @@ projectsTableASA_IFC <- function(couName, status){
     )
   }
 }
-projectsTableASA_IFC(couName,"Active")
-#############
+projectsTableASA_IFC(couName,"Pipeline")
 
+## ---- mostRecentDocs ----
+mostRecentDocuments <- function(couName){
+  
+  cou <- .getCountryCode(couName)
+  couISO2 <- .getISO2(couName)
+  
+  data <- filter(mostRecentDocs, CountryCodeISO3 == cou)
+  data <- select(data, Name, DateOrder, Report)
+  data$DateOrder <- gsub("/","-",data$DateOrder,fixed=TRUE)
+  data$Report <- as.character(data$Report)
+  
+  # escape reserved characters
+  data$Name <- gsub("%", "\\%", data$Name, fixed=TRUE)
+  data$Name <- gsub("&", "\\&", data$Name, fixed=TRUE)
+  data$Name <- gsub("_", "\\_", data$Name, fixed=TRUE)
+  data$Name <- gsub("#", "\\#", data$Name, fixed=TRUE)
+  
+  # If table is empty show "None"
+  if (nrow(data)==0){
+    data <- rbind(data,c("None",rep("",2)))
+  }
+  names(data) <- c("Product","Document Date","Document ID")
+  # I have to add a dummy column so the alignment works (align)
+  data$dummy <- rep("",nrow(data))
+  names(data)[ncol(data)] <- ""
+  
+  data.table <- xtable(data)#, digits=rep(0,ncol(data)+1)) #control decimals
+  align(data.table) <- c(rep('l',5))
+  print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          scalebox = 0.85,
+          booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
+          sanitize.text.function = function(x){x} # include sanitize to control formats
+  )
+  
+}
+mostRecentDocuments(couName)
 
-
-
-
+## ---- plannedDocs ----
+plannedDocuments <- function(couName){
+  
+  cou <- .getCountryCode(couName)
+  couISO2 <- .getISO2(couName)
+  
+  data <- filter(plannedDocs, CountryCodeISO3 == cou)
+  data <- select(data, Product, ConceptReviewDate, BoardDate)
+  # escape reserved characters
+  data$Product <- gsub("%", "\\%", data$Product, fixed=TRUE)
+  data$Product <- gsub("&", "\\&", data$Product, fixed=TRUE)
+  data$Product <- gsub("_", "\\_", data$Product, fixed=TRUE)
+  data$Product <- gsub("#", "\\#", data$Product, fixed=TRUE)
+  
+  # If table is empty show "None"
+  if (nrow(data)==0){
+    data <- rbind(data,c("None",rep("",2)))
+  }
+  names(data) <- c("Product","Concept Review Date","Board Date")
+  # I have to add a dummy column so the alignment works (align)
+  data$dummy <- rep("",nrow(data))
+  names(data)[ncol(data)] <- ""
+  
+  data.table <- xtable(data)#, digits=rep(0,ncol(data)+1)) #control decimals
+  align(data.table) <- c(rep('l',5))
+  print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+        scalebox = 0.85,
+        booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
+        sanitize.text.function = function(x){x} # include sanitize to control formats
+  )
+  
+}
+plannedDocuments(couName)
 
 
 

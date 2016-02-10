@@ -42,6 +42,10 @@ xWits <- read.csv("/Users/asanchez3/shinyTCMN/data/xWits.csv", colClasses = c(re
 TCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/TCprojects.csv", stringsAsFactors = FALSE)
 # IFC projects portfolio --------------
 IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", stringsAsFactors = FALSE)
+# SCD/CPF most recent --------------
+mostRecentDocs <- read.csv("/Users/asanchez3/shinyTCMN/data/SCDCPFdocuments.csv", stringsAsFactors = FALSE)
+# SCD/CPF planned --------------
+plannedDocs <- read.csv("/Users/asanchez3/shinyTCMN/data/Planneddocuments.csv", stringsAsFactors = FALSE)
 
 #
 #
