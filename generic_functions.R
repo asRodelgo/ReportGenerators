@@ -79,6 +79,16 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
   }
   #return(countryCode)
 }
+.getCountryCodeIFC <- function(couName){
+  
+  countryCode <- filter(countries, Country==couName)$ISO3_IFC
+  if (length(countryCode)==1){
+    return(countryCode)
+  } else{
+    return(0)
+  }
+  #return(countryCode)
+}
 
 # country flags -----------------------------------
 .outFlag <- function(couName){
@@ -153,7 +163,7 @@ IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", strin
 # filter IFC T&C relevant projects ---------------
 .filterIFCProjects <- function(couName){
   
-  cou <- .getCountryCode(couName)
+  cou <- .getCountryCodeIFC(couName)
   couISO2 <- .getISO2(couName)
   
   dataIFC <- filter(IFCprojects, COUNTRY_CODE==cou) #select country

@@ -78,7 +78,7 @@ projectsTableLendingPipeline <- function(couName){
                    Cum_Expenses = CUMULATIVE_FY_COST,FY_Prob = FY_PROB_TYPE_CODE,
                    ProjectOrder,url)
   # Financing products in Pipeline (ProjectOrder==2)
-  dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==2)
+  dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==2 & !(is.na(Approval_Date)))
   count_ibrd <- nrow(dataTC) # will determine the size of the table
   # filter by date range
   #dataTC <- filter(dataTC, (Approval_Date >= fromDate) & (Approval_Date <= toDate))
@@ -171,7 +171,7 @@ projectsTablePortfolioActive <- function(couName){
                    Months_Problem = No_of_Months_in_problem_status,
                    ProjectOrder,url)
   # Financing products in Active (ProjectOrder==1)
-  dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==1)
+  dataTC <- filter(dataTC, Prod_Line == "Financing" & ProjectOrder==1 & !(is.na(Approval_Date)))
   count_ibrd <- nrow(dataTC) # will determine the size of the table
   # filter by date range
   #dataTC <- filter(dataTC, (Approval_Date >= fromDate) & (Approval_Date <= toDate))
@@ -355,8 +355,8 @@ projectsTableASAActive <- function(couName){
                    Cum_Expenses = CUMULATIVE_FY_COST,
                    ProjectOrder,url)
   # AAA in Active (ProjectOrder==1)
-  dataTC <- filter(dataTC, Prod_Line == "Advisory Services and Analytics (ASA) IBRD" 
-                   & ProjectOrder==1)
+  dataTC <- filter(dataTC, Prod_Line %in% c("Advisory Services and Analytics (ASA) IBRD","STANDARD PRODUCT") 
+                   & ProjectOrder==1 & !(is.na(Approval_Date)))
   count_ibrd <- nrow(dataTC) # will determine the size of the table
   # filter by date range
   #dataTC <- filter(dataTC, (Approval_Date >= fromDate) & (Approval_Date <= toDate))
@@ -451,7 +451,7 @@ projectsTableASAClosed <- function(couName){
                    Cum_Expenses = CUMULATIVE_FY_COST,
                    ProjectOrder,url)
   # AAA in Active (ProjectOrder==1)
-  dataTC <- filter(dataTC, Prod_Line == "Advisory Services and Analytics (ASA) IBRD" 
+  dataTC <- filter(dataTC, Prod_Line %in% c("Advisory Services and Analytics (ASA) IBRD","STANDARD PRODUCT") 
                    & ProjectOrder==3)
   count_ibrd <- nrow(dataTC) # will determine the size of the table
   # filter by date range
@@ -545,7 +545,7 @@ projectsTableASA_IFC <- function(couName, status){
   # keep relevant columns
   dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, Team_Leader = PROJECT_LEADER,
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
-                    Project_Status, Project_Amount = TOTAL_FUNDING,
+                    Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
                     Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
   dataIFC <- filter(dataIFC, ProjectOrder == 1)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
@@ -558,11 +558,15 @@ projectsTableASA_IFC <- function(couName, status){
   # Scale amounts
   data$Project_Amount <- data$Project_Amount/1000
   data$Current_Exp <- data$Current_Exp/1000
+  data$ITD_EXPENDITURES <- data$ITD_EXPENDITURES/1000
+  
   # format Amount
   data$Project_Amount <- format(data$Project_Amount, digits=0, decimal.mark=".",
                                 big.mark=",",small.mark=".", small.interval=3)
   data$Current_Exp <- format(data$Current_Exp, digits=0, decimal.mark=".",
                              big.mark=",",small.mark=".", small.interval=3)
+  data$ITD_EXPENDITURES <- format(data$ITD_EXPENDITURES, digits=0, decimal.mark=".",
+                                  big.mark=",",small.mark=".", small.interval=3)
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
   nrow <- nrow(data)
@@ -584,7 +588,7 @@ projectsTableASA_IFC <- function(couName, status){
     data <- rbind(data,c("None",rep("",ncol(dataIFC)-1)))
   }
   names(data) <- c("Project ID", "Project Name", "Team Leader","IP Approval Date", 
-                   "Expected End Date","Approval Value (in US\\$K)", "Current Expenditure (in US\\$K)")
+                   "Expected End Date","Approval Value (in US\\$K)", "Total Expenditures (in US\\$K)", "Current FY Expenditure (in US\\$K)")
   
   # I have to add a dummy column so the alignment works (align)
   data$dummy <- rep("",nrow(data))
