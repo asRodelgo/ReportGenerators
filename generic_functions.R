@@ -175,12 +175,13 @@ plannedDocs <- read.csv("/Users/asanchez3/shinyTCMN/data/Planneddocuments.csv", 
   dataIFC <- filter(dataIFC, (PROJECT_STAGE %in% c("PIPELINE","PORTFOLIO")) | (PROJECT_STATUS %in% c("ACTIVE", "HOLD", "CLOSED")),
                     PROJECT_TYPE == "AS PROJECTS WITH CLIENT(S)")
   dataIFC <- mutate(dataIFC, Prod_Line = "Advisory Services and Analytics (ASA) IFC",
-                    Project_Status = ifelse(PROJECT_STAGE=="PIPELINE","Pipeline",ifelse(PROJECT_STATUS=="CLOSED","Closed","Active")))
+                    Project_Status = ifelse(PROJECT_STATUS=="CLOSED","Closed",ifelse(PROJECT_STAGE=="PIPELINE","Pipeline","Active")),
+                    Hold = ifelse((PROJECT_STAGE=="PORTFOLIO") & (PROJECT_STATUS=="HOLD"), "Y","N"))
   dataIFC <- mutate(dataIFC, ProjectOrder = ifelse(Project_Status=="Active",1,ifelse(Project_Status=="Pipeline",2,3)),
                     url = paste0("http://ifcext.ifc.org/ifcext/spiwebsite1.nsf/%20AllDocsAdvisory?SearchView&Query=(FIELD ProjectId=",PROJ_ID))
   # make PROJ_ID character
   dataIFC$PROJ_ID <- as.character(dataIFC$PROJ_ID)
-  dataIFC <- mutate(dataIFC, ProjectOrder = ifelse(is.na(IMPLEMENTATION_END_DATE),ProjectOrder,ifelse(IMPLEMENTATION_END_DATE<Sys.Date(),3,ProjectOrder)))
+  #dataIFC <- mutate(dataIFC, ProjectOrder = ifelse(is.na(IMPLEMENTATION_END_DATE),ProjectOrder,ifelse(IMPLEMENTATION_END_DATE<Sys.Date(),3,ProjectOrder)))
   
   return(dataIFC)
 }

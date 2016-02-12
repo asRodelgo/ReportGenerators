@@ -543,10 +543,11 @@ projectsTableASA_IFC <- function(couName, status){
   ### IFC projects ----------
   dataIFC <- .filterIFCProjects(couName)
   # keep relevant columns
-  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, Team_Leader = PROJECT_LEADER,
+  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, 
+                    Team_Leader = PROJECT_LEADER, PRODUCT_NAME, ClassType = PROJECT_CLASSIFICATION_TYPE,
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
-                    Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
-                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
+                    Project_Status, Project_Amount = TOTAL_FUNDING, ITD_EXPENDITURES,
+                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder,url,Hold)
   dataIFC <- filter(dataIFC, ProjectOrder == pOrder)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
@@ -554,11 +555,27 @@ projectsTableASA_IFC <- function(couName, status){
   dataIFC <- arrange(as.data.frame(dataIFC), desc(Approval_Date))
   dataIFC <- select(dataIFC,-ProjectOrder, -Project_Status) # drop ProjectOrder
   # remove duplicates
-  data <- dataIFC[!duplicated(dataIFC$PROJ_ID),]
+  data <- dataIFC[!duplicated(paste0(dataIFC$PROJ_ID,dataIFC$PRODUCT_NAME)),]
+  # add amounts per PROJ_ID
+  data <- data %>%
+    group_by(PROJ_ID) %>%
+    mutate(Project_Amount = sum(Project_Amount, na.rm=TRUE), 
+           ITD_EXPENDITURES = sum(ITD_EXPENDITURES, na.rm=TRUE),
+           Current_Exp = sum(Current_Exp, na.rm=TRUE))
+  
+  data <- data[!duplicated(data$PROJ_ID),]
+  data <- select(data,-PRODUCT_NAME, -ClassType) # drop Product and class info
+  
   # Scale amounts
   data$Project_Amount <- data$Project_Amount/1000
   data$Current_Exp <- data$Current_Exp/1000
   data$ITD_EXPENDITURES <- data$ITD_EXPENDITURES/1000
+  
+  data <- mutate(as.data.frame(data), PROJ_ID = ifelse(Hold == "Y",
+                                        paste0(PROJ_ID,' (Hold)'),
+                                        PROJ_ID))
+  
+  data <- select(data, -url, -Hold)
   
   # format Amount
   data$Project_Amount <- format(data$Project_Amount, digits=0, decimal.mark=".",
@@ -585,7 +602,7 @@ projectsTableASA_IFC <- function(couName, status){
   
   # If table is empty show "None"
   if (nrow(data)==0){
-    data <- rbind(data,c("None",rep("",ncol(dataIFC)-1)))
+    data <- rbind(data,c("None",rep("",ncol(data)-1)))
   }
   names(data) <- c("Project ID", "Project Name", "Team Leader","IP Approval Date", 
                    "Expected End Date","Approval Value (in US\\$K)", "Total Expenditures (in US\\$K)", "Current FY Expenditure (in US\\$K)")
@@ -625,10 +642,11 @@ projectsTableASA_IFC <- function(couName, status){
   ### IFC projects ----------
   dataIFC <- .filterIFCProjects(couName)
   # keep relevant columns
-  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, Team_Leader = PROJECT_LEADER,
+  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, 
+                    Team_Leader = PROJECT_LEADER, PRODUCT_NAME, ClassType = PROJECT_CLASSIFICATION_TYPE,
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
-                    Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
-                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
+                    Project_Status, Project_Amount = TOTAL_FUNDING, ITD_EXPENDITURES,
+                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder,url,Hold)
   dataIFC <- filter(dataIFC, ProjectOrder == pOrder)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
@@ -636,11 +654,27 @@ projectsTableASA_IFC <- function(couName, status){
   dataIFC <- arrange(as.data.frame(dataIFC), desc(Approval_Date))
   dataIFC <- select(dataIFC,-ProjectOrder, -Project_Status) # drop ProjectOrder
   # remove duplicates
-  data <- dataIFC[!duplicated(dataIFC$PROJ_ID),]
+  data <- dataIFC[!duplicated(paste0(dataIFC$PROJ_ID,dataIFC$PRODUCT_NAME)),]
+  # add amounts per PROJ_ID
+  data <- data %>%
+    group_by(PROJ_ID) %>%
+    mutate(Project_Amount = sum(Project_Amount, na.rm=TRUE), 
+           ITD_EXPENDITURES = sum(ITD_EXPENDITURES, na.rm=TRUE),
+           Current_Exp = sum(Current_Exp, na.rm=TRUE))
+  
+  data <- data[!duplicated(data$PROJ_ID),]
+  data <- select(data,-PRODUCT_NAME, -ClassType) # drop Product and class info
+  
   # Scale amounts
   data$Project_Amount <- data$Project_Amount/1000
   data$Current_Exp <- data$Current_Exp/1000
   data$ITD_EXPENDITURES <- data$ITD_EXPENDITURES/1000
+  
+  data <- mutate(as.data.frame(data), PROJ_ID = ifelse(Hold == "Y",
+                                                       paste0(PROJ_ID,' (Hold)'),
+                                                       PROJ_ID))
+  
+  data <- select(data, -url, -Hold)
   
   # format Amount
   data$Project_Amount <- format(data$Project_Amount, digits=0, decimal.mark=".",
@@ -667,7 +701,7 @@ projectsTableASA_IFC <- function(couName, status){
   
   # If table is empty show "None"
   if (nrow(data)==0){
-    data <- rbind(data,c("None",rep("",ncol(dataIFC)-1)))
+    data <- rbind(data,c("None",rep("",ncol(data)-1)))
   }
   names(data) <- c("Project ID", "Project Name", "Team Leader","IP Approval Date", 
                    "Expected End Date","Approval Value (in US\\$K)", "Total Expenditures (in US\\$K)", "Current FY Expenditure (in US\\$K)")
@@ -707,10 +741,11 @@ projectsTableASA_IFC <- function(couName, status){
   ### IFC projects ----------
   dataIFC <- .filterIFCProjects(couName)
   # keep relevant columns
-  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, Team_Leader = PROJECT_LEADER,
+  dataIFC <- select(dataIFC, PROJ_ID, Project_Name = PROJECT_NAME, 
+                    Team_Leader = PROJECT_LEADER, PRODUCT_NAME, ClassType = PROJECT_CLASSIFICATION_TYPE,
                     Approval_Date = ASIP_APPROVAL_DATE, Closing_Date = IMPLEMENTATION_END_DATE,
-                    Project_Status, Project_Amount = TOTAL_FUNDING,ITD_EXPENDITURES,
-                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder)
+                    Project_Status, Project_Amount = TOTAL_FUNDING, ITD_EXPENDITURES,
+                    Current_Exp = PRORATED_TOTAL_FYTD_EXPENSE, ProjectOrder,url,Hold)
   dataIFC <- filter(dataIFC, ProjectOrder == pOrder)
   #dataIFC <- filter(dataIFC, (Approval_Date >= fromDate) & (Approval_Date <= toDate)) #select country
   count_ifc <- nrow(dataIFC) # will determine the size of the table
@@ -718,11 +753,27 @@ projectsTableASA_IFC <- function(couName, status){
   dataIFC <- arrange(as.data.frame(dataIFC), desc(Approval_Date))
   dataIFC <- select(dataIFC,-ProjectOrder, -Project_Status) # drop ProjectOrder
   # remove duplicates
-  data <- dataIFC[!duplicated(dataIFC$PROJ_ID),]
+  data <- dataIFC[!duplicated(paste0(dataIFC$PROJ_ID,dataIFC$PRODUCT_NAME)),]
+  # add amounts per PROJ_ID
+  data <- data %>%
+    group_by(PROJ_ID) %>%
+    mutate(Project_Amount = sum(Project_Amount, na.rm=TRUE), 
+           ITD_EXPENDITURES = sum(ITD_EXPENDITURES, na.rm=TRUE),
+           Current_Exp = sum(Current_Exp, na.rm=TRUE))
+  
+  data <- data[!duplicated(data$PROJ_ID),]
+  data <- select(data,-PRODUCT_NAME, -ClassType) # drop Product and class info
+  
   # Scale amounts
   data$Project_Amount <- data$Project_Amount/1000
   data$Current_Exp <- data$Current_Exp/1000
   data$ITD_EXPENDITURES <- data$ITD_EXPENDITURES/1000
+  
+  data <- mutate(as.data.frame(data), PROJ_ID = ifelse(Hold == "Y",
+                                                       paste0(PROJ_ID,' (Hold)'),
+                                                       PROJ_ID))
+  
+  data <- select(data, -url, -Hold)
   
   # format Amount
   data$Project_Amount <- format(data$Project_Amount, digits=0, decimal.mark=".",
@@ -749,7 +800,7 @@ projectsTableASA_IFC <- function(couName, status){
   
   # If table is empty show "None"
   if (nrow(data)==0){
-    data <- rbind(data,c("None",rep("",ncol(dataIFC)-1)))
+    data <- rbind(data,c("None",rep("",ncol(data)-1)))
   }
   names(data) <- c("Project ID", "Project Name", "Team Leader","IP Approval Date", 
                    "Expected End Date","Approval Value (in US\\$K)", "Total Expenditures (in US\\$K)", "Current FY Expenditure (in US\\$K)")
@@ -785,27 +836,25 @@ mostRecentDocuments <- function(couName){
   couISO2 <- .getISO2(couName)
   
   data <- filter(mostRecentDocs, CountryCodeISO3 == cou)
-  data <- select(data, Name, DateOrder, Report)
-  data$DateOrder <- gsub("/","-",data$DateOrder,fixed=TRUE)
-  data$Report <- as.character(data$Report)
+  data <- select(data, Report, Date)
   
   # escape reserved characters
-  data$Name <- gsub("%", "\\%", data$Name, fixed=TRUE)
-  data$Name <- gsub("&", "\\&", data$Name, fixed=TRUE)
-  data$Name <- gsub("_", "\\_", data$Name, fixed=TRUE)
-  data$Name <- gsub("#", "\\#", data$Name, fixed=TRUE)
+  data$Report <- gsub("%", "\\%", data$Report, fixed=TRUE)
+  data$Report <- gsub("&", "\\&", data$Report, fixed=TRUE)
+  data$Report <- gsub("_", "\\_", data$Report, fixed=TRUE)
+  data$Report <- gsub("#", "\\#", data$Report, fixed=TRUE)
   
   # If table is empty show "None"
   if (nrow(data)==0){
-    data <- rbind(data,c("None",rep("",2)))
+    data <- rbind(data,c("None",""))
   }
-  names(data) <- c("Product","Document Date","Document ID")
+  names(data) <- c("Product","Document Date")
   # I have to add a dummy column so the alignment works (align)
   data$dummy <- rep("",nrow(data))
   names(data)[ncol(data)] <- ""
   
   data.table <- xtable(data)#, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c(rep('l',5))
+  align(data.table) <- c('l','>{\\raggedright}p{5in}',rep('l',2))
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
           scalebox = 0.85,
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
@@ -839,7 +888,7 @@ plannedDocuments <- function(couName){
   names(data)[ncol(data)] <- ""
   
   data.table <- xtable(data)#, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c(rep('l',5))
+  align(data.table) <- c('l','>{\\raggedright}p{5in}',rep('l',3))
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
         scalebox = 0.85,
         booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",

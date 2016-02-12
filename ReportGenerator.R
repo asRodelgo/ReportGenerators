@@ -16,8 +16,8 @@ for (c in countryNames$Country) {
 }
   
 # Create the operations reports --------------------------------------
-#for (c in countryNames$Country) {
-for (c in c("Brazil","Indonesia")) {
+for (c in countryNames$Country) {
+#for (c in c("China","Egypt, Arab Rep.")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Operations_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",
@@ -38,8 +38,8 @@ for (c in countryNames$Country) {
 }
 
 # Create the RMarkdown operations reports --------------------------------------
-#for (c in countryNames$Country) {
-for (c in c("Brazil")) {
+for (c in countryNames$Country) {
+#for (c in c("Brazil")) {
   iso3 <- .getCountryCode(c)
   knit2html('TCMN_Operations_TEST.Rmd',
            output = paste0("TCMN_Operations_TEST_",iso3,".html"))
