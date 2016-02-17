@@ -1,0 +1,145 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdfetex 2015.5.24)  30 JAN 2016 15:07
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**\nonstopmode \catcode126=12 \def\normaltilde{~}\catcode126=13 \let~\normaltil
+de  \input ./TCMN_Operations_TEST_BRA.html
+(./TCMN_Operations_TEST_BRA.html
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.2 title: "TCMN_
+                 Operations_TEST"
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.7 
+    
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (4.4698pt too wide) in paragraph at lines 1--7
+[]\tenrm --- ti-tle: "TCMN$[]\teni perations[]EST\tenrm "\teni author \tenrm : 
+"\teni AlbertoSanchezRodelgo\tenrm "\teni date \tenrm : "\teni January\tenrm 30
+\teni ; \tenrm 2016"\teni output \tenrm :|
+
+\hbox(6.94444+1.94444)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm | (ligature ---)
+.\discretionary
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm t
+.etc.
+
+! Misplaced alignment tab character &.
+l.10 T&
+       C Product Line Operations Board Approved On or After FY14
+I can't figure out why you would want to use a tab mark
+here. If you just want an ampersand, the remedy is
+simple: Just type `I\&' now. But if some right brace
+up above has ended a previous alignment prematurely,
+you're probably due for more error messages, and you
+might try typing `S' now just to see what is salvageable.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.15 ![plot of chunk projectStatus_
+                                   count](figure/projectStatus_count-1.png)
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.16 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.19 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (129.94086pt too wide) in paragraph at lines 17--19
+[]\tenrm By amount in thou-sands of US$(\teni ASAIBRDproductsnotincluded\tenrm 
+)![\teni plotofchunkprojectStatus[]mount\tenrm ](\teni figure=projectStatus[]mo
+unt \tensy ^^@|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm B
+.\tenrm y
+.\glue 3.33333 plus 1.66666 minus 1.11111
+.\tenrm a
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.23 ![plot of chunk projectsTreemap_
+                                     sectors](figure/projectsTreemap_sectors...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   \par 
+l.24 
+     
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (14.11536pt too wide) in paragraph at lines 22--24
+[]\tenrm Operations by sec-tor, in per-cent ![plot of chunk projectsTreemap$[]\
+teni ectors\tenrm ](\teni figure=projectsTreemap[]ectors \tensy ^^@|
+
+\hbox(7.5+2.5)x469.75499, glue set - 1.0
+.\hbox(0.0+0.0)x20.0
+.\tenrm O
+.\tenrm p
+.\kern0.27779
+.\tenrm e
+.etc.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+<to be read again> 
+                   _
+l.26 ![plot of chunk projectsTreemap_
+                                     themes](figure/projectsTreemap_themes-1...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+)
+! Emergency stop.
+<*> ...lde  \input ./TCMN_Operations_TEST_BRA.html
+                                                  
+*** (job aborted, no legal \end found)
+
+!  ==> Fatal error occurred, no output PDF file produced!
