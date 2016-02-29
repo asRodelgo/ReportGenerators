@@ -37,7 +37,7 @@ read_chunk("TCMN_charts_PDF.R")
 #source("/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/generic_functions.R")
 
 #c <- "Spain"
-thisYear <- "2015"
+thisYear <- substr(Sys.Date(),1,4)
 couName <- countryNames[countryNames$Country==c,]$Country
 couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
 expYear <- .getExportsPeriod(couName)

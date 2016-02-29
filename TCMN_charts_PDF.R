@@ -436,38 +436,40 @@ macroInd <- function(couName){
   
   tableKeys <- unique(filter(TCMN_data, Subsection=="table2head")[,c("Key","IndicatorShort")])
   data <- filter(TCMN_data, CountryCode==cou, Subsection=="table2head")
-  #data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
-  # keep the latest period (excluding projections further than 2 years)
-  data <- filter(data, Period <= (as.numeric(thisYear) + 1))
-  
-  data <- data %>%
-    group_by(Key) %>%
-    filter(Period == max(Period))
-  # add Period to Indicator name
-  data$IndicatorShort <- paste(data$IndicatorShort, " (",data$Period,")", sep="")
-  # Scale Observations
-  data <- mutate(data, ObsScaled = Scale*Observation)
-  # format numbers
-  data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
-                             big.mark=",",small.mark=".", small.interval=3)
-  
-  data <- arrange(data, Key)
-  data <- data[,c("IndicatorShort", "ObsScaled")] # short indicator name and scaled data
-  data <- as.data.frame(t(data)) # transpose the data
-  # I have to add a dummy column so the alignment works (align)
-  for (j in (ncol(data)+1):6){
-    data[,j] <- ""
-    names(data)[j] <- ""
+  if (nrow(data)>0){
+    #data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
+    # keep the latest period (excluding projections further than 2 years)
+    data <- filter(data, Period <= (as.numeric(thisYear) + 1))
+    
+    data <- data %>%
+      group_by(Key) %>%
+      filter(Period == max(Period))
+    # add Period to Indicator name
+    data$IndicatorShort <- paste(data$IndicatorShort, " (",data$Period,")", sep="")
+    # Scale Observations
+    data <- mutate(data, ObsScaled = Scale*Observation)
+    # format numbers
+    data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
+                               big.mark=",",small.mark=".", small.interval=3)
+    
+    data <- arrange(data, Key)
+    data <- data[,c("IndicatorShort", "ObsScaled")] # short indicator name and scaled data
+    data <- as.data.frame(t(data)) # transpose the data
+    # I have to add a dummy column so the alignment works (align)
+    for (j in (ncol(data)+1):6){
+      data[,j] <- ""
+      names(data)[j] <- ""
+    }
+    data$dummy <- rep("",nrow(data))
+    
+    #bold <- function(x) {paste('{\\textbf{',x,'}}', sep ='')}
+    
+    data.table <- xtable(data)
+    align(data.table) <- c('l',rep('>{\\centering}p{1.5in}',ncol(data.table)-1),'l')
+    print(data.table, include.rownames=FALSE,include.colnames=FALSE, floating=FALSE, 
+          size="\\LARGE", #sanitize.text.function=bold,
+          booktabs = FALSE, table.placement="", hline.after = NULL ,latex.environments = "center")
   }
-  data$dummy <- rep("",nrow(data))
-  
-  #bold <- function(x) {paste('{\\textbf{',x,'}}', sep ='')}
-  
-  data.table <- xtable(data)
-  align(data.table) <- c('l',rep('>{\\centering}p{1.5in}',ncol(data.table)-1),'l')
-  print(data.table, include.rownames=FALSE,include.colnames=FALSE, floating=FALSE, 
-        size="\\LARGE", #sanitize.text.function=bold,
-        booktabs = FALSE, table.placement="", hline.after = NULL ,latex.environments = "center")
   
 }
 macroInd(couName)
@@ -501,6 +503,8 @@ macroInd_Big <- function(couName){
   data <- mutate(data, ObsScaled = Scale*Observation)
   data <- arrange(data, Key)
   data <- select(data, Key, IndicatorShort, Period, ObsScaled)
+  # restrict to 2 decimal places
+  data$ObsScaled <- round(data$ObsScaled,2)
   # format numbers
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                              big.mark=",",small.mark=".", small.interval=3)
@@ -569,6 +573,8 @@ macroInd_Split <- function(couName,table){
   data <- mutate(data, ObsScaled = Scale*Observation)
   data <- arrange(data, Key)
   data <- select(data, Key, IndicatorShort, Period, ObsScaled)
+  # restrict to 2 decimal places
+  data$ObsScaled <- round(data$ObsScaled,2)
   
   # format numbers
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
@@ -650,7 +656,8 @@ macroInd_Split <- function(couName,table){
   data <- mutate(data, ObsScaled = Scale*Observation)
   data <- arrange(data, Key)
   data <- select(data, Key, IndicatorShort, Period, ObsScaled)
-  
+  # restrict to 2 decimal places
+  data$ObsScaled <- round(data$ObsScaled,2)
   # format numbers
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                            big.mark=",",small.mark=".", small.interval=3)
@@ -731,7 +738,8 @@ macroInd_Split <- function(couName,table){
   data <- mutate(data, ObsScaled = Scale*Observation)
   data <- arrange(data, Key)
   data <- select(data, Key, IndicatorShort, Period, ObsScaled)
-  
+  # restrict to 2 decimal places
+  data$ObsScaled <- round(data$ObsScaled,2)
   # format numbers
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                            big.mark=",",small.mark=".", small.interval=3)
@@ -829,54 +837,61 @@ createSparklines_Split <- function(couName,table){
   
   tableKeys <- unique(filter(TCMN_data, Subsection==table)[,c("Key","IndicatorShort")])
   data <- filter(TCMN_data, CountryCode==cou, Subsection==table)
-  data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
-  # keep the latest period (excluding projections further than 2 years)
-  data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
-  data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
-  #data <- filter(data, !is.na(Observation)) # remove NAs rows
-  # keep relevant columns
-  data <- select(data, Key, Period, Observation)
-  data <- arrange(data, Key, Period)
   
-  x <- spread(data, Key, Observation)
-  x <- x[,-1] # don't need Period column anymore
-  
-  # impute NAs and standardize so all sparklines are scales
-  for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+  if (nrow(data)>0){
+    data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
+    # keep the latest period (excluding projections further than 2 years)
+    data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
+    data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
+    #data <- filter(data, !is.na(Observation)) # remove NAs rows
+    # keep relevant columns
+    data <- select(data, Key, Period, Observation)
+    data <- arrange(data, Key, Period)
     
-    x[is.na(x[,i]),i] <- mean(x[,i],na.rm = TRUE)  #impute NAs to the mean of the column
-    if (sum(x[,i],na.rm = TRUE)==0){ 
-      x[,i] <- 0
-      #x[1,i] <- -10
-      x[nrow(x),i] <- 10
-      }
-  }
-  #x <- scale(x) # standardize x
-  
-  par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
-      mar=c(1,0,0,0), #sets margin size for the figures
-      oma=c(1,2,1,1)) #sets outer margin
-  
-  for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+    x <- spread(data, Key, Observation)
+    x <- x[,-1] # don't need Period column anymore
     
-    if (sum(x[1:(nrow(x)-1),i])==0){ # paint in white empty rows
-      plot(x[,i], #use col data, not rows from data frame x
-           col="white",lwd=4, #color the line and adjust width
-           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+    # impute NAs and standardize so all sparklines are scales
+    for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
       
-      axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
-      ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]);
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
-    } else {
-      plot(x[,i], #use col data, not rows from data frame x
-           col="darkgrey",lwd=4, #color the line and adjust width
-           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
-      
-      axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
-      ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]); # 
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      x[is.na(x[,i]),i] <- mean(x[,i],na.rm = TRUE)  #impute NAs to the mean of the column
+      if (sum(x[,i],na.rm = TRUE)==0){ 
+        x[,i] <- 0
+        #x[1,i] <- -10
+        x[nrow(x),i] <- 10
+        }
     }
-  }
+    #x <- scale(x) # standardize x
+    
+    par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
+        mar=c(1,0,0,0), #sets margin size for the figures
+        oma=c(1,2,1,1)) #sets outer margin
+    
+    for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+      
+      if (sum(x[1:(nrow(x)-1),i])==0){ # paint in white empty rows
+        plot(x[,i], #use col data, not rows from data frame x
+             col="white",lwd=4, #color the line and adjust width
+             axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+        
+        axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+        ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]);
+        points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
+      } else {
+        plot(x[,i], #use col data, not rows from data frame x
+             col="darkgrey",lwd=4, #color the line and adjust width
+             axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+        
+        axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+        ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]); # 
+        points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      }
+    }
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    #graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+  } 
+  
 }
 createSparklines_Split(couName,"table2macro")
 
@@ -888,53 +903,58 @@ createSparklines_Split <- function(couName,table){
   
   tableKeys <- unique(filter(TCMN_data, Subsection==table)[,c("Key","IndicatorShort")])
   data <- filter(TCMN_data, CountryCode==cou, Subsection==table)
-  data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
-  # keep the latest period (excluding projections further than 2 years)
-  data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
-  data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
-  #data <- filter(data, !is.na(Observation)) # remove NAs rows
-  # keep relevant columns
-  data <- select(data, Key, Period, Observation)
-  data <- arrange(data, Key, Period)
-  
-  x <- spread(data, Key, Observation)
-  x <- x[,-1] # don't need Period column anymore
-  
-  # impute NAs and standardize so all sparklines are scales
-  for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+  if (nrow(data)>0){
+    data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
+    # keep the latest period (excluding projections further than 2 years)
+    data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
+    data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
+    #data <- filter(data, !is.na(Observation)) # remove NAs rows
+    # keep relevant columns
+    data <- select(data, Key, Period, Observation)
+    data <- arrange(data, Key, Period)
     
-    x[is.na(x[,i]),i] <- mean(x[,i],na.rm = TRUE)  #impute NAs to the mean of the column
-    if (sum(x[,i],na.rm = TRUE)==0){ 
-      x[,i] <- 0
-      #x[1,i] <- -10
-      x[nrow(x),i] <- 10
-    }
-  }
-  #x <- scale(x) # standardize x
-  
-  par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
-      mar=c(1,0,0,0), #sets margin size for the figures
-      oma=c(1,2,1,1)) #sets outer margin
-  
-  for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+    x <- spread(data, Key, Observation)
+    x <- x[,-1] # don't need Period column anymore
     
-    if (sum(x[1:(nrow(x)-1),i])==0){ # paint in white empty rows
-      plot(x[,i], #use col data, not rows from data frame x
-           col="white",lwd=4, #color the line and adjust width
-           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+    # impute NAs and standardize so all sparklines are scales
+    for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
       
-      axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
-      ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]);
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
-    } else {
-      plot(x[,i], #use col data, not rows from data frame x
-           col="darkgrey",lwd=4, #color the line and adjust width
-           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
-      
-      axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
-      ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]); # 
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      x[is.na(x[,i]),i] <- mean(x[,i],na.rm = TRUE)  #impute NAs to the mean of the column
+      if (sum(x[,i],na.rm = TRUE)==0){ 
+        x[,i] <- 0
+        #x[1,i] <- -10
+        x[nrow(x),i] <- 10
+      }
     }
+    #x <- scale(x) # standardize x
+    
+    par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
+        mar=c(1,0,0,0), #sets margin size for the figures
+        oma=c(1,2,1,1)) #sets outer margin
+    
+    for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+      
+      if (sum(x[1:(nrow(x)-1),i])==0){ # paint in white empty rows
+        plot(x[,i], #use col data, not rows from data frame x
+             col="white",lwd=4, #color the line and adjust width
+             axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+        
+        axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+        ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]);
+        points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
+      } else {
+        plot(x[,i], #use col data, not rows from data frame x
+             col="darkgrey",lwd=4, #color the line and adjust width
+             axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+        
+        axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+        ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]); # 
+        points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      }
+    }
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    #graphics::text(1.5, 1,"Data not available", col="red", cex=2)
   }
 }
 createSparklines_Split(couName,"table2invest")
@@ -948,53 +968,58 @@ createSparklines_Split <- function(couName,table){
   
   tableKeys <- unique(filter(TCMN_data, Subsection==table)[,c("Key","IndicatorShort")])
   data <- filter(TCMN_data, CountryCode==cou, Subsection==table)
-  data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
-  # keep the latest period (excluding projections further than 2 years)
-  data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
-  data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
-  #data <- filter(data, !is.na(Observation)) # remove NAs rows
-  # keep relevant columns
-  data <- select(data, Key, Period, Observation)
-  data <- arrange(data, Key, Period)
-  
-  x <- spread(data, Key, Observation)
-  x <- x[,-1] # don't need Period column anymore
-  
-  # impute NAs and standardize so all sparklines are scales
-  for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+  if (nrow(data)>0){
+    data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
+    # keep the latest period (excluding projections further than 2 years)
+    data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
+    data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
+    #data <- filter(data, !is.na(Observation)) # remove NAs rows
+    # keep relevant columns
+    data <- select(data, Key, Period, Observation)
+    data <- arrange(data, Key, Period)
     
-    x[is.na(x[,i]),i] <- mean(x[,i],na.rm = TRUE)  #impute NAs to the mean of the column
-    if (sum(x[,i],na.rm = TRUE)==0){ 
-      x[,i] <- 0
-      #x[1,i] <- -10
-      x[nrow(x),i] <- 10
-    }
-  }
-  #x <- scale(x) # standardize x
-  
-  par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
-      mar=c(1,0,0,0), #sets margin size for the figures
-      oma=c(1,2,1,1)) #sets outer margin
-  
-  for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+    x <- spread(data, Key, Observation)
+    x <- x[,-1] # don't need Period column anymore
     
-    if (sum(x[1:(nrow(x)-1),i])==0){ # paint in white empty rows
-      plot(x[,i], #use col data, not rows from data frame x
-           col="white",lwd=4, #color the line and adjust width
-           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+    # impute NAs and standardize so all sparklines are scales
+    for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
       
-      axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
-      ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]);
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
-    } else {
-      plot(x[,i], #use col data, not rows from data frame x
-           col="darkgrey",lwd=4, #color the line and adjust width
-           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
-      
-      axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
-      ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]); # 
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      x[is.na(x[,i]),i] <- mean(x[,i],na.rm = TRUE)  #impute NAs to the mean of the column
+      if (sum(x[,i],na.rm = TRUE)==0){ 
+        x[,i] <- 0
+        #x[1,i] <- -10
+        x[nrow(x),i] <- 10
+      }
     }
+    #x <- scale(x) # standardize x
+    
+    par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
+        mar=c(1,0,0,0), #sets margin size for the figures
+        oma=c(1,2,1,1)) #sets outer margin
+    
+    for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
+      
+      if (sum(x[1:(nrow(x)-1),i])==0){ # paint in white empty rows
+        plot(x[,i], #use col data, not rows from data frame x
+             col="white",lwd=4, #color the line and adjust width
+             axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+        
+        axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+        ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]);
+        points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
+      } else {
+        plot(x[,i], #use col data, not rows from data frame x
+             col="darkgrey",lwd=4, #color the line and adjust width
+             axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+        
+        axis(2,yaxp=c(min(x[,i],na.rm = TRUE),max(x[,i],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+        ymin<-min(x[,i],na.rm = TRUE); tmin<-which.min(x[,i]);ymax<-max(x[,i], na.rm = TRUE);tmax<-which.max(x[,i]); # 
+        points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      }
+    }
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    #graphics::text(1.5, 1,"Data not available", col="red", cex=2)
   }
 }
 createSparklines_Split(couName,"table2trade")
@@ -1034,16 +1059,26 @@ ESTable <- function(couName){
     
     # substitute NAs for "---" em-dash
     data[is.na(data)] <- "---"
+    
+    data.table <- xtable(data)
+    align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'l')
+    print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          size="\\Large",
+          booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center")
+  
   } else{
     
     data[!is.na(data)] <- ""
+    #data <- select(data, Key)
+    names(data) <- c(" ",rep(" ",ncol(data)-1))
+    data.table <- xtable(data)
+    align(data.table) <- rep('l',ncol(data)+1)
+    print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          size="\\tiny",
+          booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center")
   } 
   
-  data.table <- xtable(data)
-  align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'l')
-  print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-        size="\\Large",
-        booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center")
+  
   
 }
 ESTable(couName)

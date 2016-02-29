@@ -5,7 +5,7 @@
 setwd('/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/')
 source('generic_functions.R') # data and functions needed
 # Create the data reports --------------------------------------
-#for (c in c("Tunisia")) {
+#for (c in c("Andorra")) {
 for (c in countryNames$Country) {
     iso3 <- .getCountryCode(c)
     knit2pdf('TCMN_PDF_Local.Rnw', clean = TRUE,
@@ -17,7 +17,7 @@ for (c in countryNames$Country) {
   
 # Create the operations reports --------------------------------------
 for (c in countryNames$Country) {
-#for (c in c("China","Egypt, Arab Rep.")) {
+#for (c in c("Brazil")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Operations_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",
@@ -28,7 +28,7 @@ for (c in countryNames$Country) {
 
 # Create the combined reports --------------------------------------
 for (c in countryNames$Country) {
-#for (c in c("Brazil","Tunisia")) {
+#for (c in c("Brazil","Bolivia", "Angola")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Full_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",
@@ -37,12 +37,23 @@ for (c in countryNames$Country) {
   file.copy(paste0("TCMN_Full_",iso3,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
 }
 
-# Create the RMarkdown operations reports --------------------------------------
-for (c in countryNames$Country) {
-#for (c in c("Brazil")) {
-  iso3 <- .getCountryCode(c)
-  knit2html('TCMN_Operations_TEST.Rmd',
-           output = paste0("TCMN_Operations_TEST_",iso3,".html"))
+# Create the Combined Region Departments reports --------------------------------------
+#for (couDep in countryNames$Country) {
+for (couDep in c("AFCF1")) {
+  #iso3 <- .getCountryCode(couDep)
+  knit2pdf('TCMN_RegionDeps_PDF_Local.Rnw', clean = TRUE,
+           encoding = "UTF-8",
+           output = paste0("TCMN_RegionDeps_",couDep,".tex"))
   # copy file to shinyTCMN pdf directory
-  #file.copy(paste0("TCMN_Operations_",iso3,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
+  file.copy(paste0("TCMN_RegionDeps_",couDep,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
 }
+
+# Create the RMarkdown operations reports --------------------------------------
+# for (c in countryNames$Country) {
+# #for (c in c("Brazil")) {
+#   iso3 <- .getCountryCode(c)
+#   knit2html('TCMN_Operations_TEST.Rmd',
+#            output = paste0("TCMN_Operations_TEST_",iso3,".html"))
+#   # copy file to shinyTCMN pdf directory
+#   #file.copy(paste0("TCMN_Operations_",iso3,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
+# }

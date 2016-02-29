@@ -28,6 +28,9 @@ countries <- read.csv("/Users/asanchez3/shinyTCMN/data/CountryClassification.csv
 # list of only countries (useful for selectors and others)
 countryNames <- filter(countries, !(CountryCodeISO2==""))
 countryNames <- select(countryNames, CountryCodeISO3, Country)# remove CountryISO2
+# list of country departments
+countryDeps <- filter(countries, !(CMU==""))
+countryDeps <- arrange(select(countryDeps, CountryCodeISO3, RegionCodeALL, Region ,CMU), CMU)
 # indicator table ----------------------------
 indicators <- read.csv("/Users/asanchez3/shinyTCMN/data/IndicatorClassification.csv", stringsAsFactors = FALSE)
 # TCMN specific source ----------------------------

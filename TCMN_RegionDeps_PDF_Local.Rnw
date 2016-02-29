@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template TCMN data sheet version 3
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Dec 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{This is my name}
+\rhead{this is page \thepage}
+\cfoot{center of the footer!}
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage{longtable} % add pages for long tables
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% First page of the overall report with an index of countries included
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+
+<<params,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
+
+  couName <- countryNames[countryNames$CountryCodeISO3==c,]$Country
+  couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2  
+  out<- c(out, knit_child('TCMN_RegionDeps_CHILD_PDF_Local.Rnw',quiet=TRUE))
+
+@    
+
+\raggedright{\color{white!30!blue} \textbf{\Large Region: \Sexpr{countryDeps[countryDeps$CMU==couDep,]$Region[1]}}}
+
+\raggedright{\color{white!30!blue} \textbf{\Large Country Management Unit: \Sexpr{couDep}}}
+
+\raggedright{\color{white!30!blue} \textbf{\Large Countries:}}
+\vspace{+1ex}
+\raggedright{\color{white!30!blue} \textbf{\Large }}
+\vspace{+1ex}
+<<countries,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
+
+out<-c()
+for (c in (filter(countryDeps, CMU == couDep)$CountryCodeISO3)){
+  couName <- countryNames[countryNames$CountryCodeISO3==c,]$Country
+  out<- c(out,couName)
+}
+
+@
+\Sexpr{paste(out, collapse='\n')}
+
+\newpage
+
+<<setup,echo=FALSE,message=FALSE,cache=FALSE>>= 
+#library(knitr)
+# Global chunk options: Cache chunks which source R code
+read_chunk("TCMN_portfolio_PDF.R")
+#opts_chunk$set(cache=TRUE,autodep=TRUE)
+@
+%
+<<run,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
+
+#source("/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/generic_functions.R")
+
+#c <- "Spain"
+out<-c()
+for (c in (filter(countryDeps, CMU == couDep)$CountryCodeISO3)){
+  couName <- countryNames[countryNames$CountryCodeISO3==c,]$Country
+  couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2  
+  out<- c(out, knit_child('TCMN_RegionDeps_CHILD_PDF_Local.Rnw',quiet=TRUE))
+}
+
+@
+\Sexpr{paste(out, collapse='\n')}
+
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}
