@@ -2,7 +2,6 @@
 %set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
 %@
 \newpage
-
 %%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
 %World Bank logo and TCMN branding
 \begin{figure}
@@ -30,9 +29,6 @@
     \end{minipage}
   \end{minipage}
   \begin{minipage}[c]{0.63\textwidth}
-  %  \begin{flushleft}  
-  %    \center{\color{blue!20!black} \textbf{\Large T\&C Product Line Operations Board Approved On or After FY14}}
-  %  \end{flushleft} 
   \end{minipage}  
 \end{minipage} % end top section
 
@@ -91,7 +87,7 @@
      
 \end{minipage}
  
- \newpage
+\newpage
 %%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
 \begin{minipage}[t]{0.99\textwidth}
   \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}

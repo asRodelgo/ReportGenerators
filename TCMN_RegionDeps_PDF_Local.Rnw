@@ -46,13 +46,16 @@
   \end{minipage}
 \end{figure}
 
-\\[10pt]
+\vspace{2ex}
 \raggedright{\Large Region: \color{white!30!blue} \textbf{\Large \Sexpr{countryDeps[countryDeps$CMU==couDep,]$Region[1]}}}
-\\[10pt]
+
+\vspace{2ex}
 \raggedright{\Large Country Management Unit: \color{white!30!blue} \textbf{\Sexpr{couDep}}}
-\\[10pt]
+
+\vspace{2ex}
 \raggedright{\Large Country list:}  
-\\[6pt]
+
+\vspace{2ex}
 <<countries,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
 
 out<-c()
@@ -64,8 +67,8 @@ out <- c(out,"") # add an extra line to avoid weird spacing between the last 2 c
 @
 \raggedright{\textbf{\Large \color{white!30!blue}\Sexpr{paste(out, collapse='\\\\\n ')}}}
 
-%\newpage
-
+\vspace{10ex}
+\raggedright{\textbf{ \large Visit \href{http://tcdatadev/}{tcdatadev/} for more data and reports on T&C operations}}
 <<setup,echo=FALSE,message=FALSE,cache=FALSE>>= 
 # Global chunk options: Cache chunks which source R code
 read_chunk("TCMN_portfolio_PDF.R")
@@ -83,6 +86,5 @@ for (c in (filter(countryDeps, CMU == couDep)$CountryCodeISO3)){
 
 @
 \Sexpr{paste(out, collapse='\n')}
-
 %%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
 \end{document}

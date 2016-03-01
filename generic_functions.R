@@ -25,6 +25,7 @@ toDate <- "2020-06-30"
 TCMN_data <- read.csv("/Users/asanchez3/shinyTCMN/data/TCMN_data.csv", colClasses = c(rep("character",4),rep("numeric",2),rep("character",2)))
 # country table ----------------------------
 countries <- read.csv("/Users/asanchez3/shinyTCMN/data/CountryClassification.csv", stringsAsFactors = FALSE)
+countries[countries$CountryCodeISO3=="NAM",]$CountryCodeISO2 <- "NA"
 # list of only countries (useful for selectors and others)
 countryNames <- filter(countries, !(CountryCodeISO2==""))
 countryNames <- select(countryNames, CountryCodeISO3, Country)# remove CountryISO2

@@ -39,7 +39,7 @@ for (c in countryNames$Country) {
 
 # Create the Combined Region Departments reports --------------------------------------
 for (couDep in unique(countryDeps$CMU)) {
-#for (couDep in c("AFCF1")) {
+#for (couDep in c("AFCS1")) {
   knit2pdf('TCMN_RegionDeps_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",
            output = paste0("TCMN_RegionDeps_",couDep,".tex"))
