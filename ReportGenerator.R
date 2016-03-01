@@ -38,9 +38,8 @@ for (c in countryNames$Country) {
 }
 
 # Create the Combined Region Departments reports --------------------------------------
-#for (couDep in countryNames$Country) {
-for (couDep in c("AFCF1")) {
-  #iso3 <- .getCountryCode(couDep)
+for (couDep in unique(countryDeps$CMU)) {
+#for (couDep in c("AFCF1")) {
   knit2pdf('TCMN_RegionDeps_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",
            output = paste0("TCMN_RegionDeps_",couDep,".tex"))

@@ -1,6 +1,8 @@
 %<<set-parent, echo=FALSE, cache=FALSE>>=
 %set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
 %@
+\newpage
+
 %%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
 %World Bank logo and TCMN branding
 \begin{figure}
@@ -141,5 +143,3 @@
        @
   \vspace*{0.2cm}
 \end{minipage}
-
-\newpage

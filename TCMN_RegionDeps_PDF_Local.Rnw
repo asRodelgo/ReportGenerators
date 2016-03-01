@@ -45,24 +45,14 @@
       \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
   \end{minipage}
 \end{figure}
-%
 
-<<params,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
-
-  couName <- countryNames[countryNames$CountryCodeISO3==c,]$Country
-  couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2  
-  out<- c(out, knit_child('TCMN_RegionDeps_CHILD_PDF_Local.Rnw',quiet=TRUE))
-
-@    
-
-\raggedright{\color{white!30!blue} \textbf{\Large Region: \Sexpr{countryDeps[countryDeps$CMU==couDep,]$Region[1]}}}
-
-\raggedright{\color{white!30!blue} \textbf{\Large Country Management Unit: \Sexpr{couDep}}}
-
-\raggedright{\color{white!30!blue} \textbf{\Large Countries:}}
-\vspace{+1ex}
-\raggedright{\color{white!30!blue} \textbf{\Large }}
-\vspace{+1ex}
+\\[10pt]
+\raggedright{\Large Region: \color{white!30!blue} \textbf{\Large \Sexpr{countryDeps[countryDeps$CMU==couDep,]$Region[1]}}}
+\\[10pt]
+\raggedright{\Large Country Management Unit: \color{white!30!blue} \textbf{\Sexpr{couDep}}}
+\\[10pt]
+\raggedright{\Large Country list:}  
+\\[6pt]
 <<countries,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
 
 out<-c()
@@ -70,14 +60,13 @@ for (c in (filter(countryDeps, CMU == couDep)$CountryCodeISO3)){
   couName <- countryNames[countryNames$CountryCodeISO3==c,]$Country
   out<- c(out,couName)
 }
-
+out <- c(out,"") # add an extra line to avoid weird spacing between the last 2 countries
 @
-\Sexpr{paste(out, collapse='\n')}
+\raggedright{\textbf{\Large \color{white!30!blue}\Sexpr{paste(out, collapse='\\\\\n ')}}}
 
-\newpage
+%\newpage
 
 <<setup,echo=FALSE,message=FALSE,cache=FALSE>>= 
-#library(knitr)
 # Global chunk options: Cache chunks which source R code
 read_chunk("TCMN_portfolio_PDF.R")
 #opts_chunk$set(cache=TRUE,autodep=TRUE)
@@ -85,9 +74,6 @@ read_chunk("TCMN_portfolio_PDF.R")
 %
 <<run,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
 
-#source("/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/generic_functions.R")
-
-#c <- "Spain"
 out<-c()
 for (c in (filter(countryDeps, CMU == couDep)$CountryCodeISO3)){
   couName <- countryNames[countryNames$CountryCodeISO3==c,]$Country
