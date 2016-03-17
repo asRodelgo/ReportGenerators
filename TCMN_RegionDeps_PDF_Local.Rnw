@@ -68,7 +68,7 @@ out <- c(out,"") # add an extra line to avoid weird spacing between the last 2 c
 \raggedright{\textbf{\Large \color{white!30!blue}\Sexpr{paste(out, collapse='\\\\\n ')}}}
 
 \vspace{10ex}
-\raggedright{\textbf{ \large Visit \href{http://tcdatadev/}{tcdatadev/} for more data and reports on T&C operations}}
+\raggedright{\large Visit \href{http://tcdatadev/}{\Large tcdatadev/} for full access to T\&C data and operations}
 <<setup,echo=FALSE,message=FALSE,cache=FALSE>>= 
 # Global chunk options: Cache chunks which source R code
 read_chunk("TCMN_portfolio_PDF.R")

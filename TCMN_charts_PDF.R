@@ -456,9 +456,11 @@ macroInd <- function(couName){
     data <- data[,c("IndicatorShort", "ObsScaled")] # short indicator name and scaled data
     data <- as.data.frame(t(data)) # transpose the data
     # I have to add a dummy column so the alignment works (align)
-    for (j in (ncol(data)+1):6){
+    j <- ncol(data)+1
+    while (j <= 7){
       data[,j] <- ""
       names(data)[j] <- ""
+      j <- j + 1
     }
     data$dummy <- rep("",nrow(data))
     
@@ -1087,31 +1089,61 @@ ESTable(couName)
 PolicyTable <- function(couName){      
   
   cou <- .getCountryCode(couName)
-  data <- filter(TCMN_data, CountryCode == cou, Subsection=="table4") #select country, region and world
+  data <- filter(TCMN_data, CountryCode == cou, substr(Subsection,1,6)=="table4") #select country, region and world
   if (nrow(data[data$CountryCode==cou,])>0){
   
     # prepare for table
-    data <- select(data, IndicatorShort, Period, Observation)
+    data <- select(data, Subsection, IndicatorShort, Period, Observation)
     # format numbers
-    data$Observation <- format(data$Observation, digits=0, decimal.mark=".",
+    data[nchar(data$Subsection)==6,]$Observation <- format(data[nchar(data$Subsection)==6,]$Observation, digits=0, decimal.mark=".",
                                big.mark=",",small.mark=".", small.interval=3)
     
     data$Observation <- as.numeric(data$Observation)
-    data <- spread(data, Period, Observation)
+    dataR <- data %>%
+      filter(nchar(Subsection)==6) %>%
+      select(-Subsection)
     
+    dataDTF <- data %>%
+      filter(nchar(Subsection)==7) %>%
+      select(-Subsection)
+    
+    dataR <- spread(dataR, Period, Observation)
+    dataDTF <- spread(dataDTF, Period, Observation)
     
     # calculate difference in Rank
-    data$ChangeRank <- data[,2] - data[,3]
+    dataR$ChangeRank <- dataR[,2] - dataR[,3]
+    dataDTF$ChangeDTF <- round(dataDTF[,3] - dataDTF[,2],2)
     
     # red for negative, green for positive changes
-    data <- mutate(data, ChangeRank = ifelse(ChangeRank<0, paste0("\\color{red}{\\Large",ChangeRank,"}"),
-                                             ifelse(ChangeRank>0, paste0("\\color{green}{\\Large",ChangeRank,"}"),ChangeRank)))
+    dataR <- mutate(dataR, ChangeRank = ifelse(ChangeRank<0, paste0("\\color{red}{",ChangeRank,"}"),
+                                             ifelse(ChangeRank>0, paste0("\\color{green}{",ChangeRank,"}"),ChangeRank)))
+    dataDTF <- mutate(dataDTF, ChangeDTF = ifelse(ChangeDTF<0, paste0("\\color{red}{",ChangeDTF,"}"),
+                                               ifelse(ChangeDTF>0, paste0("\\color{green}{",ChangeDTF,"}"),ChangeDTF)))
     
-    names(data) <- c("",paste("DB",names(data)[2],"Rank"),paste("DB",names(data)[3],"Rank"),"Change in Rank")
-    
+    names(dataR) <- c("",paste("Rank",names(dataR)[2]),paste("Rank",names(dataR)[3]),"Rank Change")
+    names(dataDTF) <- c("",paste("DTF",names(dataDTF)[2]),paste("DTF",names(dataDTF)[3]),"DTF Change")
+    # put them together in 1 table
+    data <- cbind(dataDTF,dataR[,-c(1)])
+    # reorder rows. Want overall indicator on top
+    order <- c(2,1,seq(3,nrow(data),1))
+    data <- cbind(data,order)
+    data <- arrange(data, order)
+    data <- select(data, -order)
     # I have to add a dummy column so the alignment works (align)
     data$dummy <- rep("",nrow(data))
+    names(data)[1] <- "" 
     names(data)[ncol(data)] <-""
+    # highlight top row
+    data[1,c(1:(ncol(data)-1))] <- paste0("\\textbf{",data[1,c(1:(ncol(data)-1))],"}")
+    # add an extra header. Push current header to row1
+    data_aux <- data
+    data_aux[1,] <- names(data)
+    for (i in 1:nrow(data)){
+      data_aux[i+1,] <- data[i,]
+    }
+    data <- data_aux
+    data[1,] <- gsub("Rank |DTF","",data[1,])
+    names(data) <- c(rep("",2),"DTF",rep("",2),"Rank",rep("",2))
     
     # substitute NAs for "---" em-dash
     data[is.na(data)] <- "---"
@@ -1121,10 +1153,11 @@ PolicyTable <- function(couName){
   }   
     
   data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'r')
+  align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
+  #align(data.table) <- c('l','l',rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}',"|",rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}','r')
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
         size="\\large", 
-        booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
+        booktabs = FALSE, table.placement="", hline.after = c(1) ,latex.environments = "center",
         sanitize.text.function = function(x){x}) # include sanitize to control format like colors
   
 }

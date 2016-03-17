@@ -40,11 +40,13 @@ read_chunk("TCMN_charts_PDF.R")
 thisYear <- substr(Sys.Date(),1,4)
 couName <- countryNames[countryNames$Country==c,]$Country
 couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
+couISO3 <- countries[countries$Country==couName,]$CountryCodeISO3
 expYear <- .getExportsPeriod(couName)
 impYear <- .getImportsPeriod(couName)
 month <- substr(Sys.Date(),6,7)
 year <- substr(Sys.Date(),1,4)
 date <- Sys.Date()
+ES_year <- filter(TCMN_data, CountryCode==couISO3 & Subsection=="table3")$Period[1]
 #thisYear <- "2015"
 
 @
@@ -87,28 +89,8 @@ date <- Sys.Date()
 \end{minipage} % end top section
 
 \begin{minipage}[b]{0.99\textwidth} % macro indicators main table
-  %\vspace*{0.5cm}
-  %\vspace{+3ex}
   \begin{minipage}[t]{0.99\textwidth}
-%'     \begin{minipage}[c]{0.875\textwidth}
-%'       \begin{flushleft}  
-%'       {\color{blue!50!black} \textbf{\small Macro Indicators}}
-%'       \end{flushleft} 
-%'       \vspace*{-0.4cm}
-%'       % Table 2
-%'       \centering
-%'       \resizebox{\textwidth}{!}{
-%'     <<macroInd_Big,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-%'       @      
-%'       }
-%'       \end{minipage}
-%'       \begin{minipage}[c]{0.12\textwidth}
-%'       \vspace*{+0.9cm}
-%'           <<createSparklines,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=11,fig.width=4,results="asis">>=  
-%'       @
-%'       \vspace*{-0.4cm}
-%'       \end{minipage}
- 
+
     \begin{minipage}[c]{0.875\textwidth}
       \begin{flushleft}  
       {\color{white!30!blue} \textbf{\small Macro Indicators}}
@@ -224,7 +206,7 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.56\textwidth} % Doing Business table
     %\vspace*{-0.1cm}
     %\begin{flushleft}
-      \center {\color{blue!50!black}\textbf{\small Doing Business 2015 Ranks \\ \footnotesize (among all countries)}}
+      \center {\color{blue!50!black}\textbf{\small Doing Business 2015 \\ \footnotesize Distance to Frontier (DTF) and Rank}}
     %\end{flushleft}
     \\[18pt]
     \centering
@@ -232,7 +214,7 @@ date <- Sys.Date()
       <<PolicyTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
         @          
       }
-    \\[28pt]
+    \\[15pt]
      %\hspace*{0.5cm} 
      \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
     \end{minipage}
@@ -298,7 +280,7 @@ date <- Sys.Date()
 
 \vspace{+8ex}
 %\hspace*{0.2cm}\subsection*{\color{white!50!black}Private Sector's Views}
-\hspace*{0.1cm} \raggedright{\color{white!50!black}\Large Private Sector's Views}
+\hspace*{0.1cm} \raggedright{\color{white!50!black}\Large Private Sector View}
 
 \vspace*{-0.2cm}
 {\color{white!30!black}\noindent\makebox[\linewidth]{\rule{18cm}{0.2pt}}} % horiz line
@@ -310,7 +292,7 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[c]{0.97\textwidth} 
     \begin{flushleft}  
-      {\color{blue!50!black} \textbf{Enterprise Survey 2013}}
+      {\color{blue!50!black} \textbf{Enterprise Survey \Sexpr{ES_year}}}
     \end{flushleft}  
     \vspace*{-0.4cm}
     \centering
@@ -320,17 +302,17 @@ date <- Sys.Date()
     }
     \\[8pt]
     %\hspace*{0.3cm} 
-    \raggedright{\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey 2013}}}
+    \raggedright{\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey \Sexpr{ES_year}}}}
   \end{minipage} 
 
   \begin{minipage}[b]{0.99\textwidth} 
     \vspace{+4ex}
     \begin{minipage}[c]{0.49\textwidth} % top 5 constraints ES
-      \center{\color{blue!50!black} \textbf{Top 5 constraints according to ES 2013 \\ \footnotesize(\% respondants)}}
+      \center{\color{blue!50!black} \textbf{Top 5 constraints according to ES \Sexpr{ES_year} \\ \footnotesize(\% respondants)}}
       <<top5constraintsES,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2.8,fig.width=9,results="asis">>=  
       @    
       %\vspace*{-0.7cm}
-      \hspace*{0.3cm} \raggedright\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey 2013}}
+      \hspace*{0.3cm} \raggedright\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey \Sexpr{ES_year}}}
     \end{minipage}
     \begin{minipage}[c]{0.49\textwidth} % top 5 constraints WEF
       \center{\color{blue!50!black} \textbf{Top 5 constraints according to WEF 2015 survey \\ \footnotesize(\% respondants among 88 executives)}}
