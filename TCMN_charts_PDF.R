@@ -187,6 +187,8 @@ LPIindicators <- function(couName){
   cou <- .getCountryCode(couName)
   
   data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart8")
+  # Global rank
+  #cou_rank <- filter(TCMN_data, CountryCode==cou, Key=="TP00R")[,c("Period","Observation")]
 
   if (nrow(data)>0){  
     # two last periods to plot
@@ -194,19 +196,37 @@ LPIindicators <- function(couName){
     secMaxPeriod <- max(data[!(data$Period==maxPeriod),]$Period)
     
     data <- filter(data, Period %in% c(maxPeriod,secMaxPeriod))
+    cou_rank <- filter(TCMN_data, CountryCode==cou, Key=="TP00R",Period %in% c(maxPeriod,secMaxPeriod))$Observation
+    # custom reorder bars
+    #data$IndicatorShort <- unique(as.factor(data$IndicatorShort))
+    dataMax <- filter(data, Period==maxPeriod)
+    dataMax <- arrange(dataMax, Key)
+    dataMax$IndicatorShort <- factor(dataMax$IndicatorShort, levels=dataMax[order(dataMax$Key, decreasing = TRUE), "IndicatorShort"])
+    #data <- arrange(data, Key)
+    dataSMax <- filter(data, Period==secMaxPeriod)
+    dataSMax <- arrange(dataSMax, Key)
+    dataSMax$IndicatorShort <- factor(dataSMax$IndicatorShort, levels=dataSMax[order(dataSMax$Key, decreasing = TRUE), "IndicatorShort"])
+    data <- rbind(dataMax,dataSMax)
     
-    ggplot(data, aes(x=IndicatorShort,y=Observation,fill=factor(Period))) +
-      geom_bar(position="dodge",stat="identity") +
+    alpha <- factor(ifelse(data$Key=="TP00",0.9,0.5))
+    ggplot(data=data)+ 
+      geom_bar(aes(x=IndicatorShort,y=Observation,fill = factor(ifelse(Key == "TP00", ifelse(Period == maxPeriod, 1, 2),ifelse(Period == maxPeriod, 1, 2))), alpha = alpha),
+               position="dodge",stat="identity") +
       coord_flip()+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             legend.position="top",
+            legend.text = element_text(size = 15),
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
             axis.text.y = element_text(size=15)#, axis.text.x = element_blank()
             ) + 
       labs(x="",y="")+#,title="Logistics Performance Index (1-5)"
-      scale_fill_manual(values = c("lightblue", "darkblue"),guide = guide_legend(reverse=TRUE))
+      scale_fill_manual(values = c("lightblue", "darkblue"),
+                        labels = c(paste0(secMaxPeriod," (Rank: ",cou_rank[2],") "),paste0(maxPeriod," (Rank: ",cou_rank[1],") ")),
+                        guide = guide_legend(reverse=TRUE)) +
+      scale_alpha_discrete(range = c(0.5, 0.9), guide = FALSE)
+                        
   
 } else {
   plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -228,7 +248,8 @@ WEFradar <- function(couName){
   # country and Region descriptors
   country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
   region <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionShortIncome) 
-  
+  country <- paste0(country," (Rank: ",round(filter(TCMN_data, CountryCode==cou, Key=="P00b")$Observation,1),")")
+  region <- paste0(region," (Avg Rank: ",round(filter(TCMN_data, CountryCode==couRegion, Key=="P00b")$Observation,1),")")
   # filter the data
   data <- filter(TCMN_data, CountryCode %in% c(cou,neighbors), Subsection=="chart7")
   
@@ -264,13 +285,16 @@ WEFradar <- function(couName){
     
     # transpose the data for radarchart to read
     dataTrans <- as.data.frame(t(data[,2:ncol(data)]))
-    
-    radarchart(dataTrans, axistype=1, caxislabels=seq(from=1,to=max,by=1),
+    layout(matrix(c(1,2),ncol=1), heights =c(4,1))
+    par(mar=c(0,1,3,1))
+    radarchart(dataTrans, axistype=1, caxislabels=c(" ","2","3","4","5","6","7"), centerzero = FALSE,seg=6,
                plty=c(1,2),plwd=c(6,3),pcol=c("darkblue","red"),pdensity=c(0, 0),
                cglwd=2,axislabcol="navy", vlabels=data$IndicatorShort, cex.main=1,cex=2.5)
     #title="WEF Competitiveness Indicators, stage of development (1-7)",
-    legend(-2.1,-0.8, legend=c(country,region), seg.len=0.5, pch=3, 
-           bty="n" ,lwd=3, y.intersp=1.5, horiz=FALSE, col=c("darkblue","red"))
+    par(mar=c(0,1,1,1))
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    legend(1,1.5, legend=c(country,region), seg.len=0.5, pch=3, inset=50, 
+           bty="n" ,lwd=3, x.intersp=0.5, horiz=TRUE, col=c("darkblue","red"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -451,6 +475,15 @@ macroInd <- function(couName){
     # format numbers
     data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                                big.mark=",",small.mark=".", small.interval=3)
+    for (i in 1:nrow(data)){
+      
+      data$IndicatorShort[i] <- ifelse(!is.na(merge(data,TCMN_indic[TCMN_indic$Subsection=="table2head",], by="Key")$Note[i]),
+                                       paste0(data$IndicatorShort[i]," \\large{[", merge(data,TCMN_indic[TCMN_indic$Subsection=="table2head",], by="Key")$Note[i],"]}"),
+                                       data$IndicatorShort[i])  
+    }
+    data$IndicatorShort <- gsub("%", "\\%", data$IndicatorShort, fixed=TRUE)
+    data$IndicatorShort <- gsub("&", "\\&", data$IndicatorShort, fixed=TRUE)
+    data$IndicatorShort <- gsub("$", "\\$", data$IndicatorShort, fixed=TRUE)
     
     data <- arrange(data, Key)
     data <- data[,c("IndicatorShort", "ObsScaled")] # short indicator name and scaled data
@@ -464,13 +497,13 @@ macroInd <- function(couName){
     }
     data$dummy <- rep("",nrow(data))
     
-    #bold <- function(x) {paste('{\\textbf{',x,'}}', sep ='')}
-    
     data.table <- xtable(data)
     align(data.table) <- c('l',rep('>{\\centering}p{1.5in}',ncol(data.table)-1),'l')
     print(data.table, include.rownames=FALSE,include.colnames=FALSE, floating=FALSE, 
           size="\\LARGE", #sanitize.text.function=bold,
-          booktabs = FALSE, table.placement="", hline.after = NULL ,latex.environments = "center")
+          booktabs = FALSE, table.placement="", hline.after = NULL ,latex.environments = "center",
+          sanitize.text.function = function(x){x})
+    
   }
   
 }
