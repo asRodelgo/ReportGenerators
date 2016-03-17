@@ -232,12 +232,12 @@ ES_year <- filter(TCMN_data, CountryCode==couISO3 & Subsection=="table3")$Period
 \begin{minipage}[t]{0.99\textwidth}
   \vspace{0.5cm}
   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
-    \center{\color{blue!50!black} \textbf{WEF Competitiveness Indicators \\ \footnotesize(Scale 1-5, 5=best)}}
+    \center{\color{blue!50!black} \textbf{WEF Competitiveness Indicators \\ \footnotesize(Scale 1-7, 7=best)}}
     \vspace*{-0.6cm}
-      <<WEFradar,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.4,fig.width=7,results="asis">>=  
+      <<WEFradar,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
     @      
-    \vspace*{-1.2cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
   \end{minipage}
   \begin{minipage}[c]{0.50\textwidth} % LPI chart
   %\vspace*{0.5cm}
