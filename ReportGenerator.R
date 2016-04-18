@@ -5,14 +5,14 @@
 setwd('/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/')
 source('generic_functions.R') # data and functions needed
 # Create the data reports --------------------------------------
-for (c in c("Tunisia")) {
-#for (c in countryNames$Country) {
+#for (c in c("Andorra")) {
+for (c in countryNames$Country) {
     iso3 <- .getCountryCode(c)
     knit2pdf('TCMN_PDF_Local.Rnw', clean = TRUE,
              encoding = "UTF-8",
            output = paste0("TCMN_",iso3,".tex"))
     # copy file to shinyTCMN pdf directory
- #file.copy(paste0("TCMN_",iso3,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
+ file.copy(paste0("TCMN_",iso3,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
 }
   
 # Create the operations reports --------------------------------------
@@ -26,9 +26,9 @@ for (c in countryNames$Country) {
   file.copy(paste0("TCMN_Operations_",iso3,".pdf"), "/Users/asanchez3/shinyTCMN/pdf/",overwrite=TRUE)
 }
 
-# Create the combined reports --------------------------------------
+# Create the combined FULL reports --------------------------------------
 for (c in countryNames$Country) {
-#for (c in c("Brazil","Bolivia", "Angola")) {
+#for (c in c("Brazil","Bolivia", "Andorra")) {
   iso3 <- .getCountryCode(c)
   knit2pdf('TCMN_Full_PDF_Local.Rnw', clean = TRUE,
            encoding = "UTF-8",

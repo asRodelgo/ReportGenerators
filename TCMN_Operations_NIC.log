@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  17 FEB 2016 08:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  18 APR 2016 08:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -572,13 +572,23 @@ Overfull \hbox (2.31139pt too wide) in paragraph at lines 214--214
  </Users/asanchez3/shinyTCMN/www/wb_logo_background.png> </Users/asanchez3/shin
 yTCMN/www/TC_snapshots_operations.png> </Users/asanchez3/shinyTCMN/www/NI.png>]
 
-Overfull \hbox (4.32437pt too wide) in paragraph at lines 241--241
-[]|\OT1/cmr/m/n/8 Management 
+Overfull \hbox (1.19983pt too wide) in paragraph at lines 241--241
+[]|\OT1/cmr/m/n/8 Product 
  []
 
 
-Overfull \hbox (4.32437pt too wide) in paragraph at lines 261--261
-[]|\OT1/cmr/m/n/8 Management 
+Overfull \hbox (21.62767pt too wide) in paragraph at lines 241--243
+[][] 
+ []
+
+
+Overfull \hbox (1.19983pt too wide) in paragraph at lines 261--261
+[]|\OT1/cmr/m/n/8 Product 
+ []
+
+
+Overfull \hbox (21.62767pt too wide) in paragraph at lines 261--263
+[][] 
  []
 
 
@@ -614,7 +624,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 331.
 Here is how much of TeX's memory you used:
  8523 strings out of 493089
  129390 string characters out of 6134842
- 248681 words of memory out of 5000000
+ 249681 words of memory out of 5000000
  11886 multiletter control sequences out of 15000+600000
  6990 words of font info for 25 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -623,7 +633,7 @@ Here is how much of TeX's memory you used:
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><
 /usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
 r/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
-Output written on TCMN_Operations_NIC.pdf (2 pages, 413834 bytes).
+Output written on TCMN_Operations_NIC.pdf (2 pages, 413705 bytes).
 PDF statistics:
  43 PDF objects out of 1000 (max. 8388607)
  28 compressed objects within 1 object stream

@@ -349,7 +349,8 @@ projectsTableASAActive <- function(couName){
   dataTC <- .filterTCProjects(couName)
   # select relevant variables
   dataTC <- select(dataTC, PROJ_ID, Project_Name = PROJ_SHORT_NME,
-                   Team_Leader = FULL_NME, Approval_Date = BD_APPRVL_DATE, 
+                   Team_Leader = FULL_NME, Concept_Appr_Date = MGT_APPR_CONCEPT_DATE,
+                   Approval_Date = BD_APPRVL_DATE, 
                    Prod_Line, PROD_LINE_CODE, RAS, Current_ExpBB = CURRENT_BB_COST,
                    FY_Expenses = CURRENT_FY_COST, Cum_ExpBB = CUMULATIVE_BB_COST,
                    Cum_Expenses = CUMULATIVE_FY_COST,
@@ -406,7 +407,7 @@ projectsTableASAActive <- function(couName){
     data <- rbind(data,c("None",rep("",ncol(dataTC)-2)))
   }
   
-  names(data) <- c("Task ID", "Task Name", "Team Leader", "Management Approval Date", 
+  names(data) <- c("Task ID", "Task Name", "Team Leader", "Concept Approval Date", "Output Approval Date", 
                    "Product Line","RAS (Y/N)","Current Expenditure BB (US\\$K)", "Current Expenditure Total (US\\$K)",
                    "Lifetime Expenditure BB (US\\$K)","Lifetime Expenditure Total (US\\$K)")
   # I have to add a dummy column so the alignment works (align)
@@ -414,7 +415,7 @@ projectsTableASAActive <- function(couName){
   names(data)[ncol(data)] <- ""
   
   data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c('l','l','>{\\raggedright}p{1in}','>{\\raggedright}p{1in}',rep('>{\\raggedright}p{0.6in}',3),rep('>{\\raggedleft}p{0.6in}',4),'l')
+  align(data.table) <- c('l','l','>{\\raggedright}p{1in}','>{\\raggedright}p{1in}',rep('>{\\raggedright}p{0.6in}',2),rep('>{\\raggedright}p{0.4in}',2),rep('>{\\raggedleft}p{0.6in}',4),'l')
   if (count_ibrd>6){ # squeeze tables in case they are too long
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
@@ -445,7 +446,8 @@ projectsTableASAClosed <- function(couName){
   dataTC <- .filterTCProjects(couName)
   # select relevant variables
   dataTC <- select(dataTC, PROJ_ID, Project_Name = PROJ_SHORT_NME,
-                   Team_Leader = FULL_NME, Approval_Date = BD_APPRVL_DATE, 
+                   Team_Leader = FULL_NME, Concept_Appr_Date = MGT_APPR_CONCEPT_DATE,
+                   Approval_Date = BD_APPRVL_DATE, 
                    Prod_Line, PROD_LINE_CODE, RAS, Current_ExpBB = CURRENT_BB_COST,
                    FY_Expenses = CURRENT_FY_COST, Cum_ExpBB = CUMULATIVE_BB_COST,
                    Cum_Expenses = CUMULATIVE_FY_COST,
@@ -503,7 +505,7 @@ projectsTableASAClosed <- function(couName){
     data <- rbind(data,c("None",rep("",ncol(dataTC)-2)))
   }
   
-  names(data) <- c("Task ID", "Task Name", "Team Leader", "Management Approval Date", 
+  names(data) <- c("Task ID", "Task Name", "Team Leader", "Concept Approval Date", "Output Approval Date", 
                    "Product Line","RAS (Y/N)","Current Expenditure BB (US\\$K)", "Current Expenditure Total (US\\$K)",
                    "Lifetime Expenditure BB (US\\$K)","Lifetime Expenditure Total (US\\$K)")
   
@@ -512,7 +514,7 @@ projectsTableASAClosed <- function(couName){
   names(data)[ncol(data)] <- ""
   
   data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c('l','l','>{\\raggedright}p{1in}','>{\\raggedright}p{1in}',rep('>{\\raggedright}p{0.6in}',3),rep('>{\\raggedleft}p{0.6in}',4),'l')
+  align(data.table) <- c('l','l','>{\\raggedright}p{1in}','>{\\raggedright}p{1in}',rep('>{\\raggedright}p{0.6in}',2),rep('>{\\raggedright}p{0.4in}',2),rep('>{\\raggedleft}p{0.6in}',4),'l')
   if (count_ibrd>6){ # squeeze tables in case they are too long
     
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 

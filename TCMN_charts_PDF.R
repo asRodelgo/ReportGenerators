@@ -1185,14 +1185,25 @@ PolicyTable <- function(couName){
     data[!is.na(data)] <- ""
   }   
     
-  data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
-  align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
-  #align(data.table) <- c('l','l',rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}',"|",rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}','r')
-  print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-        size="\\large", 
-        booktabs = FALSE, table.placement="", hline.after = c(1) ,latex.environments = "center",
-        sanitize.text.function = function(x){x}) # include sanitize to control format like colors
   
+  #align(data.table) <- c('l','l',rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}',"|",rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}','r')
+  if (nrow(data)>0){
+    data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
+    align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
+    print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          size="\\large", 
+          booktabs = FALSE, table.placement="", hline.after = c(1) ,latex.environments = "center",
+          sanitize.text.function = function(x){x}) # include sanitize to control format like colors
+  } else {
+    data[1,] <- c("Data not available",rep("",ncol(data)-1))
+    names(data) <- c(rep(" ",2),"DTF",rep(" ",2),"Rank",rep(" ",2))
+    data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
+    align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
+    print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
+          size="\\large", 
+          booktabs = FALSE, table.placement="" ,latex.environments = "center",
+          sanitize.text.function = function(x){x}) # include sanitize to control format like colors
+  }
 }
 PolicyTable(couName)
 
