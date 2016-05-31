@@ -43,7 +43,17 @@ mWits <- read.csv("/Users/asanchez3/shinyTCMN/data/mWits.csv", colClasses = c(re
 # WITS Exports ----------------------------
 xWits <- read.csv("/Users/asanchez3/shinyTCMN/data/xWits.csv", colClasses = c(rep("character",3),rep("numeric",2),rep("character",2)))
 # IBRD T&C projects portfolio --------------
-TCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/TCprojects.csv", stringsAsFactors = FALSE)
+#TCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/TCprojects.csv", stringsAsFactors = FALSE)
+TCprojectList <- list()
+pieces <- 5 # number of TC data frames
+for (i in 1:pieces){
+  TCprojectList[[i]] <- read.csv(paste0("/Users/asanchez3/shinyTCMN/data/TCprojects",i,".csv"),stringsAsFactors = FALSE)
+  TCprojectList[[i]] <- select(TCprojectList[[i]], -upi_nbr_c)
+}
+
+#TCprojects <- data.frame()
+TCprojects <- bind_rows(TCprojectList)
+
 # IFC projects portfolio --------------
 IFCprojects <- read.csv("/Users/asanchez3/shinyTCMN/data/IFCprojects.csv", stringsAsFactors = FALSE)
 # SCD/CPF most recent --------------

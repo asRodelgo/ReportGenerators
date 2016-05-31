@@ -60,6 +60,7 @@ top5constraintsES <- function(couName){
   
   cou <- .getCountryCode(couName)
   data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart3")
+  data <- filter(data, !(is.na(Observation)))
   
   if (nrow(data)>0){
     # compute top 5 constraints
@@ -1085,7 +1086,9 @@ ESTable <- function(couName){
     data <- merge(data, neighbors, by="CountryCode")
     data <- select(data, IndicatorShort, Observation, colName)
     data <- spread(data, colName, Observation)
-    data <- data[,c(1,4,3,2)]# reorder columns
+    if (ncol(data)==4){
+      data <- data[,c(1,4,3,2)]  
+    }
     names(data)[1] <-""
     
     # I have to add a dummy column so the alignment works (align)

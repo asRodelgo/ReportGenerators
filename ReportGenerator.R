@@ -48,8 +48,8 @@ for (couDep in unique(countryDeps$CMU)) {
 }
 
 # Create the RMarkdown operations reports --------------------------------------
-# for (c in countryNames$Country) {
-# #for (c in c("Brazil")) {
+#for (c in countryNames$Country) {
+# for (c in c("Peru")) {
 #   iso3 <- .getCountryCode(c)
 #   knit2html('TCMN_Operations_TEST.Rmd',
 #            output = paste0("TCMN_Operations_TEST_",iso3,".html"))
