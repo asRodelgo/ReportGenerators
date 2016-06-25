@@ -16,7 +16,7 @@ library(knitr) # generate LaTeX PDF report
 
 # avoid scientific notation
 options(scipen=999)
-
+thisYear <- substr(Sys.Date(),1,4)
 # PDF Offline Report generator --------------------------
 # Read data
 load("Entrepr_DataByCategory.rda")
@@ -49,8 +49,8 @@ Entrepr_data <- merge(Entrepr_data, countries[,c("CountryCodeISO3","CountryCodeI
 Entrepr_data <- Entrepr_data %>%
   mutate(Year = ifelse(is.na(Year),year,Year),
                        Country = ifelse(is.na(Country),country,Country)) %>%
-  select(Key, Category, Subcategory, Observation, CountryCode = CountryCodeISO3, iso2c, Period = Year, Country,
-         IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, Subsection)
+  select(Key, Category, Subcategory, Observation, CountryCode = CountryCodeISO3, iso2c, Period = Year, 
+         IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, Section, Subsection)
 
 # might need TCMN data for some charts/tables
 TCMN_data <- read.csv("/Users/asanchez3/shinyTCMN_Original/data/TCMN_data.csv", colClasses = c(rep("character",4),rep("numeric",2),rep("character",2)))

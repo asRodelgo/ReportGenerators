@@ -13,10 +13,10 @@ couISO2 <- .getISO2(couName)
 line_chart <- function(couName){
   
   cou <- .getCountryCode(couName)
-  data <- filter(Entrepr_data, CountryCode == cou, Subcategory == "WB.data", Subsection == "line1")
+  data <- filter(Entrepr_data, CountryCode == cou, Section == "Policy", Subsection == "line1")
   #data <- filter(Entrepr_data, Subcategory == "WB.data", Key == "IC.REG.COST.PC.ZS")  
   couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
-  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Subcategory == "WB.data", Key == "IC.REG.COST.PC.ZS") #select country, region and world
+  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Section == "Policy", Subsection == "line1") #select country, region and world
   
   # country, Region, World descriptors
   country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
@@ -45,25 +45,30 @@ line_chart <- function(couName){
   
   
 }
-ExpImp_HF(couName)
+line_chart(couName)
 
-## ---- top5constraintsES ----
-top5constraintsES <- function(couName){      
+## ---- bar_chart ----
+bar_chart <- function(couName){      
   
   cou <- .getCountryCode(couName)
-  data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart3")
+  data <- filter(Entrepr_data, CountryCode==cou, Section=="Policy", Subsection=="bar1")
   data <- filter(data, !(is.na(Observation)))
+  couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
+  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Category=="Policy", Subsection=="bar1") #select country, region and world
+  
+  # country, Region, World descriptors
+  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
+  region <- as.character(countries[countries$CountryCodeISO3==cou,]$Region) 
+  world <- "All Countries"
   
   if (nrow(data)>0){
-    # compute top 5 constraints
-    data <- head(arrange(data, desc(Observation)),5)
     # order the factors
-    data$IndicatorShort = factor(as.character(data$IndicatorShort), 
-                                 levels = data$IndicatorShort[order(data$Observation)])
-    
+    #data$IndicatorShort = factor(as.character(data$IndicatorShort), 
+    #                             levels = data$IndicatorShort[order(data$Observation)])
+    data <- filter(data, Period == max(Period))
     
     ggplot(data, aes(x=factor(IndicatorShort), y=Observation)) +
-      geom_bar(fill="blue",stat="identity") +
+      geom_bar(aes(fill=CountryCode),stat="identity") +
       geom_text(aes(label=Observation,y=Observation + max(Observation)*.06),
                 size=6) + 
       coord_flip()+
@@ -82,57 +87,21 @@ top5constraintsES <- function(couName){
   }
   
 }
-top5constraintsES(couName)
+bar_chart(couName)
 
-## ---- top5constraintsWEF ----
-top5constraintsWEF <- function(couName){      
-  
-  cou <- .getCountryCode(couName)
-  data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart4")
-  
-  if (nrow(data)>0){
-    # compute top 5 constraints
-    data <- head(arrange(data, desc(Observation)),5)
-    # order the factors
-    data$IndicatorShort = factor(as.character(data$IndicatorShort), 
-                                 levels = data$IndicatorShort[order(data$Observation)])
-    
-    
-    ggplot(data, aes(x=factor(IndicatorShort), y=Observation)) +
-      geom_bar(fill="green",stat="identity") +
-      geom_text(aes(label=Observation,y=Observation + max(Observation)*.06),
-                size=6) + 
-      coord_flip()+
-      theme(legend.key=element_blank(),
-            legend.title=element_blank(),
-            panel.border = element_blank(),
-            panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-            axis.ticks.x = element_blank(),
-            axis.text.x = element_blank(),
-            axis.text.y = element_text(size = 15)) + 
-      labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
-      )
-  } else {
-    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
-  }
-  
-}
-top5constraintsWEF(couName)
-
-## ---- WGIindicators ----
-WGIindicators <- function(couName){      
+## ---- bar_facewrap_chart ----
+bar_facewrap_chart <- function(couName){      
   
   cou <- .getCountryCode(couName) # This chart needs to query neighbouring countries also
   
-  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeByIncome  # obtain the region for the selected country
-  neighbors <- countries[countries$RegionCodeByIncome==couRegion,]$CountryCodeISO3 # retrieve all countries in that region
+  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeALL  # obtain the region for the selected country
+  neighbors <- countries[countries$RegionCodeALL==couRegion,]$CountryCodeISO3 # retrieve all countries in that region
   neighbors <- as.character(neighbors[!(neighbors==cou)]) # exclude the selected country
   
   # hardcode for now
   #neighbors <- c("DZA","JOR","MAR","EGY","TUN")
   
-  data <- filter(TCMN_data, CountryCode %in% c(cou,neighbors), Subsection=="chart6")
+  data <- filter(Entrepr_data, CountryCode %in% c(cou,neighbors), Section=="Policy", Subsection=="bar1")
   
   if (nrow(filter(data, CountryCode==cou))>0){
     
@@ -164,7 +133,7 @@ WGIindicators <- function(couName){
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank()) + 
       labs(x="",y="")+#,title="World Governance Indicators")+
-      scale_fill_manual(values = c("darkblue", "lightblue", "orange", "yellow","lightgreen"))
+      scale_fill_manual(values = c("darkblue", "lightblue", "orange", "yellow","lightgreen","pink"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -172,7 +141,7 @@ WGIindicators <- function(couName){
   }
   
 }
-WGIindicators(couName)
+bar_facewrap_chart(couName)
 
 ## ---- LPIindicators ----
 LPIindicators <- function(couName){      
