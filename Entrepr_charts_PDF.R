@@ -669,3 +669,184 @@ doing_business_table <- function(couName){
   }
 }
 doing_business_table(couName)
+
+## ---- macroInd ----
+macroInd <- function(couName){      
+  
+  cou <- .getCountryCode(couName)
+  
+  tableKeys <- unique(filter(TCMN_data, Subsection=="table2head")[,c("Key","IndicatorShort")])
+  data <- filter(TCMN_data, CountryCode==cou, Subsection=="table2head")
+  if (nrow(data)>0){
+    #data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
+    # keep the latest period (excluding projections further than 2 years)
+    data <- filter(data, Period <= (as.numeric(thisYear) + 1))
+    
+    data <- data %>%
+      group_by(Key) %>%
+      filter(Period == max(Period))
+    # add Period to Indicator name
+    data$IndicatorShort <- paste(data$IndicatorShort, " (",data$Period,")", sep="")
+    # Scale Observations
+    data <- mutate(data, ObsScaled = Scale*Observation)
+    # format numbers
+    data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
+                             big.mark=",",small.mark=".", small.interval=3)
+    for (i in 1:nrow(data)){
+      
+      data$IndicatorShort[i] <- ifelse(!is.na(merge(data,TCMN_indic[TCMN_indic$Subsection=="table2head",], by="Key")$Note[i]),
+                                       paste0(data$IndicatorShort[i]," \\large{[", merge(data,TCMN_indic[TCMN_indic$Subsection=="table2head",], by="Key")$Note[i],"]}"),
+                                       data$IndicatorShort[i])  
+    }
+    data$IndicatorShort <- gsub("%", "\\%", data$IndicatorShort, fixed=TRUE)
+    data$IndicatorShort <- gsub("&", "\\&", data$IndicatorShort, fixed=TRUE)
+    data$IndicatorShort <- gsub("$", "\\$", data$IndicatorShort, fixed=TRUE)
+    
+    data <- arrange(data, Key)
+    data <- data[,c("IndicatorShort", "ObsScaled")] # short indicator name and scaled data
+    data <- as.data.frame(t(data)) # transpose the data
+    # I have to add a dummy column so the alignment works (align)
+    j <- ncol(data)+1
+    while (j <= 7){
+      data[,j] <- ""
+      names(data)[j] <- ""
+      j <- j + 1
+    }
+    data$dummy <- rep("",nrow(data))
+    
+    data.table <- xtable(data)
+    align(data.table) <- c('l',rep('>{\\centering}p{1.5in}',ncol(data.table)-1),'l')
+    print(data.table, include.rownames=FALSE,include.colnames=FALSE, floating=FALSE, 
+          size="\\LARGE", #sanitize.text.function=bold,
+          booktabs = FALSE, table.placement="", hline.after = NULL ,latex.environments = "center",
+          sanitize.text.function = function(x){x})
+    
+  }
+  
+}
+macroInd(couName)
+
+## ---- figure_sparkline ----
+figure_sparkline <- function(couName,section,table){      
+  
+  cou <- .getCountryCode(couName)
+  ## Examples like Edward Tufte's sparklines:
+  #table <- "combo1"
+  data <- filter(Entrepr_data, CountryCode==cou, Section == section, Subsection==table)
+  
+  if (nrow(data)>0){
+    
+    data <- filter(data,!is.na(Observation))
+    dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
+    # data
+    dataPoint <- format(dataLast$Observation, digits=2, decimal.mark=".",
+                        big.mark=",",small.mark=".", small.interval=3)
+    # period
+    dataPeriod <- dataLast$Period
+    
+    dataWorld <- filter(Entrepr_data, Section == section, Subsection==table)
+    dataWorld <- filter(dataWorld,!is.na(Observation))
+    dataWorld <- dataWorld %>%
+      group_by(iso2c) %>%
+      mutate(Period = max(Period,na.rm=TRUE))%>%
+      distinct(Period)
+    
+    dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
+    dataWorld <- filter(dataWorld, !(CountryAlternat==""))
+    dataWorld <- arrange(dataWorld, desc(Observation))
+    # rank in the world
+    rank <- which(dataWorld$CountryCode == cou)
+    
+    # sparkline
+    spark <- data %>%
+      arrange(Period) %>%
+      select(Observation)
+    
+    # text
+    indicator <- dataLast$IndicatorShort
+    unit <- dataLast$Unit
+    
+    # impute NAs and standardize so all sparklines are scales
+    spark[is.na(spark),1] <- mean(spark[,1],na.rm = TRUE)  #impute NAs to the mean of the column
+    if (sum(spark[,1],na.rm = TRUE)==0){ 
+      spark[,1] <- 0
+      #x[1,i] <- -10
+      spark[nrow(spark),1] <- 10
+    }
+    
+    
+    # Print the combo -----------------------------------------------
+    par(mfrow=c(3,1), #sets number of rows in space to number of cols in data frame x
+        mar=c(1,5,0,5), #sets margin size for the figures
+        oma=c(1,5,1,5)) #sets outer margin
+    
+    # print indicator name
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.5, 1.1,indicator, col="darkblue", cex=6)
+    graphics::text(1.5, 0.8,paste0(unit, " (",dataPeriod,")"), col="darkblue", cex=6)
+    # print data point and rank
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.2, 1,dataPoint, col="black", cex=25)
+    graphics::text(1.75, 0.75,paste("(Rank:",rank,")"), col="grey", cex=7)
+    # plot sparkline  
+    if (sum(spark[1:(nrow(x)-1),1])==0){ # paint in white empty rows
+      plot(spark[,1], #use col data, not rows from data frame x
+           col="white",lwd=4, #color the line and adjust width
+           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+      
+      axis(2,yaxp=c(min(spark[,1],na.rm = TRUE),max(spark[,1],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+      ymin<-min(spark[,1],na.rm = TRUE); tmin<-which.min(spark[,1]);ymax<-max(spark[,1], na.rm = TRUE);tmax<-which.max(spark[,1]);
+      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
+    } else {
+      plot(spark[,1], #use col data, not rows from data frame x
+           col="darkgrey",lwd=4, #color the line and adjust width
+           axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
+      
+      axis(2,yaxp=c(min(spark[,1],na.rm = TRUE),max(spark[,1],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
+      ymin<-min(spark[,1],na.rm = TRUE); tmin<-which.min(spark[,1]);ymax<-max(spark[,1], na.rm = TRUE);tmax<-which.max(spark[,1]); # 
+      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+    }
+    
+    
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    #graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+  } 
+  
+}
+
+## ---- figure_sparkline1 ----
+figure_sparkline(couName,"Policy","figure3")
+
+## ---- figure_sparkline2 ----
+figure_sparkline(couName, "Policy","figure3")
+
+## ---- figure_sparkline3 ----
+figure_sparkline(couName, "Policy","figure3")
+
+## ---- figure_sparkline4 ----
+figure_sparkline(couName, "Policy","figure5")
+
+## ---- figure_sparkline5 ----
+figure_sparkline(couName, "Policy","figure5")
+
+## ---- figure_sparkline6 ----
+figure_sparkline(couName, "Policy","figure5")
+
+
+## ---- multi_figure ----
+multi_figure <- function(couName) {
+  
+  par(mfrow=c(2,3), #sets number of rows in space to number of cols in data frame x
+      mar=c(1,0,0,0), #sets margin size for the figures
+      oma=c(1,2,1,1)) #sets outer margin
+  
+  figure_sparkline(couName, "Policy","figure1")
+  figure_sparkline(couName, "Policy","figure2")
+  figure_sparkline(couName, "Policy","figure3")
+  figure_sparkline(couName, "Policy","figure4")
+  figure_sparkline(couName, "Policy","figure5")
+  figure_sparkline(couName, "Finance","figure1")
+  
+}
+
