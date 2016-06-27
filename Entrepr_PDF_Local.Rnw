@@ -19,7 +19,7 @@
             urlcolor  = blue,
             citecolor = blue,
             anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
-\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\sectionfont{\fontsize{24}{22}\selectfont\raggedright} % formats title newsletter (section) 
 \subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -50,67 +50,67 @@ date <- Sys.Date()
 %World Bank logo and Site branding
 \begin{figure}
   \vspace{-3ex} % move up this figure
-  \hspace{-7ex} % move left this figure
-  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+  %\hspace{-7ex} % move left this figure
+  %\includegraphics[width=19cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bannerLight.png}
 \end{figure}
-\begin{figure}
-  \begin{minipage}[t]{0.99\textwidth} % top section
-      \vspace{-30ex}
-      \hspace{-2ex}
-      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_data.png}}
-  %  {\color{white!70!black}\noindent\makebox[\linewidth]{\rule{20cm}{0.3pt}}} % horiz line
-  \end{minipage}
-\end{figure}
-%
-%%%% Macro Indicators
-\begin{minipage}[t]{0.99\textwidth} % top section
-  \vspace{-1.5cm}
-  \begin{minipage}[c]{0.36\textwidth} 
-    \begin{minipage}[c]{0.28\textwidth} % flag
-      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}
-    \end{minipage}
-    \begin{minipage}[c]{0.70\textwidth} % Country name
-      \section*{\color{blue!40!black}\Sexpr{couName}}
-    \end{minipage}
-  \end{minipage}
-  \begin{minipage}[c]{0.63\textwidth} % key macro table 
-    % Table 1
-    \centering
-    \resizebox{\textwidth}{!}{
-    <<macroInd,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-#macroInd(couName)
-      @
-    }
-  \end{minipage}  
-\end{minipage} % end top section
 
-\begin{minipage}[b]{0.80\textwidth} % overview section
-      \begin{minipage}[t]{0.30\textwidth}
-    <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-      @      
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  %\hspace{-7ex} % move left this figure
+  \includegraphics[width=19cm,height=6cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_backgroundTop.png}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace*{-26.8cm}
+  \begin{minipage}[t]{0.48\textwidth} % top section
+    \vspace{-1ex}
+    \begin{minipage}[t]{0.99\textwidth} % top section
+      \includegraphics[width=7cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_logo1.png}
+    \end{minipage}
+  
+    \begin{minipage}[b]{0.99\textwidth} 
+      \vspace{5ex}
+      \begin{minipage}[c]{0.18\textwidth} % flag
+        \center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}}
       \end{minipage}
-      \begin{minipage}[t]{0.30\textwidth}
-    <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-      @      
+      \begin{minipage}[c]{0.80\textwidth} % Country name
+        \section*{\color{blue!40!black}\Sexpr{couName}}
       \end{minipage}
-      \begin{minipage}[t]{0.30\textwidth}
-    <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-      @      
-      \end{minipage}
-      
-      \begin{minipage}[b]{0.30\textwidth}
-    <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-      @      
-      \end{minipage}
-      \begin{minipage}[b]{0.30\textwidth}
-    <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-      @      
-      \end{minipage}
-      \begin{minipage}[b]{0.30\textwidth}
-    <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-      @      
-      \end{minipage}
-\end{minipage}      
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[t]{0.55\textwidth} % overview section
+    \vspace{1ex}
+    \begin{minipage}[t]{0.30\textwidth}
+  <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='right',results="asis">>=  
+    @      
+    \end{minipage}
+    \begin{minipage}[t]{0.30\textwidth}
+  <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    @      
+    \end{minipage}
+    \begin{minipage}[t]{0.30\textwidth}
+  <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    @      
+    \end{minipage}
+    
+    \begin{minipage}[b]{0.30\textwidth}
+  <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    @      
+    \end{minipage}
+    \begin{minipage}[b]{0.30\textwidth}
+  <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    @      
+    \end{minipage}
+    \begin{minipage}[b]{0.30\textwidth}
+  <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    @      
+    \end{minipage}
+  \end{minipage}
+\end{minipage}
+%{\color{white!20!blue}\noindent\makebox[\linewidth]{\rule{18cm}{2pt}}} % horiz line
+\end{figure}
+
 %'     \end{minipage}
 %'     \begin{minipage}[c]{0.11\textwidth}
 %'       \vspace*{+0.8cm}
