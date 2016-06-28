@@ -81,28 +81,28 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[t]{0.55\textwidth} % overview section
     \vspace{1ex}
-    \begin{minipage}[t]{0.30\textwidth}
+    \begin{minipage}[c]{0.30\textwidth}
   <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='right',results="asis">>=  
     @      
     \end{minipage}
-    \begin{minipage}[t]{0.30\textwidth}
+    \begin{minipage}[c]{0.30\textwidth}
   <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
-    \begin{minipage}[t]{0.30\textwidth}
+    \begin{minipage}[c]{0.30\textwidth}
   <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
     
-    \begin{minipage}[b]{0.30\textwidth}
+    \begin{minipage}[c]{0.30\textwidth}
   <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
-    \begin{minipage}[b]{0.30\textwidth}
+    \begin{minipage}[c]{0.30\textwidth}
   <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
-    \begin{minipage}[b]{0.30\textwidth}
+    \begin{minipage}[c]{0.30\textwidth}
   <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
@@ -110,6 +110,109 @@ date <- Sys.Date()
 \end{minipage}
 %{\color{white!20!blue}\noindent\makebox[\linewidth]{\rule{18cm}{2pt}}} % horiz line
 \end{figure}
+
+\begin{minipage}[c]{0.875\textwidth}
+  \begin{flushleft}  
+    {\color{white!10!blue} \textbf{\LARGE Policy}}
+  \end{flushleft}
+  \vspace*{-0.4cm}
+    % Table 2
+    \centering
+    \resizebox{\textwidth}{!}{
+    <<table_time_avg_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+    @      
+    }
+  \end{minipage}
+  \begin{minipage}[c]{0.11\textwidth}
+    \vspace*{+1cm}
+    <<sparklines_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
+    @
+    \vspace*{-0.5cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \vspace{0.8cm}
+   \begin{minipage}[c]{0.44\textwidth} 
+      {\color{blue!50!black} \textbf{\small Cost of Business Startup Procedures \\ \% of GNI per capita}}
+      %\vspace{3ex}
+      \\[6pt]
+      \centering
+      \resizebox{\textwidth}{!}{%
+    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=10,results="asis">>=  
+      @            
+      }
+      \\[10pt]
+    %\hspace*{0.5cm}
+    \footnotesize{\href{http://wits.worldbank.org}{Source: World Integrated Trade Solution (WITS)}} 
+  \end{minipage}
+  \begin{minipage}[c]{0.56\textwidth} % Doing Business table
+    %\vspace*{-0.1cm}
+    %\begin{flushleft}
+    \center {\color{blue!50!black}\textbf{\small Doing Business 2015}}
+    %\end{flushleft}
+    \\[10pt]
+    \centering
+      \resizebox{\textwidth}{!}{%
+      <<doing_business_table,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+        @          
+      }
+    \\[15pt]
+     %\hspace*{0.5cm} 
+     \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
+  \end{minipage}
+\end{minipage}
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+\begin{minipage}[b]{0.875\textwidth}
+  \vspace{2ex}
+  \begin{flushleft}  
+    {\color{white!10!blue} \textbf{\LARGE Markets}}
+  \end{flushleft}
+  \vspace{0.5cm}
+  \begin{minipage}[c]{0.48\textwidth} % WEF Radar
+    \center{\color{blue!50!black} \textbf{Financial inclusion \\ \footnotesize(\% age 15+)}}
+    \vspace*{-0.6cm}
+      <<radar_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
+    @      
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+  \begin{minipage}[c]{0.50\textwidth} % 
+  %\vspace*{0.5cm}
+  \centering
+    \resizebox{\textwidth}{!}{
+    <<table_region_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=9,results="asis">>=  
+    @            
+    }
+\vspace{+1ex}    
+    <<tcombo_percent_Markets1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=8,results="asis">>=  
+    @            
+\vspace{+1ex}
+    <<combo_percent_Markets2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=8,results="asis">>=  
+    @            
+    
+  %\hspace*{0.5cm} 
+  \raggedright\footnotesize{\href{http://lpi.worldbank.org}{Source: Logistics Performance Index (World Bank)}}
+  \end{minipage}
+\end{minipage}  
+
+    
+% \begin{flushleft}  
+%   {\color{white!10!blue} \textbf{\LARGE Human capital}}
+% \end{flushleft} 
+% \begin{flushleft}  
+%   {\color{white!10!blue} \textbf{\LARGE Finance}}
+% \end{flushleft} 
+% \begin{flushleft}  
+%   {\color{white!10!blue} \textbf{\LARGE Markets}}
+% \end{flushleft} 
+% \begin{flushleft}  
+%   {\color{white!10!blue} \textbf{\LARGE Culture}}
+% \end{flushleft} 
+% \begin{flushleft}  
+%   {\color{white!10!blue} \textbf{\LARGE Supports}}
+% \end{flushleft} 
 
 %'     \end{minipage}
 %'     \begin{minipage}[c]{0.11\textwidth}
