@@ -50,16 +50,52 @@ doing_business_table(couName)
 
 ########## Human capital ##########
 
+## ---- bar_facewrap_chart_Human ----
+bar_facewrap_chart(couName, "Human capital","bar1")
+
+## ---- pie_chart_double_Human ----
+pie_chart_double(couName, "Human capital","figure6")
+
 ########## Finance ##########
+
+## ---- table_time_Finance ----
+table_time(couName, "Finance","table1")
+
+## ---- sparklines_Finance ----
+sparklines(couName,"Finance","table1")
+
+
+## ---- line_chart_Finance ----
+line_chart(couName,"Finance","figure2")
+#figure_sparkline(couName,"figure2")
 
 ########## Markets ##########
 
 ## ---- radar_chart_Markets ----
 radar_chart(couName, "Markets","radar1")
+
 ## ---- table_region_Markets ----
 table_region(couName, "Markets","table1")
+
 ## ---- combo_percent_Markets1 ----
 combo_percent(couName, "Markets","combo1")
+#pie_chart_double(couName, "Markets","combo1")
+
 ## ---- combo_percent_Markets2 ----
 combo_percent(couName, "Markets","combo2")
+#pie_chart_double(couName, "Markets","combo2")
+
+########## Culture ##########
+## ---- table_time_avg_Culture ----
+table_time_avg(couName,"Culture","table1")
+
+## ---- sparklines_Culture ----
+sparklines(couName,"Culture","table1")
+
+########## Supports ##########
+## ---- table_time_avg_Supports ----
+table_time_avg(couName,"Supports","table1")
+
+## ---- sparklines_Supports ----
+sparklines(couName,"Supports","table1")
 

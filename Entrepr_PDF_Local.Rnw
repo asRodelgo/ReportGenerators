@@ -62,7 +62,7 @@ date <- Sys.Date()
 
 \begin{figure}
 \begin{minipage}[t]{0.99\textwidth} % top section
-  \vspace*{-26.8cm}
+  \vspace*{-24cm}
   \begin{minipage}[t]{0.48\textwidth} % top section
     \vspace{-1ex}
     \begin{minipage}[t]{0.99\textwidth} % top section
@@ -116,33 +116,33 @@ date <- Sys.Date()
     {\color{white!10!blue} \textbf{\LARGE Policy}}
   \end{flushleft}
   \vspace*{-0.4cm}
-    % Table 2
-    \centering
-    \resizebox{\textwidth}{!}{
-    <<table_time_avg_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-    @      
-    }
-  \end{minipage}
-  \begin{minipage}[c]{0.11\textwidth}
-    \vspace*{+1cm}
-    <<sparklines_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
-    @
-    \vspace*{-0.5cm}
+  % Table 2
+  \centering
+  \resizebox{\textwidth}{!}{
+  <<table_time_avg_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+  @      
+  }
+\end{minipage}
+\begin{minipage}[c]{0.11\textwidth}
+  \vspace*{+1cm}
+  <<sparklines_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
+  @
+  \vspace*{-0.5cm}
 \end{minipage}
 
 \begin{minipage}[b]{0.99\textwidth}
   \vspace{0.8cm}
-   \begin{minipage}[c]{0.44\textwidth} 
-      {\color{blue!50!black} \textbf{\small Cost of Business Startup Procedures \\ \% of GNI per capita}}
-      %\vspace{3ex}
-      \\[6pt]
-      \centering
+  \begin{minipage}[c]{0.44\textwidth} 
+    {\color{blue!50!black} \textbf{\small Cost of Business Startup Procedures \\ \% of GNI per capita}}
+        %\vspace{3ex}
+    \\[6pt]
+    \centering
       \resizebox{\textwidth}{!}{%
     <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=10,results="asis">>=  
       @            
       }
-      \\[10pt]
-    %\hspace*{0.5cm}
+    \\[10pt]
+  %\hspace*{0.5cm}
     \footnotesize{\href{http://wits.worldbank.org}{Source: World Integrated Trade Solution (WITS)}} 
   \end{minipage}
   \begin{minipage}[c]{0.56\textwidth} % Doing Business table
@@ -161,6 +161,70 @@ date <- Sys.Date()
      \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
   \end{minipage}
 \end{minipage}
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+\begin{minipage}[b]{0.875\textwidth}
+   \vspace{2ex}
+   \begin{flushleft}  
+     {\color{white!10!blue} \textbf{\LARGE Human capital}}
+   \end{flushleft} 
+\vspace{0.5cm}
+  \begin{minipage}[c]{0.48\textwidth} % WEF Radar
+    \center{\color{blue!50!black} \textbf{Availability of skilled labor and education \\ \footnotesize(1-7, 7 = best)}}
+    \vspace*{-0.6cm}
+      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
+    @      
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+  \begin{minipage}[c]{0.50\textwidth} % 
+    \center{\color{blue!50!black} \textbf{Population employed in services sector \\ \footnotesize(\% total employed population)}}
+    \vspace*{-0.6cm}
+      <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
+    @      
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+\end{minipage}  
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+\begin{minipage}[b]{0.875\textwidth}
+  \vspace{2ex}
+  \begin{flushleft}  
+   {\color{white!10!blue} \textbf{\LARGE Finance}}
+  \end{flushleft} 
+  \vspace{0.5cm}
+  \begin{minipage}[c]{0.75\textwidth} % WEF Radar
+    \center{\color{blue!50!black} \textbf{FDI, Public Capital Market and Venture Capital}}
+    %\\ \footnotesize(\% GDP)}}
+    %\vspace*{-0.6cm}
+    %\begin{minipage}[c]{0.80\textwidth}  
+    \centering
+      \resizebox{\textwidth}{!}{
+      <<table_time_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+      @      
+      }
+  \vspace*{-0.6cm} 
+  \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+%'   \begin{minipage}[c]{0.11\textwidth}
+%'       \vspace*{+1cm}
+%'       <<sparklines_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
+%'       @
+%'       \vspace*{-0.5cm}
+%'   \end{minipage}
+  %\end{minipage}
+  \begin{minipage}[c]{0.24\textwidth} % 
+    \center{\color{blue!50!black} \textbf{Population employed in services sector \\ \footnotesize(\% total employed population)}}
+    \vspace*{-0.6cm}
+      <<line_chart_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=8,fig.width=11,results="asis">>=  
+    @      
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+\end{minipage}  
 
 {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
 
@@ -197,208 +261,50 @@ date <- Sys.Date()
   \end{minipage}
 \end{minipage}  
 
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+\begin{minipage}[c]{0.875\textwidth}
+  \begin{flushleft}  
+    {\color{white!10!blue} \textbf{\LARGE Culture}}
+  \end{flushleft}
+  \vspace*{-0.4cm}
+  % Table 2
+  \centering
+  \resizebox{\textwidth}{!}{
+  <<table_time_avg_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+  @      
+  }
+\end{minipage}
+\begin{minipage}[c]{0.11\textwidth}
+  \vspace*{+1cm}
+  <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
+  @
+  \vspace*{-0.5cm}
+\end{minipage}
     
-% \begin{flushleft}  
-%   {\color{white!10!blue} \textbf{\LARGE Human capital}}
-% \end{flushleft} 
-% \begin{flushleft}  
-%   {\color{white!10!blue} \textbf{\LARGE Finance}}
-% \end{flushleft} 
-% \begin{flushleft}  
-%   {\color{white!10!blue} \textbf{\LARGE Markets}}
-% \end{flushleft} 
-% \begin{flushleft}  
-%   {\color{white!10!blue} \textbf{\LARGE Culture}}
-% \end{flushleft} 
-% \begin{flushleft}  
-%   {\color{white!10!blue} \textbf{\LARGE Supports}}
-% \end{flushleft} 
 
-%'     \end{minipage}
-%'     \begin{minipage}[c]{0.11\textwidth}
-%'       \vspace*{+0.8cm}
-%'           <<createSparklines_trade,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4.5,results="asis">>=  
-%'       @
-%'       \vspace*{-0.4cm}
-%'     \end{minipage}
-%'   \\[3pt]
-%' \raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: MFM note}{,} \href{http://data.worldbank.org/data-catalog/world-development indicators}{[1] World Development Indicators (WDI)}{,} \href{http://unctadstat.unctad.org/wds/ReportFolders/reportFolders.aspx}{[2] UNCTADSTAT}{,} \href{https://www.imf.org/external/pubs/ft/weo/2015/02/weodata/index.aspx}{[3] World Economic Outlook (WEO)}}}
-%'   \end{minipage} 
-%' %\end{minipage}    
-%'   \begin{minipage}[b]{\textwidth} % macro charts
-%'   \vspace{+3ex}
-%'     \begin{minipage}[c]{0.49\textwidth} % imports/exports 
-%'     \center{\color{blue!50!black} \textbf{\small Goods Export and Import \\ volume growth, 2012-2015}}
-%'       <<ExpImp_HF,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.3,fig.width=10,results="asis">>=  
-%'       @
-%'     \vspace*{-0.3cm}
-%'     %\hspace*{0.5cm} 
-%'     \raggedright{\footnotesize{\href{http://web.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTDECPROSPECTS/0,,menuPK:476941~pagePK:51084723~piPK:51084722~theSitePK:476883,00.html}{Source: Development Prospects Group (DECPG)}}}
-%'     \end{minipage}
-%'     \begin{minipage}[c]{0.49\textwidth} % gdp value added
-%'     \center{\color{blue!50!black} \textbf{\small Gross Value Added by \\ Economic Activity 2013 \footnotesize(\% GDP)}}
-%'         <<GVA_Treemap,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=10,results="asis">>=  
-%'         @
-%'    %\vspace*{-0.3cm}
-%'    %\hspace*{0.5cm} 
-%'    \raggedright{\footnotesize{\href{http://data.worldbank.org/data-catalog/world-development indicators}{Source: World Development Indicators (WDI)}}}
-%'     \end{minipage}
-%'   \end{minipage}  
-%' \end{minipage}   
-%'  
-%' %%%% Exports Imports and DB
-%' \begin{minipage}[b]{0.99\textwidth}
-%'   \vspace{0.8cm}
-%'    \begin{minipage}[c]{0.44\textwidth} 
-%'     %\vspace*{-0.2cm}
-%'     \begin{minipage}[t]{0.99\textwidth} 
-%'       {\color{blue!50!black} \textbf{\small Top 5 Exports by \% of Total Value, \Sexpr{expYear}}}
-%'       %\vspace{3ex}
-%'       \\[6pt]
-%'       \centering
-%'       \resizebox{\textwidth}{!}{%
-%'     <<ImpExp_Treemap-2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=11,results="asis">>=  
-%'       @            
-%'       }
-%'       \end{minipage}
-%'       \\[14pt]
-%'       \begin{minipage}[t]{0.99\textwidth} 
-%'       {\color{blue!50!black} \textbf{\small Imports Categories by \% of Total Value, \Sexpr{impYear}}}
-%'       \\[6pt]
-%'       \centering
-%'       \resizebox{\textwidth}{!}{%
-%'     <<ImpExp_Treemap-1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2.5,fig.width=11,results="asis">>=  
-%'       @            
-%'       }
-%'       \end{minipage}
-%'       \\[10pt]
-%'     %\hspace*{0.5cm}
-%'     \footnotesize{\href{http://wits.worldbank.org}{Source: World Integrated Trade Solution (WITS)}} 
-%'     \end{minipage}
-%'     \begin{minipage}[c]{0.56\textwidth} % Doing Business table
-%'     %\vspace*{-0.1cm}
-%'     %\begin{flushleft}
-%'       \center {\color{blue!50!black}\textbf{\small Doing Business 2015 \\ \footnotesize Distance to Frontier (DTF) and Rank}}
-%'     %\end{flushleft}
-%'     \\[18pt]
-%'     \centering
-%'       \resizebox{\textwidth}{!}{%
-%'       <<doing_business_table,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-%'         @          
-%'       }
-%'     \\[15pt]
-%'      %\hspace*{0.5cm} 
-%'      \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
-%'     \end{minipage}
-%' \end{minipage}
-%' 
-%' \vspace{+3ex}
-%' {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
-%' \begin{minipage}[c]{0.99\textwidth}
-%'   \hspace*{-0.4cm}\raggedleft{\color{white!40!black} \footnotesize TRADE AND COMPETITIVENESS MONITORING NOTE - UPDATED \Sexpr{date}}
-%' \end{minipage}
-%' 
-%' \newpage
-%' %%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
-%' 
-%' \begin{minipage}[t]{0.99\textwidth}
-%'   \vspace{0.5cm}
-%'   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
-%'     \center{\color{blue!50!black} \textbf{WEF Competitiveness Indicators \\ \footnotesize(Scale 1-7, 7=best)}}
-%'     \vspace*{-0.6cm}
-%'       <<WEFradar,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
-%'     @      
-%'     \vspace*{-0.6cm} 
-%'     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
-%'   \end{minipage}
-%'   \begin{minipage}[c]{0.50\textwidth} % LPI chart
-%'   %\vspace*{0.5cm}
-%'   \center {\color{blue!50!black} \textbf{Logistics Performance Index \\ \footnotesize(Scale 1-5, 5=best)}}
-%'     \vspace*{0.4cm}
-%'     <<LPIindicators,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=9,results="asis">>=  
-%'     @            
-%'   %\hspace*{0.5cm} 
-%'   \raggedright\footnotesize{\href{http://lpi.worldbank.org}{Source: Logistics Performance Index (World Bank)}}
-%'   \end{minipage}
-%' \end{minipage}  
-%' 
-%' \begin{minipage}[b]{0.99\textwidth}
-%'   \begin{minipage}[c]{0.50\textwidth} % WGI chart
-%'     \vspace*{0.8cm}
-%'     \center {\color{blue!50!black} \textbf{World Governance indicators \\ \footnotesize(Std. score, High=best)}}
-%'     \vspace*{0.3cm}
-%'         <<WGIindicators,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.4,fig.width=8,results="asis">>=  
-%'       @      
-%'     \vspace*{-0.6cm} 
-%'     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://data.worldbank.org/data-catalog/worldwide-governance-indicators}{Source: Worldwide Governance Indicators}}
-%'   \end{minipage}
-%'   \begin{minipage}[c]{0.48\textwidth} % Trade Policy table
-%'     \vspace*{0.4cm}
-%'   %\begin{flushleft}
-%'     {\color{blue!50!black} \textbf{Trade Policy}}
-%'   %\end{flushleft} 
-%'   %\vspace*{0.2cm}
-%'     \\[20pt]
-%'     \centering
-%'     \resizebox{\textwidth}{!}{%
-%'     <<PolicyFacilTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-%'       @          
-%'     }
-%'     \\[20pt]
-%'     %\hspace*{0.5cm} 
-%'     \raggedright{\footnotesize{\href{http://wits.worldbank.org}{Sources: WITS}{, }\href{http://stat.wto.org/CountryProfile/WSDBCountryPFHome.aspx?Language=E}{[1] WTO Trade Profiles}}}
-%'   \end{minipage}
-%' \end{minipage}
-%' 
-%' \vspace{+8ex}
-%' %\hspace*{0.2cm}\subsection*{\color{white!50!black}Private Sector's Views}
-%' \hspace*{0.1cm} \raggedright{\color{white!50!black}\Large Private Sector View}
-%' 
-%' \vspace*{-0.2cm}
-%' {\color{white!30!black}\noindent\makebox[\linewidth]{\rule{18cm}{0.2pt}}} % horiz line
-%' 
-%' \begin{minipage}[b]{0.99\textwidth}
-%' \vspace*{+0.6cm}
-%'   \begin{minipage}[c]{0.02\textwidth}
-%'   \hspace*{+0.1cm}
-%'   \end{minipage}
-%'   \begin{minipage}[c]{0.97\textwidth} 
-%'     \begin{flushleft}  
-%'       {\color{blue!50!black} \textbf{Enterprise Survey \Sexpr{ES_year}}}
-%'     \end{flushleft}  
-%'     \vspace*{-0.4cm}
-%'     \centering
-%'     \resizebox{\textwidth}{!}{%
-%'     <<ESTable,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-%'       @      
-%'     }
-%'     \\[8pt]
-%'     %\hspace*{0.3cm} 
-%'     \raggedright{\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey \Sexpr{ES_year}}}}
-%'   \end{minipage} 
-%' 
-%'   \begin{minipage}[b]{0.99\textwidth} 
-%'     \vspace{+4ex}
-%'     \begin{minipage}[c]{0.49\textwidth} % top 5 constraints ES
-%'       \center{\color{blue!50!black} \textbf{Top 5 constraints according to ES \Sexpr{ES_year} \\ \footnotesize(\% respondants)}}
-%'       <<top5constraintsES,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2.8,fig.width=9,results="asis">>=  
-%'       @    
-%'       %\vspace*{-0.7cm}
-%'       \hspace*{0.3cm} \raggedright\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey \Sexpr{ES_year}}}
-%'     \end{minipage}
-%'     \begin{minipage}[c]{0.49\textwidth} % top 5 constraints WEF
-%'       \center{\color{blue!50!black} \textbf{Top 5 constraints according to WEF 2015 survey \\ \footnotesize(\% respondants among 88 executives)}}
-%'       <<top5constraintsWEF,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2.8,fig.width=9,results="asis">>=  
-%'       @  
-%'     %\vspace*{-0.7cm}
-%'     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
-%'     \end{minipage}
-%'   \end{minipage}
-%' \end{minipage}
-%' 
-%' \vspace{+8ex}
-%' {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
 
+\begin{minipage}[c]{0.875\textwidth}
+  \begin{flushleft}  
+    {\color{white!10!blue} \textbf{\LARGE Supports}}
+  \end{flushleft}
+  \vspace*{-0.4cm}
+  % Table 2
+  \centering
+  \resizebox{\textwidth}{!}{
+  <<table_time_avg_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+  @      
+  }
+\end{minipage}
+\begin{minipage}[c]{0.11\textwidth}
+  \vspace*{+1cm}
+  <<sparklines_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
+  @
+  \vspace*{-0.5cm}
+\end{minipage}
+
+%%% footer ----------------------------------
 \vspace{+2ex}
 \begin{minipage}[c]{0.33\textwidth}
   \hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.jpg}
