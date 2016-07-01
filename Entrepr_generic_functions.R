@@ -44,14 +44,14 @@ for (i in 1:length(datasets_by_dimension)){
   }
 }
 # Add descriptors and source fields
-Entrepr_data <- merge(Entrepr_data, dataDesc[,c("var","varname","Source_Link","Unit.of.Measure","Section","Subsection")], by.x="Key", by.y = "var", all.x = TRUE)
+Entrepr_data <- merge(Entrepr_data, dataDesc[,c("var","varname","Source_Link","Unit.of.Measure","Section","Subsection","Subsection2")], by.x="Key", by.y = "var", all.x = TRUE)
 Entrepr_data <- merge(Entrepr_data, countries[,c("CountryCodeISO3","CountryCodeISO2")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
 # clean up: remove duplicate columns
 Entrepr_data <- Entrepr_data %>%
   mutate(Year = ifelse(is.na(Year),year,Year),
                        Country = ifelse(is.na(Country),country,Country)) %>%
   select(Key, Category, Subcategory, Observation, CountryCode = CountryCodeISO3, iso2c, Period = Year, 
-         IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, Section, Subsection)
+         IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, Section, Subsection, Subsection2)
 
 # might need TCMN data for some charts/tables
 TCMN_data <- read.csv("/Users/asanchez3/shinyTCMN_Original/data/TCMN_data.csv", colClasses = c(rep("character",4),rep("numeric",2),rep("character",2)))

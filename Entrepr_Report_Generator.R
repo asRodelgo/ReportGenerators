@@ -6,6 +6,7 @@ setwd('/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/')
 source('Entrepr_generic_functions.R') # data and functions needed
 source('helper_functions.R') # data and functions needed
 # Create the data reports --------------------------------------
+#for (c in c("Argentina")){
 for (c in c("Spain","Argentina","India","Serbia")) {
 #for (c in countryNames$Country) {
   iso3 <- .getCountryCode(c)

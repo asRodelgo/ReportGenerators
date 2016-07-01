@@ -32,14 +32,23 @@ figure_sparkline(couName, "figure6")
 
 ########## Policy ##########
 
-## ---- line_chart_Policy ----
-line_chart(couName,"Policy","figure5")
+## ---- bar_facewrap_chart_Policy ----
+bar_facewrap_chart(couName,"Policy","table1")
 
-## ---- table_time_avg_Policy ----
-table_time_avg(couName,"Policy","table1")
+## ---- combo_percent_Policy1 ----
+combo_percent(couName, "Policy","combo1")
+
+## ---- combo_percent_Policy2 ----
+combo_percent(couName, "Policy","combo2")
+
+## ---- combo_percent_Policy3 ----
+combo_percent(couName, "Policy","combo3")
 
 ## ---- sparklines_Policy ----
 sparklines(couName,"Policy","table1")
+
+## ---- line_chart_Policy ----
+line_chart(couName,"Policy","figure5")
 
 ## ---- table_time_Policy ----
 table_time(couName,"Policy","table1")
@@ -64,9 +73,11 @@ table_time(couName, "Finance","table1")
 ## ---- sparklines_Finance ----
 sparklines(couName,"Finance","table1")
 
-
-## ---- line_chart_Finance ----
+## ---- line_chart_Finance1 ----
 line_chart(couName,"Finance","figure2")
+
+## ---- line_chart_Finance2 ----
+line_chart(couName,"Finance","line2")
 #figure_sparkline(couName,"figure2")
 
 ########## Markets ##########
