@@ -1,0 +1,373 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template TCMN data sheet version 3
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Dec 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{This is my name}
+\rhead{this is page \thepage}
+\cfoot{center of the footer!}
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage{longtable} % add pages for long tables
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+% First page of the overall report with an index of countries included
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+
+\vspace{2ex}
+\raggedright{\Large Region: \color{white!30!blue} \textbf{\Large Middle East and North Africa}}
+
+\vspace{2ex}
+\raggedright{\Large Country Management Unit: \color{white!30!blue} \textbf{GCPDR}}
+
+\vspace{2ex}
+\raggedright{\Large Country list:}  
+
+\vspace{2ex}
+
+\raggedright{\textbf{\Large \color{white!30!blue}Morocco\\
+ }}
+
+\vspace{10ex}
+\raggedright{\large Visit \href{http://tcdatadev/}{\Large tcdatadev/} for full access to T\&C data and operations}
+
+%
+
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/MA.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Morocco}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Morocco - Country partnership strategy for the period FY2014-2017 & 2014-05-12 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+Morocco Performance and Learning Review & 2015-12-09 & 2016-06-21 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+P155183 & Morocco Climate Innovation Centre & Justine White & --- & IPF & --- & --- & --- & 0 & 0 & --- &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+P128869 & MA-Second Competitiveness DPL & Philippe De Meneval & 2015-03-02 & DPF & 2016-03-31 & 200 & MS & MS & --- &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P158423 & Morocco Business Environment TA & Mohamed Hisham El-Shiaty & 2015-12-11 & 2016-07-31 & TA & N & --- & 0 & --- & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P148926 & MA: Trade and Competitiveness & Mariem Malouche & 2015-06-11 & 2016-02-20 & EW & N &  0 & 0 & 124 & 188 &  \\ 
+  P128429 & MA-Trade and Integration-EU & Abdoulaye Sy & 2012-05-10 & 2013-10-01 & EW & N & --- & 0 & 304 & 328 &  \\ 
+  P119808 & MA-Trade Capacity Building & Daniela Marotta & --- & 2011-06-01 & TA & N & --- & 0 &   2 &  32 &  \\ 
+  P112614 & MA - Trade Capacity building IV & Daniela Marotta & --- & 2009-02-24 & TA & N & --- & 0 &  38 & 103 &  \\ 
+  P107107 & MA-Trade Policy Modelling Cap Bldg III & Jose R. Lopez Calix & --- & 2008-08-01 & TA & N & --- & 0 &  17 &  17 &  \\ 
+  P110233 & Morocco:Building Analytical Capacity & Soamiely Andriamananjara & 2007-12-14 & 2008-05-02 & TE & N & --- & 0 &  --- &   0 &  \\ 
+  P101528 & Morocco Trade Policy Support II & Ndiame Diop & --- & 2007-06-19 & TA & N & --- & 0 &  13 &  13 &  \\ 
+  P095761 & Making the ENP Work for Morocco & Ndiame Diop & --- & 2007-06-07 & EW & N & --- & 0 & 211 & 267 &  \\ 
+  P103359 & Morocco: Analytical Trade Policy Analysi & Soamiely Andriamananjara & --- & 2007-04-12 & TE & N & --- & 0 &  35 &  35 &  \\ 
+  P099250 & MA-Trade Policy Modeling & Ndiame Diop & --- & 2006-05-01 & TA & N & --- & 0 &  52 &  52 &  \\ 
+  P100231 & Seminar on Trade Remedies & Gianni Zanini & --- & 2006-04-05 & TE & N & --- & 0 &  15 &  20 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+599527 & MOROCCO QUALITY OF PUBLIC SERVICE DELIVERY AND TRANSPARENCY TO IMPROVE THE INVESTMENT CLIMATE & Solf, Sylvia & 2013-11-22 & 2016-10-31 &   525 & 440 &  50 &  \\ 
+  599824 & E4E Logistics/ Tourism Morocco & Benkirane, Zineb & 2013-06-27 & 2016-12-31 & 1,135 & 301 & 198 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+601499 & Morocco Climate Innovation Center & White, Justine & --- & 2019-02-28 & 0 & 0 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:37 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+557046 & Business Registration Simplification in Casablanca & Riou, Delphine & 2007-10-16 & 2009-12-31 & 275 & 310 & 0 &  \\ 
+  558666 & Morocco ADR Phase 1 & Merchant, Navin Salim & 2007-08-29 & 2009-11-30 & 653 & 629 & 0 &  \\ 
+  542685 & Morocco DB TA'06 & Moullier, Thomas & 2006-02-05 & 2007-07-31 &  16 &  17 & 0 &  \\ 
+  520976 & Capacity building of AZIT & Balafrej, Omar & 2005-06-25 & 2009-06-30 &   0 &  26 & 0 &  \\ 
+  521144 & Tangier Invest & Brickell, Julia Claire Hazelton & 2005-06-25 & --- &   0 &   0 & 0 &  \\ 
+  537803 & ICA Morocco 2004 & Charafi, Yasser & 2005-06-25 & --- &   0 &   0 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}

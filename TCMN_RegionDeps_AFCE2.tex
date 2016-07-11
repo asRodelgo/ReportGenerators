@@ -1,0 +1,1117 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template TCMN data sheet version 3
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Dec 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{This is my name}
+\rhead{this is page \thepage}
+\cfoot{center of the footer!}
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage{longtable} % add pages for long tables
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+% First page of the overall report with an index of countries included
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+
+\vspace{2ex}
+\raggedright{\Large Region: \color{white!30!blue} \textbf{\Large Sub-Saharan Africa}}
+
+\vspace{2ex}
+\raggedright{\Large Country Management Unit: \color{white!30!blue} \textbf{AFCE2}}
+
+\vspace{2ex}
+\raggedright{\Large Country list:}  
+
+\vspace{2ex}
+
+\raggedright{\textbf{\Large \color{white!30!blue}Kenya\\
+ Rwanda\\
+ Uganda\\
+ Eritrea\\
+ }}
+
+\vspace{10ex}
+\raggedright{\large Visit \href{http://tcdatadev/}{\Large tcdatadev/} for full access to T\&C data and operations}
+
+%
+
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/KE.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Kenya}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Kenya - Country partnership strategy FY2014-18 & 2014-06-25 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+P156466 & Digital Entrepreneurship Kenya & Toni Kristian Eliasz & 2016-05-20 & IPF & --- & 0 & --- &  81 &    81 & --- &  \\ 
+  P128680 & Kenya Climate Innovation Center & Komal Mohindra & --- & IPF & --- & 5 & --- & 212 & 1,974 & --- &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+P154586 & Kenya Climate Venture Facility & Aun Ali Rahman & 2015-06-08 & IPF & 2018-06-30 & 5 & 4 & --- & --- & --- & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+P090606 & KE-IDF Cross Border Mkt Integ (FY96) & Anand Rajaram & 1995-09-08 & --- & --- &  0 & --- & --- & --- &  \\ 
+  P001365 & EXPORT DEVELOPMENT & PS Dummy for Conversion & 1991-11-26 & DPF & --- & 49 & --- & --- & --- &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P158356 & Boosting Private Sector Competitiveness & Maria Paulina Mogollon & 2016-04-08 & 2018-06-30 & PA & N & 63 & 119 & 63 & 119 &  \\ 
+  P156578 & Kenya Informal Sector Productivity & Nikola Denchev Kojucharov & 2016-03-31 & 2017-05-30 & TA & N &  0 &   0 &  0 &   0 &  \\ 
+  P156577 & Kenya Tourism Economic Contribution & Apurva Sanghi & 2016-01-15 & 2016-06-30 & EW & N & 35 &  35 & 35 &  35 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P147220 & Export Competitiveness and Innovation & Maria Paulina Mogollon & 2014-03-13 & 2015-07-21 & TA & N &  0 & 332 & 136 & 1,087 &  \\ 
+  P133164 & Diversifying Manufacturing in Kenya & Ganesh Rasagam & --- & 2014-01-01 & TA & N & --- &   0 &  81 &    81 &  \\ 
+  P133163 & Investment Climate Assessment & Ganesh Rasagam & --- & 2013-12-30 & EW & N & --- &   0 & 298 & 1,214 &  \\ 
+  P130880 & Kenya Climate Innovation Center & Jonathan d'Entremont Coony & 2013-06-12 & 2013-06-26 & TA & N & --- &   0 &  --- &    50 &  \\ 
+  P126409 & Kenya Competitive Partnership Initiative & Yira J. Mascaro & 2013-02-18 & 2013-06-24 & TA & N & --- &   0 &  37 &    37 &  \\ 
+  P102213 & KE-Investment Climate Assessment (FY08) & Giuseppe Iarossi & --- & 2008-06-16 & EW & N & --- &   0 & 104 &   419 &  \\ 
+  P098595 & Kenya: WITS Training & Soamiely Andriamananjara & --- & 2006-06-20 & TE & N & --- &   0 &  15 &    15 &  \\ 
+  P096616 & Agricultural Trade Seminar in Africa & Soamiely Andriamananjara & --- & 2006-04-07 & TE & N & --- &   0 & 121 &   138 &  \\ 
+  P094938 & Kenya Export Strategy Validation Wkshp & Edward Philip English & --- & 2005-04-28 & TE & N & --- &   0 &  --- &     0 &  \\ 
+  P089348 & Kenya: Export Strategy Implementation & Edward Philip English & --- & 2005-03-18 & TE & N & --- &   0 &  33 &    42 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+600530 & Kenya Investment Policy Project & Adamali, Aref & 2015-05-08 & 2017-06-30 & 1,031 &   450 &   348 &  \\ 
+  594987 & Kenya Agribusiness Investment Climate Program & Ochieng, Sarah Ruth & 2014-05-08 & 2016-06-30 & 2,384 &   955 &   281 &  \\ 
+  593208 & Kenya Regulatory Reform & Twagira, Frank Abner & 2013-04-19 & 2016-06-30 & 5,492 & 4,521 & 1,532 &  \\ 
+  567068 & Kenya Investment Generation Program & Ochieng, Sarah Ruth & 2011-10-24 & 2016-12-31 & 2,571 & 1,563 &   287 &  \\ 
+  570008 & Trade Logistics Kenya  & Sichilima, Mupelwa & 2011-05-20 & 2016-06-30 & 2,833 & 2,348 &   240 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+576467 & Kenya National Hospital Insurance Fund - Strategic Review and Market Assessment & Akyianu, Samuel Gaddiel & 2010-05-16 & 2012-12-31 &   586 &   718 & 0 &  \\ 
+  551987 & Kenya: Improving Regulatory Performance and Capacities  & Twagira, Frank Abner & 2007-02-13 & 2012-06-30 & 4,925 & 5,345 & 0 &  \\ 
+  539144 & GEM Kenya Gender and Growth Assessment Program & Cutura, Jozefina & 2006-02-22 & 2006-10-31 &    86 &    84 & 0 &  \\ 
+  540223 & Kenya Licensing Reform II & Pepper, Roy & 2005-10-13 & --- &     0 &     0 & 0 &  \\ 
+  538758 & Review of Administrative Barriers to Investment & Shen, Xiaofang & 2005-09-02 & --- &     0 &     0 & 0 &  \\ 
+  538423 & Implementation Institution and Action Planning & Shen, Xiaofang & 2005-08-17 & --- &     0 &     0 & 0 &  \\ 
+  538424 & Licensing System Reform & Shen, Xiaofang & 2005-08-17 & --- &     0 &     0 & 0 &  \\ 
+  538808 & Commercial Legal Frame Review & Shen, Xiaofang & 2005-08-17 & --- &     0 &     0 & 0 &  \\ 
+  538477 & Investment  Bill Review & Shen, Xiaofang & 2005-08-11 & --- &     0 &     0 & 0 &  \\ 
+  576948 & Africa Renewable Energy Access Advisory Services (AREAS) & Njagi, Arthur Itotia & --- & 2014-10-31 &   775 &   765 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/RW.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Rwanda}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Rwanda - Country partnership strategy FY2014-18 & 2014-06-25 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:05 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+P127105 & Governance \& Competitiveness TA Proj & Adja Mansora Dahourou & 2012-01-26 & IPF & 2016-04-30 & 5 & S & S & --- &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P155796 & Rwanda Manufacturing Extension Services & Megha Mukim & --- & 2017-06-30 & RF & N & --- & 0 & --- & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P147655 & Competition Policy Assessment & Tania Priscilla Begazo Gomez & --- & 2015-06-30 & TA & N &  0 & 0 & 133 & 133 &  \\ 
+  P151750 & Vendor Supplier Diagnostic & Megha Mukim & 2015-03-31 & 2015-06-30 & EW & N &  0 & 0 &  90 &  90 &  \\ 
+  P133236 & RW  Policy notes & Lucy M. Fye & --- & 2014-07-14 & TA & N & --- & 0 & 350 & 350 &  \\ 
+  P104449 & PPIAF: (RWANDA) Kivu Legal/Financial Adv & Pankaj Gupta & --- & 2009-12-31 & PT & N & --- & 0 &  --- &   0 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+600783 & Rwanda IC  Improving G2B services & Alles, Ashani Chanuka & 2015-03-16 & 2017-12-31 & 4,218 & 417 & 284 &  \\ 
+  600786 & RICRP 3 Sector competitiveness & Alles, Ashani Chanuka & 2015-03-07 & 2017-12-31 & 3,038 & 847 & 624 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+599540 & Rwanda Investment Climate Reform Program III - Transforming Local Economies & Alles, Ashani Chanuka & --- & 2017-06-30 & 8,087 & 150 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+576907 & Rwanda Investment Climate Reform Program & Alles, Ashani Chanuka & 2011-01-12 & 2013-12-31 & 4,565 & 4,273 & 0 &  \\ 
+  560665 & Rwanda Investment Climate Reform Project  & Douw, Willem & 2008-02-29 & 2010-10-31 & 2,833 & 2,849 & 0 &  \\ 
+  552887 & Rw PP Dialogue & Ravoavy, Fanja & 2007-03-09 & 2010-10-31 &   513 &   391 & 0 &  \\ 
+  539624 & Rwanda Informal Economy: Survey and Study & Stern, Richard & 2006-03-16 & --- &     0 &     0 & 0 &  \\ 
+  540084 & Sectoral Study of the Effective Tax Burden & Stern, Richard & 2006-02-13 & 2006-03-31 &   139 &   128 & 0 &  \\ 
+  538445 & Mini-Diagnostic of the Investment Climate & Stern, Richard & 2005-08-29 & --- &     0 &     0 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/UG.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Uganda}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Uganda - Boosting inclusive growth and accelerating poverty reduction & 2015-12-15 &  \\ 
+  Uganda - Country partnership framework for the period FY16-21 & 2016-04-26 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+P130471 & UG-Competive. \& Enterprise. Dev. Project & Moses K. Kibirige & 2013-05-09 & IPF & 2019-03-31 & 100 & 64 & MS & MS & M & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+P150857 & UG-Uganda Leasing Project (ULeP) & Carolyn Nshemereirwe Ndawula & 2014-05-30 & IPF & 2015-08-31 & 0 & --- & --- & --- &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P151883 & UG Policy Note on Private Sector & Feyi Boroffice & 2015-06-29 & 2016-06-24 & EW & N & 88 & 88 & 130 & 130 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P147217 & Uganda Local Content Multi-Sector Study & Valeriya Goffe & 2014-06-29 & 2015-06-02 & EW & N &  2 & 2 & 178 & 178 &  \\ 
+  P129705 & Uganda - DTIS update & Javier Suarez & 2013-01-02 & 2013-07-08 & EW & N & --- & 0 &  11 & 194 &  \\ 
+  P131987 & Uganda Economic Update & Rachel K. Sebudde & 2013-02-28 & 2013-06-18 & EW & N & --- & 0 & 135 & 135 &  \\ 
+  P106115 & PPIAF:(UGANDA)PPP Unit Feasibility Study & Sherri Ellen Archondo & --- & 2008-12-31 & PT & N & --- & 0 &  --- & 299 &  \\ 
+  P091115 & UG-Investor's Round Table (FY05) & Michael D. Wong & --- & 2005-12-01 & PT & N & --- & 0 &  87 &  87 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+599444 & Uganda IC Industry Program & Ndawula, Carolyn Nshemereirwe & 2014-05-21 & 2017-06-30 & 951 & 413 & 86 &  \\ 
+  601617 & Uganda IC Business Regulation & Ndawula, Carolyn Nshemereirwe & --- & --- &   0 &   0 &  0 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:06 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+600502 & Uganda Investment Climate Program Phase 2 & Ndawula, Carolyn Nshemereirwe & --- & 2018-06-30 & 100 & 105 & 105 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+573727 & Uganda Investment Climate Program & Ndawula, Carolyn Nshemereirwe & 2011-01-28 & 2014-06-30 & 1,989 & 1,933 & 0 &  \\ 
+  558245 & Uganda Investor Outreach Program & Ortega Sotes, Celia & 2007-06-26 & 2009-06-30 &   456 &   497 & 0 &  \\ 
+  546265 & GEM Uganda GGA Coalition  & Niethammer, Carmen & 2006-09-20 & 2007-12-30 &    73 &    43 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/ER.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Eritrea}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Eritrea - Country assistance strategy & 2010-06-24 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:13:07 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}

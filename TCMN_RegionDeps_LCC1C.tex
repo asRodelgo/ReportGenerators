@@ -1,0 +1,634 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template TCMN data sheet version 3
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Dec 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{This is my name}
+\rhead{this is page \thepage}
+\cfoot{center of the footer!}
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage{longtable} % add pages for long tables
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+% First page of the overall report with an index of countries included
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+
+\vspace{2ex}
+\raggedright{\Large Region: \color{white!30!blue} \textbf{\Large Latin America and Caribbean}}
+
+\vspace{2ex}
+\raggedright{\Large Country Management Unit: \color{white!30!blue} \textbf{LCC1C}}
+
+\vspace{2ex}
+\raggedright{\Large Country list:}  
+
+\vspace{2ex}
+
+\raggedright{\textbf{\Large \color{white!30!blue}Colombia\\
+ Mexico\\
+ }}
+
+\vspace{10ex}
+\raggedright{\large Visit \href{http://tcdatadev/}{\Large tcdatadev/} for full access to T\&C data and operations}
+
+%
+
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/CO.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Colombia}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:39 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Colombia - Systematic country diagnostic & 2015-07-09 &  \\ 
+  Colombia - Country partnership framework for the period FY16-21 & 2016-04-07 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:39 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:39 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:39 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:39 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:39 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P144510 & Innovation and Competitiveness PA & Leonardo Iacovone & 2013-09-04 & 2016-12-30 & PA & N & 154 & 154 & 324 & 324 &  \\ 
+  P158863 & Regulatory Business Environment in Colom & Lucero Del Carmen Burga Bravo De Rueda & 2016-05-30 & 2016-11-30 & TA & N &   0 &   0 &   0 &   0 &  \\ 
+  P151099 & IE of Technology Extension Pilot & Leonardo Iacovone & 2014-07-09 & 2016-10-17 & IE & N &   2 &   4 &  56 & 107 &  \\ 
+  P153594 & Trade in Professional Services in Colomb & Jasmin Chakeri & 2015-01-12 & 2016-06-20 & TA & N &   0 &   0 &   8 &   8 &  \\ 
+  P153595 & STI Public Expenditure Review & Leonardo Iacovone & 2014-12-20 & 2016-05-30 & EW & Y & 208 & 208 & 301 & 301 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P158038 & JIT Progress on National Science, Tech & Lucero Del Carmen Burga Bravo De Rueda & --- & 2016-03-03 & TA & N & 13 & 13 &  13 &  13 &  \\ 
+  P119018 & CO Technology Extension & Leonardo Iacovone & 2012-03-17 & 2015-12-16 & TA & N & 23 & 23 & 412 & 412 &  \\ 
+  P090985 & Intellectual Property and FTAs & Carsten Fink & --- & 2004-07-22 & TE & N & --- &  0 &  12 &  12 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+599785 & Colombia Taxes & Cebreiro Gomez, Ana & 2013-10-22 & 2017-06-30 & 2,104 & 1,832 & 406 &  \\ 
+  584507 & Green Building Code Colombia & Rada, Kristtian & 2011-08-12 & 2015-12-31 & 2,412 & 2,253 & 221 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+601492 & Investment Policy Colombia & Espinosa-Wang, Alejandro & --- & 2018-06-30 & 510 & 27 & 27 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+596167 & Subnational DB in Colombia Third Round & Roberts, Maria Camila & 2012-10-18 & 2013-09-30 &   400 &   852 &  0 &  \\ 
+  563628 & National Plan Colombia & Rada, Kristtian & 2009-03-03 & 2012-12-15 & 1,840 & 2,287 & 31 &  \\ 
+  564767 & Trade Logistics Advisory Program in Colombia & Ristic, Lazar & 2008-09-30 & 2014-06-30 & 1,977 & 1,963 &  0 &  \\ 
+  558267 & Colombia Technical Assistance Program & Shiels, Damien & 2007-06-26 & 2008-12-31 &    58 &    53 &  0 &  \\ 
+  554885 & CO\_ Mkt Study TA & Toledo, Miguel Angel & 2007-04-09 & 2008-07-30 &    70 &    50 &  0 &  \\ 
+  553565 & Colombia - Subnational Doing Business & Hernandez Uriz, Zenaida & 2007-03-14 & 2010-12-31 &   615 &   662 &  0 &  \\ 
+  536826 & Municipal Business Regulation in Bogota & Rada, Kristtian & 2005-12-15 & 2008-07-30 &   236 &   380 &  0 &  \\ 
+  535911 & Portal Nacional de Tramites CAE - Colombia & Rada, Kristtian & 2005-07-22 & 2007-12-31 &   211 &   159 &  0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+%<<set-parent, echo=FALSE, cache=FALSE>>=
+%set_parent('TCMN_RegionDeps_PDF_Local.Rnw')
+%@
+\newpage
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/MX.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Mexico}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Mexico - Country partnership strategy for the period FY2014-2019 & 2013-12-13 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P146293 & MX -  Productivity Democratization & Leonardo Iacovone & 2014-03-18 & 2017-11-30 & PA & N & 108 & 108 & 380 & 380 &  \\ 
+  P147354 & Mexico-Support to I---DEM & Leonardo Iacovone & 2013-12-02 & 2017-11-30 & TA & Y &  21 &  21 & 247 & 247 &  \\ 
+  P158466 & SEZ Initiative Implementation Support & John Millies Anderson & 2016-04-18 & 2017-08-31 & TA & N & 102 & 102 & 102 & 102 &  \\ 
+  P157894 & Subnational BR manuals \& IE CP reforms & Alejandro Espinosa-Wang & 2015-12-22 & 2017-03-31 & TA & Y &  --- &   0 &  --- &   0 &  \\ 
+  P150666 & MX Female Entreprenuership Pilot IE & Leonardo Iacovone & 2014-06-12 & 2017-02-28 & IE & N &  15 &  35 & 127 & 283 &  \\ 
+  P155080 & How markets work: analysis using prices & Alvaro S. Gonzalez & --- & 2016-11-30 & EW & N &  15 &  15 &  15 &  15 &  \\ 
+  P158402 & MX Support to I---DEM II & Leonardo Iacovone & --- & 2016-10-14 & TA & Y &  --- &   0 &  --- &   0 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P158513 & Assessment of Baja California's  IP & Alejandro Espinosa-Wang & --- & 2016-02-29 & TA & N & --- &  0 &  --- &   0 &  \\ 
+  P155064 & Oaxaca Judiciary RAAP & Pilar Sanchez-Bella & --- & 2015-12-18 & TA & N & 22 & 22 &  52 &  52 &  \\ 
+  P154972 & Building Shock Absorbers & Leonardo Iacovone & --- & 2015-12-15 & EW & N & 10 & 10 &  10 &  10 &  \\ 
+  P155079 & Productivity catch up at firm-level & Leonardo Iacovone & --- & 2015-12-14 & EW & N & 10 & 10 &  10 &  10 &  \\ 
+  P147308 & Competition Reform in Tabasco State & Martha Martinez Licetti & 2013-12-06 & 2015-06-16 & TA & Y &  0 &  0 & 109 & 109 &  \\ 
+  P147382 & Competition reform in Mexico State & Martha Martinez Licetti & 2013-12-06 & 2015-06-15 & TA & Y &  0 &  0 & 111 & 111 &  \\ 
+  P154971 & Knowledge Sharing Workshop on SEZ & Leonardo Iacovone & --- & 2015-06-03 & TA & N & --- &  0 &   9 &   9 &  \\ 
+  P145045 & Subnational Doing Business in Mexico V & Pilar Salgado Otonel & 2013-04-23 & 2015-03-09 & EW & N &  0 &  0 & 239 & 239 &  \\ 
+  P150476 & Oxaca Regulatory Barriers to Competition & Eva M. Gutierrez & --- & 2014-06-15 & TA & N & --- &  0 &  14 &  14 &  \\ 
+  P126169 & MX Federal Competition Commission & Jane C. Hwang & 2011-03-10 & 2014-01-31 & TE & N & --- &  0 &  42 &  42 &  \\ 
+  P147313 & Mexico-Innovative Entrepreneur Forum & Eva M. Gutierrez & --- & 2013-11-13 & TA & N & --- &  0 &   5 &   5 &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:14:40 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+585307 & Sub National Doing Business - Mexico Phase 4 & Bustelo, Federico Matias & 2011-06-17 & 2012-12-01 &   0 & 123 & 0 &  \\ 
+  560850 & Business Regulation Simplification in the State of Mexico & Martin-Montero, Ernesto & 2008-02-06 & 2010-12-31 & 100 & 409 & 0 &  \\ 
+  548505 & Mexico Business Process Outsourcing Study & Dervishi, Andi & 2007-11-10 & 2007-06-30 & 191 & 191 & 0 &  \\ 
+  550968 & State and Municipal Business Regulation Simplification in Guerrero & Martin-Montero, Ernesto & 2006-10-18 & 2010-12-31 & 430 & 638 & 0 &  \\ 
+  523177 & E-Government Study & Dervishi, Andi & 2006-09-21 & 2008-06-30 & 100 & 100 & 0 &  \\ 
+  545964 & Mexico: Administrative barriers solution design at the subnational level Phase II and III & Capaul, Mierta & 2006-06-06 & 2009-06-30 & 546 & 612 & 0 &  \\ 
+  546247 & Administrative Simplification in the Federal District of Mexico & Martin-Montero, Ernesto & 2006-05-25 & 2009-06-30 & 241 & 612 & 0 &  \\ 
+  538757 & Administrative Barriers solution design at the sub-national level in Mexico-Phase I & Capaul, Mierta & 2005-08-29 & --- &   0 &   0 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}

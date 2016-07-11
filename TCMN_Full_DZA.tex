@@ -1,0 +1,780 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template TCMN data sheet version 3
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Dec 2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{16}{15}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%
+
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_data.png}}
+  %  {\color{white!70!black}\noindent\makebox[\linewidth]{\rule{20cm}{0.3pt}}} % horiz line
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/DZ.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Algeria}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth} % key macro table 
+    % Table 1
+    \centering
+    \resizebox{\textwidth}{!}{
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:21 2016
+{\LARGE
+\begin{tabular}{>{\centering}p{1.5in}>{\centering}p{1.5in}>{\centering}p{1.5in}>{\centering}p{1.5in}>{\centering}p{1.5in}>{\centering}p{1.5in}>{\centering}p{1.5in}l}
+  GDP (US\$ billions) (2017) & Population (millions) (2017) & Land area (sq. km) (2015) & Income per capita (current US\$) (2017) & Unemployment rate (2016) & Ease of Doing Business Rank (2016) &  &  \\ 
+        194 &        41 & 2,381,740 &     4,730 &        12 &       163 &  &  \\ 
+  \end{tabular}
+}
+
+    }
+  \end{minipage}  
+\end{minipage} % end top section
+
+\begin{minipage}[b]{0.99\textwidth} % macro indicators main table
+  %\vspace*{0.5cm}
+  %\vspace{+3ex}
+  \begin{minipage}[t]{0.99\textwidth}
+
+    \begin{minipage}[c]{0.875\textwidth}
+      \begin{flushleft}  
+      {\color{white!30!blue} \textbf{\small Macro Indicators}}
+      \end{flushleft} 
+      \vspace*{-0.4cm}
+      % Table 2
+      \centering
+      \resizebox{\textwidth}{!}{
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:21 2016
+{\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2003-2012 & 2013 & 2014 & 2015 & 2016 & 2017 &  \\ 
+  \hline
+GDP growth (annual \%) &   3.73 &   2.81 &   4.30 &   2.80 &   3.90 &   4.00 &  \\ 
+  Current account balance &  12.47 &   0.52 &  -4.16 & -14.99 & -13.83 & -13.13 &  \\ 
+  Fiscal balance (\% of GDP) &   4.39 &  -0.78 &  -5.89 & -11.52 &  -9.40 &  -6.43 &  \\ 
+  Remittances, received (\% of GDP) \large{[1]} &   0.64 &   0.10 &   0.14 & --- & --- & --- &  \\ 
+  General government gross debt \large{[3]} &  21.92 &   7.74 &   7.96 &   8.72 &  14.87 & --- &  \\ 
+  Real Effective Exchange Rate (2010=100) &  84.63 & 104.82 & 107.70 & 111.06 & 105.49 & 104.09 &  \\ 
+  Consumer Price Index, annual percent change &   4.39 &   3.30 &   2.90 &   5.10 &   5.00 &   4.50 &  \\ 
+  \end{tabular}
+}
+
+      }
+    \end{minipage}
+    \begin{minipage}[c]{0.11\textwidth}
+      \vspace*{+0.8cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/createSparklines_macro-1} 
+
+}
+
+
+
+      \vspace*{-0.5cm}
+    \end{minipage}
+    
+    %\vspace*{-0.4cm}
+    \begin{minipage}[c]{0.875\textwidth}
+      \begin{flushleft}  
+      {\color{white!30!blue} \textbf{\small Investment indicators}}
+      \end{flushleft} 
+      \vspace*{-0.4cm}
+      % Table 2
+      \centering
+      \resizebox{\textwidth}{!}{
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:21 2016
+{\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2003-2012 & 2013 & 2014 & 2015 & 2016 & 2017 &  \\ 
+  \hline
+Gross domestic investment (\% GDP) & 23.9 & 34.2 & 35.1 & 35.2 & 35.5 & 36.3 &  \\ 
+  Gross domestic investment, of w: Private investment (\% GDP) \large{[1]} & 36.3 & 43.4 & 45.6 & --- & --- & --- &  \\ 
+  Inward FDI (\% of GDP) \large{[2]} &  1.4 &  1.3 &  0.7 & --- & --- & --- &  \\ 
+  Inward FDI, \% of private investment \large{[2]} &  5.0 &  3.8 &   NA & --- & --- & --- &  \\ 
+  \end{tabular}
+}
+
+      }
+    \end{minipage}
+    \begin{minipage}[c]{0.11\textwidth}
+      \vspace*{+0.8cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/createSparklines_invest-1} 
+
+}
+
+
+
+      \vspace*{-0.5cm}
+    \end{minipage}
+    
+    %\vspace*{-0.4cm}
+    \begin{minipage}[c]{0.875\textwidth}
+      \begin{flushleft}  
+      {\color{white!30!blue} \textbf{\small Trade Indicators}}
+      \end{flushleft} 
+      \vspace*{-0.4cm}
+      % Table 2
+      \centering
+      \resizebox{\textwidth}{!}{
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:21 2016
+{\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2003-2012 & 2013 & 2014 & 2015 & 2016 & 2017 &  \\ 
+  \hline
+Total Trade in Goods and Services (\% of GDP, real terms) & 54.98 & 48.91 & 46.89 & 45.64 & 44.31 & 43.89 &  \\ 
+  Trade balance (\% GDP, real terms) & 23.21 &  7.75 &  6.56 &  5.78 &  4.99 &  3.85 &  \\ 
+  Exports, Goods and Services, annual percent change (real terms) &  0.77 & -6.59 & -1.60 & -1.10 & -0.40 &  0.70 &  \\ 
+  Imports, Goods and Services, annual percent change (real terms) &  7.61 &  9.28 &  2.20 &  1.60 &  2.50 &  5.90 &  \\ 
+  Total reserves in months of imports \large{[1]} & 32.52 & 32.78 & 28.18 & --- & --- & --- &  \\ 
+  \end{tabular}
+}
+
+      }
+    \end{minipage}
+    \begin{minipage}[c]{0.11\textwidth}
+      \vspace*{+0.8cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/createSparklines_trade-1} 
+
+}
+
+
+
+      \vspace*{-0.4cm}
+    \end{minipage}
+  \\[3pt]
+\raggedright{\footnotesize{\href{http://www.worldbank.org/en/topic/macroeconomics/overview}{Sources: MFM note}{,} \href{http://data.worldbank.org/data-catalog/world-development indicators}{[1] World Development Indicators (WDI)}{,} \href{http://unctadstat.unctad.org/wds/ReportFolders/reportFolders.aspx}{[2] UNCTADSTAT}{,} \href{https://www.imf.org/external/pubs/ft/weo/2015/02/weodata/index.aspx}{[3] World Economic Outlook (WEO)}}}
+  \end{minipage} 
+%\end{minipage}    
+  \begin{minipage}[b]{\textwidth} % macro charts
+  \vspace{+3ex}
+    \begin{minipage}[c]{0.49\textwidth} % imports/exports 
+    \center{\color{blue!50!black} \textbf{\small Goods Export and Import \\ volume growth, 2012-2015}}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/ExpImp_HF-1} 
+
+}
+
+
+
+    \vspace*{-0.3cm}
+    %\hspace*{0.5cm} 
+    \raggedright{\footnotesize{\href{http://web.worldbank.org/WBSITE/EXTERNAL/EXTDEC/EXTDECPROSPECTS/0,,menuPK:476941~pagePK:51084723~piPK:51084722~theSitePK:476883,00.html}{Source: Development Prospects Group (DECPG)}}}
+    \end{minipage}
+    \begin{minipage}[c]{0.49\textwidth} % gdp value added
+    \center{\color{blue!50!black} \textbf{\small Gross Value Added by \\ Economic Activity 2013 \footnotesize(\% GDP)}}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/GVA_Treemap-1} 
+
+}
+
+
+
+   %\vspace*{-0.3cm}
+   %\hspace*{0.5cm} 
+   \raggedright{\footnotesize{\href{http://data.worldbank.org/data-catalog/world-development indicators}{Source: World Development Indicators (WDI)}}}
+    \end{minipage}
+  \end{minipage}  
+\end{minipage}   
+ 
+%%%% Exports Imports and DB
+\begin{minipage}[b]{0.99\textwidth}
+  \vspace{0.8cm}
+   \begin{minipage}[c]{0.44\textwidth} 
+    %\vspace*{-0.2cm}
+    \begin{minipage}[t]{0.99\textwidth} 
+      {\color{blue!50!black} \textbf{\small Top 5 Exports by \% of Total Value, 2014}}
+      %\vspace{3ex}
+      \\[6pt]
+      \centering
+      \resizebox{\textwidth}{!}{%
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/ImpExp_Treemap-2-1} 
+
+}
+
+
+
+      }
+      \end{minipage}
+      \\[14pt]
+      \begin{minipage}[t]{0.99\textwidth} 
+      {\color{blue!50!black} \textbf{\small Imports Categories by \% of Total Value, 2014}}
+      \\[6pt]
+      \centering
+      \resizebox{\textwidth}{!}{%
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/ImpExp_Treemap-1-1} 
+
+}
+
+
+
+      }
+      \end{minipage}
+      \\[10pt]
+    %\hspace*{0.5cm}
+    \footnotesize{\href{http://wits.worldbank.org}{Source: World Integrated Trade Solution (WITS)}} 
+    \end{minipage}
+    \begin{minipage}[c]{0.56\textwidth} % Doing Business table
+    %\vspace*{-0.1cm}
+    %\begin{flushleft}
+      \center {\color{blue!50!black}\textbf{\small Doing Business 2015 \\ \footnotesize Distance to Frontier (DTF) and Rank}}
+    %\end{flushleft}
+    \\[18pt]
+    \centering
+      \resizebox{\textwidth}{!}{%
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:22 2016
+{\large
+\begin{tabular}{lrrr|rrrr}
+  &  & DTF &  &  & Rank &  &  \\ 
+  &  2015 &  2016 &  Change & 2015 & 2016 & Change &  \\ 
+   \hline
+\textbf{Ease of Doing Business} & \textbf{45.4} & \textbf{45.72} & \textbf{\color{green}{0.32}} & \textbf{161} & \textbf{163} & \textbf{\color{red}{-2}} &  \\ 
+  Dealing with Construction Permits & 62.95 & 64.05 & \color{green}{1.1} & 124 & 122 & \color{green}{2} &  \\ 
+  Enforcing Contracts & 55.49 & 55.49 & 0 & 106 & 106 & 0 &  \\ 
+  Getting Credit & 10 & 10 & 0 & 171 & 174 & \color{red}{-3} &  \\ 
+  Getting Electricity & 57.48 & 57.56 & \color{green}{0.08} & 125 & 130 & \color{red}{-5} &  \\ 
+  Paying Taxes & 45.03 & 45.03 & 0 & 168 & 169 & \color{red}{-1} &  \\ 
+  Protecting Minority Investors & 33.33 & 33.33 & 0 & 173 & 174 & \color{red}{-1} &  \\ 
+  Registering Property & 43.83 & 43.83 & 0 & 160 & 163 & \color{red}{-3} &  \\ 
+  Resolving Insolvency & 47.67 & 47.67 & 0 & 71 & 73 & \color{red}{-2} &  \\ 
+  Starting a Business & 74.07 & 76.08 & \color{green}{2.01} & 143 & 145 & \color{red}{-2} &  \\ 
+  Trading Across Borders & 24.15 & 24.15 & 0 & 176 & 176 & 0 &  \\ 
+  \end{tabular}
+}
+
+      }
+    \\[15pt]
+     %\hspace*{0.5cm} 
+     \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
+    \end{minipage}
+\end{minipage}
+
+% \vspace{+3ex}
+% {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+% \begin{minipage}[c]{0.99\textwidth}
+%   \hspace*{-0.4cm}\raggedleft{\color{white!40!black} \footnotesize TRADE AND COMPETITIVENESS MONITORING NOTE - UPDATED} 
+%   %month year}
+% \end{minipage}
+
+\newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+
+\begin{minipage}[t]{0.99\textwidth}
+  \vspace{0.5cm}
+  \begin{minipage}[c]{0.48\textwidth} % WEF Radar
+    \center{\color{blue!50!black} \textbf{WEF Competitiveness Indicators \\ \footnotesize(Scale 1-7, 7=best)}}
+    \vspace*{-0.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/WEFradar-1} 
+
+}
+
+
+
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+  \begin{minipage}[c]{0.50\textwidth} % LPI chart
+  %\vspace*{0.5cm}
+  \center {\color{blue!50!black} \textbf{Logistics Performance Index \\ \footnotesize(Scale 1-5, 5=best)}}
+    \vspace*{0.4cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/LPIindicators-1} 
+
+}
+
+
+
+  %\hspace*{0.5cm} 
+  \raggedright\footnotesize{\href{http://lpi.worldbank.org}{Source: Logistics Performance Index (World Bank)}}
+  \end{minipage}
+\end{minipage}  
+
+\begin{minipage}[b]{0.99\textwidth}
+  \begin{minipage}[c]{0.50\textwidth} % WGI chart
+    \vspace*{0.8cm}
+    \center {\color{blue!50!black} \textbf{World Governance indicators \\ \footnotesize(Std. score, High=best)}}
+    \vspace*{0.3cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/WGIindicators-1} 
+
+}
+
+
+
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://data.worldbank.org/data-catalog/worldwide-governance-indicators}{Source: Worldwide Governance Indicators}}
+  \end{minipage}
+  \begin{minipage}[c]{0.48\textwidth} % Trade Policy table
+    \vspace*{0.4cm}
+  %\begin{flushleft}
+    {\color{blue!50!black} \textbf{Trade Policy}}
+  %\end{flushleft} 
+  %\vspace*{0.2cm}
+    \\[20pt]
+    \centering
+    \resizebox{\textwidth}{!}{%
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:23 2016
+{\Large
+\begin{tabular}{lrrr}
+  & 2014 & 2015 &  \\ 
+  \hline
+Applied Tariff (Incl. Prefers. and Trade-Weighted) & 12.1 & 12.1 &  \\ 
+  Dispersion (Standard Deviation) & 10.3 & 10.4 &  \\ 
+  Import duties collected (\%, 2009-2011) \large{[1]} & 4.6 & --- &  \\ 
+  MFN Tariff (Agriculture) & 23.1 & 23.2 &  \\ 
+  MFN Tariff (Non-Agriculture) & 17.4 & 17.4 &  \\ 
+  MFN Tariff (Simple Average) & 18.4 & 18.3 &  \\ 
+  Services sectors with GATS commitments \large{[1]} & --- & --- &  \\ 
+  \end{tabular}
+}
+
+    }
+    \\[20pt]
+    %\hspace*{0.5cm} 
+    \raggedright{\footnotesize{\href{http://wits.worldbank.org}{Sources: WITS}{, }\href{http://stat.wto.org/CountryProfile/WSDBCountryPFHome.aspx?Language=E}{[1] WTO Trade Profiles}}}
+  \end{minipage}
+\end{minipage}
+
+\vspace{+8ex}
+%\hspace*{0.2cm}\subsection*{\color{white!50!black}Private Sector's Views}
+\hspace*{0.1cm} \raggedright{\color{white!50!black}\Large Private Sector View}
+
+\vspace*{-0.2cm}
+{\color{white!30!black}\noindent\makebox[\linewidth]{\rule{18cm}{0.2pt}}} % horiz line
+
+\begin{minipage}[b]{0.99\textwidth}
+\vspace*{+0.6cm}
+  \begin{minipage}[c]{0.02\textwidth}
+  \hspace*{+0.1cm}
+  \end{minipage}
+  \begin{minipage}[c]{0.97\textwidth} 
+    \begin{flushleft}  
+      {\color{blue!50!black} \textbf{Enterprise Survey 2007}}
+    \end{flushleft}  
+    \vspace*{-0.4cm}
+    \centering
+    \resizebox{\textwidth}{!}{%
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:23 2016
+{\Large
+\begin{tabular}{lrrrl}
+  & Middle East and North Africa & All Countries & Algeria &  \\ 
+  \hline
+Number of electrical outages in a typical month & 17.60 & 6.30 & 3.20 &  \\ 
+  Percent of firms with a bank loan/line of credit & 25.60 & 35.20 & 31.10 &  \\ 
+  Proportion of investments financed by banks (\%) & 13.60 & 14.60 & 12.30 &  \\ 
+  Proportion of investments financed internally (\%) & 72.70 & 71.20 & 74.50 &  \\ 
+  Senior management time spent dealing with the requirements of government regulation (\%) & 9.10 & 10.00 & 25.10 &  \\ 
+  \end{tabular}
+}
+
+    }
+    \\[8pt]
+    %\hspace*{0.3cm} 
+    \raggedright{\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey 2007}}}
+  \end{minipage} 
+
+  \begin{minipage}[b]{0.99\textwidth} 
+    \vspace{+4ex}
+    \begin{minipage}[c]{0.49\textwidth} % top 5 constraints ES
+      \center{\color{blue!50!black} \textbf{Top 5 constraints according to ES 2007 \\ \footnotesize(\% respondants)}}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/top5constraintsES-1} 
+
+}
+
+
+
+      %\vspace*{-0.7cm}
+      \hspace*{0.3cm} \raggedright\footnotesize{\href{https://www.enterprisesurveys.org/data}{Source: Enterprise Survey 2007}}
+    \end{minipage}
+    \begin{minipage}[c]{0.49\textwidth} % top 5 constraints WEF
+      \center{\color{blue!50!black} \textbf{Top 5 constraints according to WEF 2015 survey \\ \footnotesize(\% respondants among 88 executives)}}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/top5constraintsWEF-1} 
+
+}
+
+
+
+    %\vspace*{-0.7cm}
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/reports/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \end{minipage}
+  \end{minipage}
+\end{minipage}
+
+% \vspace{+8ex}
+% {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+% \vspace{+2ex}
+% \begin{minipage}[c]{0.33\textwidth}
+%   \hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.jpg}
+%   %\hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.png}
+% \end{minipage}
+% \begin{minipage}[c]{0.65\textwidth}
+%   \vspace*{-0.4cm}
+%   \raggedleft{\color{white!40!black} \footnotesize TRADE AND COMPETITIVENESS MONITORING NOTE - UPDATED} 
+%   %month year}
+% \end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%% Operations section %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+%%%%%%%%%%%%%%%% PAGE 3 %%%%%%%%%%%%%%%%%%%
+
+%World Bank logo and TCMN branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  \hspace{-7ex} % move left this figure
+  \includegraphics[width=5cm]{/Users/asanchez3/shinyTCMN/www/wb_logo_background.png}
+\end{figure}
+\begin{figure}
+  \begin{minipage}[t]{0.99\textwidth} % top section
+      \vspace{-30ex}
+      \hspace{-2ex}
+      \raggedright{\includegraphics[width=5.5cm,right]{/Users/asanchez3/shinyTCMN/www/TC_snapshots_operations.png}}
+  \end{minipage}
+\end{figure}
+%
+%%%% Macro Indicators
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace{-1.5cm}
+  \begin{minipage}[c]{0.36\textwidth} 
+    \begin{minipage}[c]{0.28\textwidth} % flag
+      \includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/DZ.png}
+    \end{minipage}
+    \begin{minipage}[c]{0.70\textwidth} % Country name
+      \section*{\color{blue!40!black}Algeria}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[c]{0.63\textwidth}
+  %  \begin{flushleft}  
+  %    \center{\color{blue!20!black} \textbf{\Large T\&C Product Line Operations Board Approved On or After FY14}}
+  %  \end{flushleft} 
+  \end{minipage}  
+\end{minipage} % end top section
+
+%\begin{minipage}[b]{0.99\textwidth} % main body
+  \raggedright{\color{white!30!blue} \textbf{\Large SCD/CPF}}
+    \begin{minipage}[c]{0.99\textwidth}  
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Most Recent}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}ll}
+ Product & Document Date &  \\ 
+  \hline
+Algeria - Country partnership strategy for the period of FY11-14 & 2012-08-28 &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.99\textwidth} % imports/exports
+      \vspace*{0.2cm}
+      \raggedright{\color{white!30!blue} \textbf{\large Planned}}
+      \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+\scalebox{0.85}{
+\begin{tabular}{>{\raggedright}p{5in}lll}
+ Product & Concept Review Date & Board Date &  \\ 
+  \hline
+None &  &  &  \\ 
+  \end{tabular}
+}
+
+      \vspace*{0.5cm}
+    \end{minipage}
+%\end{minipage}
+  
+\vspace*{0.5cm}
+\raggedright{\color{white!30!blue} \textbf{\Large WB Lending Pipeline}}
+\begin{minipage}[b]{0.99\textwidth} % overview tables
+  \begin{minipage}[c]{0.99\textwidth}  
+    \vspace*{0.5cm}
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Begin Appraisal & Commitment (US\$M) & Latest Sort Overall Risk Rating & FY Expenses (US\$K) & Cum Expenses (US\$K) & FY Prob &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+    
+  \raggedright{\color{white!30!blue} \textbf{\Large WB Portfolio}}
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedleft}p{0.5in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.4in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Undisbursed Balance (US\$M) & Project Rating DO & Project Rating IP & Overall Risk & Months in Problem Status &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+  \begin{minipage}[c]{0.99\textwidth} % imports/exports 
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.5cm}
+      
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.5in}>{\raggedright}p{1in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedleft}p{0.6in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}>{\raggedright}p{0.5in}l}
+ Project ID & Project Name & Team Leader & Approval Date & Lending Inst. Type & Closing Date & Commitment (US\$M) & Project Rating DO & Project Rating IP & IEG Outcome Rating &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+     
+\end{minipage}
+ 
+ \newpage
+%%%%%%%%%%%%%%%% PAGE 2 %%%%%%%%%%%%%%%%%%%
+\begin{minipage}[t]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\Large WB ASA}}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+P153539 & DZ-RAS Support to Business Env. Reforms & Philippe De Meneval & 2014-11-20 & 2016-06-30 & TA & Y & 87 & 87 & 212 & 212 &  \\ 
+  P159440 & Algeria-Agribusiness-Development & Herve Assah & --- & 2016-06-30 & TA & N & 99 & 99 &  99 &  99 &  \\ 
+  \end{tabular}
+}
+}
+
+     \vspace*{0.2cm}
+  \end{minipage}
+
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+    \vspace*{0.3cm}
+       
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1in}>{\raggedright}p{1in}>{\raggedright}p{0.6in}>{\raggedright}p{0.6in}>{\raggedright}p{0.4in}>{\raggedright}p{0.4in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}>{\raggedleft}p{0.6in}l}
+ Task ID & Task Name & Team Leader & Concept Approval Date & Output Approval Date & Product Line & RAS (Y/N) & Current Expenditure BB (US\$K) & Current Expenditure Total (US\$K) & Lifetime Expenditure BB (US\$K) & Lifetime Expenditure Total (US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.5cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\Large IFC ASA}}
+  \begin{minipage}[b]{0.99\textwidth}
+    \vspace*{0.2cm}
+    \raggedright{\color{white!30!blue} \textbf{\large Active}}
+    \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+    \vspace*{0.2cm}
+  \end{minipage}
+
+  \raggedright{\color{white!30!blue} \textbf{\large Pipeline}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\footnotesize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+None &  &  &  &  &  &  &  &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+
+\begin{minipage}[b]{0.99\textwidth}
+  \raggedright{\color{white!30!blue} \textbf{\large Closed}}
+  \vspace*{0.3cm}
+  
+% latex table generated in R 3.2.2 by xtable 1.7-4 package
+% Tue May 31 11:04:24 2016
+{\scriptsize
+\scalebox{0.85}{
+\begin{tabular}{l>{\raggedright}p{1.6in}>{\raggedright}p{1.5in}>{\raggedright}p{0.7in}>{\raggedright}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}>{\raggedleft}p{0.7in}l}
+ Project ID & Project Name & Team Leader & IP Approval Date & Expected End Date & Approval Value (in US\$K) & Total Expenditures (in US\$K) & Current FY Expenditure (in US\$K) &  \\ 
+  \hline
+549325 & Biz Simp Algeria & Moullier, Thomas & 2006-12-07 & 2008-06-30 & 250 & 225 & 0 &  \\ 
+  546546 & CARE Advocacy 2 & Pilgrim, Markus & 2006-06-08 & 2008-06-30 &  76 &  76 & 0 &  \\ 
+  536853 & CNCPME & Faraoun, Malik & 2006-02-10 & --- &   0 &   0 & 0 &  \\ 
+  542704 & Algeria DB'06 TA & Moullier, Thomas & 2006-01-13 & 2007-07-31 &  60 &  60 & 0 &  \\ 
+  520891 & ANEXAL & Khelladi, Insaf & 2005-06-25 & --- &   0 &   0 & 0 &  \\ 
+  530828 & Care Advocacy Program & Faraoun, Malik & 2005-06-25 & --- &   0 &   0 & 0 &  \\ 
+  \end{tabular}
+}
+}
+
+  \vspace*{0.2cm}
+\end{minipage}
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}
