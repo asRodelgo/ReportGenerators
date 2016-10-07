@@ -21,6 +21,8 @@
             anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
 \sectionfont{\fontsize{24}{22}\selectfont\raggedright} % formats title newsletter (section) 
 \subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+\usepackage{times} % select font family
+\usepackage{anyfontsize} % custom font sizes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -66,18 +68,20 @@ date <- Sys.Date()
   \begin{minipage}[t]{0.53\textwidth} % top section
     \vspace{-1ex}
     \begin{minipage}[t]{0.99\textwidth} % top section
-      \subsection*{\color{white}Entrepreneurship At a Glance}
-      \includegraphics[width=5.5cm,height=1.2cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/WBlogo_Transparent.jpg}
+      \hspace{5ex}\raggedright\Large{\color{white}Entrepreneurship At a Glance}
+      %\includegraphics[width=5.5cm,height=1.2cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/WBlogo_Transparent.jpg}
       %\includegraphics[width=7cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_logo1.png}
     \end{minipage}
   
     \begin{minipage}[b]{0.99\textwidth} 
-      \vspace{5ex}
+      \vspace{4ex}
       %\begin{minipage}[c]{0.18\textwidth} % flag
         %\center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}}
       %\end{minipage}
       %\begin{minipage}[c]{0.80\textwidth} % Country name
-        \section*{\color{white}\Sexpr{couName}}
+      \hspace{5ex}{\fontsize{44}{50}\selectfont{\color{white}\Sexpr{couName}}}
+      %\vspace{4ex}  
+      %\hspace{5ex}\raggedright{\small{\color{white}COUNTRY SNAPSHOT}}
       %\end{minipage}
     \end{minipage}
   \end{minipage}
@@ -193,7 +197,7 @@ date <- Sys.Date()
 \begin{minipage}[b]{0.875\textwidth}
    \vspace{2ex}
    \begin{flushleft}  
-     \LARGE{\textcolor[HTML]{22A6F5}{Human capital}}
+     \LARGE{\textcolor[HTML]{22A6F5}{HUMAN CAPITAL}}
    \end{flushleft} 
 \vspace{0.5cm}
   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
@@ -221,7 +225,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.875\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-   \LARGE{\textcolor[HTML]{22A6F5}{Finance}}
+   \LARGE{\textcolor[HTML]{22A6F5}{FINANCE}}
   \end{flushleft} 
   %\vspace{0.5cm}
   %\begin{minipage}[c]{0.75\textwidth} 
@@ -272,7 +276,7 @@ date <- Sys.Date()
 \begin{minipage}[b]{0.875\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{Markets}}
+    \LARGE{\textcolor[HTML]{22A6F5}{MARKETS}}
   \end{flushleft}
   \vspace{0.5cm}
   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
@@ -312,7 +316,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.765\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{Culture}}
+    \LARGE{\textcolor[HTML]{22A6F5}{CULTURE}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   % Table 2
@@ -337,7 +341,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.765\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{Supports}}
+    \LARGE{\textcolor[HTML]{22A6F5}{SUPPORTS}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   % Table 2
