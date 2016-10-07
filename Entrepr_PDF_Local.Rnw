@@ -5,7 +5,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{article}
 %%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
-\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage[top=0.3in, bottom=0.1in, left=0.3in, right=0.3in]{geometry}
 \usepackage{graphicx} % to load images
 \usepackage[export]{adjustbox} % add alignment to includegraphics
 \usepackage[font=small]{caption}
@@ -57,53 +57,58 @@ date <- Sys.Date()
 \begin{figure}
   \vspace{-3ex} % move up this figure
   %\hspace{-7ex} % move left this figure
-  \includegraphics[width=19cm,height=6cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_backgroundTop.png}
+  \includegraphics[width=20.1cm,height=6cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/header_background_blue_white.png}
 \end{figure}
 
 \begin{figure}
 \begin{minipage}[t]{0.99\textwidth} % top section
   \vspace*{-26cm}
-  \begin{minipage}[t]{0.48\textwidth} % top section
+  \begin{minipage}[t]{0.53\textwidth} % top section
     \vspace{-1ex}
     \begin{minipage}[t]{0.99\textwidth} % top section
-      \includegraphics[width=7cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_logo1.png}
+      \subsection*{\color{white}Entrepreneurship At a Glance}
+      \includegraphics[width=5.5cm,height=1.2cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/WBlogo_Transparent.jpg}
+      %\includegraphics[width=7cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_logo1.png}
     \end{minipage}
   
     \begin{minipage}[b]{0.99\textwidth} 
       \vspace{5ex}
-      \begin{minipage}[c]{0.18\textwidth} % flag
-        \center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}}
-      \end{minipage}
-      \begin{minipage}[c]{0.80\textwidth} % Country name
-        \section*{\color{blue!40!black}\Sexpr{couName}}
-      \end{minipage}
+      %\begin{minipage}[c]{0.18\textwidth} % flag
+        %\center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}}
+      %\end{minipage}
+      %\begin{minipage}[c]{0.80\textwidth} % Country name
+        \section*{\color{white}\Sexpr{couName}}
+      %\end{minipage}
     \end{minipage}
   \end{minipage}
-  \begin{minipage}[t]{0.55\textwidth} % overview section
-    \vspace{1ex}
-    \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='right',results="asis">>=  
+  \begin{minipage}[t]{0.50\textwidth} % overview section
+    \vspace{-4ex}
+    \begin{minipage}[c]{0.29\textwidth}
+  <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='right',results="asis">>=  
     @      
+    \vspace{3ex}
     \end{minipage}
-    \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    \begin{minipage}[c]{0.29\textwidth}
+  <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \vspace{3ex}
     \end{minipage}
-    \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    \begin{minipage}[c]{0.29\textwidth}
+  <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \vspace{3ex}
     \end{minipage}
     
-    \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    \begin{minipage}[c]{0.29\textwidth}
+  <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
-    \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    \begin{minipage}[c]{0.29\textwidth}
+  <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
-    \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
+    \begin{minipage}[c]{0.29\textwidth}
+  <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
     \end{minipage}
   \end{minipage}
@@ -115,7 +120,7 @@ date <- Sys.Date()
 
 \begin{minipage}[c]{0.875\textwidth}
   \begin{flushleft}  
-    {\color{blue!20!black} \textbf{\LARGE Policy}}
+    \LARGE{\textcolor[HTML]{22A6F5}{POLICY}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   \begin{minipage}[c]{0.48\textwidth}
@@ -188,7 +193,7 @@ date <- Sys.Date()
 \begin{minipage}[b]{0.875\textwidth}
    \vspace{2ex}
    \begin{flushleft}  
-     {\color{blue!20!black} \textbf{\LARGE Human capital}}
+     \LARGE{\textcolor[HTML]{22A6F5}{Human capital}}
    \end{flushleft} 
 \vspace{0.5cm}
   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
@@ -216,7 +221,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.875\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-   {\color{blue!20!black} \textbf{\LARGE Finance}}
+   \LARGE{\textcolor[HTML]{22A6F5}{Finance}}
   \end{flushleft} 
   %\vspace{0.5cm}
   %\begin{minipage}[c]{0.75\textwidth} 
@@ -267,7 +272,7 @@ date <- Sys.Date()
 \begin{minipage}[b]{0.875\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    {\color{blue!20!black} \textbf{\LARGE Markets}}
+    \LARGE{\textcolor[HTML]{22A6F5}{Markets}}
   \end{flushleft}
   \vspace{0.5cm}
   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
@@ -307,7 +312,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.765\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    {\color{blue!20!black} \textbf{\LARGE Culture}}
+    \LARGE{\textcolor[HTML]{22A6F5}{Culture}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   % Table 2
@@ -332,7 +337,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.765\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    {\color{blue!20!black} \textbf{\LARGE Supports}}
+    \LARGE{\textcolor[HTML]{22A6F5}{Supports}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   % Table 2

@@ -1,0 +1,559 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template Entrepreneurship indicators data sheet version 1
+% 
+% Alberto Sanchez asanchezrodelgo@ifc.org Jun 2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
+\usepackage[top=0.3in, bottom=0.1in, left=0.5in, right=0.6in]{geometry}
+\usepackage{graphicx} % to load images
+\usepackage[export]{adjustbox} % add alignment to includegraphics
+\usepackage[font=small]{caption}
+\usepackage{xcolor} % color text
+\usepackage{tabularx} % to adjust table width, etc. 
+\usepackage{titlesec} % format titles and headers
+\usepackage{sectsty} % format sections & subsections
+\usepackage{booktabs} % For \toprule, \midrule and \bottomrule
+\usepackage[colorlinks = true,
+            linkcolor = blue,
+            urlcolor  = blue,
+            citecolor = blue,
+            anchorcolor = blue]{hyperref} % to include hyperlinks in the doc
+\sectionfont{\fontsize{24}{22}\selectfont\raggedright} % formats title newsletter (section) 
+\subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+%
+
+%%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
+%World Bank logo and Site branding
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  %\hspace{-7ex} % move left this figure
+  %\includegraphics[width=19cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bannerLight.png}
+\end{figure}
+
+\begin{figure}
+  \vspace{-3ex} % move up this figure
+  %\hspace{-7ex} % move left this figure
+  \includegraphics[width=19cm,height=6cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_backgroundTop.png}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}[t]{0.99\textwidth} % top section
+  \vspace*{-26cm}
+  \begin{minipage}[t]{0.48\textwidth} % top section
+    \vspace{-1ex}
+    \begin{minipage}[t]{0.99\textwidth} % top section
+      \includegraphics[width=7cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_logo1.png}
+    \end{minipage}
+  
+    \begin{minipage}[b]{0.99\textwidth} 
+      \vspace{5ex}
+      \begin{minipage}[c]{0.18\textwidth} % flag
+        \center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/XS.png}}
+      \end{minipage}
+      \begin{minipage}[c]{0.80\textwidth} % Country name
+        \section*{\color{blue!40!black}(ES) High income: OECD}
+      \end{minipage}
+    \end{minipage}
+  \end{minipage}
+  \begin{minipage}[t]{0.55\textwidth} % overview section
+    \vspace{1ex}
+    \begin{minipage}[c]{0.30\textwidth}
+
+
+\hfill{}\includegraphics[width=\maxwidth]{figure/figure_sparkline1-1} 
+
+
+
+    \end{minipage}
+    \begin{minipage}[c]{0.30\textwidth}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline2-1} 
+
+}
+
+
+
+    \end{minipage}
+    \begin{minipage}[c]{0.30\textwidth}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline3-1} 
+
+}
+
+
+
+    \end{minipage}
+    
+    \begin{minipage}[c]{0.30\textwidth}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline4-1} 
+
+}
+
+
+
+    \end{minipage}
+    \begin{minipage}[c]{0.30\textwidth}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline5-1} 
+
+}
+
+
+
+    \end{minipage}
+    \begin{minipage}[c]{0.30\textwidth}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline6-1} 
+
+}
+
+
+
+    \end{minipage}
+  \end{minipage}
+\end{minipage}
+%{\color{white!20!blue}\noindent\makebox[\linewidth]{\rule{18cm}{2pt}}} % horiz line
+\end{figure}
+
+%% Policy --------------------------------------------
+
+\begin{minipage}[c]{0.875\textwidth}
+  \begin{flushleft}  
+    {\color{blue!20!black} \textbf{\LARGE Policy}}
+  \end{flushleft}
+  %\vspace*{-0.4cm}
+  \begin{minipage}[c]{0.48\textwidth}
+    \center {\color{blue!50!black} \textbf{\small Government indexes}}
+    \vspace{1ex}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/bar_facewrap_chart_Policy-1} 
+
+}
+
+
+
+  \end{minipage}
+  \begin{minipage}[c]{0.56\textwidth}
+    \center {\color{blue!50!black} \textbf{\small Investment climate}}
+    
+    \vspace{1ex}
+    \begin{minipage}[c]{0.32\textwidth}
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in if (is.na(data\$Period)) data\$Period <- as.character(as.numeric(thisYear) - : argument is of length zero}}\end{kframe}
+    \end{minipage}
+    \begin{minipage}[c]{0.32\textwidth}
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in if (is.na(data\$Period)) data\$Period <- as.character(as.numeric(thisYear) - : argument is of length zero}}\end{kframe}
+    \end{minipage}
+    \begin{minipage}[c]{0.32\textwidth}
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in if (is.na(data\$Period)) data\$Period <- as.character(as.numeric(thisYear) - : argument is of length zero}}\end{kframe}
+    \end{minipage}  
+  \end{minipage}
+\end{minipage}
+%' \begin{minipage}[c]{0.11\textwidth}
+%'   \vspace*{+1cm}
+%'   <<sparklines_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
+%'   @
+%'   \vspace*{-0.5cm}
+%' \end{minipage}
+
+\begin{minipage}[b]{0.875\textwidth}
+  \vspace{0.8cm}
+  \begin{minipage}[c]{0.46\textwidth} 
+    {\color{blue!50!black} \textbf{\small Cost of Business Startup Procedures \\ \% of GNI per capita}}
+        %\vspace{3ex}
+    \\[6pt]
+    \centering
+      \resizebox{\textwidth}{!}{%
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/line_chart_Policy-1} 
+
+}
+
+
+
+      }
+    \\[10pt]
+  %\hspace*{0.5cm}
+    \footnotesize{\href{http://wits.worldbank.org}{Source: World Integrated Trade Solution (WITS)}} 
+  \end{minipage}
+  \begin{minipage}[c]{0.55\textwidth} % Doing Business table
+    %\vspace*{-0.1cm}
+    %\begin{flushleft}
+    \center {\color{blue!50!black}\textbf{\small Doing Business 2015}}
+    %\end{flushleft}
+    \\[10pt]
+    \centering
+      \resizebox{\textwidth}{!}{%
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Thu Jul 14 09:57:28 2016
+\begingroup\large
+\begin{tabular}{lrrr|rrrr}
+  \hline
+  &   & DTF &   &   & Rank &   &   \\ 
+  \hline
+Data not available &  &  &  &  &  &  &  \\ 
+   \hline
+\end{tabular}
+\endgroup
+
+      }
+    \\[15pt]
+     %\hspace*{0.5cm} 
+     \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
+  \end{minipage}
+\end{minipage}
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+%% Human capital --------------------------------------------
+
+\begin{minipage}[b]{0.875\textwidth}
+   \vspace{2ex}
+   \begin{flushleft}  
+     {\color{blue!20!black} \textbf{\LARGE Human capital}}
+   \end{flushleft} 
+\vspace{0.5cm}
+  \begin{minipage}[c]{0.48\textwidth} % WEF Radar
+    \center{\color{blue!50!black} \textbf{Availability of skilled labor and education \\ \footnotesize(1-7, 7 = best)}}
+    %\vspace*{-0.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/bar_facewrap_chart_Human-1} 
+
+}
+
+
+
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+  \begin{minipage}[c]{0.50\textwidth} % 
+    \center{\color{blue!50!black} \textbf{Population employed in services sector \\ \footnotesize(\% total employed population)}}
+    \vspace*{-0.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/pie_chart_double_Human-1} 
+
+}
+
+
+
+    \vspace*{-1cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+\end{minipage}  
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+%% Finance --------------------------------------------
+
+\begin{minipage}[c]{0.875\textwidth}
+  \vspace{2ex}
+  \begin{flushleft}  
+   {\color{blue!20!black} \textbf{\LARGE Finance}}
+  \end{flushleft} 
+  %\vspace{0.5cm}
+  %\begin{minipage}[c]{0.75\textwidth} 
+    \center{\color{blue!50!black} \textbf{FDI, Public Capital Market and Venture Capital}}
+    %\\ \footnotesize(\% GDP)}}
+    %\vspace*{-0.6cm}
+    \begin{minipage}[c]{0.80\textwidth}  
+    \centering
+      \resizebox{\textwidth}{!}{
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Thu Jul 14 09:57:29 2016
+\begingroup\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & 2011 & 2012 & 2013 & 2014 & 2015 &  \\ 
+  \hline
+Foreign direct investment, net &  NA &  NA &  NA &  NA &  NA &  \\ 
+  Market capitalization of listed companies &  73 &  85 & 104 & 106 &  NA &  \\ 
+  Investment in telecoms with private participation &  NA &  NA &  NA &  NA &  NA &  \\ 
+  \end{tabular}
+\endgroup
+
+      }
+    \vspace*{-0.2cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \end{minipage}
+    \begin{minipage}[c]{0.11\textwidth}
+      \vspace*{+0.5cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/sparklines_Finance-1} 
+
+}
+
+
+
+      \vspace*{-0.5cm}
+    \end{minipage}
+\end{minipage}
+  
+\begin{minipage}[c]{0.875\textwidth} % 
+  \vspace*{0.3cm}
+  \begin{minipage}[c]{0.49\textwidth} % 
+    \center{\color{blue!50!black} \textbf{Informal Investors rate \\ \footnotesize(\% employed population)}}
+    %\vspace*{-0.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/line_chart_Finance1-1} 
+
+}
+
+
+
+    %\vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+  \begin{minipage}[c]{0.49\textwidth} % 
+    \center{\color{blue!50!black} \textbf{Lending interest rate}}
+    %\vspace*{-0.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/line_chart_Finance2-1} 
+
+}
+
+
+
+    %\vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+\end{minipage}  
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+%% Markets --------------------------------------------
+\vspace{2ex}
+\begin{minipage}[b]{0.875\textwidth}
+  \vspace{2ex}
+  \begin{flushleft}  
+    {\color{blue!20!black} \textbf{\LARGE Markets}}
+  \end{flushleft}
+  \vspace{0.5cm}
+  \begin{minipage}[c]{0.48\textwidth} % WEF Radar
+    \center{\color{blue!50!black} \textbf{Financial inclusion \\ \footnotesize(\% age 15+)}}
+    \vspace*{-0.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/radar_chart_Markets-1} 
+
+}
+
+
+
+    \vspace*{-0.6cm} 
+    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+  \end{minipage}
+  \begin{minipage}[c]{0.50\textwidth} % 
+  %\vspace*{0.5cm}
+    \centering
+      \resizebox{\textwidth}{!}{
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Thu Jul 14 09:57:29 2016
+\begingroup\Large
+\begin{tabular}{lrrl}
+  & (ES) High income: OECD & All Countries &  \\ 
+  \hline
+Internet users & 84 & 14 &  \\ 
+  \end{tabular}
+\endgroup
+
+      }
+    \vspace{+1ex}    
+    \begin{minipage}[c]{0.49\textwidth} % 
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in if (is.na(data\$Period)) data\$Period <- as.character(as.numeric(thisYear) - : argument is of length zero}}\end{kframe}
+    \end{minipage}
+    \begin{minipage}[c]{0.49\textwidth} % 
+    \vspace{+1ex}
+\begin{kframe}
+
+
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in if (is.na(data\$Period)) data\$Period <- as.character(as.numeric(thisYear) - : argument is of length zero}}\end{kframe}
+    \end{minipage}  
+    %\hspace*{0.5cm} 
+    \raggedright\footnotesize{\href{http://lpi.worldbank.org}{Source: Logistics Performance Index (World Bank)}}
+  \end{minipage}
+\end{minipage}  
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+%% Culture --------------------------------------------
+\vspace{2ex}
+\begin{minipage}[c]{0.765\textwidth}
+  \vspace{2ex}
+  \begin{flushleft}  
+    {\color{blue!20!black} \textbf{\LARGE Culture}}
+  \end{flushleft}
+  %\vspace*{-0.4cm}
+  % Table 2
+  \centering
+  \resizebox{\textwidth}{!}{
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Thu Jul 14 09:57:29 2016
+\begingroup\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2002-2010 & 2011 & 2012 & 2013 & 2014 & 2015 &  \\ 
+  \hline
+ICT service exports & 28.7 & 30.8 & 31.4 & 31.2 & 32.0 &   --- &  \\ 
+  Company spending on R\&D & --- & --- & --- & --- & --- &   --- &  \\ 
+  Fear of Failure Rate & --- & --- & --- & --- & --- &   --- &  \\ 
+  High Status Successful Entrepreneurship & --- & --- & --- & --- & --- &   --- &  \\ 
+  New business density &  4.6 &  4.6 &  4.8 &  1.7 &  5.5 &   --- &  \\ 
+  Improvement-Driven Opp. Entrepreneurial Activity: Rel. Prevalence & --- & --- & --- & --- & --- &   --- &  \\ 
+  Media Attention for Entrepreneurship & --- & --- & --- & --- & --- &   --- &  \\ 
+  New Product early-stage Entrepreneurial Activity & --- & --- & --- & --- & --- &   --- &  \\ 
+  Number of tech startups & --- & --- & --- & --- & --- &   --- &  \\ 
+  Perceived Capabilities & --- & --- & --- & --- & --- &   --- &  \\ 
+  Total early-stage Entrepreneurial Activity (TEA) & --- & --- & --- & --- & --- &   --- &  \\ 
+  \end{tabular}
+\endgroup
+
+  }
+\end{minipage}
+\begin{minipage}[c]{0.11\textwidth}
+  \vspace*{+1.5cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/sparklines_Culture-1} 
+
+}
+
+
+
+  \vspace*{-0.5cm}
+\end{minipage}
+    
+
+{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+
+%% Supports --------------------------------------------
+\vspace{2ex}
+\begin{minipage}[c]{0.765\textwidth}
+  \vspace{2ex}
+  \begin{flushleft}  
+    {\color{blue!20!black} \textbf{\LARGE Supports}}
+  \end{flushleft}
+  %\vspace*{-0.4cm}
+  % Table 2
+  \centering
+  \resizebox{\textwidth}{!}{
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Thu Jul 14 09:57:29 2016
+\begingroup\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2002-2010 & 2011 & 2012 & 2013 & 2014 & 2015 &  \\ 
+  \hline
+Access to electricity & 100.0 &    NA & 100.0 &    NA &    NA &    --- &  \\ 
+  Efficiency of legal framework in settling disputes & --- & --- & --- & --- & --- &    --- &  \\ 
+  Quality of electricity supply & --- & --- & --- & --- & --- &    --- &  \\ 
+  \% firms identifying transportation as major constraint & --- & --- & --- & --- & --- &    --- &  \\ 
+  \% of firms with an annual fin. Statem. reviewed by ext. auditors & --- & --- & --- & --- & --- &    --- &  \\ 
+  ICT goods imports &  10.9 &   9.2 &   8.9 &   8.9 &   9.1 &    --- &  \\ 
+  \end{tabular}
+\endgroup
+
+  }
+\end{minipage}
+\begin{minipage}[c]{0.11\textwidth}
+  \vspace*{+1.6cm}
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/sparklines_Supports-1} 
+
+}
+
+
+
+  \vspace*{-0.5cm}
+\end{minipage}
+
+%%% footer ----------------------------------
+\vspace{2ex}
+\begin{minipage}[c]{0.33\textwidth}
+  \hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.jpg}
+  %\hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.png}
+\end{minipage}
+\begin{minipage}[c]{0.65\textwidth}
+  \vspace*{-0.4cm}
+  \raggedleft{\color{white!40!black} \footnotesize TRADE AND COMPETITIVENESS MONITORING NOTE - UPDATED 2016-07-14}
+\end{minipage}
+
+%%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
+\end{document}

@@ -13,6 +13,8 @@ figure_sparkline <- function(couName,table){
   if (nrow(data)>0){
     
     data <- filter(data,!is.na(Observation))
+    minPeriod <- min(data$Period)
+    maxPeriod <- max(data$Period)
     dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
     # data
     dataPoint <- format(dataLast$Observation, digits=2, decimal.mark=".",
@@ -20,7 +22,7 @@ figure_sparkline <- function(couName,table){
     # period
     dataPeriod <- dataLast$Period
     
-    dataWorld <- filter(Entrepr_data, Subsection==table)
+    dataWorld <- filter(Entrepr_data, Subsection2==table)
     dataWorld <- filter(dataWorld,!is.na(Observation))
     dataWorld <- dataWorld %>%
       group_by(iso2c) %>%
@@ -33,6 +35,7 @@ figure_sparkline <- function(couName,table){
     dataWorld <- arrange(dataWorld, desc(Observation))
     # rank in the world
     rank <- which(dataWorld$CountryCode == cou)
+    rankedTotal <- nrow(dataWorld)
     
     # sparkline
     spark <- data %>%
@@ -43,7 +46,7 @@ figure_sparkline <- function(couName,table){
     indicator <- dataLast$IndicatorShort
     unit <- dataLast$Unit
     
-    # impute NAs and standardize so all sparklines are scales
+    # impute NAs and standardize so all sparklines are scaled
     spark[is.na(spark),1] <- mean(spark[,1],na.rm = TRUE)  #impute NAs to the mean of the column
     if (sum(spark[,1],na.rm = TRUE)==0){ 
       spark[,1] <- 0
@@ -51,21 +54,43 @@ figure_sparkline <- function(couName,table){
       spark[nrow(spark),1] <- 10
     }
     
+    # Ad-hoc shorten some indicatores and units names:
+    if (table == "figure2"){
+      indicator <- "Ease of Doing Business"
+      unit <- "1=most business-friendly regulat."
+    }
+    if (table == "figure3"){
+      indicator <- "Broadband Internet Subs."
+    }
+    if (table == "figure4"){
+      indicator <- "Avail. of Scientists & Engineers"
+    }
+    if (table == "figure5"){
+      indicator <- "Tertiary education enrollment"
+      unit <- "Percent of population"
+    }
+    if (table == "figure6"){
+      indicator <- "Venture Capital Avail."
+    }
     
     # Print the combo -----------------------------------------------
-    par(mfrow=c(3,1), #sets number of rows in space to number of cols in data frame x
-        mar=c(1,5,0,5), #sets margin size for the figures
-        oma=c(1,5,1,5)) #sets outer margin
+    par(mfrow=c(5,1), #sets number of rows in space to number of cols in data frame x
+        mar=c(0,2,0,2), #sets margin size for the figures
+        oma=c(0,1,0,1)) #sets outer margin
     
     # print indicator name
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1.1,indicator, col="darkblue", cex=5)
+    graphics::text(1.5, 1.1,indicator, col="darkblue", cex=7)
     graphics::text(1.5, 0.8,paste0(unit, " (",dataPeriod,")"), col="darkblue", cex=5)
     # print data point and rank
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.2, 1,dataPoint, col="black", cex=25)
-    graphics::text(1.75, 0.75,paste("(Rank:",rank,")"), col="grey", cex=7)
+    graphics::text(1.5, 1,dataPoint, col="#22a6f5", cex=18)
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.5, 1.2,paste0("(Rank: ",rank,"/",rankedTotal,")"), col="grey", cex=7)
     # plot sparkline  
+    par(#sets number of rows in space to number of cols in data frame x
+        mar=c(0,5,0,5))#sets margin size for the figures
+        #oma=c(0,4,0,4)) #sets outer margin
     if (sum(spark[1:(nrow(spark)-1),1])==0){ # paint in white empty rows
       plot(spark[,1], #use col data, not rows from data frame x
            col="white",lwd=4, #color the line and adjust width
@@ -76,14 +101,20 @@ figure_sparkline <- function(couName,table){
       points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
     } else {
       plot(spark[,1], #use col data, not rows from data frame x
-           col="darkgrey",lwd=4, #color the line and adjust width
+           col="darkgrey",lwd=10, #color the line and adjust width
            axes=F,ylab="",xlab="",main="",type="l"); #suppress axes lines, set as line plot
       
       axis(2,yaxp=c(min(spark[,1],na.rm = TRUE),max(spark[,1],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
       ymin<-min(spark[,1],na.rm = TRUE); tmin<-which.min(spark[,1]);ymax<-max(spark[,1], na.rm = TRUE);tmax<-which.max(spark[,1]); # 
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
+      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=6) # add coloured points at max and min
+      plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+      if (minPeriod==maxPeriod){
+        graphics::text(1.5, 1,minPeriod, col="grey", cex=5)
+      } else{
+        graphics::text(1.05, 1,minPeriod, col="grey", cex=5)
+        graphics::text(1.95, 1,maxPeriod, col="grey", cex=5)
+      }
     }
-    
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
