@@ -23,6 +23,12 @@
 \subsectionfont{\fontsize{14}{12}\selectfont\raggedright} % formats title newsletter (section)
 \usepackage{times} % select font family
 \usepackage{anyfontsize} % custom font sizes
+\usepackage{colortbl} % custom font sizes
+%\usepackage[table]{color}
+%\definecolor{lightgray}{gray}{0.9}
+%\let\oldtabular\tabular
+%\let\endoldtabular\endtabular
+%\renewenvironment{tabular}{\rowcolors{2}{white}{lightgray}\oldtabular}{\endoldtabular}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

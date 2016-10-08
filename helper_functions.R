@@ -175,11 +175,11 @@ table_time <- function(couName,section, table){
   
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
-  
+  col <- rep("\\rowcolor[gray]{0.95}", 2)
   data.table <- xtable(data, digits=rep(1,ncol(data)+1)) #control decimals
   align(data.table) <- c('l','>{\\raggedright}p{6in}','r',rep('>{\\raggedleft}p{0.8in}',ncol(data.table)-3),'l')
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-        size="\\Large",
+        size="\\Large",add.to.row = list(pos = as.list(c(1,3)), command = col),
         booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
         sanitize.text.function = function(x){x}) # include sanitize to control formats
   
