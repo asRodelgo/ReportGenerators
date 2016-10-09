@@ -175,11 +175,12 @@ table_time <- function(couName,section, table){
   
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
-  col <- rep("\\rowcolor[gray]{0.95}", 2)
+  rowsSelect <- seq(1,nrow(data),2)
+  col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
   data.table <- xtable(data, digits=rep(1,ncol(data)+1)) #control decimals
   align(data.table) <- c('l','>{\\raggedright}p{6in}','r',rep('>{\\raggedleft}p{0.8in}',ncol(data.table)-3),'l')
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-        size="\\Large",add.to.row = list(pos = as.list(c(1,3)), command = col),
+        size="\\Large",add.to.row = list(pos = as.list(rowsSelect), command = col),
         booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
         sanitize.text.function = function(x){x}) # include sanitize to control formats
   
@@ -298,11 +299,12 @@ table_time_avg <- function(couName,section,table){
   
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
-  
+  rowsSelect <- seq(1,nrow(data),2)
+  col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
   data.table <- xtable(data, digits=rep(1,ncol(data)+1)) #control decimals
   align(data.table) <- c('l','>{\\raggedright}p{6in}','r',rep('>{\\raggedleft}p{0.8in}',ncol(data.table)-3),'l')
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-        size="\\Large",
+        size="\\Large",add.to.row = list(pos = as.list(rowsSelect), command = col),
         booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center",
         sanitize.text.function = function(x){x}) # include sanitize to control formats
   
@@ -375,32 +377,43 @@ sparklines <- function(couName,section,table){
 }
 
 ## ---- bar_chart ----
-bar_chart <- function(couName){      
+bar_chart <- function(couName,section,table){      
   
   cou <- .getCountryCode(couName)
-  data <- filter(Entrepr_data, CountryCode==cou, Section=="Policy", Subsection=="bar1")
+  data <- filter(Entrepr_data, CountryCode==cou, Section==section, Subsection %in% table)
   data <- filter(data, !(is.na(Observation)))
-  couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
-  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Category=="Policy", Subsection=="bar1") #select country, region and world
+  #couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
+  #data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Category=="Policy", Subsection=="bar1") #select country, region and world
   
   # country, Region, World descriptors
-  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
-  region <- as.character(countries[countries$CountryCodeISO3==cou,]$Region) 
-  world <- "All Countries"
+  #country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
+  #region <- as.character(countries[countries$CountryCodeISO3==cou,]$Region) 
+  #world <- "All Countries"
   
   if (nrow(data)>0){
     # order the factors
     #data$IndicatorShort = factor(as.character(data$IndicatorShort), 
     #                             levels = data$IndicatorShort[order(data$Observation)])
-    data <- filter(data, Period == max(Period))
+    if (!any(is.na(data$Period))){
+      data <- data %>%
+        group_by(Key) %>%
+        filter(Period == max(Period))
+    }
     
-    ggplot(data, aes(x=factor(IndicatorShort), y=Observation)) +
-      geom_bar(aes(fill=CountryCode),stat="identity") +
-      geom_text(aes(label=Observation,y=Observation + max(Observation)*.06),
-                size=6) + 
+    require(stringr) # to wrap label text
+    data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 20))
+    data_grey <- data.frame(IndicatorShort=data$IndicatorShort,Observation=rep(100,3))
+    
+    #data <- mutate(data, id = seq(1,nrow(data),1))
+    ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
+      geom_bar(data=data_grey,color="#f1f3f3",fill = "#f1f3f3",stat="identity") +
+      geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
+      geom_text(data=data, aes(label=paste0(Observation,"%"),y=Observation - max(Observation)*.1),
+                size=6,color="white") + 
       coord_flip()+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
+            legend.position='none',
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
             axis.ticks.x = element_blank(),
@@ -447,7 +460,7 @@ bar_facewrap_chart <- function(couName, section, table){
     
     topNeighbors <- head(arrange(as.data.frame(income), desc(Observation)),4)$CountryCode
     data <- filter(data, CountryCode %in% c(cou,topNeighbors))
-    
+    data$IndicatorShort <- gsub(" index","",tolower(data$IndicatorShort))
     # order the factors
     data$Country = factor(as.character(data$Country), 
                           levels = c(unique(as.character(data[data$CountryCode==cou,]$Country)), 
@@ -455,16 +468,18 @@ bar_facewrap_chart <- function(couName, section, table){
     
     ggplot(data, aes(x=Country,y=Observation,fill=Country)) +
       geom_bar(position="dodge",stat="identity") +
+      coord_flip()+
       facet_wrap(~IndicatorShort) +
-      #coord_flip()+
-      theme(legend.key=element_blank(),
+      theme(strip.text.x = element_text(size = 12, colour = "white"),
+            strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
+            legend.key=element_blank(),
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-            axis.ticks.x = element_blank(),
-            axis.text.x = element_blank()) + 
+            axis.ticks.y = element_blank(),
+            axis.text.y = element_blank()) + 
       labs(x="",y="")+#,title="World Governance Indicators")+
-      scale_fill_manual(values = c("darkblue", "lightblue", "orange", "yellow","lightgreen","pink"))
+      scale_fill_manual(values = c("orange", "lightblue", "brown","lightgreen","pink"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -679,11 +694,12 @@ table_region <- function(couName,section,table){
     
     # substitute NAs for "---" em-dash
     data[is.na(data)] <- "---"
-    
+    rowsSelect <- seq(1,nrow(data),2)
+    col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
     data.table <- xtable(data)
     align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'l')
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\Large",
+          size="\\Large",add.to.row = list(pos = as.list(rowsSelect), command = col),
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center")
     
   } else{
@@ -731,9 +747,9 @@ doing_business_table <- function(couName){
     
     # red for negative, green for positive changes
     dataR <- mutate(dataR, ChangeRank = ifelse(ChangeRank<0, paste0("\\color{red}{",ChangeRank,"}"),
-                                               ifelse(ChangeRank>0, paste0("\\color{green}{",ChangeRank,"}"),ChangeRank)))
+                                               ifelse(ChangeRank>0, paste0("\\color{green}{",ChangeRank,"}"),paste0("\\color{gray}{",ChangeRank,"}"))))
     dataDTF <- mutate(dataDTF, ChangeDTF = ifelse(ChangeDTF<0, paste0("\\color{red}{",ChangeDTF,"}"),
-                                                  ifelse(ChangeDTF>0, paste0("\\color{green}{",ChangeDTF,"}"),ChangeDTF)))
+                                                  ifelse(ChangeDTF>0, paste0("\\color{green}{",ChangeDTF,"}"),paste0("\\color{gray}{",ChangeDTF,"}"))))
     
     names(dataR) <- c("",paste("Rank",names(dataR)[2]),paste("Rank",names(dataR)[3]),"Rank Change")
     names(dataDTF) <- c("",paste("DTF",names(dataDTF)[2]),paste("DTF",names(dataDTF)[3]),"DTF Change")
@@ -770,10 +786,12 @@ doing_business_table <- function(couName){
   
   #align(data.table) <- c('l','l',rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}',"|",rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}','r')
   if (nrow(data)>0){
+    rowsSelect <- seq(2,nrow(data),2)
+    col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
     data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
     align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\large", 
+          size="\\large", add.to.row = list(pos = as.list(rowsSelect), command = col),
           booktabs = FALSE, table.placement="", hline.after = c(1) ,latex.environments = "center",
           sanitize.text.function = function(x){x}) # include sanitize to control format like colors
   } else {

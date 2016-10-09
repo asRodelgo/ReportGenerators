@@ -24,6 +24,7 @@
 \usepackage{times} % select font family
 \usepackage{anyfontsize} % custom font sizes
 \usepackage{colortbl} % custom font sizes
+\color{gray}
 %\usepackage[table]{color}
 %\definecolor{lightgray}{gray}{0.9}
 %\let\oldtabular\tabular
@@ -130,31 +131,30 @@ date <- Sys.Date()
 
 \begin{minipage}[c]{0.875\textwidth}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{POLICY}}
+    \Large{\textcolor[HTML]{22A6F5}{POLICY}}
   \end{flushleft}
   %\vspace*{-0.4cm}
-  \begin{minipage}[c]{0.48\textwidth}
-    \center {\color{blue!50!black} \textbf{\small Government indexes}}
+  \begin{minipage}[c]{0.55\textwidth}
+    \small{\textcolor[HTML]{818181}{GOVERNMENT INDEXES}}
     \vspace{1ex}
     <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=6,results="asis">>=  
     @      
   \end{minipage}
-  \begin{minipage}[c]{0.56\textwidth}
-    \center {\color{blue!50!black} \textbf{\small Investment climate}}
-    
+  \begin{minipage}[c]{0.45\textwidth}
+    \small{\textcolor[HTML]{818181}{INVESTMENT CLIMATE}}
     \vspace{1ex}
-    \begin{minipage}[c]{0.32\textwidth}
-    <<combo_percent_Policy1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
+    %\begin{minipage}[c]{0.32\textwidth}
+    <<bar_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=6,results="asis">>=  
     @
-    \end{minipage}
-    \begin{minipage}[c]{0.32\textwidth}
-    <<combo_percent_Policy2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
-    @
-    \end{minipage}
-    \begin{minipage}[c]{0.32\textwidth}
-    <<combo_percent_Policy3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
-    @
-    \end{minipage}  
+    %\end{minipage}
+    %\begin{minipage}[c]{0.32\textwidth}
+%    <<combo_percent_Policy2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
+%    @
+%    \end{minipage}
+%    \begin{minipage}[c]{0.32\textwidth}
+%    <<combo_percent_Policy3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
+%    @
+%    \end{minipage}  
   \end{minipage}
 \end{minipage}
 %' \begin{minipage}[c]{0.11\textwidth}
@@ -203,18 +203,18 @@ date <- Sys.Date()
 \begin{minipage}[b]{0.875\textwidth}
    \vspace{2ex}
    \begin{flushleft}  
-     \LARGE{\textcolor[HTML]{22A6F5}{HUMAN CAPITAL}}
+     \Large{\textcolor[HTML]{22A6F5}{HUMAN CAPITAL}}
    \end{flushleft} 
 \vspace{0.5cm}
-  \begin{minipage}[c]{0.48\textwidth} % WEF Radar
+  \begin{minipage}[c]{0.55\textwidth} % WEF Radar
     \center{\color{blue!50!black} \textbf{Availability of skilled labor and education \\ \footnotesize(1-7, 7 = best)}}
     %\vspace*{-0.6cm}
-      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=7,results="asis">>=  
+      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
     @      
     \vspace*{-0.6cm} 
     \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
   \end{minipage}
-  \begin{minipage}[c]{0.50\textwidth} % 
+  \begin{minipage}[c]{0.45\textwidth} % 
     \center{\color{blue!50!black} \textbf{Population employed in services sector \\ \footnotesize(\% total employed population)}}
     \vspace*{-0.6cm}
       <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
@@ -231,7 +231,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.875\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-   \LARGE{\textcolor[HTML]{22A6F5}{FINANCE}}
+   \Large{\textcolor[HTML]{22A6F5}{FINANCE}}
   \end{flushleft} 
   %\vspace{0.5cm}
   %\begin{minipage}[c]{0.75\textwidth} 
@@ -282,7 +282,7 @@ date <- Sys.Date()
 \begin{minipage}[b]{0.875\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{MARKETS}}
+    \Large{\textcolor[HTML]{22A6F5}{MARKETS}}
   \end{flushleft}
   \vspace{0.5cm}
   \begin{minipage}[c]{0.48\textwidth} % WEF Radar
@@ -318,11 +318,12 @@ date <- Sys.Date()
 {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
 
 %% Culture --------------------------------------------
+
 \vspace{2ex}
 \begin{minipage}[c]{0.765\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{CULTURE}}
+    \Large{\textcolor[HTML]{22A6F5}{CULTURE}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   % Table 2
@@ -338,7 +339,6 @@ date <- Sys.Date()
   @
   \vspace*{-0.5cm}
 \end{minipage}
-    
 
 {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
 
@@ -347,7 +347,7 @@ date <- Sys.Date()
 \begin{minipage}[c]{0.765\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
-    \LARGE{\textcolor[HTML]{22A6F5}{SUPPORTS}}
+    \Large{\textcolor[HTML]{22A6F5}{SUPPORTS}}
   \end{flushleft}
   %\vspace*{-0.4cm}
   % Table 2
