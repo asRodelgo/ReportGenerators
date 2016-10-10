@@ -66,7 +66,7 @@ doing_business_table(couName)
 bar_facewrap_chart(couName, "Human capital","bar1")
 
 ## ---- pie_chart_double_Human ----
-pie_chart_double(couName, "Human capital","figure6")
+pie_chart_regular(couName, "Human capital","figure6")
 
 ########## Finance ##########
 

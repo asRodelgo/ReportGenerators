@@ -971,3 +971,106 @@ pie_chart_double <- function(couName,section,table){
   
 }
 
+## ---- pie_chart_regular ----
+pie_chart_regular <- function(couName,section,table){      
+  
+  cou <- .getCountryCode(couName)
+  
+  data <- Entrepr_data %>%
+    filter(CountryCode==cou & Section == section & Subsection==table)
+  data <- filter(data, !(is.na(Observation)))
+  data <- mutate(data, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+  
+  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeByIncome  # obtain the region for the selected country
+  # country and Region descriptors
+  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
+  region <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionShortIncome) 
+  # filter the data
+  dataRegion <- Entrepr_data %>%
+    filter(CountryCode==couRegion & Section == section & Subsection==table)
+  dataRegion <- filter(dataRegion, !(is.na(Observation)))
+  dataRegion <- mutate(dataRegion, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+  
+  if (nrow(filter(data, CountryCode==cou))>0){
+    data <- filter(data, Period==max(Period))
+    data <- select(data, IndicatorShort, Observation)
+    pickColor <- ifelse(data$Observation > 50,"green","red")
+    data <- rbind(data, c(" ",0)) # add "Other" category
+    data$Observation <- round(as.numeric(data$Observation),2)
+    data$color <- c(pickColor,"lightgrey") # add the color
+    data[data$IndicatorShort==" ",]$Observation <- 100 - sum(data$Observation)
+    
+    # format numbers
+    data$Observation <- format(data$Observation, digits=0, decimal.mark=".",
+                               big.mark=",",small.mark=".", small.interval=3)
+    data$Observation <- as.numeric(data$Observation)
+    data <- data %>%
+      mutate(ObsLabel = paste0(Observation,"%")) %>%
+      arrange(desc(IndicatorShort))
+    
+    data$ObsLabel[2] <- ""
+    
+    dataRegion <- filter(dataRegion, Period==max(Period))
+    dataRegion <- select(dataRegion, IndicatorShort, Observation)
+    pickColor <- ifelse(dataRegion$Observation > 50,"green","red")
+    dataRegion <- rbind(dataRegion, c(" ",0)) # add "Other" category
+    dataRegion$Observation <- round(as.numeric(dataRegion$Observation),2)
+    dataRegion$color <- c(pickColor,"lightgrey") # add the color
+    dataRegion[dataRegion$IndicatorShort==" ",]$Observation <- 100 - sum(dataRegion$Observation)
+    
+    # format numbers
+    dataRegion$Observation <- format(dataRegion$Observation, digits=0, decimal.mark=".",
+                                     big.mark=",",small.mark=".", small.interval=3)
+    dataRegion$Observation <- as.numeric(dataRegion$Observation)
+    dataRegion <- dataRegion %>%
+      mutate(ObsLabel = paste0(Observation,"%")) %>%
+      arrange(desc(IndicatorShort))
+    
+    dataRegion$ObsLabel[2] <- ""
+    
+    
+    p1 <- ggplot(data, aes("",Observation,fill=IndicatorShort)) +
+      geom_bar(width=1,stat="identity") +
+      scale_fill_manual(values = c("lightgrey","blue"),guide=FALSE) +
+      coord_polar("y",start = 0) +
+      geom_text(aes(label=ObsLabel,y=15),
+                size=12,color="white") + 
+      ggtitle(country) + 
+      theme(legend.key=element_blank(),
+            legend.title=element_blank(),
+            panel.border = element_blank(),
+            panel.background = element_blank(),
+            plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+            axis.ticks.x = element_blank(),
+            axis.text.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.y = element_blank()) + 
+      labs(x="",y="")
+    
+    p2 <- ggplot(dataRegion, aes("",Observation,fill=IndicatorShort)) +
+      geom_bar(width=1,stat="identity") +
+      scale_fill_manual(values = c("lightgrey","darkgreen"),guide=FALSE) +
+      coord_polar("y",start = 0) +
+      geom_text(aes(label=ObsLabel,y=15),
+                size=12,color="white") + 
+      ggtitle(region) + 
+      theme(legend.key=element_blank(),
+            legend.title=element_blank(),
+            panel.border = element_blank(),
+            panel.background = element_blank(),
+            plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+            axis.ticks.x = element_blank(),
+            axis.text.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.y = element_blank()) + 
+      labs(x="",y="")
+    
+    grid.arrange(p1,p2,ncol=2)
+    
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+  }  
+  
+}
+
