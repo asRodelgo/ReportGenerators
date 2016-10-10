@@ -172,7 +172,7 @@ date <- Sys.Date()
     \\[6pt]
     \centering
       \resizebox{\textwidth}{!}{%
-    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4,fig.width=8,results="asis">>=  
+    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=6,results="asis">>=  
       @            
       }
     \\[10pt]

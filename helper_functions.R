@@ -202,16 +202,22 @@ line_chart <- function(couName, section, table){
   world <- "All Countries"
   #data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart1")
   data <- data[!(is.na(data$Observation)),]
+  # order lines in chart
+  positions <- c(country,region,world)
+  
   if (nrow(data)>0){
     data <- arrange(data,Period)
-    ggplot(data, aes(x=Period, y=Observation, group=Country)) +
-      geom_line(aes(linetype=Country,colour=Country),size=1.5,stat="identity") +
-      scale_linetype_manual(values = c(1,2,3))+
+    
+    ggplot(data, aes(x=Period, y=Observation, colour=Country, linetype=Country, group=Country)) +
+      geom_line(size=1.5,stat="identity") +
+      scale_color_manual(limits=positions, values=c("orange","lightblue","lightgreen"))+
+      scale_linetype_manual(limits=positions,values = c("solid","dashed","dashed"))+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
+            legend.position="bottom",
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-            axis.text.x = element_text(angle = 90, hjust = 1)) + 
+            axis.text.x = element_text(hjust = 1)) + 
       labs(x="",y=""#,title="Goods Export and Import volume growth, 2012-2015"
       ) + 
       scale_x_discrete(breaks = unique(data$Period)[seq(1,length(unique(data$Period)),3)]) 
@@ -463,8 +469,9 @@ bar_facewrap_chart <- function(couName, section, table){
     data$IndicatorShort <- gsub(" index","",tolower(data$IndicatorShort))
     # order the factors
     data$Country = factor(as.character(data$Country), 
-                          levels = c(unique(as.character(data[data$CountryCode==cou,]$Country)), 
-                                     as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country))))
+                          levels = c(as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)),
+                                     unique(as.character(data[data$CountryCode==cou,]$Country))))
+    order_legend <- c(couName,as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)))
     
     ggplot(data, aes(x=Country,y=Observation,fill=Country)) +
       geom_bar(position="dodge",stat="identity") +
@@ -479,7 +486,7 @@ bar_facewrap_chart <- function(couName, section, table){
             axis.ticks.y = element_blank(),
             axis.text.y = element_blank()) + 
       labs(x="",y="")+#,title="World Governance Indicators")+
-      scale_fill_manual(values = c("orange", "lightblue", "brown","lightgreen","pink"))
+      scale_fill_manual(breaks=order_legend,values = c("lightblue", "brown","lightgreen","pink","orange"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
