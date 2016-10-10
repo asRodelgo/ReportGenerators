@@ -214,7 +214,7 @@ line_chart <- function(couName, section, table){
       scale_linetype_manual(limits=positions,values = c("solid","dashed","dashed"))+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
-            legend.position="bottom",
+            legend.position="top",
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
             axis.text.x = element_text(hjust = 1)) + 
@@ -472,6 +472,9 @@ bar_facewrap_chart <- function(couName, section, table){
                           levels = c(as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)),
                                      unique(as.character(data[data$CountryCode==cou,]$Country))))
     order_legend <- c(couName,as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)))
+    
+    require(stringr) # to wrap label text
+    data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 20))
     
     ggplot(data, aes(x=Country,y=Observation,fill=Country)) +
       geom_bar(position="dodge",stat="identity") +
@@ -997,7 +1000,7 @@ pie_chart_regular <- function(couName,section,table){
     pickColor <- ifelse(data$Observation > 50,"green","red")
     data <- rbind(data, c(" ",0)) # add "Other" category
     data$Observation <- round(as.numeric(data$Observation),2)
-    data$color <- c(pickColor,"lightgrey") # add the color
+    data$color <- c(pickColor,"#f1f3f3") # add the color
     data[data$IndicatorShort==" ",]$Observation <- 100 - sum(data$Observation)
     
     # format numbers
@@ -1015,7 +1018,7 @@ pie_chart_regular <- function(couName,section,table){
     pickColor <- ifelse(dataRegion$Observation > 50,"green","red")
     dataRegion <- rbind(dataRegion, c(" ",0)) # add "Other" category
     dataRegion$Observation <- round(as.numeric(dataRegion$Observation),2)
-    dataRegion$color <- c(pickColor,"lightgrey") # add the color
+    dataRegion$color <- c(pickColor,"#f1f3f3") # add the color
     dataRegion[dataRegion$IndicatorShort==" ",]$Observation <- 100 - sum(dataRegion$Observation)
     
     # format numbers
@@ -1031,7 +1034,7 @@ pie_chart_regular <- function(couName,section,table){
     
     p1 <- ggplot(data, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("lightgrey","blue"),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=15),
                 size=12,color="white") + 
@@ -1040,7 +1043,7 @@ pie_chart_regular <- function(couName,section,table){
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+            plot.title = element_text(lineheight=.8, size = 25, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),
@@ -1049,7 +1052,7 @@ pie_chart_regular <- function(couName,section,table){
     
     p2 <- ggplot(dataRegion, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("lightgrey","darkgreen"),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3","darkgreen"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=15),
                 size=12,color="white") + 
@@ -1058,7 +1061,7 @@ pie_chart_regular <- function(couName,section,table){
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+            plot.title = element_text(lineheight=.8, size = 25, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),

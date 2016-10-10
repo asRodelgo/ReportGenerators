@@ -129,7 +129,7 @@ date <- Sys.Date()
 
 %% Policy --------------------------------------------
 
-\begin{minipage}[c]{0.875\textwidth}
+\begin{minipage}[c]{0.95\textwidth}
   \begin{flushleft}  
     \Large{\textcolor[HTML]{22A6F5}{POLICY}}
   \end{flushleft}
@@ -137,100 +137,78 @@ date <- Sys.Date()
   \begin{minipage}[c]{0.55\textwidth}
     \small{\textcolor[HTML]{818181}{GOVERNMENT INDEXES}}
     \vspace{1ex}
-    <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=6,results="asis">>=  
+    <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2.7,fig.width=6,results="asis">>=  
     @      
-    %\\[10pt] 
-    \footnotesize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
   \begin{minipage}[c]{0.45\textwidth}
+    %\vspace{-1ex}
     \small{\textcolor[HTML]{818181}{INVESTMENT CLIMATE}}
     \vspace{1ex}
-    %\begin{minipage}[c]{0.32\textwidth}
     <<bar_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=6,results="asis">>=  
     @
-    %\end{minipage}
-    %\begin{minipage}[c]{0.32\textwidth}
-%    <<combo_percent_Policy2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
-%    @
-%    \end{minipage}
-%    \begin{minipage}[c]{0.32\textwidth}
-%    <<combo_percent_Policy3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=6,results="asis">>=  
-%    @
-%    \end{minipage}  
+    \vspace{-2ex}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
 \end{minipage}
-%' \begin{minipage}[c]{0.11\textwidth}
-%'   \vspace*{+1cm}
-%'   <<sparklines_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
-%'   @
-%'   \vspace*{-0.5cm}
-%' \end{minipage}
 
-\begin{minipage}[b]{0.875\textwidth}
+\begin{minipage}[b]{0.95\textwidth}
   \vspace{0.8cm}
-  \begin{minipage}[c]{0.46\textwidth} 
+  \begin{minipage}[c]{0.43\textwidth} 
     \small{\textcolor[HTML]{818181}{COST OF BUSINESS STARTUP PROCEDURES \\ \% of GNI per capita}}
-        %\vspace{3ex}
-    \\[6pt]
-    \centering
-      \resizebox{\textwidth}{!}{%
-    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=6,results="asis">>=  
+    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=6,results="asis">>=  
       @            
-      }
-    \\[10pt]
-  %\hspace*{0.5cm}
-    \footnotesize{\href{http://wits.worldbank.org}{Source: World Integrated Trade Solution (WITS)}} 
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}} 
   \end{minipage}
-  \begin{minipage}[c]{0.55\textwidth} % Doing Business table
+  \begin{minipage}[c]{0.56\textwidth} % Doing Business table
     %\vspace*{-0.1cm}
     %\begin{flushleft}
     \small{\textcolor[HTML]{818181}{DOING BUSINESS 2015}}
     %\end{flushleft}
-    \\[10pt]
-    \centering
+   \\[4pt]
+  %  \centering
       \resizebox{\textwidth}{!}{%
       <<doing_business_table,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
         @          
       }
-    \\[15pt]
+    \\[6pt]
      %\hspace*{0.5cm} 
-     \raggedright{\footnotesize{\href{http://www.doingbusiness.org/data}{Source: Doing Busines Report 2015}}}
+     \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
 \end{minipage}
-
-{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+%\vspace{1ex}
+%{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{20cm}{0.3pt}}} % horiz line
 
 %% Human capital --------------------------------------------
 
-\begin{minipage}[b]{0.875\textwidth}
-   \vspace{2ex}
+\begin{minipage}[b]{0.95\textwidth}
+   \vspace{5ex}
    \begin{flushleft}  
      \Large{\textcolor[HTML]{22A6F5}{HUMAN CAPITAL}}
    \end{flushleft} 
-\vspace{0.5cm}
+%\vspace{0.5cm}
   \begin{minipage}[c]{0.55\textwidth} % WEF Radar
     \small{\textcolor[HTML]{818181}{AVAILABILITY OF SKILLED LABOR AND EDUCATION \\ \footnotesize(1-7, 7 = best)}}
-    %\vspace*{-0.6cm}
-      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=7,results="asis">>=  
+      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.2,fig.width=7,results="asis">>=  
     @      
-    \vspace*{-0.6cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    %\vspace*{-0.6cm} 
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
   \begin{minipage}[c]{0.45\textwidth} % 
     \small{\textcolor[HTML]{818181}{POPULATION EMPLOYED IN SERVICES SECTOR \\ \footnotesize(\% total employed population)}}
     \vspace*{-0.6cm}
-      <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.5,fig.width=7.5,results="asis">>=  
+      <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.6,fig.width=7.5,results="asis">>=  
     @      
     \vspace*{-1cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
 \end{minipage}  
 
-{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
+%{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
 
 %% Finance --------------------------------------------
 
-\begin{minipage}[c]{0.875\textwidth}
+\begin{minipage}[c]{0.95\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
    \Large{\textcolor[HTML]{22A6F5}{FINANCE}}
@@ -247,7 +225,7 @@ date <- Sys.Date()
       @      
       }
     \vspace*{-0.2cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
     \end{minipage}
     \begin{minipage}[c]{0.11\textwidth}
       \vspace*{+0.5cm}
@@ -257,7 +235,7 @@ date <- Sys.Date()
     \end{minipage}
 \end{minipage}
   
-\begin{minipage}[c]{0.875\textwidth} % 
+\begin{minipage}[c]{0.95\textwidth} % 
   \vspace*{0.3cm}
   \begin{minipage}[c]{0.49\textwidth} % 
     \small{\textcolor[HTML]{818181}{INFORMAL INVESTOR RATE \\ \footnotesize(\% employed population)}}
@@ -265,7 +243,7 @@ date <- Sys.Date()
     <<line_chart_Finance1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=5.5,results="asis">>=  
     @      
     %\vspace*{-0.6cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
   \begin{minipage}[c]{0.49\textwidth} % 
     \small{\textcolor[HTML]{818181}{LENDING INTEREST RATE}}
@@ -273,7 +251,7 @@ date <- Sys.Date()
     <<line_chart_Finance2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=5.5,results="asis">>=  
     @      
     %\vspace*{-0.6cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
 \end{minipage}  
 
@@ -281,7 +259,7 @@ date <- Sys.Date()
 
 %% Markets --------------------------------------------
 \vspace{2ex}
-\begin{minipage}[b]{0.875\textwidth}
+\begin{minipage}[b]{0.95\textwidth}
   \vspace{2ex}
   \begin{flushleft}  
     \Large{\textcolor[HTML]{22A6F5}{MARKETS}}
@@ -293,7 +271,7 @@ date <- Sys.Date()
       <<radar_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=7,results="asis">>=  
     @      
     \vspace*{-0.6cm} 
-    \hspace*{0.3cm} \raggedright\footnotesize{\href{http://www.weforum.org/global-competitiveness-report-2015-2016}{Source: WEF Global Competitiveness Report 2015}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
   \begin{minipage}[c]{0.50\textwidth} % 
   %\vspace*{0.5cm}
@@ -313,7 +291,7 @@ date <- Sys.Date()
       @            
     \end{minipage}  
     %\hspace*{0.5cm} 
-    \raggedright\footnotesize{\href{http://lpi.worldbank.org}{Source: Logistics Performance Index (World Bank)}}
+    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
   \end{minipage}
 \end{minipage}  
 
