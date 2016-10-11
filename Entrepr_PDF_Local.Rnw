@@ -219,26 +219,28 @@ date <- Sys.Date()
 
 \begin{figure}
 \vspace*{-25cm}
+\hspace*{+1cm}
 \begin{minipage}[c]{0.95\textwidth}
   \begin{minipage}[c]{0.95\textwidth}
     %\vspace{2ex}
-    %\begin{flushleft}  
-     \hspace{7ex}\Large{\textcolor[HTML]{22A6F5}{FINANCE}}
-     
-     \hspace{7ex}\small{\textcolor[HTML]{818181}{FDI, PUBLIC CAPITAL MARKET AND VENTURE CAPITAL}}
+    \begin{flushleft}  
+     \Large{\textcolor[HTML]{22A6F5}{FINANCE}}
+    \end{flushleft} 
+     \vspace{1ex}
+     \small{\textcolor[HTML]{818181}{FDI, PUBLIC CAPITAL MARKET AND VENTURE CAPITAL}}
       \\[4pt]
       %\\ \footnotesize(\% GDP)}}
       %\vspace*{-0.6cm}
-      \begin{minipage}[c]{0.80\textwidth}  
+      \begin{minipage}[c]{0.85\textwidth}  
       \centering
         \resizebox{\textwidth}{!}{
-        <<table_time_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
+        <<table_time_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',results="asis">>=  
         @      
         }
       \vspace*{-0.2cm} 
       \hspace{8ex}\scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
       \end{minipage}
-      \begin{minipage}[c]{0.11\textwidth}
+      \begin{minipage}[c]{0.13\textwidth}
         \vspace*{+0.5cm}
         <<sparklines_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4,fig.width=4,results="asis">>=  
         @
