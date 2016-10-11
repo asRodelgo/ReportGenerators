@@ -417,7 +417,7 @@ bar_chart <- function(couName,section,table){
     
     require(stringr) # to wrap label text
     data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 20))
-    data_grey <- data.frame(IndicatorShort=data$IndicatorShort,Observation=rep(100,3))
+    data_grey <- data.frame(IndicatorShort=data$IndicatorShort,Observation=rep(100,length(table)))
     
     #data <- mutate(data, id = seq(1,nrow(data),1))
     ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
@@ -1146,19 +1146,21 @@ pie_chart_regular <- function(couName,section,table){
     
     #if (section=="Markets")  thisColor = "blue"
     #else thisColor = "darkgreen"
+    #par(#mar=c(0,5,5,5),
+    #    oma=c(0,5,5,5))
     
     p1 <- ggplot(data1, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
       scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=10),
-                size=8,color="white") + 
+                size=5,color="white") + 
       ggtitle(data1$IndicatorShort) + 
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(lineheight=.8, size = 15, colour = "#818181"),
+            plot.title = element_text(lineheight=.8, size = 12, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),
@@ -1170,13 +1172,13 @@ pie_chart_regular <- function(couName,section,table){
       scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=10),
-                size=8,color="white") + 
+                size=5,color="white") + 
       ggtitle(data2$IndicatorShort) + 
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(lineheight=.8, size = 15, colour = "#818181"),
+            plot.title = element_text(lineheight=.8, size = 12, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),

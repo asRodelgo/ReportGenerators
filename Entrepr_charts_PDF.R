@@ -94,6 +94,9 @@ table_region(couName, "Markets","table1")
 ## ---- pie_chart_double_Markets ----
 pie_chart_regular(couName, "Markets",c("combo1","combo2"))
 
+## ---- bar_chart_Markets ----
+bar_chart(couName,"Markets",c("combo1","combo2"))
+
 # ## ---- combo_percent_Markets1 ----
 # combo_percent(couName, "Markets","combo1")
 # #pie_chart_double(couName, "Markets","combo1")
