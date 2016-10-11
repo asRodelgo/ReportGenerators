@@ -209,24 +209,24 @@ date <- Sys.Date()
 \end{minipage}  
 
 %{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
-%\newpage
+\clearpage
 %% Finance --------------------------------------------
 \begin{figure}
-  \vspace{+18cm} % move down this figure
+  \vspace{80ex} % move down this figure
   %\hspace{-7ex} % move left this figure
   \includegraphics[width=21.7cm,height=10.5cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_grey.png}
 \end{figure}
 
 \begin{figure}
-  \vspace*{-30cm}
+\vspace*{-25cm}
+\begin{minipage}[c]{0.95\textwidth}
   \begin{minipage}[c]{0.95\textwidth}
-    \vspace{2ex}
-    \begin{flushleft}  
-     \Large{\textcolor[HTML]{22A6F5}{FINANCE}}
-    \end{flushleft} 
-    %\vspace{0.5cm}
-    %\begin{minipage}[c]{0.75\textwidth} 
-      \small{\textcolor[HTML]{818181}{FDI, PUBLIC CAPITAL MARKET AND VENTURE CAPITAL}}
+    %\vspace{2ex}
+    %\begin{flushleft}  
+     \hspace{7ex}\Large{\textcolor[HTML]{22A6F5}{FINANCE}}
+     
+     \hspace{7ex}\small{\textcolor[HTML]{818181}{FDI, PUBLIC CAPITAL MARKET AND VENTURE CAPITAL}}
+      \\[4pt]
       %\\ \footnotesize(\% GDP)}}
       %\vspace*{-0.6cm}
       \begin{minipage}[c]{0.80\textwidth}  
@@ -236,7 +236,7 @@ date <- Sys.Date()
         @      
         }
       \vspace*{-0.2cm} 
-      \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+      \hspace{8ex}\scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
       \end{minipage}
       \begin{minipage}[c]{0.11\textwidth}
         \vspace*{+0.5cm}
@@ -354,7 +354,7 @@ date <- Sys.Date()
     @
     \vspace*{-0.5cm}
   \end{minipage}
-
+\end{minipage}
   %%% footer ----------------------------------
   \vspace{2ex}
   \begin{minipage}[c]{0.33\textwidth}
