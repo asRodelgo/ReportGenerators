@@ -55,22 +55,28 @@ figure_sparkline <- function(couName,table){
     }
     
     # Ad-hoc shorten some indicatores and units names:
+    if (table == "figure1"){
+      indicator <- "Tech Startups"
+    }
     if (table == "figure2"){
-      indicator <- "Ease of Doing Business"
+      indicator <- "Doing Business"
       unit <- "1=most business-friendly regulat."
     }
     if (table == "figure3"){
-      indicator <- "Broadband Internet Subs."
+      indicator <- "Broadband Internet"
+      unit <- "Subscriptions per 100 pop."
     }
     if (table == "figure4"){
-      indicator <- "Avail. of Scientists & Engineers"
+      indicator <- "Scientists & Engineers"
+      unit <- "Availability 1-7, 7=best"
     }
     if (table == "figure5"){
-      indicator <- "Tertiary education enrollment"
-      unit <- "Percent of population"
+      indicator <- "Tertiary education"
+      unit <- "Enrollments in percent of pop."
     }
     if (table == "figure6"){
-      indicator <- "Venture Capital Avail."
+      indicator <- "Venture Capital"
+      unit <- "Availability 1-7, 7=best"
     }
     
     # Print the combo -----------------------------------------------
@@ -80,8 +86,8 @@ figure_sparkline <- function(couName,table){
     
     # print indicator name
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1.1,indicator, col="darkblue", cex=7)
-    graphics::text(1.5, 0.8,paste0(unit, " (",dataPeriod,")"), col="darkblue", cex=5)
+    graphics::text(1.5, 1.1,indicator, col="#818181", cex=10)
+    graphics::text(1.5, 0.8,paste0(unit, " (",dataPeriod,")"), col="#818181", cex=5)
     # print data point and rank
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     graphics::text(1.5, 1,dataPoint, col="#22a6f5", cex=18)
