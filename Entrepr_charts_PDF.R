@@ -66,7 +66,7 @@ doing_business_table(couName)
 bar_facewrap_chart(couName, "Human capital","bar1")
 
 ## ---- pie_chart_double_Human ----
-pie_chart_regular(couName, "Human capital","figure6")
+pie_chart_region(couName, "Human capital","figure6")
 
 ########## Finance ##########
 
@@ -91,12 +91,15 @@ radar_chart(couName, "Markets","radar1")
 ## ---- table_region_Markets ----
 table_region(couName, "Markets","table1")
 
-## ---- combo_percent_Markets1 ----
-combo_percent(couName, "Markets","combo1")
-#pie_chart_double(couName, "Markets","combo1")
+## ---- pie_chart_double_Markets ----
+pie_chart_regular(couName, "Markets",c("combo1","combo2"))
 
-## ---- combo_percent_Markets2 ----
-combo_percent(couName, "Markets","combo2")
+# ## ---- combo_percent_Markets1 ----
+# combo_percent(couName, "Markets","combo1")
+# #pie_chart_double(couName, "Markets","combo1")
+# 
+# ## ---- combo_percent_Markets2 ----
+# combo_percent(couName, "Markets","combo2")
 #pie_chart_double(couName, "Markets","combo2")
 
 ########## Culture ##########

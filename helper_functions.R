@@ -144,7 +144,10 @@ table_time <- function(couName,section, table){
   #keep only periods of interest in data
   data <- filter(data, Period > (as.numeric(thisYear) - 6))
   # Scale Observations
-  data <- mutate(data, ObsScaled = Observation)
+  data <- mutate(data, ObsScaled = ifelse(grepl("current US",Unit),Observation/1000000000,Observation),
+                 Unit = ifelse(grepl("current US",Unit),"USD billions",Unit),
+                 IndicatorShort = paste0(IndicatorShort, ", ",Unit))
+  
   data <- arrange(data, Key)
   data <- select(data, Key, IndicatorShort, Period, ObsScaled)
   # restrict to 2 decimal places
@@ -154,12 +157,12 @@ table_time <- function(couName,section, table){
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                            big.mark=",",small.mark=".", small.interval=3)
   
-  for (i in 1:nrow(data)){
-    
-    data$IndicatorShort[i] <- ifelse(!is.na(merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i]),
-                                     paste0(data$IndicatorShort[i]," \\large{[", merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i],"]}"),
-                                     data$IndicatorShort[i])  
-  }
+#   for (i in 1:nrow(data)){
+#     
+#     data$IndicatorShort[i] <- ifelse(!is.na(merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i]),
+#                                      paste0(data$IndicatorShort[i]," \\large{[", merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i],"]}"),
+#                                      data$IndicatorShort[i])  
+#   }
   # escape reserved characters
   data$IndicatorShort <- gsub("%", "\\%", data$IndicatorShort, fixed=TRUE)
   data$IndicatorShort <- gsub("&", "\\&", data$IndicatorShort, fixed=TRUE)
@@ -980,13 +983,13 @@ pie_chart_double <- function(couName,section,table){
   
 }
 
-## ---- pie_chart_regular ----
-pie_chart_regular <- function(couName,section,table){      
+## ---- pie_chart_region ----
+pie_chart_region <- function(couName,section,table){      
   
   cou <- .getCountryCode(couName)
   
   data <- Entrepr_data %>%
-    filter(CountryCode==cou & Section == section & Subsection==table)
+    filter(CountryCode==cou & Section == section & Subsection %in% table)
   data <- filter(data, !(is.na(Observation)))
   data <- mutate(data, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
   
@@ -1037,6 +1040,8 @@ pie_chart_regular <- function(couName,section,table){
     
     dataRegion$ObsLabel[2] <- ""
     
+  #  if (section=="Markets")  thisColor = "blue"
+  #  else thisColor = "darkgreen"
     
     p1 <- ggplot(data, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
@@ -1058,7 +1063,7 @@ pie_chart_regular <- function(couName,section,table){
     
     p2 <- ggplot(dataRegion, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("#f1f3f3","darkgreen"),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3",thisColor),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=15),
                 size=12,color="white") + 
@@ -1083,3 +1088,106 @@ pie_chart_regular <- function(couName,section,table){
   
 }
 
+## ---- pie_chart_regular ----
+pie_chart_regular <- function(couName,section,table){      
+  
+  cou <- .getCountryCode(couName)
+  
+  data <- Entrepr_data %>%
+    filter(CountryCode==cou & Section == section & Subsection %in% table)
+  data <- filter(data, !(is.na(Observation)))
+  data <- mutate(data, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+  
+  # country and Region descriptors
+  #country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
+  # filter the data
+  if (nrow(filter(data, CountryCode==cou))>0){
+    data <- filter(data, Period==max(Period))
+    data$IndicatorShort <- gsub(" (%)","",data$IndicatorShort,fixed=TRUE)
+    data$IndicatorShort <- gsub("with","having",data$IndicatorShort,fixed=TRUE)
+    require(stringr) # to wrap label text
+    data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 29))
+    
+    data1 <- data[1,]
+    data1 <- select(data1, IndicatorShort, Observation)
+    pickColor <- ifelse(data1$Observation > 50,"green","red")
+    data1 <- rbind(data1, c(" ",0)) # add "Other" category
+    data1$Observation <- round(as.numeric(data1$Observation),2)
+    data1$color <- c(pickColor,"#f1f3f3") # add the color
+    data1[data1$IndicatorShort==" ",]$Observation <- 100 - sum(data1$Observation)
+    
+    # format numbers
+    data1$Observation <- format(data1$Observation, digits=0, decimal.mark=".",
+                               big.mark=",",small.mark=".", small.interval=3)
+    data1$Observation <- as.numeric(data1$Observation)
+    data1 <- data1 %>%
+      mutate(ObsLabel = paste0(Observation,"%")) %>%
+      arrange(desc(IndicatorShort))
+    
+    data1$ObsLabel[2] <- ""
+    
+    data2 <- data[2,]
+    data2 <- select(data2, IndicatorShort, Observation)
+    pickColor <- ifelse(data2$Observation > 50,"green","red")
+    data2 <- rbind(data2, c(" ",0)) # add "Other" category
+    data2$Observation <- round(as.numeric(data2$Observation),2)
+    data2$color <- c(pickColor,"#f1f3f3") # add the color
+    data2[data2$IndicatorShort==" ",]$Observation <- 100 - sum(data2$Observation)
+    
+    # format numbers
+    data2$Observation <- format(data2$Observation, digits=0, decimal.mark=".",
+                                big.mark=",",small.mark=".", small.interval=3)
+    data2$Observation <- as.numeric(data2$Observation)
+    data2 <- data2 %>%
+      mutate(ObsLabel = paste0(Observation,"%")) %>%
+      arrange(desc(IndicatorShort))
+    
+    data2$ObsLabel[2] <- ""
+    
+    #if (section=="Markets")  thisColor = "blue"
+    #else thisColor = "darkgreen"
+    
+    p1 <- ggplot(data1, aes("",Observation,fill=IndicatorShort)) +
+      geom_bar(width=1,stat="identity") +
+      scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
+      coord_polar("y",start = 0) +
+      geom_text(aes(label=ObsLabel,y=10),
+                size=8,color="white") + 
+      ggtitle(data1$IndicatorShort) + 
+      theme(legend.key=element_blank(),
+            legend.title=element_blank(),
+            panel.border = element_blank(),
+            panel.background = element_blank(),
+            plot.title = element_text(lineheight=.8, size = 15, colour = "#818181"),
+            axis.ticks.x = element_blank(),
+            axis.text.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.y = element_blank()) + 
+      labs(x="",y="")
+    
+    p2 <- ggplot(data2, aes("",Observation,fill=IndicatorShort)) +
+      geom_bar(width=1,stat="identity") +
+      scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
+      coord_polar("y",start = 0) +
+      geom_text(aes(label=ObsLabel,y=10),
+                size=8,color="white") + 
+      ggtitle(data2$IndicatorShort) + 
+      theme(legend.key=element_blank(),
+            legend.title=element_blank(),
+            panel.border = element_blank(),
+            panel.background = element_blank(),
+            plot.title = element_text(lineheight=.8, size = 15, colour = "#818181"),
+            axis.ticks.x = element_blank(),
+            axis.text.x = element_blank(),
+            axis.ticks.y = element_blank(),
+            axis.text.y = element_blank()) + 
+      labs(x="",y="")
+    
+    grid.arrange(p1,p2,ncol=2)
+    
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+  }  
+  
+}
