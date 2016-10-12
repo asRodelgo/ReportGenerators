@@ -71,7 +71,7 @@ date <- Sys.Date()
 
 \begin{figure}
 \begin{minipage}[t]{0.99\textwidth} % top section
-  \vspace*{-26.5cm}
+  \vspace*{-26.8cm}
   \begin{minipage}[t]{0.54\textwidth} % top section
     \vspace{-1ex}
     \begin{minipage}[t]{0.99\textwidth} % top section
@@ -97,30 +97,36 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.29\textwidth}
   <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='right',results="asis">>=  
     @      
+    \hspace{2ex}\tiny{\href{https://data.crunchbase.com/docs/2013-snapshot}{\textcolor[HTML]{22A6F5}{Source: Crunchbase snapshot}}}
     \vspace{3ex}
     \end{minipage}
     \begin{minipage}[c]{0.29\textwidth}
   <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \hspace{2ex}\tiny{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{Source: WEF-GCI Report}}}
     \vspace{3ex}
     \end{minipage}
     \begin{minipage}[c]{0.29\textwidth}
   <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \hspace{2ex}\tiny{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{Source: World Bank WDI}}}
     \vspace{3ex}
     \end{minipage}
     
     \begin{minipage}[c]{0.29\textwidth}
   <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \hspace{2ex}\tiny{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{Source: WEF-GCI Report}}}
     \end{minipage}
     \begin{minipage}[c]{0.29\textwidth}
   <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \hspace{2ex}\tiny{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{Source: World Bank WDI}}}
     \end{minipage}
     \begin{minipage}[c]{0.29\textwidth}
   <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=9,fig.width=12,fig.align='center',results="asis">>=  
     @      
+    \hspace{2ex}\tiny{\href{http://www.meetup.com/en-US/meetup_api/}{\textcolor[HTML]{22A6F5}{Source: Meetup API}}}
     \end{minipage}
   \end{minipage}
 \end{minipage}
@@ -139,7 +145,7 @@ date <- Sys.Date()
     \vspace{1ex}
     <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=2.7,fig.width=6,results="asis">>=  
     @      
-   \hspace{4ex}\scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+   \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/WEF_NRI_2012-2015_Historical_Dataset.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: GLOBAL INFORMATION TECHNOLOGY REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
   \end{minipage}
   \begin{minipage}[c]{0.43\textwidth}
     %\vspace{-1ex}
