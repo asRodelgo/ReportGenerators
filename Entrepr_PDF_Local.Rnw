@@ -66,13 +66,13 @@ date <- Sys.Date()
 \begin{figure}
   \vspace{-1ex} % move up this figure
   %\hspace{-7ex} % move left this figure
-  \includegraphics[width=21.7cm,height=6cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/header_background_blue_white.png}
+  \includegraphics[width=21.8cm,height=6cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/header_background_lightblue_white.png}
 \end{figure}
 
 \begin{figure}
 \begin{minipage}[t]{0.99\textwidth} % top section
   \vspace*{-26.5cm}
-  \begin{minipage}[t]{0.53\textwidth} % top section
+  \begin{minipage}[t]{0.54\textwidth} % top section
     \vspace{-1ex}
     \begin{minipage}[t]{0.99\textwidth} % top section
       \hspace{5ex}\raggedright\Large{\color{white}Entrepreneurship At a Glance}
@@ -212,9 +212,9 @@ date <- Sys.Date()
 \clearpage
 %% Finance --------------------------------------------
 \begin{figure}
-  \vspace{105ex} % move down this figure
+  \vspace{102ex} % move down this figure
   %\hspace{-7ex} % move left this figure
-  \includegraphics[width=21.7cm,height=11.5cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_grey.png}
+  \includegraphics[width=21.7cm,height=11.5cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_lightgrey.png}
 \end{figure}
 
 \begin{figure}
@@ -242,8 +242,8 @@ date <- Sys.Date()
       \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
       \end{minipage}
       \begin{minipage}[c]{0.13\textwidth}
-        \vspace*{+0.5cm}
-        <<sparklines_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3,fig.width=4,results="asis">>=  
+        \vspace*{+0.3cm}
+        <<sparklines_Finance,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
         @
         \vspace*{-0.5cm}
       \end{minipage}
@@ -254,7 +254,7 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.49\textwidth} % 
       \small{\textcolor[HTML]{818181}{INFORMAL INVESTOR RATE \footnotesize(\% employed population)}}
       %\vspace*{-0.4cm}
-      <<line_chart_Finance1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=5.5,results="asis">>=  
+      <<line_chart_Finance1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=6.5,results="asis">>=  
       @      
       \vspace*{-0.2cm} 
       \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
@@ -262,7 +262,7 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.49\textwidth} % 
       \small{\textcolor[HTML]{818181}{LENDING INTEREST RATE}}
       %\vspace*{-0.6cm}
-      <<line_chart_Finance2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=5.5,results="asis">>=  
+      <<line_chart_Finance2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=6.5,results="asis">>=  
       @      
       \vspace*{-0.2cm} 
       \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
@@ -270,7 +270,7 @@ date <- Sys.Date()
   \end{minipage}  
   
  % {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
-  
+  %\color{white} % define color white to contrast with grey background
   %% Markets --------------------------------------------
   \vspace{5ex}
   \begin{minipage}[b]{0.95\textwidth}
@@ -316,14 +316,14 @@ date <- Sys.Date()
   %{\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
 
 %% Culture --------------------------------------------
-
+  %\color{white} % define color white to contrast with grey background
   %\vspace*{-26cm}
   \begin{minipage}[c]{0.83\textwidth}
     \vspace{2ex}
     \begin{flushleft}  
       \Large{\textcolor[HTML]{22A6F5}{CULTURE}}
     \end{flushleft}
-    %\vspace*{-0.4cm}
+    \vspace*{-0.2cm}
     % Table 2
     \centering
     \resizebox{\textwidth}{!}{
@@ -332,13 +332,13 @@ date <- Sys.Date()
     }
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
-    \vspace*{+1.8cm}
-    <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=9,fig.width=5,results="asis">>=  
+    \vspace*{+1.5cm}
+    <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=8.8,fig.width=5,results="asis">>=  
     @
     \vspace*{-0.5cm}
   \end{minipage}
   
-  \vspace{-2ex}
+  \vspace{-1ex}
   \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
  % {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
   
@@ -349,7 +349,7 @@ date <- Sys.Date()
     \begin{flushleft}  
       \Large{\textcolor[HTML]{22A6F5}{SUPPORTS}}
     \end{flushleft}
-    %\vspace*{-0.4cm}
+    \vspace*{-0.2cm}
     % Table 2
     \centering
     \resizebox{\textwidth}{!}{
@@ -358,13 +358,13 @@ date <- Sys.Date()
     }
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
-    \vspace*{+1.6cm}
+    \vspace*{+1.4cm}
     <<sparklines_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
     @
     \vspace*{-0.5cm}
   \end{minipage}
   
-  \vspace{-2ex}
+  \vspace{-1ex}
   \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
 \end{minipage}
 

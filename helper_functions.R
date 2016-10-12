@@ -86,13 +86,13 @@ figure_sparkline <- function(couName,table){
     
     # print indicator name
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1.1,indicator, col="#818181", cex=10)
-    graphics::text(1.5, 0.8,paste0(unit, " (",dataPeriod,")"), col="#818181", cex=5)
+    graphics::text(1.5, 1.1,indicator, col="#22a6f5", cex=10)
+    graphics::text(1.5, 0.7,paste0(unit, " (",dataPeriod,")"), col="#818181", cex=5)
     # print data point and rank
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,dataPoint, col="#22a6f5", cex=18)
+    graphics::text(1.5, 0.95,dataPoint, col="#22a6f5", cex=18)
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1.2,paste0("(Rank: ",rank,"/",rankedTotal,")"), col="grey", cex=7)
+    graphics::text(1.5, 1.1,paste0("(Rank: ",rank,"/",rankedTotal,")"), col="grey", cex=7)
     # plot sparkline  
     par(#sets number of rows in space to number of cols in data frame x
         mar=c(0,5,0,5))#sets margin size for the figures
@@ -184,7 +184,7 @@ table_time <- function(couName,section, table){
   
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
-  rowsSelect <- seq(1,nrow(data),2)
+  rowsSelect <- seq(1,nrow(data)-1,2)
   col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
   data.table <- xtable(data, digits=rep(1,ncol(data)+1)) #control decimals
   align(data.table) <- c('l','>{\\raggedright}p{6in}','r',rep('>{\\raggedleft}p{0.8in}',ncol(data.table)-3),'l')
@@ -314,8 +314,17 @@ table_time_avg <- function(couName,section,table){
   
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
-  rowsSelect <- seq(1,nrow(data),2)
-  col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
+  #if (round(nrow(data)/2,0)>nrow(data)/2){ # odd number
+    rowsSelect <- seq(1,nrow(data)-1,2)
+  #} else{ # even
+  #  rowsSelect <- seq(1,nrow(data)-1,2)
+  #}
+  if (section %in% c("Culture","Supports")){
+    col <- rep("\\rowcolor{white}", length(rowsSelect))  
+  } else {
+    col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))  
+  }
+  
   data.table <- xtable(data, digits=rep(1,ncol(data)+1)) #control decimals
   align(data.table) <- c('l','>{\\raggedright}p{6in}','r',rep('>{\\raggedleft}p{0.8in}',ncol(data.table)-3),'l')
   print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
@@ -561,13 +570,13 @@ radar_chart <- function(couName,section,table){
     layout(matrix(c(1,2),ncol=1), heights =c(4,1))
     par(mar=c(0,1,3,1))
     radarchart(dataTrans, axistype=1, centerzero = FALSE,seg=4, caxislabels=c(" ","","50%","","100%"),
-               plty=c(1,2),plwd=c(6,3),pcol=c("darkblue","red"),pdensity=c(0, 0),
-               cglwd=2,axislabcol="navy", vlabels=data$IndicatorShort, cex.main=1,cex=2.5)
+               plty=c(1,1),plwd=c(6,3),pcol=c("orange","lightblue"),pdensity=c(0, 0),
+               cglwd=2,axislabcol="lightgrey", vlabels=data$IndicatorShort, cex.main=1,cex=2.5)
     #title="WEF Competitiveness Indicators, stage of development (1-7)",
     par(mar=c(0,1,1,1))
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    legend(1,1.5, legend=c(country,region), seg.len=0.5, pch=3, inset=50, 
-           bty="n" ,lwd=3, x.intersp=0.5, horiz=TRUE, col=c("darkblue","red"))
+    legend(1,1.5, legend=c(country,region), seg.len=0.5, pch=19, inset=50, 
+           bty="n" ,lwd=3, x.intersp=0.5, horiz=TRUE, col=c("orange","lightblue"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -713,7 +722,7 @@ table_region <- function(couName,section,table){
     
     # substitute NAs for "---" em-dash
     data[is.na(data)] <- "---"
-    rowsSelect <- seq(1,nrow(data),2)
+    rowsSelect <- seq(1,nrow(data)-1,2)
     col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
     data.table <- xtable(data)
     align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'l')
@@ -805,7 +814,7 @@ doing_business_table <- function(couName){
   
   #align(data.table) <- c('l','l',rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}',"|",rep('>{\\raggedleft}p{0.6in}',2),'>{\\raggedleft}p{0.8in}','r')
   if (nrow(data)>0){
-    rowsSelect <- seq(2,nrow(data),2)
+    rowsSelect <- seq(2,nrow(data)-1,2)
     col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
     data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
     align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
@@ -1045,7 +1054,7 @@ pie_chart_region <- function(couName,section,table){
     
     p1 <- ggplot(data, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3","#22a6f5"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=15),
                 size=12,color="white") + 
@@ -1063,7 +1072,7 @@ pie_chart_region <- function(couName,section,table){
     
     p2 <- ggplot(dataRegion, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("#f1f3f3",thisColor),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3","#22a6f5"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=15),
                 size=12,color="white") + 
@@ -1151,7 +1160,7 @@ pie_chart_regular <- function(couName,section,table){
     
     p1 <- ggplot(data1, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3","#22a6f5"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=10),
                 size=5,color="white") + 
@@ -1169,7 +1178,7 @@ pie_chart_regular <- function(couName,section,table){
     
     p2 <- ggplot(data2, aes("",Observation,fill=IndicatorShort)) +
       geom_bar(width=1,stat="identity") +
-      scale_fill_manual(values = c("#f1f3f3","blue"),guide=FALSE) +
+      scale_fill_manual(values = c("#f1f3f3","#22a6f5"),guide=FALSE) +
       coord_polar("y",start = 0) +
       geom_text(aes(label=ObsLabel,y=10),
                 size=5,color="white") + 
