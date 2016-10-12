@@ -297,6 +297,11 @@ table_time_avg <- function(couName,section,table){
   # remove NAs rows
   #data <- filter(data, !is.na(Observation))
   # calculate average for 1st column
+  data <- mutate(data, Unit = ifelse(grepl("Active population",Unit),"% of TEA",Unit),
+                 IndicatorShort = paste0(IndicatorShort,", ",Unit))
+  data$IndicatorShort <- gsub("Entrepreneurial","Entrepr.", data$IndicatorShort)
+  data$IndicatorShort <- gsub("auditors","audit.", data$IndicatorShort)
+  
   data_avg <- data %>%
     group_by(Key) %>%
     filter(Period < (as.numeric(thisYear)-5)) %>%
@@ -798,6 +803,8 @@ table_region <- function(couName,section,table){
     
     # prepare for table
     data <- merge(data, neighbors, by="CountryCode")
+    data <- mutate(data, Unit = ifelse(grepl("population",Unit),"per 100 pop.",Unit),
+                   IndicatorShort = paste0(IndicatorShort," (",Unit,")"))
     data <- select(data, IndicatorShort, Observation, colName)
     data$Observation <- format(data$Observation, digits=2, decimal.mark=".",
                                big.mark=",",small.mark=".", small.interval=3)

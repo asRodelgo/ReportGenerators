@@ -377,7 +377,7 @@ date <- Sys.Date()
   %%% footer ----------------------------------
   \vspace{4ex}
   \begin{minipage}[c]{0.33\textwidth}
-    \hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.jpg}
+    \hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/WBlogo_Transparent.png}
     %\hspace*{+0.3cm} \includegraphics[width=4cm,left]{/Users/asanchez3/shinyTCMN/www/wb_logo.png}
   \end{minipage}
   \begin{minipage}[c]{0.65\textwidth}
