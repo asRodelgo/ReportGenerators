@@ -143,7 +143,7 @@ date <- Sys.Date()
   \begin{minipage}[c]{0.55\textwidth}
     \hspace{4ex}\small{\textcolor[HTML]{818181}{GOVERNMENT INDEXES}}
     \vspace{1ex}
-    <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=2.7,fig.width=6,results="asis">>=  
+    <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.2,fig.width=7,results="asis">>=  
     @      
    \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/WEF_NRI_2012-2015_Historical_Dataset.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: GLOBAL INFORMATION TECHNOLOGY REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
   \end{minipage}
@@ -151,7 +151,7 @@ date <- Sys.Date()
     %\vspace{-1ex}
     \small{\textcolor[HTML]{818181}{INVESTMENT CLIMATE}}
     \vspace{1ex}
-    <<bar_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=6,results="asis">>=  
+    <<bar_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.7,fig.width=6,results="asis">>=  
     @
     \vspace{-2ex}
     \scriptsize{\href{http://iab.worldbank.org/Data/ExploreTopics/Investing-across-sectors}{\textcolor[HTML]{22A6F5}{SOURCE: INVESTING ACROSS BORDERS}}}
@@ -199,7 +199,7 @@ date <- Sys.Date()
     \hspace{4ex}\small{\textcolor[HTML]{818181}{AVAILABILITY OF SKILLED LABOR AND EDUCATION}} 
     
     \hspace{4ex}\footnotesize{\textcolor[HTML]{818181}{(1-7, 7 = best)}}
-      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.2,fig.width=7,results="asis">>=  
+      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.1,fig.width=7,results="asis">>=  
     @      
     %\vspace*{-0.6cm} 
     \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCE: WEF-GCI REPORT}}}

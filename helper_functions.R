@@ -142,7 +142,7 @@ table_time <- function(couName,section, table){
   data <- filter(data, Period <= (as.numeric(thisYear) + 1))
   
   #keep only periods of interest in data
-  data <- filter(data, Period > (as.numeric(thisYear) - 6))
+  data <- filter(data, Period > (as.numeric(thisYear) - 7))
   # Scale Observations
   data <- mutate(data, ObsScaled = ifelse(grepl("current US",Unit),Observation/1000000000,Observation),
                  Unit = ifelse(grepl("current US",Unit),"USD billions",Unit),
@@ -152,7 +152,7 @@ table_time <- function(couName,section, table){
   data <- select(data, Key, IndicatorShort, Period, ObsScaled)
   # restrict to 2 decimal places
   data$ObsScaled <- round(data$ObsScaled,2)
-  
+  data[is.na(data)] <- "..."
   # format numbers
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                            big.mark=",",small.mark=".", small.interval=3)
@@ -170,6 +170,10 @@ table_time <- function(couName,section, table){
   # final table format
   data <- spread(data, Period, ObsScaled)
   data <- data[,-1] #drop the Key column
+  
+  # remove columns with all NAs
+  data <- data[,!(colSums(data == "...   ")==nrow(data))]
+  
   # dummy columns in to keep the pdf layout fixed to 6 columns
   if (ncol(data)<=5){
     for (j in (ncol(data)+1):7){
@@ -211,16 +215,57 @@ line_chart <- function(couName, section, table){
   world <- "All Countries"
   #data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart1")
   data <- data[!(is.na(data$Observation)),]
-  # order lines in chart
-  positions <- c(country,region,world)
   
+  # order lines in chart and hide elements in legend
   if (nrow(data)>0){
     data <- arrange(data,Period)
     
+    if (nrow(filter(data,CountryCode == cou))>0){
+      if (nrow(filter(data,CountryCode == couRegion))>0){
+        if (nrow(filter(data,CountryCode == "RWe"))>0){
+          values_colors=c("orange","lightblue","lightgreen")
+          values_shapes = c("solid","dashed","dashed")
+          positions <- c(country,region,world)
+        } else {
+          values_colors=c("orange","lightblue")
+          values_shapes = c("solid","dashed")
+          positions <- c(country,region)
+        }
+      } else {
+        if (nrow(filter(data,CountryCode == "RWe"))>0){
+          values_colors=c("orange","lightgreen")
+          values_shapes = c("solid","dashed")
+          positions <- c(country,world)
+        } else {
+          values_colors=c("orange")
+          values_shapes = c("solid")
+          positions <- c(country)
+        }
+      }
+    } else {
+      if (nrow(filter(data,CountryCode == couRegion))>0){
+        if (nrow(filter(data,CountryCode == "RWe"))>0){
+          values_colors=c("lightblue","lightgreen")
+          values_shapes = c("dashed","dashed")
+          positions <- c(region,world)
+        } else {
+          values_colors=c("lightblue")
+          values_shapes = c("dashed")
+          positions <- c(region)
+        }
+      } else {
+        if (nrow(filter(data,CountryCode == "RWe"))>0){
+          values_colors=c("lightgreen")
+          values_shapes = c("dashed")
+          positions <- c(world)
+        } 
+      }
+    }
+    
     ggplot(data, aes(x=Period, y=Observation, colour=Country, linetype=Country, group=Country)) +
       geom_line(size=1.5,stat="identity") +
-      scale_color_manual(limits=positions, values=c("orange","lightblue","lightgreen"))+
-      scale_linetype_manual(limits=positions,values = c("solid","dashed","dashed"))+
+      scale_color_manual(limits=positions, values=values_colors)+
+      scale_linetype_manual(limits=positions,values = values_shapes)+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             legend.position="top",
@@ -425,26 +470,47 @@ bar_chart <- function(couName,section,table){
     }
     
     require(stringr) # to wrap label text
-    data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 20))
-    data_grey <- data.frame(IndicatorShort=data$IndicatorShort,Observation=rep(100,length(table)))
+    data <- mutate(data, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
+    data <- mutate(data, IndicatorShort = str_wrap(paste0(IndicatorShort,", ",Unit), width = 30))
     
-    #data <- mutate(data, id = seq(1,nrow(data),1))
-    ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
-      geom_bar(data=data_grey,color="#f1f3f3",fill = "#f1f3f3",stat="identity") +
-      geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
-      geom_text(data=data, aes(label=paste0(Observation,"%"),y=Observation - max(Observation)*.1),
-                size=6,color="white") + 
-      coord_flip()+
-      theme(legend.key=element_blank(),
-            legend.title=element_blank(),
-            legend.position='none',
-            panel.border = element_blank(),
-            panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-            axis.ticks.x = element_blank(),
-            axis.text.x = element_blank(),
-            axis.text.y = element_text(size = 15)) + 
-      labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
-      )
+    if (section == "Markets"){
+      
+      data_grey <- data.frame(IndicatorShort=data$IndicatorShort,Observation=rep(100,length(table)))
+      #data <- mutate(data, id = seq(1,nrow(data),1))
+      ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
+        geom_bar(data=data_grey,color="#f1f3f3",fill = "#f1f3f3",stat="identity") +
+        geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
+        geom_text(data=data, aes(label=Observation,y=Observation - max(Observation)*.1),
+                  size=6,color="white") + 
+        coord_flip()+
+        theme(legend.key=element_blank(),
+              legend.title=element_blank(),
+              legend.position='none',
+              panel.border = element_blank(),
+              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              axis.ticks.x = element_blank(),
+              axis.text.x = element_blank(),
+              axis.text.y = element_text(size = 15)) + 
+        labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
+        )
+    } else {
+      ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
+        geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
+        geom_text(data=data, aes(label=Observation,y=Observation - max(Observation)*.1),
+                  size=6,color="white") + 
+        coord_flip()+
+        theme(legend.key=element_blank(),
+              legend.title=element_blank(),
+              legend.position='none',
+              panel.border = element_blank(),
+              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              axis.ticks.x = element_blank(),
+              axis.text.x = element_blank(),
+              axis.text.y = element_text(size = 15)) + 
+        labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
+        )
+    }
+    
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     graphics::text(1.5, 1,"Data not available", col="red", cex=2)
@@ -492,22 +558,48 @@ bar_facewrap_chart <- function(couName, section, table){
     order_legend <- c(couName,as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)))
     
     require(stringr) # to wrap label text
-    data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 20))
+    #data <- mutate(data, Country = str_wrap(Country, width = 15))
+    if (section == "Policy"){
+
+      data <- mutate(data, IndicatorShort = str_wrap(paste0(IndicatorShort,", ",Unit), width = 25))
+      
+      ggplot(data, aes(x=Country,y=Observation,fill=Country)) +
+        geom_bar(position="dodge",stat="identity") +
+        #coord_flip()+
+        facet_wrap(~IndicatorShort,scales="free_y") +
+        theme(strip.text.x = element_text(size = 12, colour = "white"),
+              strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
+              legend.key=element_blank(),
+              legend.title=element_blank(),
+              panel.border = element_blank(),
+              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              axis.ticks.y = element_blank(),
+              axis.ticks.x = element_blank(),
+              axis.text.x = element_blank()) + 
+        labs(x="",y="")+#,title="World Governance Indicators")+
+        scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","brown","lightblue","orange"))
+      
+    } else{
+      
+      data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 20))
+      
+      ggplot(data, aes(x=factor(Country),y=Observation,fill=factor(Country))) +
+        geom_bar(position="dodge",stat="identity") +
+        coord_flip()+
+        facet_wrap(~IndicatorShort) +
+        theme(strip.text.x = element_text(size = 12, colour = "white"),
+              strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
+              legend.key=element_blank(),
+              legend.title=element_blank(),
+              panel.border = element_blank(),
+              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              #axis.ticks.y = element_blank(),
+              axis.ticks.y = element_blank(),
+              axis.text.y = element_blank()) + 
+        labs(x="",y="")+#,title="World Governance Indicators")+
+        scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","brown","lightblue","orange"))
+    }
     
-    ggplot(data, aes(x=Country,y=Observation,fill=Country)) +
-      geom_bar(position="dodge",stat="identity") +
-      coord_flip()+
-      facet_wrap(~IndicatorShort) +
-      theme(strip.text.x = element_text(size = 12, colour = "white"),
-            strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
-            legend.key=element_blank(),
-            legend.title=element_blank(),
-            panel.border = element_blank(),
-            panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-            axis.ticks.y = element_blank(),
-            axis.text.y = element_blank()) + 
-      labs(x="",y="")+#,title="World Governance Indicators")+
-      scale_fill_manual(breaks=order_legend,values = c("lightblue", "brown","lightgreen","pink","orange"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
