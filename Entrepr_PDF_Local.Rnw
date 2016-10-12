@@ -154,7 +154,7 @@ date <- Sys.Date()
     <<bar_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.5,fig.width=6,results="asis">>=  
     @
     \vspace{-2ex}
-    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+    \scriptsize{\href{http://iab.worldbank.org/Data/ExploreTopics/Investing-across-sectors}{\textcolor[HTML]{22A6F5}{SOURCE: INVESTING ACROSS BORDERS}}}
   \end{minipage}
 \end{minipage}
 
@@ -166,7 +166,7 @@ date <- Sys.Date()
     \hspace{4ex}\footnotesize{\textcolor[HTML]{818181}{\% of GNI per capita}}
     <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.1,fig.width=6,results="asis">>=  
       @            
-    \hspace{4ex}\scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}} 
+    \hspace{4ex}\scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}} 
   \end{minipage}
   \begin{minipage}[c]{0.55\textwidth} % Doing Business table
     %\vspace*{-0.1cm}
@@ -181,7 +181,7 @@ date <- Sys.Date()
       }
     \\[6pt]
      %\hspace*{0.5cm} 
-     \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+     \scriptsize{\href{http://www.doingbusiness.org}{\textcolor[HTML]{22A6F5}{SOURCE: DOING BUSINESS}}}
   \end{minipage}
 \end{minipage}
 %\vspace{1ex}
@@ -202,7 +202,7 @@ date <- Sys.Date()
       <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.2,fig.width=7,results="asis">>=  
     @      
     %\vspace*{-0.6cm} 
-    \hspace{4ex}\scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+    \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCE: WEF-GCI REPORT}}}
   \end{minipage}
   \begin{minipage}[c]{0.43\textwidth} % 
     \small{\textcolor[HTML]{818181}{POPULATION EMPLOYED IN SERVICES SECTOR \\ \footnotesize(\% total employed population)}}
@@ -210,7 +210,7 @@ date <- Sys.Date()
       <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.6,fig.width=7.5,results="asis">>=  
     @      
     \vspace*{-1cm} 
-    \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+    \scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}}
   \end{minipage}
 \end{minipage}  
 
@@ -245,7 +245,7 @@ date <- Sys.Date()
         }
       %\vspace*{-0.2cm}
       \\[4pt]
-      \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+      \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
       \end{minipage}
       \begin{minipage}[c]{0.13\textwidth}
         \vspace*{+0.3cm}
@@ -258,20 +258,20 @@ date <- Sys.Date()
   \begin{minipage}[c]{0.95\textwidth} % 
     \vspace*{0.6cm}
     \begin{minipage}[c]{0.49\textwidth} % 
-      \small{\textcolor[HTML]{818181}{INFORMAL INVESTOR RATE \footnotesize(\% employed population)}}
+      \small{\textcolor[HTML]{818181}{INFORMAL INVESTORS RATE \footnotesize(\% of 18-64 population)}}
       %\vspace*{-0.4cm}
       <<line_chart_Finance1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=6.5,results="asis">>=  
       @      
       \vspace*{-0.2cm} 
-      \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+      \scriptsize{\href{http://www.gemconsortium.org/data/sets}{\textcolor[HTML]{22A6F5}{SOURCE: GLOBAL ENTREPRENEURSHIP MONITOR - ADULT POPULATION}}}
     \end{minipage}
     \begin{minipage}[c]{0.49\textwidth} % 
-      \small{\textcolor[HTML]{818181}{LENDING INTEREST RATE}}
+      \small{\textcolor[HTML]{818181}{LENDING INTEREST RATES \footnotesize(\% of interest rate)}}
       %\vspace*{-0.6cm}
       <<line_chart_Finance2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=6.5,results="asis">>=  
       @      
       \vspace*{-0.2cm} 
-      \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+      \scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
     \end{minipage}
   \end{minipage}  
   
@@ -291,10 +291,10 @@ date <- Sys.Date()
         <<radar_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=7,results="asis">>=  
       @      
       \vspace*{-0.6cm} 
-      \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+      \scriptsize{\href{http://www.worldbank.org/en/programs/globalfindex}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK - FINDEX}}}
     \end{minipage}
     \begin{minipage}[c]{0.50\textwidth} % 
-      \small{\textcolor[HTML]{818181}{WEB TECHNOLOGIES \& INTERNET}}
+      \small{\textcolor[HTML]{818181}{DIGITAL COMMERCE \& INTERNET ACCESS}}
       \\[8pt]
     %\vspace*{0.5cm}
       %\centering
@@ -315,7 +315,7 @@ date <- Sys.Date()
 %'       \end{minipage}  
       %\hspace*{0.5cm}
       %\vspace{-6ex}
-      \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+      \hspace{4ex}\scriptsize{\href{http://www.enterprisesurveys.org/data/exploretopics/innovation-and-technology}{\textcolor[HTML]{22A6F5}{SOURCES: ENTERPRISE SURVEYS; }}\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
     \end{minipage}
   \end{minipage}  
   
@@ -345,7 +345,7 @@ date <- Sys.Date()
   \end{minipage}
   
   \vspace{-1ex}
-  \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+  \scriptsize{\href{http://www.gemconsortium.org/data/sets}{\textcolor[HTML]{22A6F5}{SOURCES: GLOBAL ENTREPRENEURSHIP MONITOR - ADULT POPULATION; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
  % {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
   
   %% Supports --------------------------------------------
@@ -371,7 +371,7 @@ date <- Sys.Date()
   \end{minipage}
   
   \vspace{-1ex}
-  \scriptsize{\href{http://wits.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD INTEGRATED TRADE SOLUTION}}}
+  \scriptsize{\href{http://www.enterprisesurveys.org/data/exploretopics/innovation-and-technology}{\textcolor[HTML]{22A6F5}{SOURCES: ENTERPRISE SURVEYS; }}\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
 \end{minipage}
 
   %%% footer ----------------------------------
