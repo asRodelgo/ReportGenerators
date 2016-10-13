@@ -206,10 +206,10 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[c]{0.43\textwidth} % 
     \small{\textcolor[HTML]{818181}{POPULATION EMPLOYED IN SERVICES SECTOR \\ \footnotesize(\% total employed population)}}
-    \vspace*{-0.6cm}
-      <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.6,fig.width=7.5,results="asis">>=  
+    \vspace{-2ex}
+      <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=7.5,results="asis">>=  
     @      
-    \vspace*{-1cm} 
+    \vspace{-1ex} 
     \scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}}
   \end{minipage}
 \end{minipage}  
