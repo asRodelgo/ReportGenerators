@@ -6,7 +6,7 @@ figure_sparkline <- function(couName,table){
   ## Examples like Edward Tufte's sparklines:
   #table <- "combo1"
   data <- Entrepr_data %>%
-    filter(CountryCode==cou, Subsection2==table) %>%
+    filter(CountryCode==cou, Subsection2==table, !is.na(Observation)) %>%
     mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear)-1),Period))
   
   
@@ -124,7 +124,7 @@ figure_sparkline <- function(couName,table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    #graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    #graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   } 
   
 }
@@ -203,10 +203,10 @@ table_time <- function(couName,section, table){
 line_chart <- function(couName, section, table){
   
   cou <- .getCountryCode(couName)
-  data <- filter(Entrepr_data, CountryCode == cou, Section == section, Subsection == table)
+  #data <- filter(Entrepr_data, CountryCode == cou, Section == section, Subsection == table)
   #data <- filter(Entrepr_data, Subcategory == "WB.data", Key == "IC.REG.COST.PC.ZS")  
   couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
-  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Section == section, Subsection == table) #select country, region and world
+  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Section == section, Subsection == table, !(is.na(Observation))) #select country, region and world
   data <- merge(data, countries[,c("CountryCodeISO3","Country")],by.x = "CountryCode", by.y="CountryCodeISO3")
   data$Country <- gsub("(ES) ","",data$Country,fixed=TRUE)
   # country, Region, World descriptors
@@ -262,10 +262,10 @@ line_chart <- function(couName, section, table){
       }
     }
     
-    ggplot(data, aes(x=Period, y=Observation, colour=Country, linetype=Country, group=Country)) +
+    ggplot(data, aes(x=Period, y=Observation, group=factor(Country), colour=factor(Country))) +
       geom_line(size=1.5,stat="identity") +
       scale_color_manual(limits=positions, values=values_colors)+
-      scale_linetype_manual(limits=positions,values = values_shapes)+
+      #scale_linetype_manual(limits=positions,values = values_shapes)+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             legend.position="top",
@@ -278,7 +278,7 @@ line_chart <- function(couName, section, table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }
   
 }
@@ -445,7 +445,7 @@ sparklines <- function(couName,section,table){
     }
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    #graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    #graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   } 
   
 }
@@ -518,7 +518,7 @@ bar_chart <- function(couName,section,table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }
   
 }
@@ -608,7 +608,7 @@ bar_facewrap_chart <- function(couName, section, table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }
   
 }
@@ -677,7 +677,7 @@ radar_chart <- function(couName,section,table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }  
   
 }
@@ -723,7 +723,7 @@ combo_percent <- function(couName,section,table){
             title="")
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }  
   
 }
@@ -769,7 +769,7 @@ combo_rate <- function(couName){
             title="")
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }  
   
 }
@@ -821,7 +821,11 @@ table_region <- function(couName,section,table){
     
     # substitute NAs for "---" em-dash
     data[is.na(data)] <- "---"
-    rowsSelect <- seq(1,nrow(data)-1,2)
+    if (nrow(data)>1){
+      rowsSelect <- seq(1,nrow(data)-1,2)
+    } else{
+      rowsSelect <- c(1)
+    }
     col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
     data.table <- xtable(data)
     align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'l')
@@ -1086,7 +1090,7 @@ pie_chart_double <- function(couName,section,table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }  
   
 }
@@ -1191,7 +1195,7 @@ pie_chart_region <- function(couName,section,table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }  
   
 }
@@ -1297,7 +1301,7 @@ pie_chart_regular <- function(couName,section,table){
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.5, 1,"Data not available", col="red", cex=2)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
   }  
   
 }
