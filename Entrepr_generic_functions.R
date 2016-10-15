@@ -21,6 +21,7 @@ thisYear <- substr(Sys.Date(),1,4)
 # PDF Offline Report generator --------------------------
 # Read data
 load("Entrepr_DataByCategory.rda")
+#load("datasets by dimension_new.rda")
 dataDesc <- read.csv("Entrepr_DataDescription.csv", stringsAsFactors = FALSE)
 # country table ----------------------------
 countries <- read.csv("/Users/asanchez3/shinyTCMN_Original/data/CountryClassification.csv", stringsAsFactors = FALSE)
