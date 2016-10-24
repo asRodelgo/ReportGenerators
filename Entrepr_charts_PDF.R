@@ -91,8 +91,8 @@ radar_chart(couName, "Markets","radar1")
 ## ---- table_region_Markets ----
 table_region(couName, "Markets","table1")
 
-## ---- pie_chart_double_Markets ----
-pie_chart_regular(couName, "Markets",c("combo1","combo2"))
+# ## ---- pie_chart_double_Markets ----
+#pie_chart_regular(couName, "Markets",c("combo1","combo2"))
 
 ## ---- bar_chart_Markets ----
 bar_chart(couName,"Markets",c("combo1","combo2"))

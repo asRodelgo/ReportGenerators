@@ -365,7 +365,7 @@ table_time_avg <- function(couName,section,table){
   # substitute NAs for "---" em-dash
   data[is.na(data)] <- "---"
   #if (round(nrow(data)/2,0)>nrow(data)/2){ # odd number
-    rowsSelect <- seq(1,nrow(data)-1,2)
+  rowsSelect <- seq(1,nrow(data)-1,2)
   #} else{ # even
   #  rowsSelect <- seq(1,nrow(data)-1,2)
   #}
@@ -455,7 +455,9 @@ bar_chart <- function(couName,section,table){
   
   cou <- .getCountryCode(couName)
   data <- filter(Entrepr_data, CountryCode==cou, Section==section, Subsection %in% table)
-  data <- filter(data, !(is.na(Observation)))
+  data <- data %>%
+    filter(!(is.na(Observation))) %>%
+    distinct(Key,Period,.keep_all=TRUE)
   #couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
   #data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Category=="Policy", Subsection=="bar1") #select country, region and world
   
@@ -485,8 +487,8 @@ bar_chart <- function(couName,section,table){
       ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
         geom_bar(data=data_grey,color="#f1f3f3",fill = "#f1f3f3",stat="identity") +
         geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
-        geom_text(data=data, aes(label=Observation,y=Observation - max(Observation)*.1),
-                  size=6,color="white") + 
+        geom_text(data=data, aes(label=round(Observation,1),y=ifelse(Observation<21,Observation + max(Observation)*.1,Observation - max(Observation)*.1)),
+                  size=6,color=ifelse(data$Observation<21,"#f1f3f3","white")) + 
         coord_flip()+
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
@@ -501,8 +503,8 @@ bar_chart <- function(couName,section,table){
     } else {
       ggplot(NULL,aes(x=IndicatorShort,y=Observation)) +
         geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
-        geom_text(data=data, aes(label=Observation,y=Observation - max(Observation)*.1),
-                  size=6,color="white") + 
+        geom_text(data=data, aes(label=round(Observation,1),y=ifelse(Observation<14,Observation + max(Observation)*.1,Observation - max(Observation)*.1)),
+                  size=6,color=ifelse(data$Observation<14,"darkgrey","white")) + 
         coord_flip()+
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
@@ -790,11 +792,21 @@ table_region <- function(couName,section,table){
     neighbors <- data.frame(CountryCode=c(cou,couRegion,"RWe"),colName=c(country,region,world), stringsAsFactors = FALSE)
     
     # remove NAs rows
-    data <- filter(data, !is.na(Observation))
+    #data <- filter(data, !is.na(Observation))
     # keep the latest period (excluding projections further than 2 years)
     data <- data %>%
       group_by(Key,CountryCode) %>%
       mutate(Period = max(Period,na.rm = TRUE))
+    
+    # Scale Observations
+    data <- mutate(data, ObsScaled = Observation)
+    data <- arrange(data, Key)
+    #data <- select(data, Key, IndicatorShort, Period, ObsScaled)
+    # restrict to 2 decimal places
+    data$ObsScaled <- round(data$ObsScaled,2)
+    # format numbers
+    data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
+                             big.mark=",",small.mark=".", small.interval=3)
     
     data <- distinct(data, Key, .keep_all = TRUE)
     #data <- filter(data, Period <= (as.numeric(thisYear) + 1))
@@ -812,10 +824,18 @@ table_region <- function(couName,section,table){
       data <- data[,c(1,4,3,2)]  
     }
     names(data)[1] <-""
+    #names(data) <- str_wrap(names(data),width=12)
     
     # I have to add a dummy column so the alignment works (align)
     data$dummy <- rep("",nrow(data))
     names(data)[ncol(data)] <-""
+    
+    # make sure there are always 3 rows on the table to avoid black stripes on following table
+    if (nrow(data)<3){
+      for (r in 1:(3-nrow(data))){
+        data <- rbind(data,c("",rep("",ncol(data))))
+      }
+    }
     
     # substitute NAs for "---" em-dash
     data[is.na(data)] <- "---"
@@ -826,7 +846,7 @@ table_region <- function(couName,section,table){
     }
     col <- rep("\\rowcolor[gray]{0.95}", length(rowsSelect))
     data.table <- xtable(data)
-    align(data.table) <- c('l','l',rep('r',(ncol(data)-2)),'l')
+    align(data.table) <- c('l','l',rep('>{\\raggedleft}p{1.2in}',(ncol(data)-2)),'l')
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
           size="\\Large",add.to.row = list(pos = as.list(rowsSelect), command = col),
           booktabs = FALSE, table.placement="", hline.after = c(0) ,latex.environments = "center")

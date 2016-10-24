@@ -43,7 +43,9 @@ read_chunk("Entrepr_charts_PDF.R")
 
 #c <- "Spain"
 thisYear <- substr(Sys.Date(),1,4)
+#library(stringr)
 couName <- countryNames[countryNames$Country==c,]$Country
+#couName <- str_wrap(couName,width=12)
 couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
 couISO3 <- countries[countries$Country==couName,]$CountryCodeISO3
 #expYear <- .getExportsPeriod(couName)
@@ -86,7 +88,7 @@ date <- Sys.Date()
         %\center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}}
       %\end{minipage}
       %\begin{minipage}[c]{0.80\textwidth} % Country name
-      \hspace{5ex}{\fontsize{44}{50}\selectfont{\color{white}\Sexpr{couName}}}
+      \hspace{5ex}{\fontsize{40}{42}\selectfont{\color{white}\Sexpr{couName}}}
       %\vspace{4ex}  
       %\hspace{5ex}\raggedright{\small{\color{white}COUNTRY SNAPSHOT}}
       %\end{minipage}

@@ -6,6 +6,7 @@ library(gridExtra) # ggplot charts side by side
 library(data.table) # fast operations
 library(tidyr) # transform data
 library(xtable) # LaTeX tables
+library(stringr) # work with character strings
 library(fmsb) # radar charts
 require(treemap) # treemap charts
 library(DT) # customize dataTable javascript library
