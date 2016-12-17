@@ -104,7 +104,7 @@ figure_sparkline <- function(couName,table){
       
       axis(2,yaxp=c(min(spark[,1],na.rm = TRUE),max(spark[,1],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
       ymin<-min(spark[,1],na.rm = TRUE); tmin<-which.min(spark[,1]);ymax<-max(spark[,1], na.rm = TRUE);tmax<-which.max(spark[,1]);
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=5) # add coloured points at max and min# 
+      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("white","white"),cex=7) # add coloured points at max and min# 
     } else {
       plot(spark[,1], #use col data, not rows from data frame x
            col="darkgrey",lwd=10, #color the line and adjust width
@@ -112,13 +112,13 @@ figure_sparkline <- function(couName,table){
       
       axis(2,yaxp=c(min(spark[,1],na.rm = TRUE),max(spark[,1],na.rm = TRUE),2),col="white",tcl=0,labels=FALSE)  #y-axis: put a 2nd white axis line over the 1st y-axis to make it invisible
       ymin<-min(spark[,1],na.rm = TRUE); tmin<-which.min(spark[,1]);ymax<-max(spark[,1], na.rm = TRUE);tmax<-which.max(spark[,1]); # 
-      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=6) # add coloured points at max and min
+      points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=7) # add coloured points at max and min
       plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
       if (minPeriod==maxPeriod){
-        graphics::text(1.5, 1,minPeriod, col="grey", cex=5)
+        graphics::text(1.5, 1.2,minPeriod, col="grey", cex=5)
       } else{
-        graphics::text(1.05, 1,minPeriod, col="grey", cex=5)
-        graphics::text(1.95, 1,maxPeriod, col="grey", cex=5)
+        graphics::text(1.05, 1.2,minPeriod, col="grey", cex=5)
+        graphics::text(1.95, 1.2,maxPeriod, col="grey", cex=5)
       }
     }
     
