@@ -7,7 +7,7 @@ source('Entrepr_generic_functions.R') # data and functions needed
 source('helper_functions.R') # data and functions needed
 # Create the data reports --------------------------------------
 #for (c in c("Sint Maarten (Dutch part)")){
-#for (c in c("Bosnia and Herzegovina")) {
+#for (c in c("Antigua and Barbuda")) {
 for (c in countryNames$Country) {
   if (!(substr(c,1,1)=="(") & !(countryNames$CountryCodeISO3=="")){
     iso3 <- .getCountryCode(c)

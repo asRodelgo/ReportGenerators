@@ -21,7 +21,11 @@ options(scipen=999)
 thisYear <- substr(Sys.Date(),1,4)
 # PDF Offline Report generator --------------------------
 # Read data
-load("Entrepr_DataByCategory.rda")
+# New data source added Dec17_2016. Not yet implemented
+load("/Users/asanchez3/Desktop/Data Analysis/Entrepreneurship-Ind/Testapp/all datasets.rda")
+  # Configuration file
+  # config_file <- read.csv("/Users/asanchez3/Desktop/Data Analysis/Entrepreneurship-Ind/Testapp/config/vars and names.csv")
+#load("Entrepr_DataByCategory.rda")
 #load("datasets by dimension_new.rda")
 dataDesc <- read.csv("Entrepr_DataDescription.csv", stringsAsFactors = FALSE)
 # country table ----------------------------
@@ -32,18 +36,18 @@ countryNames <- filter(countries, !(CountryCodeISO2==""))
 countryNames <- select(countryNames, CountryCodeISO3, Country)# remove CountryISO2
 # transform data for easier processing
 Entrepr_data <- data.frame()
-for (i in 1:length(datasets_by_dimension)){
-  for (j in 1:length(datasets_by_dimension[[i]])){
-    thisDataFrame <- as.data.frame(sapply(datasets_by_dimension[[i]][[j]], as.character), stringsAsFactors = FALSE)
+for (i in 1:length(all.datasets)){
+  #for (j in 1:length(all.datasets[[i]])){
+    thisDataFrame <- as.data.frame(sapply(all.datasets[[i]], as.character), stringsAsFactors = FALSE)
     thisGather <- gather(thisDataFrame, Key, Observation, -one_of("iso2c","country","Country", "year", "iso3c", "Year"))
     thisGather$Observation <- as.numeric(thisGather$Observation)
-    thisGather <- mutate(thisGather, Category = names(datasets_by_dimension)[i], Subcategory = names(datasets_by_dimension[[i]])[j])
+    thisGather <- mutate(thisGather, Category = names(all.datasets)[i])
     if (nrow(Entrepr_data)>0) {
       Entrepr_data <- bind_rows(Entrepr_data, thisGather)
     } else {
       Entrepr_data <- thisGather
     }
-  }
+  #}
 }
 # Add descriptors and source fields
 Entrepr_data <- merge(Entrepr_data, dataDesc[,c("var","varname","Source_Link","Unit.of.Measure","Section","Subsection","Subsection2")], by.x="Key", by.y = "var", all.x = TRUE)
@@ -52,7 +56,7 @@ Entrepr_data <- merge(Entrepr_data, countries[,c("CountryCodeISO3","CountryCodeI
 Entrepr_data <- Entrepr_data %>%
   mutate(Year = ifelse(is.na(Year),year,Year),
                        Country = ifelse(is.na(Country),country,Country)) %>%
-  select(Key, Category, Subcategory, Observation, CountryCode = CountryCodeISO3, iso2c, Period = Year, 
+  select(Key, Category, Observation, CountryCode = CountryCodeISO3, iso2c, Period = Year, 
          IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, Section, Subsection, Subsection2)
 
 # might need TCMN data for some charts/tables
