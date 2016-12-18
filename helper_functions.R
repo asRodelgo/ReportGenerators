@@ -67,11 +67,11 @@ figure_sparkline <- function(couName,table){
       unit <- "Subscriptions per 100 pop."
     }
     if (table == "figure4"){
-      indicator <- "Scientists & Engineers"
+      indicator <- "Scientists, Engineers"
       unit <- "Availability 1-7, 7=best"
     }
     if (table == "figure5"){
-      indicator <- "Tertiary education"
+      indicator <- "Tertiary Education"
       unit <- "Enrollments in percent of pop."
     }
     if (table == "figure6"){
@@ -518,6 +518,72 @@ bar_chart <- function(couName,section,table){
         )
     }
     
+  } else {
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
+  }
+  
+}
+
+## ---- number_chart ----
+number_chart <- function(couName,section,table){      
+  
+  cou <- .getCountryCode(couName)
+  data <- filter(Entrepr_data, CountryCode==cou, Section==section, Subsection %in% table)
+  data <- data %>%
+    filter(!(is.na(Observation))) %>%
+    distinct(Key,Period,.keep_all=TRUE)
+  
+  # data
+  #dataPoints <- format(data$Observation, digits=2, decimal.mark=".",
+  #                    big.mark=",",small.mark=".", small.interval=3)
+  # period
+  #dataPeriods <- data$Period
+  
+  dataWorld <- filter(Entrepr_data, Section==section, Subsection %in% table)
+  dataWorld <- filter(dataWorld,!is.na(Observation))
+  dataWorld <- dataWorld %>%
+    group_by(iso2c) %>%
+    mutate(Period = max(Period,na.rm=TRUE)) %>%
+    distinct(Key, Period, .keep_all = TRUE)
+  
+  dataWorld <- as.data.frame(dataWorld)
+  dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
+  dataWorld <- filter(dataWorld, !(CountryAlternat==""))
+  dataWorld <- dataWorld %>%
+    group_by(Key) %>%
+    arrange(desc(Observation)) %>%
+    as.data.frame()
+  
+  if (nrow(data)>0){
+    
+    require(stringr) # to wrap label text
+    # Print the combo -----------------------------------------------
+    par(mfrow=c(length(unique(dataWorld$Key)),2), #sets number of rows in space to number of cols in data frame x
+        mar=c(0,2,0,2), #sets margin size for the figures
+        oma=c(0,1,0,1)) #sets outer margin
+    
+    i <- 1
+    for (ind in unique(dataWorld$Key)){
+      thisKey <- filter(dataWorld, Key == ind)
+      rank[i] <- which(thisKey$CountryCode == cou)
+      rankedTotal[i] <- nrow(thisKey)
+    
+      thisKey <- mutate(thisKey, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
+      thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = 28))
+      
+      # print indicator name
+      plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+      graphics::text(1, 1.1,thisKey$IndicatorShort[1], col="#22a6f5", cex=3, adj=0)
+      graphics::text(1, 0.8,paste0(thisKey$Unit[1], " (",thisKey$Period[1],")"), col="#818181", cex=2, adj = 0)
+      # print data point and rank
+      plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+      graphics::text(1.15, 1,filter(thisKey,CountryCode==cou)$Observation , col="#22a6f5", cex=8)
+      graphics::text(1.4, 0.95,paste0("(Rank: ",rank[i],"/",rankedTotal[i],")"), col="grey", cex=3, adj=0)
+      
+      i <- i + 1
+    }
+
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)

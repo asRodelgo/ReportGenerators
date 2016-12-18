@@ -58,6 +58,9 @@ Entrepr_data <- Entrepr_data %>%
                        Country = ifelse(is.na(Country),country,Country)) %>%
   select(Key, Category, Observation, CountryCode = CountryCodeISO3, iso2c, Period = Year, 
          IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, Section, Subsection, Subsection2)
+## Hardcode some periods missing in the source data
+# Investment Across Borders
+Entrepr_data$Period <- ifelse(grepl("iab_",Entrepr_data$Category),"2012",Entrepr_data$Period)
 
 # might need TCMN data for some charts/tables
 TCMN_data <- read.csv("/Users/asanchez3/shinyTCMN_Original/data/TCMN_data.csv", colClasses = c(rep("character",4),rep("numeric",2),rep("character",2)))

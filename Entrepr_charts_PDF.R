@@ -38,6 +38,9 @@ bar_facewrap_chart(couName,"Policy","table1")
 ## ---- bar_chart_Policy ----
 bar_chart(couName,"Policy",c("combo1","combo2","combo3"))
 
+## ---- number_chart_Policy ----
+number_chart(couName,"Policy",c("combo1","combo2","combo3"))
+
 ## ---- combo_percent_Policy1 ----
 #combo_percent(couName, "Policy","combo1")
 

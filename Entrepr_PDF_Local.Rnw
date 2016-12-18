@@ -163,7 +163,7 @@ date <- Sys.Date()
     %\vspace{-1ex}
     \small{\textcolor[HTML]{818181}{INVESTMENT CLIMATE}}
     \vspace{1ex}
-    <<bar_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.7,fig.width=6,results="asis">>=  
+    <<number_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=6.1,fig.width=10,results="asis">>=  
     @
     \vspace{-2ex}
     \scriptsize{\href{http://iab.worldbank.org/Data/ExploreTopics/Investing-across-sectors}{\textcolor[HTML]{22A6F5}{SOURCE: INVESTING ACROSS BORDERS}}}
