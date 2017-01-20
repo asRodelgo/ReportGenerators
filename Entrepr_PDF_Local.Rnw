@@ -172,14 +172,6 @@ date <- Sys.Date()
 
 \begin{minipage}[b]{0.95\textwidth}
   \vspace{0.8cm}
-  \begin{minipage}[c]{0.43\textwidth} 
-    \hspace{4ex}\small{\textcolor[HTML]{818181}{COST OF BUSINESS STARTUP PROCEDURES}}
-    
-    \hspace{4ex}\footnotesize{\textcolor[HTML]{818181}{\% of GNI per capita}}
-    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.1,fig.width=6,results="asis">>=  
-      @            
-    \hspace{4ex}\scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}} 
-  \end{minipage}
   \begin{minipage}[c]{0.55\textwidth} % Doing Business table
     %\vspace*{-0.1cm}
     %\begin{flushleft}
@@ -194,6 +186,14 @@ date <- Sys.Date()
     \\[6pt]
      %\hspace*{0.5cm} 
      \scriptsize{\href{http://www.doingbusiness.org}{\textcolor[HTML]{22A6F5}{SOURCE: DOING BUSINESS}}}
+  \end{minipage}
+    \begin{minipage}[c]{0.40\textwidth} 
+    \hspace{4ex}\small{\textcolor[HTML]{818181}{COST OF BUSINESS STARTUP PROCEDURES}}
+    
+    \hspace{4ex}\footnotesize{\textcolor[HTML]{818181}{\% of GNI per capita}}
+    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.1,fig.width=6,results="asis">>=  
+      @            
+    \hspace{4ex}\scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}} 
   \end{minipage}
 \end{minipage}
 %\vspace{1ex}

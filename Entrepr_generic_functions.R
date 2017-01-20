@@ -73,18 +73,18 @@ TCMN_indic <- read.csv("/Users/asanchez3/shinyTCMN_Original/data/TCMN_Indicators
 
 .getISO2 <- function(couName){
   
-  countryISO2 <- tolower(as.character(filter(countries,Country==couName)$CountryCodeISO2))
+  countryISO2 <- tolower(as.character(filter(countries,name==couName)$iso2))
 }
 
 .getRegion <- function(couName){
   
   cou <- .getCountryCode(couName)
-  region <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionShort) 
+  region <- as.character(countries[countries$iso3==cou,]$region) 
 }
 
 .getCountryCode <- function(couName){
   
-  countryCode <- filter(countries, Country==couName)$CountryCodeISO3
+  countryCode <- filter(countries, name==couName)$iso3
   if (length(countryCode)==1){
     return(countryCode)
   } else{

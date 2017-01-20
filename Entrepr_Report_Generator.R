@@ -4,11 +4,11 @@
 # setwd() to handle images and other files
 setwd('/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/')
 source('Entrepr_generic_functions.R') # data and functions needed
-source('helper_functions.R') # data and functions needed
+source('helper_functions.R') # charts and table functions needed
 # Create the data reports --------------------------------------
 #for (c in c("Sint Maarten (Dutch part)")){
 #for (c in c("Antigua and Barbuda")) {
-for (c in c("India")) {
+for (c in c("Brazil")) {
 #for (c in countryNames$Country) {
   if (!(substr(c,1,1)=="(") & !(countryNames$CountryCodeISO3=="")){
     iso3 <- .getCountryCode(c)

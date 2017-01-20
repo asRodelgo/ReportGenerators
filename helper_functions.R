@@ -9,7 +9,6 @@ figure_sparkline <- function(couName,table){
     filter(CountryCode==cou, Subsection2==table, !is.na(Observation)) %>%
     mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear)-1),Period))
   
-  
   if (nrow(data)>0){
     
     data <- filter(data,!is.na(Observation))
@@ -25,13 +24,13 @@ figure_sparkline <- function(couName,table){
     dataWorld <- filter(Entrepr_data, Subsection2==table)
     dataWorld <- filter(dataWorld,!is.na(Observation))
     dataWorld <- dataWorld %>%
-      group_by(iso2c) %>%
+      group_by(iso2) %>%
       mutate(Period = max(Period,na.rm=TRUE)) %>%
       distinct(Period, .keep_all = TRUE)
     
     dataWorld <- as.data.frame(dataWorld)
-    dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
-    dataWorld <- filter(dataWorld, !(CountryAlternat==""))
+#     dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
+#     dataWorld <- filter(dataWorld, !(CountryAlternat==""))
     dataWorld <- arrange(dataWorld, desc(Observation))
     # rank in the world
     rank <- which(dataWorld$CountryCode == cou)
@@ -597,8 +596,8 @@ bar_facewrap_chart <- function(couName, section, table){
   
   cou <- .getCountryCode(couName) # This chart needs to query neighbouring countries also
   
-  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeALL  # obtain the region for the selected country
-  neighbors <- countries[countries$RegionCodeALL==couRegion,]$CountryCodeISO3 # retrieve all countries in that region
+  couRegion <- countries[countries$iso3==cou,]$region  # obtain the region for the selected country
+  neighbors <- countries[countries$region==couRegion,]$iso3 # retrieve all countries in that region
   neighbors <- as.character(neighbors[!(neighbors==cou)]) # exclude the selected country
   
   # hardcode for now
@@ -611,14 +610,17 @@ bar_facewrap_chart <- function(couName, section, table){
   
   if (nrow(filter(data, CountryCode==cou))>0){
     
-    data <- merge(data, countries[,c("Country","CountryCodeISO3")], by.x="CountryCode", by.y="CountryCodeISO3") # add country name
-    data <- filter(data, Period == max(Period,na.rm=TRUE))
+    #data <- merge(data, countries[,c("Country","CountryCodeISO3")], by.x="CountryCode", by.y="CountryCodeISO3") # add country name
+    data <- data %>%
+      filter(!is.na(Observation)) %>%
+      group_by(Key) %>%
+      filter(Period == max(Period,na.rm=TRUE))
     data <- distinct(data, Key,CountryCode, .keep_all = TRUE)
     # select top 4 countries from the neighborhood based on their income level
-    income <- filter(TCMN_data, CountryCode %in% neighbors, Subsection=="table2head", Key=="M03")
+    income <- filter(Entrepr_data, CountryCode %in% neighbors & Section=="aux_income")
     income <- income %>%
       group_by(CountryCode) %>%
-      filter(Period < thisYear) %>%
+      filter(!is.na(Observation), Period < thisYear) %>%
       filter(Period == max(Period,na.rm=TRUE))
     
     topNeighbors <- head(arrange(as.data.frame(income), desc(Observation)),4)$CountryCode
@@ -650,7 +652,7 @@ bar_facewrap_chart <- function(couName, section, table){
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank()) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
-        scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","brown","lightblue","orange"))
+        scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","lightblue","brown","orange"))
       
     } else{
       
@@ -670,7 +672,7 @@ bar_facewrap_chart <- function(couName, section, table){
               axis.ticks.y = element_blank(),
               axis.text.y = element_blank()) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
-        scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","brown","lightblue","orange"))
+        scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","lightblue","brown","orange"))
     }
     
     
@@ -1006,8 +1008,8 @@ doing_business_table <- function(couName){
     data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
     align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\large", add.to.row = list(pos = as.list(rowsSelect), command = col),
-          booktabs = FALSE, table.placement="", hline.after = c(1) ,latex.environments = "center",
+          size="\\normalsize", add.to.row = list(pos = as.list(rowsSelect), command = col),
+          booktabs = FALSE, table.placement="", hline.after = c(1) ,latex.environments = "right",
           sanitize.text.function = function(x){x}) # include sanitize to control format like colors
   } else {
     data[1,] <- c("No data",rep("",ncol(data)-1))
@@ -1015,8 +1017,8 @@ doing_business_table <- function(couName){
     data.table <- xtable(data, digits=rep(0,ncol(data)+1)) #control decimals
     align(data.table) <- c('l','l',rep('r',2),'r',"|",rep('r',2),'r','r')
     print(data.table, include.rownames=FALSE,include.colnames=TRUE, floating=FALSE, 
-          size="\\large", 
-          booktabs = FALSE, table.placement="" ,latex.environments = "center",
+          size="\\normalsize", 
+          booktabs = FALSE, table.placement="" ,latex.environments = "right",
           sanitize.text.function = function(x){x}) # include sanitize to control format like colors
   }
 }
