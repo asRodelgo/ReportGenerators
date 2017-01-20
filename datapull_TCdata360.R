@@ -20,8 +20,8 @@ dataDesc <- read.csv("Entrepr_DataDescription.csv", stringsAsFactors = FALSE)
 indicatorsID <- filter(dataDesc, !is.na(tcdata360_id))$tcdata360_id
 
 indicators_Entrep <- indicators %>%
-  filter(id %in% indicatorsID & !(datasetId==23)) %>% # avoid Services Restrict Index
-  distinct(name,.keep_all=TRUE) %>%
+  filter(id %in% indicatorsID) %>% 
+  distinct(id,.keep_all=TRUE) %>%
   arrange(name)
 
 

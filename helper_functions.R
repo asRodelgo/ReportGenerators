@@ -542,13 +542,13 @@ number_chart <- function(couName,section,table){
   dataWorld <- filter(Entrepr_data, Section==section, Subsection %in% table)
   dataWorld <- filter(dataWorld,!is.na(Observation))
   dataWorld <- dataWorld %>%
-    group_by(iso2c) %>%
+    group_by(iso2) %>%
     mutate(Period = max(Period,na.rm=TRUE)) %>%
     distinct(Key, Period, .keep_all = TRUE)
   
   dataWorld <- as.data.frame(dataWorld)
-  dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
-  dataWorld <- filter(dataWorld, !(CountryAlternat==""))
+  #dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
+  #dataWorld <- filter(dataWorld, !(CountryAlternat==""))
   dataWorld <- dataWorld %>%
     group_by(Key) %>%
     arrange(desc(Observation)) %>%
@@ -937,22 +937,24 @@ table_region <- function(couName,section,table){
 doing_business_table <- function(couName){      
   
   cou <- .getCountryCode(couName)
-  data <- filter(TCMN_data, CountryCode == cou, substr(Subsection,1,6)=="table4") #select country, region and world
+  data <- filter(Entrepr_data, CountryCode == cou, grepl("dbtable",Subsection), !is.na(Observation)) #select country, region and world
+  
   if (nrow(data[data$CountryCode==cou,])>0){
     
     # prepare for table
-    data <- select(data, Subsection, IndicatorShort, Period, Observation)
+    data <- select(data, Subsection, IndicatorShort, Period, Observation) %>%
+      arrange(Subsection, Period, IndicatorShort)
     # format numbers
-    data[nchar(data$Subsection)==6,]$Observation <- format(data[nchar(data$Subsection)==6,]$Observation, digits=0, decimal.mark=".",
-                                                           big.mark=",",small.mark=".", small.interval=3)
+    #data$Observation <- format(data$Observation, digits=0, decimal.mark=".",
+    #                                                       big.mark=",",small.mark=".", small.interval=3)
     
     data$Observation <- as.numeric(data$Observation)
     dataR <- data %>%
-      filter(nchar(Subsection)==6) %>%
+      filter(grepl("R",Subsection)) %>%
       select(-Subsection)
     
     dataDTF <- data %>%
-      filter(nchar(Subsection)==7) %>%
+      filter(grepl("DTF",Subsection), Period >= as.numeric(thisYear)-1) %>%
       select(-Subsection)
     
     dataR <- spread(dataR, Period, Observation)
