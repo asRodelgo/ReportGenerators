@@ -202,68 +202,78 @@ table_time <- function(couName,section, table){
 line_chart <- function(couName, section, table){
   
   cou <- .getCountryCode(couName)
-  #data <- filter(Entrepr_data, CountryCode == cou, Section == section, Subsection == table)
-  #data <- filter(Entrepr_data, Subcategory == "WB.data", Key == "IC.REG.COST.PC.ZS")  
-  couRegion <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionCodeES)  # obtain the region for the selected country
-  data <- filter(Entrepr_data, CountryCode %in% c(cou,couRegion, "RWe"), Section == section, Subsection == table, !(is.na(Observation))) #select country, region and world
-  data <- merge(data, countries[,c("CountryCodeISO3","Country")],by.x = "CountryCode", by.y="CountryCodeISO3")
-  data$Country <- gsub("(ES) ","",data$Country,fixed=TRUE)
+  couRegion <- as.character(countries[countries$iso3==cou,]$region)  # obtain the region for the selected country
+  
+  data <- filter(Entrepr_data, region==couRegion, Section == section, Subsection == table, !(is.na(Observation))) #select country, region and world
+  #data <- merge(data, countries[,c("CountryCodeISO3","Country")],by.x = "CountryCode", by.y="CountryCodeISO3")
+  #data$Country <- gsub("(ES) ","",data$Country,fixed=TRUE)
+  income <- filter(Entrepr_data, region==couRegion & Section=="aux_income")
+  income <- income %>%
+    group_by(CountryCode) %>%
+    filter(!is.na(Observation), Period < thisYear, !(CountryCode==cou)) %>%
+    filter(Period == max(Period,na.rm=TRUE))
+  
+  topNeighbors <- head(arrange(as.data.frame(income), desc(Observation)),4)$CountryCode
+  data <- filter(data, CountryCode %in% c(cou,topNeighbors)) %>%
+    arrange(CountryCode,Period)
+  
   # country, Region, World descriptors
-  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
-  region <- as.character(countries[countries$CountryCodeISO3==cou,]$Region) 
-  world <- "All Countries"
-  #data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart1")
-  data <- data[!(is.na(data$Observation)),]
+#   country <- as.character(countries[countries$iso3==cou,]$Country)
+#   region <- as.character(countries[countries$iso3==cou,]$region) 
+#   world <- "All Countries"
+#   #data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart1")
+#   data <- data[!(is.na(data$Observation)),]
   
   # order lines in chart and hide elements in legend
   if (nrow(filter(data,CountryCode==cou))>0){
-    data <- arrange(data,Period)
-    
-    if (nrow(filter(data,CountryCode == cou))>0){
-      if (nrow(filter(data,CountryCode == couRegion))>0){
-        if (nrow(filter(data,CountryCode == "RWe"))>0){
-          values_colors=c("orange","lightblue","lightgreen")
-          values_shapes = c("solid","dashed","dashed")
-          positions <- c(country,region,world)
-        } else {
-          values_colors=c("orange","lightblue")
-          values_shapes = c("solid","dashed")
-          positions <- c(country,region)
-        }
-      } else {
-        if (nrow(filter(data,CountryCode == "RWe"))>0){
-          values_colors=c("orange","lightgreen")
-          values_shapes = c("solid","dashed")
-          positions <- c(country,world)
-        } else {
-          values_colors=c("orange")
-          values_shapes = c("solid")
-          positions <- c(country)
-        }
-      }
-    } else {
-      if (nrow(filter(data,CountryCode == couRegion))>0){
-        if (nrow(filter(data,CountryCode == "RWe"))>0){
-          values_colors=c("lightblue","lightgreen")
-          values_shapes = c("dashed","dashed")
-          positions <- c(region,world)
-        } else {
-          values_colors=c("lightblue")
-          values_shapes = c("dashed")
-          positions <- c(region)
-        }
-      } else {
-        if (nrow(filter(data,CountryCode == "RWe"))>0){
-          values_colors=c("lightgreen")
-          values_shapes = c("dashed")
-          positions <- c(world)
-        } 
-      }
-    }
+#     data <- arrange(data,Period)
+#     
+#     if (nrow(filter(data,CountryCode == cou))>0){
+#       if (nrow(filter(data,CountryCode == couRegion))>0){
+#         if (nrow(filter(data,CountryCode == "RWe"))>0){
+#           values_colors=c("orange","lightblue","lightgreen")
+#           values_shapes = c("solid","dashed","dashed")
+#           positions <- c(country,region,world)
+#         } else {
+#           values_colors=c("orange","lightblue")
+#           values_shapes = c("solid","dashed")
+#           positions <- c(country,region)
+#         }
+#       } else {
+#         if (nrow(filter(data,CountryCode == "RWe"))>0){
+#           values_colors=c("orange","lightgreen")
+#           values_shapes = c("solid","dashed")
+#           positions <- c(country,world)
+#         } else {
+#           values_colors=c("orange")
+#           values_shapes = c("solid")
+#           positions <- c(country)
+#         }
+#       }
+#     } else {
+#       if (nrow(filter(data,CountryCode == couRegion))>0){
+#         if (nrow(filter(data,CountryCode == "RWe"))>0){
+#           values_colors=c("lightblue","lightgreen")
+#           values_shapes = c("dashed","dashed")
+#           positions <- c(region,world)
+#         } else {
+#           values_colors=c("lightblue")
+#           values_shapes = c("dashed")
+#           positions <- c(region)
+#         }
+#       } else {
+#         if (nrow(filter(data,CountryCode == "RWe"))>0){
+#           values_colors=c("lightgreen")
+#           values_shapes = c("dashed")
+#           positions <- c(world)
+#         } 
+#       }
+#     }
+    order_legend <- c(couName,as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)))
     
     ggplot(data, aes(x=Period, y=Observation, group=factor(Country), colour=factor(Country))) +
       geom_line(size=1.5,stat="identity") +
-      scale_color_manual(limits=positions, values=values_colors)+
+      #scale_color_manual(limits=positions, values=values_colors)+
       #scale_linetype_manual(limits=positions,values = values_shapes)+
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
@@ -273,7 +283,8 @@ line_chart <- function(couName, section, table){
             axis.text.x = element_text(hjust = 1)) + 
       labs(x="",y=""#,title="Goods Export and Import volume growth, 2012-2015"
       ) + 
-      scale_x_discrete(breaks = unique(data$Period)[seq(1,length(unique(data$Period)),3)]) 
+      scale_x_discrete(breaks = unique(data$Period)[seq(1,length(unique(data$Period)),3)]) +
+      scale_color_manual(breaks=order_legend,values = c("orange","brown","lightblue","lightgreen","pink"))
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -291,19 +302,18 @@ table_time_avg <- function(couName,section,table){
   data <- filter(Entrepr_data, CountryCode==cou, Section == section, Subsection==table)
   data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
   # keep the latest period (excluding projections further than 2 years)
-  data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
-  data <- filter(data, Period <= (as.numeric(thisYear) + 1))
+  data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period)) %>%
+  filter(Period <= (as.numeric(thisYear) + 1)) %>%
   # remove NAs rows
-  #data <- filter(data, !is.na(Observation))
   # calculate average for 1st column
-  data <- mutate(data, Unit = ifelse(grepl("Active population",Unit),"% of TEA",Unit),
+  mutate(Unit = ifelse(grepl("Active population",Unit),"% of TEA",Unit),
                  IndicatorShort = paste0(IndicatorShort,", ",Unit))
   data$IndicatorShort <- gsub("Entrepreneurial","Entrepr.", data$IndicatorShort)
   data$IndicatorShort <- gsub("auditors","audit.", data$IndicatorShort)
   
   data_avg <- data %>%
     group_by(Key) %>%
-    filter(Period < (as.numeric(thisYear)-5)) %>%
+    filter(Period < (as.numeric(thisYear)-5) & Period > (as.numeric(thisYear)-15)) %>%
     mutate(historical_avg = mean(Observation,na.rm=TRUE))
   # add average as one of the time periods
   min_year <- min(data_avg$Period)
@@ -316,12 +326,12 @@ table_time_avg <- function(couName,section,table){
   
   #keep only periods of interest in data
   data <- filter(data, Period > (as.numeric(thisYear) - 6))
-  data <- bind_rows(data, data_avg) # add rows to data
+  data <- bind_rows(data, data_avg) %>% # add rows to data
   #data <- as.data.frame(data)
   # Scale Observations
-  data <- mutate(data, ObsScaled = Observation)
-  data <- arrange(data, Key)
-  data <- select(data, Key, IndicatorShort, Period, ObsScaled)
+  mutate(ObsScaled = Observation) %>%
+  arrange(Key) %>%
+  select(Key, IndicatorShort, Period, ObsScaled)
   # restrict to 2 decimal places
   data$ObsScaled <- round(data$ObsScaled,2)
   
@@ -329,12 +339,12 @@ table_time_avg <- function(couName,section,table){
   data$ObsScaled <- format(data$ObsScaled, digits=2, decimal.mark=".",
                            big.mark=",",small.mark=".", small.interval=3)
   
-  for (i in 1:nrow(data)){
-    
-    data$IndicatorShort[i] <- ifelse(!is.na(merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i]),
-                                     paste0(data$IndicatorShort[i]," \\large{[", merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i],"]}"),
-                                     data$IndicatorShort[i])  
-  }
+#   for (i in 1:nrow(data)){
+#     
+#     data$IndicatorShort[i] <- ifelse(!is.na(merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i]),
+#                                      paste0(data$IndicatorShort[i]," \\large{[", merge(data,TCMN_indic[TCMN_indic$Subsection==table,], by="Key")$Note[i],"]}"),
+#                                      data$IndicatorShort[i])  
+#   }
   # escape reserved characters
   data$IndicatorShort <- gsub("%", "\\%", data$IndicatorShort, fixed=TRUE)
   data$IndicatorShort <- gsub("&", "\\&", data$IndicatorShort, fixed=TRUE)
@@ -395,14 +405,16 @@ sparklines <- function(couName,section,table){
   if (nrow(data)>0){
     data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
     # keep the latest period (excluding projections further than 2 years)
-    data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period))
-    data <- filter(data, Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 14))
-    #data <- filter(data, !is.na(Observation)) # remove NAs rows
-    # keep relevant columns
-    data <- select(data, Key, Period, Observation)
-    data <- arrange(data, Key, Period)
+    data <- data %>%
+      mutate(Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period)) %>%
+      filter(Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 15)) %>%
+      select(Key, Period, Observation) %>%
+      arrange(Key, Period) %>%
+      distinct(Key,Period, .keep_all = TRUE)
     
-    data <- distinct(data, Key,Period, .keep_all = TRUE)
+    minPeriod <- min(data$Period,na.rm = TRUE)
+    maxPeriod <- max(data$Period,na.rm = TRUE)
+    
     x <- spread(data, Key, Observation)
     x <- x[,-1] # don't need Period column anymore
     
@@ -418,9 +430,13 @@ sparklines <- function(couName,section,table){
     }
     #x <- scale(x) # standardize x
     
-    par(mfrow=c(ncol(x)+2,1), #sets number of rows in space to number of cols in data frame x
+    par(mfrow=c(ncol(x)+3,1), #sets number of rows in space to number of cols in data frame x
         mar=c(1,0,0,0), #sets margin size for the figures
         oma=c(1,2,1,1)) #sets outer margin
+    
+    plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+    graphics::text(1.05, 1,minPeriod, col="grey", cex=5)
+    graphics::text(1.95, 1,maxPeriod, col="grey", cex=5)
     
     for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
       
@@ -442,6 +458,7 @@ sparklines <- function(couName,section,table){
         points(x=c(tmin,tmax),y=c(ymin,ymax),pch=19,col=c("red","green"),cex=5) # add coloured points at max and min
       }
     }
+    
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     #graphics::text(1.5, 1,"Data not available", col="lightgrey", cex=1.5)
@@ -607,7 +624,6 @@ bar_facewrap_chart <- function(couName, section, table){
     filter(CountryCode %in% c(cou,neighbors), Section==section, Subsection==table) %>%
     mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear)-1),Period))
   
-  
   if (nrow(filter(data, CountryCode==cou))>0){
     
     #data <- merge(data, countries[,c("Country","CountryCodeISO3")], by.x="CountryCode", by.y="CountryCodeISO3") # add country name
@@ -689,13 +705,13 @@ radar_chart <- function(couName,section,table){
   
   cou <- .getCountryCode(couName) # This chart needs to query neighbouring countries also
   
-  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeByIncome  # obtain the region for the selected country
-  neighbors <- countries[countries$RegionCodeByIncome==couRegion,]$CountryCodeISO3 # retrieve all countries in that region
+  couRegion <- countries[countries$iso3==cou,]$region  # obtain the region for the selected country
+  neighbors <- countries[countries$region==couRegion,]$iso3 # retrieve all countries in that region
   neighbors <- as.character(neighbors[!(neighbors==cou)]) # exclude the selected country
   
   # country and Region descriptors
-  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
-  region <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionShortIncome) 
+  country <- as.character(countries[countries$iso3==cou,]$Country)
+  region <- as.character(countries[countries$iso3==cou,]$region) 
   #country <- paste0(country," (Rank: ",round(filter(TCMN_data, CountryCode==cou, Key=="P00b")$Observation,1),")")
   #region <- paste0(region," (Avg Rank: ",round(filter(TCMN_data, CountryCode==couRegion, Key=="P00b")$Observation,1),")")
   # filter the data
@@ -704,19 +720,14 @@ radar_chart <- function(couName,section,table){
   if (nrow(filter(data, CountryCode==cou))>0){  
     # calculate the average for the region
     data <- data %>%
+      filter(!is.na(Observation)) %>%
       group_by(Key) %>%
-      mutate(regionAvg = mean(Observation, na.rm=TRUE))
-    
-    # remove all countries except cou
-    data <- filter(data, CountryCode==cou)
-    
-    # Keep last period
-    data <- filter(data, Period == max(Period))
-    
-    # as.numeric
-    #countries <- names(data[,3:ncol(data)])
-    #data <- data %>% mutate_each_(funs(as.character), countries) %>% mutate_each_(funs(as.numeric), countries)
-    
+      mutate(Observation = ifelse(Observation > 0 & Observation < 1, Observation*100,Observation)) %>%
+      filter(Period == max(Period)) %>%
+      mutate(regionAvg = mean(Observation, na.rm=TRUE)) %>%
+      filter(CountryCode==cou) %>%
+      as.data.frame()
+  
     # I must add the max and min columns to make it work:
     max<-100
     min <-1
@@ -726,10 +737,9 @@ radar_chart <- function(couName,section,table){
     # order labels ad-hoc:
     order <- c(1,3,4,6,2,5)
     data <- cbind(data,order)
-    data <- arrange(data,order)
-    data <- select(data, -order)# drop order
     
-    data <- select(data, IndicatorShort, max, min, Observation, regionAvg)
+    data <- arrange(data,order) %>%
+    select(IndicatorShort, max, min, Observation, regionAvg)
     # transpose the data for radarchart to read
     dataTrans <- as.data.frame(t(data[,2:ncol(data)]))
     layout(matrix(c(1,2),ncol=1), heights =c(4,1))
