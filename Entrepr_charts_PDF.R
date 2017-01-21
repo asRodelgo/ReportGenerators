@@ -39,7 +39,7 @@ bar_facewrap_chart(couName,"Policy","table1")
 bar_chart(couName,"Policy",c("combo1","combo2","combo3"))
 
 ## ---- number_chart_Policy ----
-number_chart(couName,"Policy",c("combo1","combo2","combo3"))
+number_chart(couName,"Policy",c("combo1","combo2","combo3"),str_wrap_size=28)
 
 ## ---- combo_percent_Policy1 ----
 #combo_percent(couName, "Policy","combo1")
@@ -110,7 +110,7 @@ table_region(couName, "Markets","table1")
 bar_chart(couName,"Markets",c("combo1","combo2"))
 
 ## ---- number_chart_Markets ----
-number_chart(couName,"Markets",c("table1","combo1","combo2"))
+number_chart(couName,"Markets",c("table1","combo1","combo2"),str_wrap_size=36)
 
 # ## ---- combo_percent_Markets1 ----
 # combo_percent(couName, "Markets","combo1")

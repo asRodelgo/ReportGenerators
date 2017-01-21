@@ -15,6 +15,10 @@ figure_sparkline <- function(couName,table){
     minPeriod <- min(data$Period)
     maxPeriod <- max(data$Period)
     dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
+    
+    if (table == "figureFin2"){
+      dataLast$Observation <- dataLast$Observation/1000000
+    }
     # data
     dataPoint <- format(dataLast$Observation, digits=2, decimal.mark=".",
                         big.mark=",",small.mark=".", small.interval=3)
@@ -76,6 +80,16 @@ figure_sparkline <- function(couName,table){
     if (table == "figure6"){
       indicator <- "Venture Capital"
       unit <- "Availability 1-7, 7=best"
+    }
+    if (table == "figureFin1"){
+      indicator <- "FDI, net inflows"
+    }
+    if (table == "figureFin2"){
+      indicator <- "Investment in Telecoms w/ Private Part."
+      unit <- "Millions, $US"
+    }
+    if (table == "figureFin3"){
+      indicator <- "Market Capitaliz. of Listed Companies"
     }
     
     # Print the combo -----------------------------------------------
@@ -217,13 +231,6 @@ line_chart <- function(couName, section, table){
   data <- filter(data, CountryCode %in% c(cou,topNeighbors)) %>%
     arrange(CountryCode,Period)
   
-  # country, Region, World descriptors
-#   country <- as.character(countries[countries$iso3==cou,]$Country)
-#   region <- as.character(countries[countries$iso3==cou,]$region) 
-#   world <- "All Countries"
-#   #data <- filter(TCMN_data, CountryCode==cou, Subsection=="chart1")
-#   data <- data[!(is.na(data$Observation)),]
-  
   # order lines in chart and hide elements in legend
   if (nrow(filter(data,CountryCode==cou))>0){
 #     data <- arrange(data,Period)
@@ -270,9 +277,12 @@ line_chart <- function(couName, section, table){
 #       }
 #     }
     order_legend <- c(couName,as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)))
+    country_order <- factor(order_legend, levels = c(couName,order_legend[2:length(order_legend)]))
+    my_order <- data.frame(Country = country_order, order = seq(1,5,1))
+    data <- merge(data,my_order, by="Country")
     
-    ggplot(data, aes(x=Period, y=Observation, group=factor(Country), colour=factor(Country))) +
-      geom_line(size=1.5,stat="identity") +
+    ggplot(data, aes(x=Period, y=Observation)) +
+      geom_line(stat="identity",aes(group=factor(order), colour=factor(order), size=factor(order), alpha=factor(order))) +
       #scale_color_manual(limits=positions, values=values_colors)+
       #scale_linetype_manual(limits=positions,values = values_shapes)+
       theme(legend.key=element_blank(),
@@ -280,11 +290,14 @@ line_chart <- function(couName, section, table){
             legend.position="top",
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+            axis.line = element_line(size=0.1),
             axis.text.x = element_text(hjust = 1)) + 
       labs(x="",y=""#,title="Goods Export and Import volume growth, 2012-2015"
       ) + 
-      scale_x_discrete(breaks = unique(data$Period)[seq(1,length(unique(data$Period)),3)]) +
-      scale_color_manual(breaks=order_legend,values = c("orange","brown","lightblue","lightgreen","pink"))
+      scale_color_manual(labels = order_legend, values = c("orange","brown","lightblue","lightgreen","pink")) +
+      scale_alpha_manual(labels = order_legend,values = c(1, rep(0.6,4))) + 
+      scale_size_manual(labels = order_legend,values = c(3, rep(1,4))) + 
+      scale_x_discrete(breaks = unique(data$Period)[seq(1,length(unique(data$Period)),3)])
     
   } else {
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
@@ -542,7 +555,7 @@ bar_chart <- function(couName,section,table){
 }
 
 ## ---- number_chart ----
-number_chart <- function(couName,section,table){      
+number_chart <- function(couName,section,table,str_wrap_size){      
   
   cou <- .getCountryCode(couName)
   data <- filter(Entrepr_data, CountryCode==cou, Section==section, Subsection %in% table)
@@ -586,12 +599,12 @@ number_chart <- function(couName,section,table){
       rankedTotal[i] <- nrow(thisKey)
     
       thisKey <- mutate(thisKey, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
-      thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = 28))
+      thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = str_wrap_size))
       
       # print indicator name
       plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
       graphics::text(1, 1.1,thisKey$IndicatorShort[1], col="#22a6f5", cex=3, adj=0)
-      graphics::text(1, 0.8,paste0(thisKey$Unit[1], " (",thisKey$Period[1],")"), col="#818181", cex=2, adj = 0)
+      graphics::text(1, 0.75,paste0(thisKey$Unit[1], " (",thisKey$Period[1],")"), col="#818181", cex=2, adj = 0)
       # print data point and rank
       plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
       graphics::text(1.15, 1,filter(thisKey,CountryCode==cou)$Observation , col="#22a6f5", cex=8)
@@ -743,10 +756,13 @@ radar_chart <- function(couName,section,table){
     # transpose the data for radarchart to read
     dataTrans <- as.data.frame(t(data[,2:ncol(data)]))
     layout(matrix(c(1,2),ncol=1), heights =c(4,1))
-    par(mar=c(0,1,3,1))
+    #       col.axis="red",col.lab=c("red","red"),col.main="red",col.sub="red",family="serif")
+    par(mar=c(0,1,3,1),family="serif")
+    
     radarchart(dataTrans, axistype=1, centerzero = FALSE,seg=4, caxislabels=c(" ","","50%","","100%"),
-               plty=c(1,1),plwd=c(6,3),pcol=c("orange","lightblue"),pdensity=c(0, 0),
-               cglwd=2,axislabcol="lightgrey", vlabels=data$IndicatorShort, cex.main=1,cex=2.5)
+                     plty=c(1,1),plwd=c(6,3),pcol=c("orange","lightblue"),pdensity=c(0, 0),
+                     cglwd=2,axislabcol="lightgrey", vlabels=data$IndicatorShort, cex.main=1,cex=2.5)
+          
     #title="WEF Competitiveness Indicators, stage of development (1-7)",
     par(mar=c(0,1,1,1))
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)

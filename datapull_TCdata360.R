@@ -27,7 +27,7 @@ indicators_Entrep <- indicators %>%
 
 Entrepr_data <- data.frame()
 specialchars <- paste(c("[-]","[.]"),collapse = "|")
-for (cou in c("BRA","ARG","ECU","URY")){
+for (cou in c("BRA","ARG","ECU","URY","BOL")){
 #for (cou in countries$id){
   for (ind in indicators_Entrep$id){
     print(paste0("Processing...",cou," ",ind))
