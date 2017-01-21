@@ -1096,19 +1096,19 @@ pie_chart_double <- function(couName,section,table){
   cou <- .getCountryCode(couName)
   
   data <- Entrepr_data %>%
-    filter(CountryCode==cou & Section == section & Subsection==table)
-  data <- filter(data, !(is.na(Observation)))
-  data <- mutate(data, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+    filter(CountryCode==cou & Section == section & Subsection==table) %>%
+    filter(!is.na(Observation)) %>%
+    mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
 
-  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeByIncome  # obtain the region for the selected country
+  couRegion <- countries[countries$iso3==cou,]$region  # obtain the region for the selected country
   # country and Region descriptors
-  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
-  region <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionShortIncome) 
+  country <- as.character(countries[countries$iso3==cou,]$Country)
+  region <- as.character(countries[countries$iso3==cou,]$region) 
   # filter the data
   dataRegion <- Entrepr_data %>%
-    filter(CountryCode==couRegion & Section == section & Subsection==table)
-  dataRegion <- filter(dataRegion, !(is.na(Observation)))
-  dataRegion <- mutate(dataRegion, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+    filter(region==couRegion & Section == section & Subsection==table) %>%
+    filter(!is.na(Observation)) %>%
+    mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
   
   if (nrow(filter(data, CountryCode==cou))>0){
     data <- filter(data, Period==max(Period))
@@ -1220,22 +1220,23 @@ pie_chart_region <- function(couName,section,table){
   cou <- .getCountryCode(couName)
   
   data <- Entrepr_data %>%
-    filter(CountryCode==cou & Section == section & Subsection %in% table)
-  data <- filter(data, !(is.na(Observation)))
-  data <- mutate(data, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+    filter(CountryCode==cou & Section == section & Subsection==table) %>%
+    filter(!is.na(Observation)) %>%
+    mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
   
-  couRegion <- countries[countries$CountryCodeISO3==cou,]$RegionCodeByIncome  # obtain the region for the selected country
+  couRegion <- countries[countries$iso3==cou,]$region  # obtain the region for the selected country
   # country and Region descriptors
-  country <- as.character(countries[countries$CountryCodeISO3==cou,]$Country)
-  region <- as.character(countries[countries$CountryCodeISO3==cou,]$RegionShortIncome) 
+  country <- as.character(countries[countries$iso3==cou,]$Country)
+  region <- as.character(countries[countries$iso3==cou,]$region) 
   # filter the data
   dataRegion <- Entrepr_data %>%
-    filter(CountryCode==couRegion & Section == section & Subsection==table)
-  dataRegion <- filter(dataRegion, !(is.na(Observation)))
-  dataRegion <- mutate(dataRegion, Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
+    filter(region==couRegion & Section == section & Subsection==table) %>%
+    filter(!is.na(Observation)) %>%
+    mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear) - 1),Period))
   
   if (nrow(filter(data, CountryCode==cou))>0){
     data <- filter(data, Period==max(Period))
+    maxPeriod <- data$Period
     data <- select(data, IndicatorShort, Observation)
     pickColor <- ifelse(data$Observation > 50,"green","red")
     data <- rbind(data, c(" ",0)) # add "Other" category
@@ -1255,8 +1256,10 @@ pie_chart_region <- function(couName,section,table){
     
     if (nrow(dataRegion)>0){ # make sure dataRegion is not empty, so I show only 1 pie
       
-      dataRegion <- filter(dataRegion, Period==max(Period))
-      dataRegion <- select(dataRegion, IndicatorShort, Observation)
+      dataRegion <- filter(dataRegion, Period==maxPeriod) %>% #max period for the selected country
+        mutate(Observation = mean(Observation, is.na=TRUE)) %>%
+        select(IndicatorShort, Observation) %>%
+        distinct(IndicatorShort, Observation)
       pickColor <- ifelse(dataRegion$Observation > 50,"green","red")
       dataRegion <- rbind(dataRegion, c(" ",0)) # add "Other" category
       dataRegion$Observation <- round(as.numeric(dataRegion$Observation),2)

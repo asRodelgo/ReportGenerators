@@ -73,6 +73,15 @@ pie_chart_region(couName, "Human capital","figure6")
 
 ########## Finance ##########
 
+## ---- figure_sparkline_Fin1 ----
+figure_sparkline(couName,"figureFin1")
+
+## ---- figure_sparkline_Fin2 ----
+figure_sparkline(couName,"figureFin2")
+
+## ---- figure_sparkline_Fin3 ----
+figure_sparkline(couName,"figureFin3")
+
 ## ---- table_time_Finance ----
 table_time(couName, "Finance","table1")
 

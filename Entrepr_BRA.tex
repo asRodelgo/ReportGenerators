@@ -3,7 +3,57 @@
 % 
 % Alberto Sanchez asanchezrodelgo@ifc.org Jun 2016
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass{article}
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 %%%%%%%%%%%%%% package declaration %%%%%%%%%%%%%%%%%%%%%
 \usepackage[top=0in, bottom=0.1in, left=0in, right=0in]{geometry}
 \usepackage{graphicx} % to load images
@@ -33,30 +83,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
-<<setup,echo=FALSE,message=FALSE,cache=FALSE>>= 
-# Global chunk options: Cache chunks which source R code
-read_chunk("Entrepr_charts_PDF.R")
-@
+
 %
-<<params,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE>>=
 
-#c <- "Spain"
-thisYear <- substr(Sys.Date(),1,4)
-#library(stringr)
-couName <- countryNames[countryNames$Country==c,]$Country
-#couName <- str_wrap(couName,width=12)
-couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
-couISO3 <- countries[countries$Country==couName,]$CountryCodeISO3
-#expYear <- .getExportsPeriod(couName)
-#impYear <- .getImportsPeriod(couName)
-month <- substr(Sys.Date(),6,7)
-year <- substr(Sys.Date(),1,4)
-date <- Sys.Date()
-#ES_year <- filter(TCMN_data, CountryCode==couISO3 & Subsection=="table3")$Period[1]
-#thisYear <- "2015"
-
-@
 %%%%%%%%%%%%%%%% PAGE 1 %%%%%%%%%%%%%%%%%%%
 %World Bank logo and Site branding
 \begin{figure}
@@ -85,10 +116,10 @@ date <- Sys.Date()
     \begin{minipage}[b]{0.99\textwidth} 
       \vspace{4ex}
       %\begin{minipage}[c]{0.18\textwidth} % flag
-        %\center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/\Sexpr{couISO2}.png}}
+        %\center{\includegraphics[width=1.2cm,height=1.2cm]{/Users/asanchez3/shinyTCMN/www/couISO2.png}}
       %\end{minipage}
       %\begin{minipage}[c]{0.80\textwidth} % Country name
-      \hspace{5ex}{\fontsize{40}{42}\selectfont{\color{white}\Sexpr{couName}}}
+      \hspace{5ex}{\fontsize{40}{42}\selectfont{\color{white}Brazil}}
       %\vspace{4ex}  
       %\hspace{5ex}\raggedright{\small{\color{white}COUNTRY SNAPSHOT}}
       %\end{minipage}
@@ -102,42 +133,76 @@ date <- Sys.Date()
   \begin{minipage}[t]{0.56\textwidth} % overview section
     \vspace{-4ex}
     \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='right',results="asis">>=  
-    @      
+
+
+\hfill{}\includegraphics[width=\maxwidth]{figure/figure_sparkline1-1} 
+
+
+
     \vspace{-2ex}
     \hspace{2ex}\tiny{\href{https://data.crunchbase.com/docs/2013-snapshot}{\textcolor[HTML]{22A6F5}{Source: Crunchbase snapshot}}}
     \vspace{3ex}
     \end{minipage}
     \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-    @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline2-1} 
+
+}
+
+
+
     \vspace{-2ex}
     \hspace{2ex}\tiny{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{Source: WEF-GCI Report}}}
     \vspace{3ex}
     \end{minipage}
     \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-    @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline3-1} 
+
+}
+
+
+
     \vspace{-2ex}
     \hspace{2ex}\tiny{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{Source: World Bank WDI}}}
     \vspace{3ex}
     \end{minipage}
     
     \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline4,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-    @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline4-1} 
+
+}
+
+
+
     \vspace{-2ex}
     \hspace{2ex}\tiny{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{Source: WEF-GCI Report}}}
     \end{minipage}
     \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline5,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-    @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline5-1} 
+
+}
+
+
+
     \vspace{-2ex}
     \hspace{2ex}\tiny{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{Source: World Bank WDI}}}
     \end{minipage}
     \begin{minipage}[c]{0.30\textwidth}
-  <<figure_sparkline6,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.height=8,fig.width=11,fig.align='center',results="asis">>=  
-    @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline6-1} 
+
+}
+
+
+
     \vspace{-2ex}
     \hspace{2ex}\tiny{\href{http://www.meetup.com/en-US/meetup_api/}{\textcolor[HTML]{22A6F5}{Source: Meetup API}}}
     \end{minipage}
@@ -155,16 +220,26 @@ date <- Sys.Date()
   \begin{minipage}[c]{0.55\textwidth}
     \hspace{4ex}\small{\textcolor[HTML]{818181}{GOVERNMENT INDEXES}}
     \vspace{1ex}
-    <<bar_facewrap_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.2,fig.width=7,results="asis">>=  
-    @      
+
+
+\hfill{}\includegraphics[width=\maxwidth]{figure/bar_facewrap_chart_Policy-1} 
+
+
+
    \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/WEF_NRI_2012-2015_Historical_Dataset.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: GLOBAL INFORMATION TECHNOLOGY REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
   \end{minipage}
   \begin{minipage}[c]{0.43\textwidth}
     %\vspace{-1ex}
     \small{\textcolor[HTML]{818181}{INVESTMENT CLIMATE}}
     \vspace{1ex}
-    <<number_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=6.1,fig.width=10,results="asis">>=  
-    @
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/number_chart_Policy-1} 
+
+}
+
+
+
     \vspace{-2ex}
     \scriptsize{\href{http://iab.worldbank.org/Data/ExploreTopics/Investing-across-sectors}{\textcolor[HTML]{22A6F5}{SOURCE: INVESTING ACROSS BORDERS}}}
   \end{minipage}
@@ -180,8 +255,27 @@ date <- Sys.Date()
    \\[4pt]
   %  \centering
       \resizebox{\textwidth}{!}{%
-      <<doing_business_table,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-        @          
+% latex table generated in R 3.3.1 by xtable 1.8-2 package
+% Sat Jan 21 10:49:44 2017
+\begingroup\normalsize
+\begin{tabular}{lrrr|rrrr}
+  &  & DTF &  &  & Rank &  &  \\ 
+  &  2016 &  2017 &  Change & 2016 & 2017 & Change &  \\ 
+   \hline
+\textbf{Ease of doing business index } & \textbf{56.6} & \textbf{56.53} & \textbf{\color{red}{-0.07}} & \textbf{121} & \textbf{123} & \textbf{\color{red}{-2}} &  \\ 
+   \rowcolor[gray]{0.95}Dealing with Construction Permits & 51.27 & 51.28 & \color{green}{0.01} & 170 & 172 & \color{red}{-2} &  \\ 
+  Enforcing Contracts & 65.55 & 67.41 & \color{green}{1.86} & 45 & 37 & \color{green}{8} &  \\ 
+   \rowcolor[gray]{0.95}Getting Credit & 45 & 45 & \color{gray}{0} & 97 & 101 & \color{red}{-4} &  \\ 
+  Getting Electricity & 82.32 & 81.23 & \color{red}{-1.09} & 39 & 47 & \color{red}{-8} &  \\ 
+   \rowcolor[gray]{0.95}Paying Taxes & 33.12 & 33.03 & \color{red}{-0.09} & 181 & 181 & \color{gray}{0} &  \\ 
+  Protecting Minority Investors & 65 & 65 & \color{gray}{0} & 30 & 32 & \color{red}{-2} &  \\ 
+   \rowcolor[gray]{0.95}Registering Property & 52.64 & 52.62 & \color{red}{-0.02} & 130 & 128 & \color{green}{2} &  \\ 
+  Resolving Insolvency & 22.4 & 15.8 & \color{red}{-6.6} & 60 & 67 & \color{red}{-7} &  \\ 
+   \rowcolor[gray]{0.95}Starting a Business & 64.2 & 65.04 & \color{green}{0.84} & 174 & 175 & \color{red}{-1} &  \\ 
+  Trading Across Borders & 54.2 & 55.57 & \color{green}{1.37} & 150 & 149 & \color{green}{1} &  \\ 
+  \end{tabular}
+\endgroup
+
       }
     \\[6pt]
      %\hspace*{0.5cm} 
@@ -191,8 +285,12 @@ date <- Sys.Date()
     \hspace{4ex}\small{\textcolor[HTML]{818181}{COST OF BUSINESS STARTUP PROCEDURES}}
     
     \hspace{4ex}\footnotesize{\textcolor[HTML]{818181}{\% of GNI per capita}}
-    <<line_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.1,fig.width=6,results="asis">>=  
-      @            
+
+
+\hfill{}\includegraphics[width=\maxwidth]{figure/line_chart_Policy-1} 
+
+
+
     \hspace{4ex}\scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}} 
   \end{minipage}
 \end{minipage}
@@ -211,16 +309,26 @@ date <- Sys.Date()
     \hspace{4ex}\small{\textcolor[HTML]{818181}{AVAILABILITY OF SKILLED LABOR AND EDUCATION}} 
     
     \hspace{4ex}\footnotesize{\textcolor[HTML]{818181}{(1-7, 7 = best)}}
-      <<bar_facewrap_chart_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='right',fig.height=3.1,fig.width=7,results="asis">>=  
-    @      
+
+
+\hfill{}\includegraphics[width=\maxwidth]{figure/bar_facewrap_chart_Human-1} 
+
+
+
     %\vspace*{-0.6cm} 
     \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCE: WEF-GCI REPORT}}}
   \end{minipage}
   \begin{minipage}[c]{0.43\textwidth} % 
     \small{\textcolor[HTML]{818181}{POPULATION EMPLOYED IN SERVICES SECTOR \\ \footnotesize(\% total employed population)}}
     \vspace{-2ex}
-      <<pie_chart_double_Human,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=7.5,results="asis">>=  
-    @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/pie_chart_double_Human-1} 
+
+}
+
+
+
     \vspace{-1ex} 
     \scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK WDI}}}
   \end{minipage}
@@ -251,19 +359,37 @@ date <- Sys.Date()
       %\vspace*{-0.6cm}
       \begin{minipage}[c]{0.33\textwidth}  
       %\centering
-        <<figure_sparkline_Fin1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
-        @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline_Fin1-1} 
+
+}
+
+
+
       %\vspace*{-0.2cm}
       \\[4pt]
       \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
       \end{minipage}
       \begin{minipage}[c]{0.33\textwidth}
-        <<figure_sparkline_Fin2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
-        @
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline_Fin2-1} 
+
+}
+
+
+
       \end{minipage}
       \begin{minipage}[c]{0.33\textwidth}
-        <<figure_sparkline_Fin3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
-        @
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/figure_sparkline_Fin3-1} 
+
+}
+
+
+
       \end{minipage}
   \end{minipage}
     
@@ -272,16 +398,28 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.49\textwidth} % 
       \small{\textcolor[HTML]{818181}{INFORMAL INVESTORS RATE \footnotesize(\% of 18-64 population)}}
       %\vspace*{-0.4cm}
-      <<line_chart_Finance1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=6.5,results="asis">>=  
-      @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/line_chart_Finance1-1} 
+
+}
+
+
+
       \vspace*{-0.2cm} 
       \scriptsize{\href{http://www.gemconsortium.org/data/sets}{\textcolor[HTML]{22A6F5}{SOURCE: GLOBAL ENTREPRENEURSHIP MONITOR - ADULT POPULATION}}}
     \end{minipage}
     \begin{minipage}[c]{0.49\textwidth} % 
       \small{\textcolor[HTML]{818181}{LENDING INTEREST RATES \footnotesize(\% of interest rate)}}
       %\vspace*{-0.6cm}
-      <<line_chart_Finance2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=2,fig.width=6.5,results="asis">>=  
-      @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/line_chart_Finance2-1} 
+
+}
+
+
+
       \vspace*{-0.2cm} 
       \scriptsize{\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
     \end{minipage}
@@ -300,8 +438,14 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.48\textwidth} % WEF Radar
       \small{\textcolor[HTML]{818181}{FINANCIAL INCLUSION \footnotesize(\% age 15+)}}
       \vspace*{-0.6cm}
-        <<radar_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5,fig.width=7,results="asis">>=  
-      @      
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/radar_chart_Markets-1} 
+
+}
+
+
+
       \vspace*{-0.6cm} 
       \scriptsize{\href{http://www.worldbank.org/en/programs/globalfindex}{\textcolor[HTML]{22A6F5}{SOURCE: WORLD BANK - FINDEX}}}
     \end{minipage}
@@ -309,8 +453,14 @@ date <- Sys.Date()
       \small{\textcolor[HTML]{818181}{DIGITAL COMMERCE \& INTERNET ACCESS}}
       \\[8pt]
       \begin{minipage}[c]{0.99\textwidth} % 
-        <<number_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=6.5,results="asis">>=  
-        @            
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/number_chart_Markets-1} 
+
+}
+
+
+
       \vspace{-5ex}
       \end{minipage}
       \hspace{4ex}\scriptsize{\href{http://www.enterprisesurveys.org/data/exploretopics/innovation-and-technology}{\textcolor[HTML]{22A6F5}{SOURCES: ENTERPRISE SURVEYS; }}\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
@@ -331,14 +481,38 @@ date <- Sys.Date()
     % Table 2
     \centering
     \resizebox{\textwidth}{!}{
-    <<table_time_avg_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-    @      
+% latex table generated in R 3.3.1 by xtable 1.8-2 package
+% Sat Jan 21 10:49:46 2017
+\begingroup\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2003-2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 &  \\ 
+  \hline
+Company spending on R\&D, 1-7, best &  3.8 &  3.6 &  3.6 &  3.5 &  3.3 &  3.2 &   --- &  \\ 
+   \rowcolor{white}ICT service exports, \% of service exports, BoP & 45.9 & 49.4 & 47.7 & 57.0 & 56.4 &   NA &   --- &  \\ 
+  New business density, new registrations per 1,000 people ages 15-64 &  2.3 &  2.2 &   NA &  2.9 &   NA &   NA &   --- &  \\ 
+   \rowcolor{white}Perceived Capabilities, \% of 18-64 population & 53.4 & 53.9 & 52.6 & 50.0 & 58.3 &   NA &   --- &  \\ 
+  Fear of Failure Rate, \% of 18-64 population & 34.2 & 31.1 & 38.7 & 35.6 & 44.7 &   NA &   --- &  \\ 
+   \rowcolor{white}Number of tech startups, number per million pop & 39.8 & 33.6 & 38.0 & 37.7 & 51.7 &   NA &   --- &  \\ 
+  High Status Successful Entrepreneurship, \% of 18-64 population & 77.5 & 86.0 & 82.2 &   NA & 80.1 &   NA &   --- &  \\ 
+   \rowcolor{white}Media Attention for Entrepreneurship, \% of 18-64 population & 75.0 & 86.2 & 84.1 &   NA & 69.6 &   NA &   --- &  \\ 
+  Total early-stage Entrepr. Activity (TEA), \% of 18-64 population & 13.5 & 15.4 & 17.3 & 17.2 & 21.0 &   NA &   --- &  \\ 
+   \rowcolor{white}Improvement-Driven Opp. Entrepr. Activity: Rel. Prevalence, \% of TEA & 42.9 & 58.8 & 57.4 & 57.8 & 47.8 &   NA &   --- &  \\ 
+  New Product early-stage Entrepr. Activity, \% of TEA & 17.8 &  1.3 &  1.2 & 21.9 & 28.4 &   NA &   --- &  \\ 
+  \end{tabular}
+\endgroup
+
     }
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
     \vspace*{+1.5cm}
-    <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=8.8,fig.width=5,results="asis">>=  
-    @
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/sparklines_Culture-1} 
+
+}
+
+
+
     \vspace*{-0.5cm}
   \end{minipage}
   
@@ -357,14 +531,33 @@ date <- Sys.Date()
     % Table 2
     \centering
     \resizebox{\textwidth}{!}{
-    <<table_time_avg_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',results="asis">>=  
-    @      
+% latex table generated in R 3.3.1 by xtable 1.8-2 package
+% Sat Jan 21 10:49:46 2017
+\begingroup\Large
+\begin{tabular}{>{\raggedright}p{6in}r>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}>{\raggedleft}p{0.8in}l}
+  & Avg 2003-2011 & 2012 & 2013 & 2014 & 2015 & 2016 & 2017 &  \\ 
+  \hline
+\% firms identifying transportation as major constraint, \% of firms &  27.9 &    NA &    NA &    NA &    NA &    NA &    --- &  \\ 
+   \rowcolor{white}\% of firms with an annual fin. Statem. reviewed by ext. audit., \% of firms &  13.8 &    NA &    NA &    NA &    NA &    NA &    --- &  \\ 
+  Quality of electricity supply, 1-7, best &   5.0 &   4.9 &   4.8 &   4.1 &   3.8 &   4.1 &    --- &  \\ 
+   \rowcolor{white}Efficiency of legal framework in settling disputes, 1-7, best &   3.3 &   3.5 &   3.3 &   3.2 &   2.8 &   2.7 &    --- &  \\ 
+  Access to electricity, \% population &  98.0 &  99.5 &    NA &    NA &    NA &    NA &    --- &  \\ 
+   \rowcolor{white}ICT goods imports, \% total goods imports &   9.7 &   8.8 &   8.7 &   8.8 &    NA &    NA &    --- &  \\ 
+  \end{tabular}
+\endgroup
+
     }
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
     \vspace*{+1.4cm}
-    <<sparklines_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
-    @
+
+
+{\centering \includegraphics[width=\maxwidth]{figure/sparklines_Supports-1} 
+
+}
+
+
+
     \vspace*{-0.5cm}
   \end{minipage}
   
@@ -380,7 +573,7 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[c]{0.65\textwidth}
     \vspace*{-0.1cm}
-    \raggedleft{\color{white!40!black} \footnotesize ENTREPRENEURSHIP INDICATORS AT A GLANCE - UPDATED \Sexpr{date}}
+    \raggedleft{\color{white!40!black} \footnotesize ENTREPRENEURSHIP INDICATORS AT A GLANCE - UPDATED 2017-01-21}
   \end{minipage}
 \end{figure}
 %%%%%%%%%%%%%%%% END OF DOCUMENT %%%%%%%%%%%%%%%%%%%
