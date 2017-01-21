@@ -44,10 +44,10 @@ read_chunk("Entrepr_charts_PDF.R")
 #c <- "Spain"
 thisYear <- substr(Sys.Date(),1,4)
 #library(stringr)
-couName <- countryNames[countryNames$Country==c,]$Country
+couName <- countries[countries$name==c,]$name
 #couName <- str_wrap(couName,width=12)
-couISO2 <- countries[countries$Country==couName,]$CountryCodeISO2
-couISO3 <- countries[countries$Country==couName,]$CountryCodeISO3
+couISO2 <- countries[countries$Country==couName,]$iso2
+couISO3 <- countries[countries$Country==couName,]$iso3
 #expYear <- .getExportsPeriod(couName)
 #impYear <- .getImportsPeriod(couName)
 month <- substr(Sys.Date(),6,7)
@@ -230,9 +230,9 @@ date <- Sys.Date()
 \clearpage
 %% Finance --------------------------------------------
 \begin{figure}
-  \vspace{102ex} % move down this figure
+  \vspace{110ex} % move down this figure
   %\hspace{-7ex} % move left this figure
-  \includegraphics[width=21.7cm,height=11.5cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_lightgrey.png}
+  \includegraphics[width=21.7cm,height=10.5cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_lightgrey.png}
 \end{figure}
 
 \begin{figure}
@@ -249,22 +249,25 @@ date <- Sys.Date()
       \\[4pt]
       %\\ \footnotesize(\% GDP)}}
       %\vspace*{-0.6cm}
-      \begin{minipage}[c]{0.33\textwidth}  
+      \begin{minipage}[c]{0.32\textwidth}  
       %\centering
-        <<figure_sparkline_Fin1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
+        <<figure_sparkline_Fin1,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=11,fig.width=20,results="asis">>=  
         @      
       %\vspace*{-0.2cm}
-      \\[4pt]
-      \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
+%       \\[4pt]
+%       \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
       \end{minipage}
-      \begin{minipage}[c]{0.33\textwidth}
-        <<figure_sparkline_Fin2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
+      \begin{minipage}[c]{0.32\textwidth}
+        <<figure_sparkline_Fin2,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=11,fig.width=20,results="asis">>=  
         @
       \end{minipage}
-      \begin{minipage}[c]{0.33\textwidth}
-        <<figure_sparkline_Fin3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=3.1,fig.width=4,results="asis">>=  
+      \begin{minipage}[c]{0.32\textwidth}
+        <<figure_sparkline_Fin3,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=11,fig.width=20,results="asis">>=  
         @
       \end{minipage}
+      
+       %\\[4pt]
+       \hspace{4ex}\scriptsize{\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{SOURCES: WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
   \end{minipage}
     
   \begin{minipage}[c]{0.95\textwidth} % 
@@ -308,11 +311,11 @@ date <- Sys.Date()
     \begin{minipage}[c]{0.50\textwidth} % 
       \small{\textcolor[HTML]{818181}{DIGITAL COMMERCE \& INTERNET ACCESS}}
       \\[8pt]
-      \begin{minipage}[c]{0.99\textwidth} % 
-        <<number_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=6.5,results="asis">>=  
+      %\begin{minipage}[c]{0.99\textwidth} % 
+        <<number_chart_Markets,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=6.5,fig.width=13,results="asis">>=  
         @            
-      \vspace{-5ex}
-      \end{minipage}
+      %\vspace{-5ex}
+      %\end{minipage}
       \hspace{4ex}\scriptsize{\href{http://www.enterprisesurveys.org/data/exploretopics/innovation-and-technology}{\textcolor[HTML]{22A6F5}{SOURCES: ENTERPRISE SURVEYS; }}\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
     \end{minipage}
   \end{minipage}  
@@ -336,7 +339,7 @@ date <- Sys.Date()
     }
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
-    \vspace*{+1.5cm}
+    \vspace*{+1cm}
     <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=8.8,fig.width=5,results="asis">>=  
     @
     \vspace*{-0.5cm}
@@ -362,7 +365,7 @@ date <- Sys.Date()
     }
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
-    \vspace*{+1.4cm}
+    \vspace*{+1cm}
     <<sparklines_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=4.5,fig.width=4,results="asis">>=  
     @
     \vspace*{-0.5cm}

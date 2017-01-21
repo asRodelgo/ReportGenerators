@@ -303,7 +303,7 @@ table_time_avg <- function(couName,section,table){
   data <- merge(tableKeys,select(data,-IndicatorShort),by="Key",all.x=TRUE)
   # keep the latest period (excluding projections further than 2 years)
   data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period)) %>%
-  filter(Period <= (as.numeric(thisYear) + 1)) %>%
+  filter(Period <= (as.numeric(thisYear))) %>%
   # remove NAs rows
   # calculate average for 1st column
   mutate(Unit = ifelse(grepl("Active population",Unit),"% of TEA",Unit),
@@ -407,7 +407,7 @@ sparklines <- function(couName,section,table){
     # keep the latest period (excluding projections further than 2 years)
     data <- data %>%
       mutate(Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period)) %>%
-      filter(Period <= (as.numeric(thisYear) + 1), Period > (as.numeric(thisYear) - 15)) %>%
+      filter(Period <= as.numeric(thisYear), Period > (as.numeric(thisYear) - 15)) %>%
       select(Key, Period, Observation) %>%
       arrange(Key, Period) %>%
       distinct(Key,Period, .keep_all = TRUE)
@@ -435,8 +435,8 @@ sparklines <- function(couName,section,table){
         oma=c(1,2,1,1)) #sets outer margin
     
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    graphics::text(1.05, 1,minPeriod, col="grey", cex=5)
-    graphics::text(1.95, 1,maxPeriod, col="grey", cex=5)
+    graphics::text(1.05, 1,minPeriod, col="darkgrey", cex=3)
+    graphics::text(1.95, 1,maxPeriod, col="darkgrey", cex=3)
     
     for (i in 1:ncol(x)){ # setup for statement to loop over all elements in a list or vector
       
@@ -750,7 +750,7 @@ radar_chart <- function(couName,section,table){
     #title="WEF Competitiveness Indicators, stage of development (1-7)",
     par(mar=c(0,1,1,1))
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-    legend(1,1.5, legend=c(country,region), seg.len=0.5, pch=19, inset=50, 
+    legend(1,1.5, legend=c(couName,region), seg.len=0.5, pch=19, inset=50, 
            bty="n" ,lwd=3, x.intersp=0.5, horiz=TRUE, col=c("orange","lightblue"))
     
   } else {
@@ -1285,7 +1285,7 @@ pie_chart_region <- function(couName,section,table){
         coord_polar("y",start = 0) +
         geom_text(aes(label=ObsLabel,y=15),
                   size=12,color="white") + 
-        ggtitle(country) + 
+        ggtitle(couName) + 
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
               panel.border = element_blank(),

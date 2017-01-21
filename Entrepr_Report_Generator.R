@@ -9,8 +9,8 @@ source('helper_functions.R') # charts and table functions needed
 #for (c in c("Sint Maarten (Dutch part)")){
 #for (c in c("Antigua and Barbuda")) {
 for (c in c("Brazil")) {
-#for (c in countryNames$Country) {
-  if (!(substr(c,1,1)=="(") & !(countryNames$CountryCodeISO3=="")){
+#for (c in countries$name) {
+  if (!(substr(c,1,1)=="(") & !(filter(countries, name==c)$iso3=="")){
     iso3 <- .getCountryCode(c)
     knit2pdf('Entrepr_PDF_Local.Rnw', clean = TRUE,
              encoding = "UTF-8",
