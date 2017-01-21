@@ -559,15 +559,15 @@ number_chart <- function(couName,section,table){
   dataWorld <- filter(Entrepr_data, Section==section, Subsection %in% table)
   dataWorld <- filter(dataWorld,!is.na(Observation))
   dataWorld <- dataWorld %>%
-    group_by(iso2) %>%
+    group_by(Country,Key) %>%
     mutate(Period = max(Period,na.rm=TRUE)) %>%
-    distinct(Key, Period, .keep_all = TRUE)
-  
-  dataWorld <- as.data.frame(dataWorld)
+    distinct(Key, Period, .keep_all = TRUE) %>%
+    as.data.frame()
   #dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
   #dataWorld <- filter(dataWorld, !(CountryAlternat==""))
   dataWorld <- dataWorld %>%
     group_by(Key) %>%
+    mutate(Observation = round(Observation,1)) %>%
     arrange(desc(Observation)) %>%
     as.data.frame()
   
