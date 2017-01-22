@@ -278,7 +278,7 @@ line_chart <- function(couName, section, table){
 #     }
     order_legend <- c(couName,as.character(unique(data[data$CountryCode %in% topNeighbors,]$Country)))
     country_order <- factor(order_legend, levels = c(couName,order_legend[2:length(order_legend)]))
-    my_order <- data.frame(Country = country_order, order = seq(1,5,1))
+    my_order <- data.frame(Country = country_order, order = seq(1,length(order_legend),1))
     data <- merge(data,my_order, by="Country")
     
     ggplot(data, aes(x=Period, y=Observation)) +
@@ -288,15 +288,16 @@ line_chart <- function(couName, section, table){
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             legend.position="top",
+            legend.text = element_text(size = 10, colour = "#818181"),
             panel.border = element_blank(),
             panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-            axis.line = element_line(size=0.1),
-            axis.text.x = element_text(hjust = 1)) + 
+            axis.line = element_line(size=0.1, colour = "lightgrey"),
+            axis.text.x = element_text(color="#818181",hjust = 1)) + 
       labs(x="",y=""#,title="Goods Export and Import volume growth, 2012-2015"
       ) + 
       scale_color_manual(labels = order_legend, values = c("orange","brown","lightblue","lightgreen","pink")) +
       scale_alpha_manual(labels = order_legend,values = c(1, rep(0.6,4))) + 
-      scale_size_manual(labels = order_legend,values = c(3, rep(1,4))) + 
+      scale_size_manual(labels = order_legend,values = c(2, rep(1,4))) + 
       scale_x_discrete(breaks = unique(data$Period)[seq(1,length(unique(data$Period)),3)])
     
   } else {
@@ -480,7 +481,7 @@ sparklines <- function(couName,section,table){
 }
 
 ## ---- bar_chart ----
-bar_chart <- function(couName,section,table){      
+bar_chart <- function(couName,section,table,paste_unit){      
   
   cou <- .getCountryCode(couName)
   data <- filter(Entrepr_data, CountryCode==cou, Section==section, Subsection %in% table)
@@ -506,8 +507,14 @@ bar_chart <- function(couName,section,table){
     }
     
     require(stringr) # to wrap label text
-    data <- mutate(data, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
-    data <- mutate(data, IndicatorShort = str_wrap(paste0(IndicatorShort,", ",Unit), width = 30))
+    
+    if (!paste_unit){ # should unit be included in indicator name
+      data <- mutate(data, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
+      data <- mutate(data, IndicatorShort = str_wrap(paste0(IndicatorShort,", ",Unit), width = 30))
+    } else {
+      data <- mutate(data, IndicatorShort = str_wrap(IndicatorShort, width = 30))
+    }
+    
     
     if (section == "Markets"){
       
@@ -517,7 +524,7 @@ bar_chart <- function(couName,section,table){
         geom_bar(data=data_grey,color="#f1f3f3",fill = "#f1f3f3",stat="identity") +
         geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
         geom_text(data=data, aes(label=round(Observation,1),y=ifelse(Observation<21,Observation + max(Observation)*.1,Observation - max(Observation)*.1)),
-                  size=6,color=ifelse(data$Observation<21,"#f1f3f3","white")) + 
+                  size=8,color=ifelse(data$Observation<21,"#f1f3f3","white")) + 
         coord_flip()+
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
@@ -526,7 +533,8 @@ bar_chart <- function(couName,section,table){
               panel.background = element_blank(),plot.title = element_text(lineheight=.5),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(size = 15)) + 
+              axis.text.y = element_text(size = 20),
+              axis.text = element_text(color = "#818181")) + 
         labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
         )
     } else {
@@ -675,11 +683,13 @@ bar_facewrap_chart <- function(couName, section, table){
               strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
               legend.key=element_blank(),
               legend.title=element_blank(),
+              legend.text = element_text(size = 10, colour = "#818181"),
               panel.border = element_blank(),
               panel.background = element_blank(),plot.title = element_text(lineheight=.5),
-              axis.ticks.y = element_blank(),
+              #axis.ticks.y = element_blank(),
               axis.ticks.x = element_blank(),
-              axis.text.x = element_blank()) + 
+              axis.text.x = element_blank(),
+              axis.text.y = element_text(color="#818181")) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
         scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","lightblue","brown","orange"))
       
@@ -695,11 +705,13 @@ bar_facewrap_chart <- function(couName, section, table){
               strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
               legend.key=element_blank(),
               legend.title=element_blank(),
+              legend.text = element_text(size = 10, colour = "#818181"),
               panel.border = element_blank(),
               panel.background = element_blank(),plot.title = element_text(lineheight=.5),
               #axis.ticks.y = element_blank(),
               axis.ticks.y = element_blank(),
-              axis.text.y = element_blank()) + 
+              axis.text.y = element_blank(),
+              axis.text.x = element_text(color="#818181")) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
         scale_fill_manual(breaks=order_legend,values = c("pink","lightgreen","lightblue","brown","orange"))
     }
@@ -1166,7 +1178,7 @@ pie_chart_double <- function(couName,section,table){
     
       p1 <- ggplot(data, aes("",Observation,fill=IndicatorShort)) +
         geom_bar(width=1,stat="identity") +
-        scale_fill_manual(values = c("lightgrey","blue"),guide=FALSE) +
+        scale_fill_manual(values = c("lightgrey","orange"),guide=FALSE) +
         coord_polar("x",start = 0) +
         geom_text(aes(label=ObsLabel,y=0),
                   size=12,color="white") + 
@@ -1175,7 +1187,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+              plot.title = element_text(lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1188,12 +1200,12 @@ pie_chart_double <- function(couName,section,table){
         coord_polar("x",start = 0) +
         geom_text(aes(label=ObsLabel,y=0),
                   size=12,color="white") + 
-        ggtitle(region) + 
+        ggtitle(paste0(region," (simple average)")) + 
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+              plot.title = element_text(lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1215,7 +1227,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 25, colour = "darkgrey"),
+              plot.title = element_text(lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1297,7 +1309,7 @@ pie_chart_region <- function(couName,section,table){
       
       p1 <- ggplot(data, aes("",Observation,fill=IndicatorShort)) +
         geom_bar(width=1,stat="identity") +
-        scale_fill_manual(values = c("#f1f3f3","#22a6f5"),guide=FALSE) +
+        scale_fill_manual(values = c("#f1f3f3","orange"),guide=FALSE) +
         coord_polar("y",start = 0) +
         geom_text(aes(label=ObsLabel,y=15),
                   size=12,color="white") + 
@@ -1306,7 +1318,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 25, colour = "#818181"),
+              plot.title = element_text(lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1319,12 +1331,12 @@ pie_chart_region <- function(couName,section,table){
         coord_polar("y",start = 0) +
         geom_text(aes(label=ObsLabel,y=15),
                   size=12,color="white") + 
-        ggtitle(region) + 
+        ggtitle(paste0(region," (simple average)")) + 
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 25, colour = "#818181"),
+              plot.title = element_text(lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1346,7 +1358,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 25, colour = "#818181"),
+              plot.title = element_text(lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
