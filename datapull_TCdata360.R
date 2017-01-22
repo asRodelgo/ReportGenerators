@@ -27,8 +27,8 @@ indicators_Entrep <- indicators %>%
 
 Entrepr_data <- data.frame()
 specialchars <- paste(c("[-]","[.]"),collapse = "|")
-#for (cou in c("BRA","ARG","ECU","URY","BOL")){
-for (cou in countries$id){
+for (cou in c("BRA","ARG","ECU","URY","BOL")){
+#for (cou in countries$id){
   for (ind in indicators_Entrep$id){
     print(paste0("Processing...",cou," ",ind))
     thisQuery <- fromJSON(paste0("http://datascope-prod.amida-demo.com/api/v1/data?countries=",cou,
@@ -85,7 +85,7 @@ missInd <- select(all.datasets$WB.data, iso2 = iso2c, Period = year, Observation
 Entrepr_data <- bind_rows(Entrepr_data, missInd)
 
 
-write.csv(Entrepr_data,"Entrepr_data.csv",row.names = FALSE)
+write.csv(Entrepr_data,"data/Entrepr_data.csv",row.names = FALSE)
 # -----------------------------------------------------------
 
 
