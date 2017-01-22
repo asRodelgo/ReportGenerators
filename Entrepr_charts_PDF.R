@@ -100,14 +100,14 @@ line_chart(couName,"Finance","line2")
 ## ---- radar_chart_Markets ----
 radar_chart(couName, "Markets","radar1")
 
+## ---- bar_chart_Markets ----
+bar_chart(couName, "Markets","radar1",paste_unit=TRUE)
+
 ## ---- table_region_Markets ----
 table_region(couName, "Markets","table1")
 
 # ## ---- pie_chart_double_Markets ----
 #pie_chart_regular(couName, "Markets",c("combo1","combo2"))
-
-## ---- bar_chart_Markets ----
-bar_chart(couName,"Markets",c("combo1","combo2"))
 
 ## ---- number_chart_Markets ----
 number_chart(couName,"Markets",c("table1","combo1","combo2"),str_wrap_size=36)
