@@ -15,6 +15,16 @@ library(devtools) # allow install packages from source
 #install_github('htmlwidgets/sparkline') # install sparklines
 library(sparkline) # sparklines
 library(knitr) # generate LaTeX PDF report
+#install.packages("extrafont")
+
+## load extra fonts for ggplot2 charts
+## I don't need it if I'm using Times New Roman
+#library(extrafont) 
+# look at the loaded fonts
+#fonts()
+#fonttable()
+#font_import(pattern="[T/t]imes New Roman")
+#loadfonts(device="pdf")
 
 # avoid scientific notation
 options(scipen=999)

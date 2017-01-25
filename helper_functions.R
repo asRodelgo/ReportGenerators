@@ -298,12 +298,12 @@ line_chart <- function(couName, section, table){
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             legend.position="top",
-            legend.text = element_text(size = 10, colour = "#818181"),
+            legend.text = element_text(family="Times New Roman", size = 10, colour = "#818181"),
             panel.border = element_blank(),
-            panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+            panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
             axis.line = element_line(size=0.1, colour = "lightgrey"),
-            axis.text.x = element_text(color="#818181",hjust = 1),
-            axis.text.y = element_text(color="#818181")) +
+            axis.text.x = element_text(family="Times New Roman", color="#818181",hjust = 1),
+            axis.text.y = element_text(family="Times New Roman", color="#818181")) +
       labs(x="",y=""#,title="Goods Export and Import volume growth, 2012-2015"
       ) + 
       scale_color_manual(labels = order_legend, values = c("orange","brown","lightblue","lightgreen","pink")) +
@@ -552,11 +552,11 @@ bar_chart <- function(couName,section,table,paste_unit){
               legend.title=element_blank(),
               legend.position='none',
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(size = 20),
-              axis.text = element_text(color = "#818181")) + 
+              axis.text.y = element_text(family="Times New Roman", size = 20),
+              axis.text = element_text(family="Times New Roman", color = "#818181")) + 
         labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
         )
     } else {
@@ -569,10 +569,10 @@ bar_chart <- function(couName,section,table,paste_unit){
               legend.title=element_blank(),
               legend.position='none',
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(size = 15)) + 
+              axis.text.y = element_text(family="Times New Roman", size = 15)) + 
         labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
         )
     }
@@ -716,17 +716,17 @@ bar_facewrap_chart <- function(couName, section, table){
         geom_bar(position="dodge",stat="identity") +
         #coord_flip()+
         facet_wrap(~IndicatorShort,scales="free_y") +
-        theme(strip.text.x = element_text(size = 12, colour = "white"),
+        theme(strip.text.x = element_text(family="Times New Roman", size = 12, colour = "white"),
               strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
               legend.key=element_blank(),
               legend.title=element_blank(),
-              legend.text = element_text(size = 10, colour = "#818181"),
+              legend.text = element_text(family="Times New Roman", size = 10, colour = "#818181"),
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
               #axis.ticks.y = element_blank(),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(color="#818181")) + 
+              axis.text.y = element_text(family="Times New Roman", color="#818181")) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
         scale_fill_manual(breaks = order_legend,values = c("orange","brown","lightblue","lightgreen","pink")) +
         scale_alpha_manual(labels = order_legend,values = c(1, rep(0.4,4)),guide=FALSE)
@@ -745,17 +745,17 @@ bar_facewrap_chart <- function(couName, section, table){
         geom_bar(position="dodge",stat="identity") +
         coord_flip() +
         facet_wrap(~IndicatorShort) +
-        theme(strip.text.x = element_text(size = 12, colour = "white"),
+        theme(strip.text.x = element_text(family="Times New Roman", size = 12, colour = "white"),
               strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
               legend.key=element_blank(),
               legend.title=element_blank(),
-              legend.text = element_text(size = 10, colour = "#818181"),
+              legend.text = element_text(family="Times New Roman", size = 10, colour = "#818181"),
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
               #axis.ticks.y = element_blank(),
               axis.ticks.y = element_blank(),
               axis.text.y = element_blank(),
-              axis.text.x = element_text(color="#818181")) + 
+              axis.text.x = element_text(family="Times New Roman", color="#818181")) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
         scale_fill_manual(breaks=order_legend,values = c("orange","brown","lightblue","lightgreen","pink")) +
         scale_alpha_manual(labels = order_legend,values = c(1, rep(0.4,4)),guide=FALSE)
@@ -1232,7 +1232,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 20, colour = "darkgrey"),
+              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1250,7 +1250,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 20, colour = "darkgrey"),
+              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1272,7 +1272,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 20, colour = "darkgrey"),
+              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1363,7 +1363,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 20, colour = "#818181"),
+              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1381,7 +1381,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 20, colour = "#818181"),
+              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1403,7 +1403,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(lineheight=.8, size = 20, colour = "#818181"),
+              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1492,7 +1492,7 @@ pie_chart_regular <- function(couName,section,table){
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(lineheight=.8, size = 12, colour = "#818181"),
+            plot.title = element_text(family="Times New Roman", lineheight=.8, size = 12, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),
@@ -1510,7 +1510,7 @@ pie_chart_regular <- function(couName,section,table){
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(lineheight=.8, size = 12, colour = "#818181"),
+            plot.title = element_text(family="Times New Roman", lineheight=.8, size = 12, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),
