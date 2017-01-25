@@ -24,7 +24,9 @@ library(knitr) # generate LaTeX PDF report
 #fonts()
 #fonttable()
 #font_import(pattern="[T/t]imes New Roman")
-#loadfonts(device="pdf")
+loadfonts(device="postscript")
+library(Cairo)
+cairo_ps("test.eps", family = "Times")
 
 # avoid scientific notation
 options(scipen=999)

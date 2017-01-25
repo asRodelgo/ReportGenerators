@@ -93,7 +93,7 @@ figure_sparkline <- function(couName,table){
     }
     
     # Print the combo -----------------------------------------------
-    par(mfrow=c(5,1), #sets number of rows in space to number of cols in data frame x
+    par(family = 'serif',mfrow=c(5,1), #sets number of rows in space to number of cols in data frame x
         mar=c(0,2,0,2), #sets margin size for the figures
         oma=c(0,1,0,1)) #sets outer margin
     
@@ -107,7 +107,7 @@ figure_sparkline <- function(couName,table){
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     graphics::text(1.5, 1.1,paste0("(Rank: ",rank,"/",rankedTotal,")"), col="grey", cex=7)
     # plot sparkline  
-    par(#sets number of rows in space to number of cols in data frame x
+    par(family = 'serif',#sets number of rows in space to number of cols in data frame x
         mar=c(0,5,0,5))#sets margin size for the figures
         #oma=c(0,4,0,4)) #sets outer margin
     if (sum(spark[1:(nrow(spark)-1),1])==0){ # paint in white empty rows
@@ -172,7 +172,7 @@ figure_sparkline <- function(couName,table){
     }
     
     # Print the combo -----------------------------------------------
-    par(mfrow=c(5,1), #sets number of rows in space to number of cols in data frame x
+    par(family = 'serif',mfrow=c(5,1), #sets number of rows in space to number of cols in data frame x
         mar=c(0,2,0,2), #sets margin size for the figures
         oma=c(0,1,0,1)) #sets outer margin
     
@@ -186,7 +186,7 @@ figure_sparkline <- function(couName,table){
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     graphics::text(1.5, 1.1,paste0("(Rank: /",rankedTotal,")"), col="grey", cex=7)
     # plot sparkline  
-    par(#sets number of rows in space to number of cols in data frame x
+    par(family = 'serif',#sets number of rows in space to number of cols in data frame x
       mar=c(0,5,0,5))#sets margin size for the figures
     #oma=c(0,4,0,4)) #sets outer margin
     
@@ -298,12 +298,12 @@ line_chart <- function(couName, section, table){
       theme(legend.key=element_blank(),
             legend.title=element_blank(),
             legend.position="top",
-            legend.text = element_text(family="Times New Roman", size = 10, colour = "#818181"),
+            legend.text = element_text(family="Times", size = 10, colour = "#818181"),
             panel.border = element_blank(),
-            panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
+            panel.background = element_blank(),plot.title = element_text(family="Times", lineheight=.5),
             axis.line = element_line(size=0.1, colour = "lightgrey"),
-            axis.text.x = element_text(family="Times New Roman", color="#818181",hjust = 1),
-            axis.text.y = element_text(family="Times New Roman", color="#818181")) +
+            axis.text.x = element_text(family="Times", color="#818181",hjust = 1),
+            axis.text.y = element_text(family="Times", color="#818181")) +
       labs(x="",y=""#,title="Goods Export and Import volume growth, 2012-2015"
       ) + 
       scale_color_manual(labels = order_legend, values = c("orange","brown","lightblue","lightgreen","pink")) +
@@ -466,7 +466,7 @@ sparklines <- function(couName,section,table){
     }
     #x <- scale(x) # standardize x
     
-    par(mfrow=c(ncol(x)+3,1), #sets number of rows in space to number of cols in data frame x
+    par(family = 'serif',mfrow=c(ncol(x)+3,1), #sets number of rows in space to number of cols in data frame x
         mar=c(1,0,0,0), #sets margin size for the figures
         oma=c(1,2,1,1)) #sets outer margin
     
@@ -552,11 +552,11 @@ bar_chart <- function(couName,section,table,paste_unit){
               legend.title=element_blank(),
               legend.position='none',
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times", lineheight=.5),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(family="Times New Roman", size = 20),
-              axis.text = element_text(family="Times New Roman", color = "#818181")) + 
+              axis.text.y = element_text(family="Times", size = 20),
+              axis.text = element_text(family="Times", color = "#818181")) + 
         labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
         )
     } else {
@@ -569,10 +569,10 @@ bar_chart <- function(couName,section,table,paste_unit){
               legend.title=element_blank(),
               legend.position='none',
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times", lineheight=.5),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(family="Times New Roman", size = 15)) + 
+              axis.text.y = element_text(family="Times", size = 15)) + 
         labs(x="",y=""#,title="Top 5 constraints according to 2013 Enterprise Survey (in percent)"
         )
     }
@@ -618,7 +618,7 @@ number_chart <- function(couName,section,table,str_wrap_size){
     
     require(stringr) # to wrap label text
     # Print the combo -----------------------------------------------
-    par(mfrow=c(length(unique(dataWorld$Key)),2), #sets number of rows in space to number of cols in data frame x
+    par(family = 'serif',mfrow=c(length(unique(dataWorld$Key)),2), #sets number of rows in space to number of cols in data frame x
         mar=c(0,2,0,2), #sets margin size for the figures
         oma=c(0,1,0,1)) #sets outer margin
     
@@ -716,17 +716,18 @@ bar_facewrap_chart <- function(couName, section, table){
         geom_bar(position="dodge",stat="identity") +
         #coord_flip()+
         facet_wrap(~IndicatorShort,scales="free_y") +
-        theme(strip.text.x = element_text(family="Times New Roman", size = 12, colour = "white"),
+        theme(strip.text.x = element_text(family="Times", size = 12, colour = "white"),
               strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
               legend.key=element_blank(),
               legend.title=element_blank(),
-              legend.text = element_text(family="Times New Roman", size = 10, colour = "#818181"),
+              legend.text = element_text(family="Times", size = 10, colour = "#818181"),
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times", lineheight=.5),
               #axis.ticks.y = element_blank(),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
-              axis.text.y = element_text(family="Times New Roman", color="#818181")) + 
+              axis.text.y = element_text(family="Times", color="#818181")
+              ) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
         scale_fill_manual(breaks = order_legend,values = c("orange","brown","lightblue","lightgreen","pink")) +
         scale_alpha_manual(labels = order_legend,values = c(1, rep(0.4,4)),guide=FALSE)
@@ -745,17 +746,17 @@ bar_facewrap_chart <- function(couName, section, table){
         geom_bar(position="dodge",stat="identity") +
         coord_flip() +
         facet_wrap(~IndicatorShort) +
-        theme(strip.text.x = element_text(family="Times New Roman", size = 12, colour = "white"),
+        theme(strip.text.x = element_text(family="Times", size = 12, colour = "white"),
               strip.background = element_rect(colour = "#22A6F5", fill = "#22A6F5"),
               legend.key=element_blank(),
               legend.title=element_blank(),
-              legend.text = element_text(family="Times New Roman", size = 10, colour = "#818181"),
+              legend.text = element_text(family="Times", size = 10, colour = "#818181"),
               panel.border = element_blank(),
-              panel.background = element_blank(),plot.title = element_text(family="Times New Roman", lineheight=.5),
+              panel.background = element_blank(),plot.title = element_text(family="Times", lineheight=.5),
               #axis.ticks.y = element_blank(),
               axis.ticks.y = element_blank(),
               axis.text.y = element_blank(),
-              axis.text.x = element_text(family="Times New Roman", color="#818181")) + 
+              axis.text.x = element_text(family="Times", color="#818181")) + 
         labs(x="",y="")+#,title="World Governance Indicators")+
         scale_fill_manual(breaks=order_legend,values = c("orange","brown","lightblue","lightgreen","pink")) +
         scale_alpha_manual(labels = order_legend,values = c(1, rep(0.4,4)),guide=FALSE)
@@ -821,7 +822,7 @@ radar_chart <- function(couName,section,table){
                      cglwd=2,axislabcol="lightgrey", vlabels=data$IndicatorShort, cex.main=1,cex=2.5)
           
     #title="WEF Competitiveness Indicators, stage of development (1-7)",
-    par(mar=c(0,1,1,1))
+    par(family = 'serif',mar=c(0,1,1,1))
     plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
     legend(1,1.5, legend=c(couName,region), seg.len=0.5, pch=19, inset=50, 
            bty="n" ,lwd=3, x.intersp=0.5, horiz=TRUE, col=c("orange","lightblue"))
@@ -1232,7 +1233,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "darkgrey"),
+              plot.title = element_text(family="Times", lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1250,7 +1251,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "darkgrey"),
+              plot.title = element_text(family="Times", lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1272,7 +1273,7 @@ pie_chart_double <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "darkgrey"),
+              plot.title = element_text(family="Times", lineheight=.8, size = 20, colour = "darkgrey"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1363,7 +1364,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "#818181"),
+              plot.title = element_text(family="Times", lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1381,7 +1382,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "#818181"),
+              plot.title = element_text(family="Times", lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1403,7 +1404,7 @@ pie_chart_region <- function(couName,section,table){
               legend.title=element_blank(),
               panel.border = element_blank(),
               panel.background = element_blank(),
-              plot.title = element_text(family="Times New Roman", lineheight=.8, size = 20, colour = "#818181"),
+              plot.title = element_text(family="Times", lineheight=.8, size = 20, colour = "#818181"),
               axis.ticks.x = element_blank(),
               axis.text.x = element_blank(),
               axis.ticks.y = element_blank(),
@@ -1478,7 +1479,7 @@ pie_chart_regular <- function(couName,section,table){
     
     #if (section=="Markets")  thisColor = "blue"
     #else thisColor = "darkgreen"
-    #par(#mar=c(0,5,5,5),
+    #par(family = 'serif',#mar=c(0,5,5,5),
     #    oma=c(0,5,5,5))
     
     p1 <- ggplot(data1, aes("",Observation,fill=IndicatorShort)) +
@@ -1492,7 +1493,7 @@ pie_chart_regular <- function(couName,section,table){
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(family="Times New Roman", lineheight=.8, size = 12, colour = "#818181"),
+            plot.title = element_text(family="Times", lineheight=.8, size = 12, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),
@@ -1510,7 +1511,7 @@ pie_chart_regular <- function(couName,section,table){
             legend.title=element_blank(),
             panel.border = element_blank(),
             panel.background = element_blank(),
-            plot.title = element_text(family="Times New Roman", lineheight=.8, size = 12, colour = "#818181"),
+            plot.title = element_text(family="Times", lineheight=.8, size = 12, colour = "#818181"),
             axis.ticks.x = element_blank(),
             axis.text.x = element_blank(),
             axis.ticks.y = element_blank(),
