@@ -13,8 +13,8 @@ exclude <- c("Channel Islands","Virgin Islands (U.S.)","Northern Mariana Islands
              "Marshall Islands","Greenland","Gibraltar","Cayman Islands","British Virgin Islands",
              "St. Martin (French part)","Sint Maarten (Dutch part)")
 processed <- c()
-#for (c in filter(countries, !(name %in% exclude))$name) {
-for (c in c("Angola")) {
+for (c in filter(countries, !(name %in% exclude))$name) {
+#for (c in c("Angola")) {
   if (!(substr(c,1,1)=="(") & !(filter(countries, name==c)$iso3=="")){
     iso3 <- .getCountryCode(c)
     knit2pdf('Entrepr_PDF_Local.Rnw', clean = TRUE,
