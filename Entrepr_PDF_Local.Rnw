@@ -231,9 +231,9 @@ date <- Sys.Date()
 \clearpage
 %% Finance --------------------------------------------
 \begin{figure}
-  \vspace{110ex} % move down this figure
+  \vspace{108ex} % move down this figure
   %\hspace{-7ex} % move left this figure
-  \includegraphics[width=21.7cm,height=10.5cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_lightgrey.png}
+  \includegraphics[width=21.7cm,height=11cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_lightgrey.png}
 \end{figure}
 
 \begin{figure}
@@ -341,18 +341,18 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
     \vspace*{+1.1cm}
-    <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=8.8,fig.width=5,results="asis">>=  
+    <<sparklines_Culture,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=8.8,fig.width=5.5,results="asis">>=  
     @
     \vspace*{-0.5cm}
   \end{minipage}
   
-  \vspace{-1ex}
+  %\vspace{-1ex}
   \scriptsize{\href{http://www.gemconsortium.org/data/sets}{\textcolor[HTML]{22A6F5}{SOURCES: GLOBAL ENTREPRENEURSHIP MONITOR - ADULT POPULATION; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
  % {\color{blue!50!white}\noindent\makebox[\linewidth]{\rule{18cm}{0.3pt}}} % horiz line
   
   %% Supports --------------------------------------------
   \vspace{2ex}
-  \begin{minipage}[c]{0.825\textwidth}
+  \begin{minipage}[c]{0.83\textwidth}
     \vspace{2ex}
     \begin{flushleft}  
       \Large{\textcolor[HTML]{22A6F5}{SUPPORTS}}\hspace{2ex}\small{\textcolor[HTML]{818181} {Infrastructure and support services available through incubators, accelerators and other NGOs}}
@@ -367,12 +367,12 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[c]{0.125\textwidth}
     \vspace*{+1cm}
-    <<sparklines_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=5.7,fig.width=4.8,results="asis">>=  
+    <<sparklines_Supports,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=7.7,fig.width=5.8,results="asis">>=  
     @
     \vspace*{-0.5cm}
   \end{minipage}
   
-  \vspace{-1ex}
+  %\vspace{-1ex}
   \scriptsize{\href{http://www.enterprisesurveys.org/data/exploretopics/innovation-and-technology}{\textcolor[HTML]{22A6F5}{SOURCES: ENTERPRISE SURVEYS; }}\href{http://www3.weforum.org/docs/gcr/2015-2016/GCI_Dataset_2006-2015.xlsx}{\textcolor[HTML]{22A6F5}{WEF-GCI REPORT; }}\href{http://data.worldbank.org}{\textcolor[HTML]{22A6F5}{WORLD BANK - WDI}}}
 \end{minipage}
 
