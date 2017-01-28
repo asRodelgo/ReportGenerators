@@ -625,21 +625,35 @@ number_chart <- function(couName,section,table,str_wrap_size){
     i <- 1
     for (ind in unique(dataWorld$Key)){
       thisKey <- filter(dataWorld, Key == ind)
-      rank[i] <- which(thisKey$CountryCode == cou)
       rankedTotal[i] <- nrow(thisKey)
-    
-      thisKey <- mutate(thisKey, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
-      thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = str_wrap_size))
       
-      # print indicator name
-      plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-      graphics::text(1, 1.1,thisKey$IndicatorShort[1], col="#22a6f5", cex=3, adj=0)
-      graphics::text(1, 0.75,paste0(thisKey$Unit[1], " (",thisKey$Period[1],")"), col="#818181", cex=2, adj = 0)
-      # print data point and rank
-      plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
-      graphics::text(1.17, 1,filter(thisKey,CountryCode==cou)$Observation , col="#22a6f5", cex=8)
-      graphics::text(1.42, 0.95,paste0("(Rank: ",rank[i],"/",rankedTotal[i],")"), col="grey", cex=3, adj=0)
+      if (nrow(filter(thisKey, CountryCode == cou))>0){# country has data for this indicator
+        
+        rank[i] <- which(thisKey$CountryCode == cou)
+        
+        thisKey <- mutate(thisKey, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
+        thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = str_wrap_size))
+        
+        # print indicator name
+        plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+        graphics::text(1, 1.1,thisKey$IndicatorShort[1], col="#22a6f5", cex=3, adj=0)
+        graphics::text(1, 0.75,paste0(thisKey$Unit[1], " (",thisKey$Period[1],")"), col="#818181", cex=2, adj = 0)
+        # print data point and rank
+        plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+        graphics::text(1.17, 1,filter(thisKey,CountryCode==cou)$Observation , col="#22a6f5", cex=8)
+        graphics::text(1.42, 0.95,paste0("(Rank: ",rank[i],"/",rankedTotal[i],")"), col="grey", cex=3, adj=0)
       
+      } else { # no data for this indicator
+        
+        # print indicator name
+        plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+        graphics::text(1, 1.1,thisKey$IndicatorShort[1], col="#22a6f5", cex=3, adj=0)
+        graphics::text(1, 0.75,paste0(thisKey$Unit[1], " (",thisKey$Period[1],")"), col="#818181", cex=2, adj = 0)
+        # print data point and rank
+        plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
+        graphics::text(1.17, 1," " , col="#22a6f5", cex=8)
+        graphics::text(1.42, 0.95,paste0("(Rank: /",rankedTotal[i],")"), col="grey", cex=3, adj=0)
+      }
       i <- i + 1
     }
 

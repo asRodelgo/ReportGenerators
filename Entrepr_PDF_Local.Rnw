@@ -77,7 +77,7 @@ date <- Sys.Date()
   \begin{minipage}[t]{0.48\textwidth} % top section
     \vspace{-1ex}
     \begin{minipage}[t]{0.99\textwidth} % top section
-      \hspace{5ex}\raggedright\Large{\color{white}Digital Entrepreneurship At a Glance}
+      \hspace{5ex}\raggedright\Large{\color{white}Digital Entrepreneurship 360}
       %\includegraphics[width=5.5cm,height=1.2cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/WBlogo_Transparent.jpg}
       %\includegraphics[width=7cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/Entrepr_logo1.png}
     \end{minipage}
@@ -161,7 +161,7 @@ date <- Sys.Date()
   \end{minipage}
   \begin{minipage}[c]{0.43\textwidth}
     %\vspace{-1ex}
-    \small{\textcolor[HTML]{818181}{INVESTMENT CLIMATE}}
+    \small{\textcolor[HTML]{818181}{INVESTMENT FRIENDLINESS}}
     \vspace{1ex}
     <<number_chart_Policy,echo=FALSE,message=FALSE,cache=FALSE,warning=FALSE,fig.align='center',fig.height=6,fig.width=10,results="asis">>=  
     @
@@ -243,7 +243,7 @@ date <- Sys.Date()
   \begin{minipage}[c]{0.95\textwidth}
     %\vspace{16ex}
     \begin{flushleft}  
-     \Large{\textcolor[HTML]{22A6F5}{FINANCE}}
+     \Large{\textcolor[HTML]{22A6F5}{FINANCING}}
     \end{flushleft} 
      %\vspace{1ex}
      \small{\textcolor[HTML]{818181}{FDI, PUBLIC CAPITAL MARKET AND VENTURE CAPITAL}}
