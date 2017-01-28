@@ -623,6 +623,8 @@ number_chart <- function(couName,section,table,str_wrap_size){
         oma=c(0,1,0,1)) #sets outer margin
     
     i <- 1
+    rankedTotal <- c()
+    rank <- c()
     for (ind in unique(dataWorld$Key)){
       thisKey <- filter(dataWorld, Key == ind)
       
@@ -697,7 +699,7 @@ bar_facewrap_chart <- function(couName, section, table){
     
     topNeighbors <- head(arrange(as.data.frame(income), desc(Observation)),15)$CountryCode
     data <- filter(data, CountryCode %in% c(cou,topNeighbors))
-    data$IndicatorShort <- gsub(" index","",tolower(data$IndicatorShort))
+    data$IndicatorShort <- gsub(" Index","",data$IndicatorShort)
     #data <- group_by(Key,Country) %>%
     #  filter(Period == max(Period))
     

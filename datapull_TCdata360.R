@@ -16,3 +16,31 @@ Entrepr_data <- read.csv("/Users/asanchez3/Desktop/Work/TCMN/Entrepreneurship_da
 
 # Read data description file (what goes in the PDF report)
 dataDesc <- read.csv("Entrepr_DataDescription.csv", stringsAsFactors = FALSE)
+
+# Add descriptors and source fields
+Entrepr_data <- merge(Entrepr_data,dataDesc, by.x = "id", by.y = "tcdata360_id")
+Entrepr_data <- merge(Entrepr_data, countries[,c("iso3","iso2","name","region")],by="iso3",all.x = TRUE)
+# clean up: remove duplicate columns
+Entrepr_data <- Entrepr_data %>%
+  mutate(Period = as.character(Period)) %>%
+  select(Key = id, Country = name, Period, Observation, CountryCode = iso3, iso2,  
+         IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, 
+         Section, Subsection, Subsection2, region)
+
+# -----------------------------------------------------------------------
+# In case there are indicators not available from the API
+# -----------------------------------------------------------------------
+# Missing indicators from TCdata360
+load("/Users/asanchez3/Desktop/Data Analysis/Entrepreneurship-Ind/Testapp/all datasets.rda")
+missInd <- select(all.datasets$WB.data, iso2 = iso2c, Period = year, Observation = one_of("SL.SRV.EMPL.ZS")) %>%
+  mutate(var = "SL.SRV.EMPL.ZS") %>%
+  join(dataDesc, by = "var") %>%
+  join(countries[,c("iso3","iso2","name","region")], by = "iso2") %>%
+  filter(!is.na(iso3)) %>%
+  mutate(Period = as.character(Period)) %>%
+  select(Key = tcdata360_id, Country = name, Period, Observation, CountryCode = iso3, iso2,  
+         IndicatorShort = varname, Source = Source_Link, Unit = Unit.of.Measure, 
+         Section, Subsection, Subsection2, region)
+
+# Append to master data file
+Entrepr_data <- bind_rows(Entrepr_data, missInd)
