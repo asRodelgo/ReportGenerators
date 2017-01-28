@@ -82,7 +82,7 @@ figure_sparkline <- function(couName,table){
       unit <- "Availability 1-7, 7=best"
     }
     if (table == "figureFin1"){
-      indicator <- "FDI, net inflows"
+      indicator <- "FDI, Net Inflows"
     }
     if (table == "figureFin2"){
       indicator <- "Investment in Telecoms w/ Private Part."
@@ -546,7 +546,7 @@ bar_chart <- function(couName,section,table,paste_unit){
         geom_bar(data=data_grey,color="#f1f3f3",fill = "#f1f3f3",stat="identity") +
         geom_bar(data=data,color="#22A6F5",fill="#22A6F5",stat="identity") +
         geom_text(data=data, aes(label=round(Observation,1),y=ifelse(Observation<21,Observation + max(Observation)*.1,Observation - max(Observation)*.1)),
-                  size=8,color=ifelse(data$Observation<21,"#22a6f5","white")) + 
+                  size=12,color=ifelse(data$Observation<21,"#22a6f5","white")) + 
         coord_flip()+
         theme(legend.key=element_blank(),
               legend.title=element_blank(),
@@ -625,15 +625,14 @@ number_chart <- function(couName,section,table,str_wrap_size){
     i <- 1
     for (ind in unique(dataWorld$Key)){
       thisKey <- filter(dataWorld, Key == ind)
+      
+      thisKey <- mutate(thisKey, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
+      thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = str_wrap_size))
       rankedTotal[i] <- nrow(thisKey)
       
       if (nrow(filter(thisKey, CountryCode == cou))>0){# country has data for this indicator
         
         rank[i] <- which(thisKey$CountryCode == cou)
-        
-        thisKey <- mutate(thisKey, Unit = ifelse(grepl("0-100",Unit),"100=full ownership allowed",Unit))
-        thisKey <- mutate(thisKey, IndicatorShort = str_wrap(paste0(IndicatorShort), width = str_wrap_size))
-        
         # print indicator name
         plot(c(1,1),type="n", frame.plot = FALSE, axes=FALSE, ann=FALSE)
         graphics::text(1, 1.1,thisKey$IndicatorShort[1], col="#22a6f5", cex=3, adj=0)
