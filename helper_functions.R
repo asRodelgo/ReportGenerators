@@ -9,11 +9,13 @@ figure_sparkline <- function(couName,table){
     filter(CountryCode==cou, Subsection2==table, !is.na(Observation)) %>%
     mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear)-1),Period))
   
-  data <- filter(data,!is.na(Observation))
-  dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
-  
   if (table == "figureFin2"){
+    data <- filter(data,Observation > 0)
+    dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
     dataLast$Observation <- ifelse(dataLast$Observation>1000000,dataLast$Observation/1000000,dataLast$Observation)
+  } else {
+    data <- filter(data,!is.na(Observation))
+    dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
   }
   # data
   dataPoint <- format(dataLast$Observation, digits=2, decimal.mark=".",
@@ -405,8 +407,13 @@ sparklines <- function(couName,section,table){
   if (sum(data$Observation,na.rm=TRUE)==0){ # in case this country has no data
     data$Observation <- 0
     data$Period <- as.numeric(thisYear)-1
-    # To create at least 2 reference points in the sparkline (though empty)
-    data <- bind_rows(data, mutate(data,Period = as.numeric(thisYear)-2))
+    # To create table's reference points in the LaTeX output
+    data_initial <- data
+    for (per in (as.numeric(thisYear)-7):(as.numeric(thisYear)-2)){
+      data_plus <- mutate(data_initial,Period = per)
+      data <- bind_rows(data, data_plus)
+    }
+    data$Period <- as.character(data$Period)
   }
   
   if (nrow(data)>0){
