@@ -231,7 +231,7 @@ date <- Sys.Date()
 \clearpage
 %% Finance --------------------------------------------
 \begin{figure}
-  \vspace{108ex} % move down this figure
+  \vspace{100ex} % move down this figure
   %\hspace{-7ex} % move left this figure
   \includegraphics[width=21.7cm,height=11cm]{/Users/asanchez3/Desktop/Work/TCMN/ReportGenerators/www/bottom_background_lightgrey.png}
 \end{figure}

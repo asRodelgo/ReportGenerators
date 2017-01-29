@@ -83,7 +83,7 @@ figure_sparkline <- function(couName,table){
       select(Observation)
     
     # text
-    indicator <- dataLast$IndicatorShort
+    #indicator <- dataLast$IndicatorShort
     #unit <- dataLast$Unit
     
     # impute NAs and standardize so all sparklines are scaled
@@ -298,6 +298,13 @@ table_time_avg <- function(couName,section,table){
   if (sum(data$Observation,na.rm=TRUE)==0){ # in case this country has no data
     data$Observation <- 0
     data$Period <- as.numeric(thisYear)-1
+    # To create table's reference points in the LaTeX output
+    data_initial <- data
+    for (per in (as.numeric(thisYear)-7):(as.numeric(thisYear)-2)){
+      data_plus <- mutate(data_initial,Period = per)
+      data <- bind_rows(data, data_plus)
+    }
+    data$Period <- as.character(data$Period)
   }
     # keep the latest period (excluding projections further than 2 years)
     data <- mutate(data, Period = ifelse(is.na(Period),max(as.numeric(Period),na.rm=TRUE),Period)) %>%
@@ -398,6 +405,8 @@ sparklines <- function(couName,section,table){
   if (sum(data$Observation,na.rm=TRUE)==0){ # in case this country has no data
     data$Observation <- 0
     data$Period <- as.numeric(thisYear)-1
+    # To create at least 2 reference points in the sparkline (though empty)
+    data <- bind_rows(data, mutate(data,Period = as.numeric(thisYear)-2))
   }
   
   if (nrow(data)>0){
