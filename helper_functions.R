@@ -9,36 +9,74 @@ figure_sparkline <- function(couName,table){
     filter(CountryCode==cou, Subsection2==table, !is.na(Observation)) %>%
     mutate(Period = ifelse(is.na(Period),as.character(as.numeric(thisYear)-1),Period))
   
-  if (nrow(data)>0){
-    
-    data <- filter(data,!is.na(Observation))
-    minPeriod <- min(data$Period)
-    maxPeriod <- max(data$Period)
-    dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
-    
-    if (table == "figureFin2"){
-      dataLast$Observation <- ifelse(dataLast$Observation>1000000,dataLast$Observation/1000000,dataLast$Observation)
-    }
-    # data
-    dataPoint <- format(dataLast$Observation, digits=2, decimal.mark=".",
-                        big.mark=",",small.mark=".", small.interval=3)
-    # period
-    dataPeriod <- dataLast$Period
-    
-    dataWorld <- filter(Entrepr_data, Subsection2==table)
-    dataWorld <- filter(dataWorld,!is.na(Observation))
-    dataWorld <- dataWorld %>%
-      group_by(iso2) %>%
-      mutate(Period = max(Period,na.rm=TRUE)) %>%
-      distinct(Period, .keep_all = TRUE) %>%
-      as.data.frame()
+  data <- filter(data,!is.na(Observation))
+  dataLast <- filter(data, Period == max(Period,na.rm=TRUE))
+  
+  if (table == "figureFin2"){
+    dataLast$Observation <- ifelse(dataLast$Observation>1000000,dataLast$Observation/1000000,dataLast$Observation)
+  }
+  # data
+  dataPoint <- format(dataLast$Observation, digits=2, decimal.mark=".",
+                      big.mark=",",small.mark=".", small.interval=3)
+  # period
+  dataPeriod <- dataLast$Period
+  
+  dataWorld <- filter(Entrepr_data, Subsection2==table)
+  dataWorld <- filter(dataWorld,!is.na(Observation))
+  dataWorld <- dataWorld %>%
+    group_by(iso2) %>%
+    mutate(Period = max(Period,na.rm=TRUE)) %>%
+    distinct(Period, .keep_all = TRUE) %>%
+    as.data.frame()
 #     dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
 #     dataWorld <- filter(dataWorld, !(CountryAlternat==""))
-    dataWorld <- arrange(dataWorld, desc(Observation))
-    # rank in the world
-    rank <- which(dataWorld$CountryCode == cou)
-    rankedTotal <- nrow(dataWorld)
+  dataWorld <- arrange(dataWorld, desc(Observation))
+  # rank in the world
+  rank <- which(dataWorld$CountryCode == cou)
+  rankedTotal <- nrow(dataWorld)
+  
+  # Ad-hoc shorten some indicatores and units names:
+  if (table == "figure1"){
+    indicator <- "Tech Startups"
+    unit <- "number per million pop"
+  }
+  if (table == "figure2"){
+    indicator <- "Doing Business"
+    unit <- "1=most business-friendly regulat."
+  }
+  if (table == "figure3"){
+    indicator <- "Broadband Internet"
+    unit <- "Subscriptions per 100 pop."
+  }
+  if (table == "figure4"){
+    indicator <- "Scientists, Engineers"
+    unit <- "Availability 1-7, 7=best"
+  }
+  if (table == "figure5"){
+    indicator <- "Tertiary Education"
+    unit <- "Enrollments in percent of pop."
+  }
+  if (table == "figure6"){
+    indicator <- "Venture Capital"
+    unit <- "Availability 1-7, 7=best"
+  }
+  if (table == "figureFin1"){
+    indicator <- "FDI, net inflows"
+    unit <- "BoP, current US$, as % GDP"
+  }
+  if (table == "figureFin2"){
+    indicator <- "Investment in Telecoms w/ Private Part."
+    unit <- "Millions, $US"
+  }
+  if (table == "figureFin3"){
+    indicator <- "Market Capitaliz. of Listed Companies"
+    unit <- "% of GDP"
+  }
     
+  if (nrow(data)>0){
+    
+    minPeriod <- min(data$Period, na.rm=TRUE)
+    maxPeriod <- max(data$Period, na.rm=TRUE)
     # sparkline
     spark <- data %>%
       arrange(Period) %>%
@@ -46,7 +84,7 @@ figure_sparkline <- function(couName,table){
     
     # text
     indicator <- dataLast$IndicatorShort
-    unit <- dataLast$Unit
+    #unit <- dataLast$Unit
     
     # impute NAs and standardize so all sparklines are scaled
     spark[is.na(spark),1] <- mean(spark[,1],na.rm = TRUE)  #impute NAs to the mean of the column
@@ -54,41 +92,6 @@ figure_sparkline <- function(couName,table){
       spark[,1] <- 0
       #x[1,i] <- -10
       spark[nrow(spark),1] <- 10
-    }
-    
-    # Ad-hoc shorten some indicatores and units names:
-    if (table == "figure1"){
-      indicator <- "Tech Startups"
-    }
-    if (table == "figure2"){
-      indicator <- "Doing Business"
-      unit <- "1=most business-friendly regulat."
-    }
-    if (table == "figure3"){
-      indicator <- "Broadband Internet"
-      unit <- "Subscriptions per 100 pop."
-    }
-    if (table == "figure4"){
-      indicator <- "Scientists, Engineers"
-      unit <- "Availability 1-7, 7=best"
-    }
-    if (table == "figure5"){
-      indicator <- "Tertiary Education"
-      unit <- "Enrollments in percent of pop."
-    }
-    if (table == "figure6"){
-      indicator <- "Venture Capital"
-      unit <- "Availability 1-7, 7=best"
-    }
-    if (table == "figureFin1"){
-      indicator <- "FDI, Net Inflows"
-    }
-    if (table == "figureFin2"){
-      indicator <- "Investment in Telecoms w/ Private Part."
-      unit <- "Millions, $US"
-    }
-    if (table == "figureFin3"){
-      indicator <- "Market Capitaliz. of Listed Companies"
     }
     
     # Print the combo -----------------------------------------------
@@ -135,43 +138,6 @@ figure_sparkline <- function(couName,table){
     }
     
   } else {
-    # Ad-hoc shorten some indicatores and units names:
-    if (table == "figure1"){
-      indicator <- "Tech Startups"
-      unit <- "number per million pop"
-    }
-    if (table == "figure2"){
-      indicator <- "Doing Business"
-      unit <- "1=most business-friendly regulat."
-    }
-    if (table == "figure3"){
-      indicator <- "Broadband Internet"
-      unit <- "Subscriptions per 100 pop."
-    }
-    if (table == "figure4"){
-      indicator <- "Scientists, Engineers"
-      unit <- "Availability 1-7, 7=best"
-    }
-    if (table == "figure5"){
-      indicator <- "Tertiary Education"
-      unit <- "Enrollments in percent of pop."
-    }
-    if (table == "figure6"){
-      indicator <- "Venture Capital"
-      unit <- "Availability 1-7, 7=best"
-    }
-    if (table == "figureFin1"){
-      indicator <- "FDI, net inflows"
-      unit <- "BoP, current US$, as % GDP"
-    }
-    if (table == "figureFin2"){
-      indicator <- "Investment in Telecoms w/ Private Part."
-      unit <- "Millions, $US"
-    }
-    if (table == "figureFin3"){
-      indicator <- "Market Capitaliz. of Listed Companies"
-      unit <- "% of GDP"
-    }
     
     # Print the combo -----------------------------------------------
     par(family = 'serif',mfrow=c(5,1), #sets number of rows in space to number of cols in data frame x
