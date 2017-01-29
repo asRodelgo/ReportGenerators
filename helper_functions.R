@@ -30,9 +30,8 @@ figure_sparkline <- function(couName,table){
     dataWorld <- dataWorld %>%
       group_by(iso2) %>%
       mutate(Period = max(Period,na.rm=TRUE)) %>%
-      distinct(Period, .keep_all = TRUE)
-    
-    dataWorld <- as.data.frame(dataWorld)
+      distinct(Period, .keep_all = TRUE) %>%
+      as.data.frame()
 #     dataWorld <- merge(dataWorld,countries[,c("CountryCodeISO2","CountryAlternat")],by.x="iso2c",by.y="CountryCodeISO2",all.x = TRUE)
 #     dataWorld <- filter(dataWorld, !(CountryAlternat==""))
     dataWorld <- arrange(dataWorld, desc(Observation))
@@ -139,6 +138,7 @@ figure_sparkline <- function(couName,table){
     # Ad-hoc shorten some indicatores and units names:
     if (table == "figure1"){
       indicator <- "Tech Startups"
+      unit <- "number per million pop"
     }
     if (table == "figure2"){
       indicator <- "Doing Business"
@@ -162,6 +162,7 @@ figure_sparkline <- function(couName,table){
     }
     if (table == "figureFin1"){
       indicator <- "FDI, net inflows"
+      unit <- "BoP, current US$, as % GDP"
     }
     if (table == "figureFin2"){
       indicator <- "Investment in Telecoms w/ Private Part."
@@ -169,6 +170,7 @@ figure_sparkline <- function(couName,table){
     }
     if (table == "figureFin3"){
       indicator <- "Market Capitaliz. of Listed Companies"
+      unit <- "% of GDP"
     }
     
     # Print the combo -----------------------------------------------
